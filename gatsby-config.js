@@ -2,14 +2,14 @@ const path = require('path')
 
 module.exports = {
   siteMetadata: {
-    site: `Gnonce-starter`,
-    title: `Gatsby Starter Gnonce`,
-    titleTemplate: `%s - Gnonce`,
-    description: `Gatsby + Typescript + Styled Components = 💖`,
-    siteUrl: `https://gatsby-starter-gnonce.netlify.com/`,
+    site: `portfolio-site`,
+    title: `Pat Jacobs | Web Engineer`,
+    titleTemplate: `%s | Pat Jacobs | Web Engineer`,
+    description: `Portolfio site for Pat Jacobs, Full-stack Web Engineer`,
+    siteUrl: `https://www.patjacobs.io`,
     language: `en`,
     color: `#003580`,
-    twitter: 'gnonce',
+    twitter: 'jatpacobs',
   },
   plugins: [
     {
