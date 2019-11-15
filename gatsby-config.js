@@ -8,7 +8,7 @@ module.exports = {
     description: `Portolfio site for Pat Jacobs, Full-stack Web Engineer`,
     siteUrl: `https://www.patjacobs.io`,
     language: `en`,
-    color: `#003580`,
+    color: `#000`,
     twitter: 'jatpacobs',
   },
   plugins: [
@@ -22,14 +22,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gnonce`,
-        short_name: `Gnonce`,
+        name: `Pat Jacobs | Web Engineer`,
+        short_name: `patjacobs.io`,
         start_url: `/`,
-        background_color: `#003580`,
-        theme_color: `#003580`,
+        background_color: `#000`,
+        theme_color: `#000`,
         display: `standalone`,
-        icon: `src/images/icon.png`, // This path is relative to the root of the site.
-        include_favicon: true, // Include favicon
+        icon: `src/assets/icons/logo.png`, 
+        include_favicon: true,
       },
     },
     `gatsby-plugin-sitemap`,

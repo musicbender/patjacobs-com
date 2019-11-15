@@ -1,8 +1,7 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-
 import theme from '../styles/theme'
-import GlobalStyles from '../styles/globalStyles'
+import GlobalStyles from '../styles/global-styles'
 
 import Head from '../components/Head'
 
