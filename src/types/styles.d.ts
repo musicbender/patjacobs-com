@@ -1,15 +1,4 @@
 export interface ITheme {
-  breakpoints: {
-    largest: string,
-    extraLarge: string
-    max: string
-    medium: string
-    small:  string
-    tablet: string
-    mobile: string
-    smallMobile: string
-    tinyMobile: string
-  }
   palette: {
     white: string
     offWhite: string
@@ -45,12 +34,8 @@ export interface ITheme {
   }
   sizes: {
     toolbarHeight: string;
-    mobile: {
-      footerHeight: string;
-    }
-    desktop: {
-      footerHeight: string;
-    }
+    footerHeightM: string;
+    footerHeightD: string;
   }
   animate: {
     easeOut: string
@@ -67,3 +52,15 @@ export interface ITheme {
     skillsRevealDuration: string
   }
 }
+
+export interface IBreakPoints {
+  desktopXXL: string
+  desktopXL: string
+  desktopL: string
+  desktopM: string
+  desktopS:  string
+  tablet: string
+  mobileL: string
+  mobileM: string
+  mobileS: string
+};

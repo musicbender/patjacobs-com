@@ -1,17 +1,6 @@
 import { ITheme } from '../types/styles';
 
 const theme: ITheme = {
-  breakpoints: {
-    largest: '(max-width: 1920px)',
-    extraLarge: '(max-width: 1600px)',
-    max: '(max-width: 1320px)',
-    medium: '(max-width: 1280px)',
-    small:  '(max-width: 1024px)',
-    tablet: '(max-width: 768px)',
-    mobile: '(max-width: 480px)',
-    smallMobile: '(max-width: 414px)',
-    tinyMobile: '(max-width: 375px)',
-  },
   palette: {
     white: '#fff',
     offWhite: 'rgb(245,245,245)',
@@ -47,12 +36,8 @@ const theme: ITheme = {
   },
   sizes: {
     toolbarHeight: '6em',
-    mobile: {
-      footerHeight: '8em',
-    },
-    desktop: {
-      footerHeight: '5em',
-    },
+    footerHeightM: '8em',
+    footerHeightD: '5em',
   },
   animate: {
     easeOut: 'cubic-bezier(0.23, 1, 0.32, 1)',
