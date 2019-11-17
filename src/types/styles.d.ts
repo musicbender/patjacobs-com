@@ -54,13 +54,13 @@ export interface ITheme {
 }
 
 export interface IBreakPoints {
-  desktopXXL: string
-  desktopXL: string
-  desktopL: string
-  desktopM: string
-  desktopS:  string
-  tablet: string
-  mobileL: string
-  mobileM: string
-  mobileS: string
+  desktopXXL: number
+  desktopXL: number
+  desktopL: number
+  desktopM: number
+  desktopS:  number
+  tablet: number
+  mobileL: number
+  mobileM: number
+  mobileS: number
 };

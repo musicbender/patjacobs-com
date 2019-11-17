@@ -1,25 +1,26 @@
-import { IBreakPoints } from '../types/styles';
+import { css, ThemedCssFunction } from 'styled-components'
+import { IBreakPoints, ITheme } from '../types/styles';
 
 export const sizes: IBreakPoints = {
-  desktopXXL: '1920px',
-  desktopXL: '1600px',
-  desktopL: '1320px',
-  desktopM: '1280px',
-  desktopS:  '1024px',
-  tablet: '768px',
-  mobileL: '480px',
-  mobileM: '414px',
-  mobileS: '375px',
+  desktopXXL: 1920,
+  desktopXL: 1600,
+  desktopL: 1320,
+  desktopM: 1280,
+  desktopS:  1024,
+  tablet: 768,
+  mobileL: 480,
+  mobileM: 414,
+  mobileS: 375,
 };
 
-export const devices: IBreakPoints = {
-  desktopXXL: `(max-width: ${sizes.desktopXXL})`,
-  desktopXL: `(max-width: ${sizes.desktopXL})`,
-  desktopL: `(max-width: ${sizes.desktopL})`,
-  desktopM: `(max-width: ${sizes.desktopM})`,
-  desktopS:  `(max-width: ${sizes.desktopS})`,
-  tablet: `(max-width: ${sizes.tablet})`,
-  mobileL: `(max-width: ${sizes.mobileL})`,
-  mobileM: `(max-width: ${sizes.mobileM})`,
-  mobileS: `(max-width: ${sizes.mobileS})`,
-};
+export const media = (Object.keys(sizes) as Array<keyof typeof sizes>)
+  .reduce((accumulator, label) => {
+    const emSize = sizes[label] / 16;
+
+    accumulator[label] = (first: any, ...interpolations: any[]) => css`
+      @media (max-width: ${emSize}em) {
+        ${css(first, ...interpolations)}
+      }
+    `;
+    return accumulator
+  }, {} as { [key in keyof typeof sizes]: ThemedCssFunction<ITheme> });
