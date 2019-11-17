@@ -1,27 +1,36 @@
-import React from 'react'
-import styled, { ThemeProvider } from 'styled-components'
-import theme from '../styles/theme'
-import GlobalStyles from '../styles/global-styles'
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import theme from '../styles/theme';
+import GlobalStyles from '../styles/global-styles';
+import Head from '../components/global/head';
+import { 
+  AppWrapper, 
+  MainWrapper, 
+  OutterWrapper,
+  InnerWrapper 
+} from './styles';
 
-import Head from '../components/Head'
-
-interface ILayoutProps {
-  children: any
+interface IProps {
+  children?: any
   location: {
     pathname: string
   }
 }
 
-const Wrapper = styled.div`
-  display: flex;
-`
-
-export default ({ children, location }: ILayoutProps) => {
+export default ({ children, location }: IProps) => {
   return (
-    <Wrapper>
+    <AppWrapper>
       <GlobalStyles />
       <Head pathname={location.pathname} />
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
-    </Wrapper>
+      <ThemeProvider theme={theme}>
+        <MainWrapper>
+          <OutterWrapper>
+            <InnerWrapper>
+              {children}
+            </InnerWrapper> 
+          </OutterWrapper>
+        </MainWrapper>
+      </ThemeProvider>
+    </AppWrapper>
   )
 }

@@ -37,7 +37,9 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-helmet": "^5.2.0",
+    "react-redux": "^7.1.3",
     "react-typography": "^0.16.19",
+    "redux": "^4.0.4",
     "styled-components": "^4.1.3",
     "typescript": "^3.3.3333",
     "typography": "^0.16.19"

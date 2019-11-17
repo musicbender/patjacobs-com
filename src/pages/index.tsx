@@ -1,15 +1,20 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
+import Layout from '../layout';
+import Home from '../components/pages/home';
 
-interface Props {
-  
-}
-
-class Index extends PureComponent<Props> {
-  render() {
-    return (
-      <div>
-        
-      </div>
-    )
+interface IProps {
+  location: {
+    pathname: string
   }
 }
+
+const Index: React.FunctionComponent<IProps> = ({ location }: IProps) => {
+  return (
+    <Layout location={location}>
+      <Home />
+    </Layout>
+  );
+}
+
+export default Index;
+
