@@ -1,17 +1,21 @@
 import { TRANSPORT_CHANGED, IS_MOBILE_SET } from '../configs/constants';
 import { changeTransport } from '../actions/global';
-import { config } from '../../shared/config.json';
 import { isMobileSize } from '../util/util';
+import { requestTimeout } from '../util/shims';
+import { Middleware, Dispatch, AnyAction, MiddlewareAPI } from 'redux';
 
-const globalMiddleware = store => next => action => {
+// TEMP
+var transportDuration = 1000;
+
+const globalMiddleware: Middleware<Dispatch> = (store: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: AnyAction) => {
   const { type, payload } = action;
   switch (type) {
     case TRANSPORT_CHANGED:
       next(action);
       if (!!payload) {
-        window.requestTimeout(() => {
+        requestTimeout(() => {
           store.dispatch(changeTransport(false))
-        }, config.transportDuration);
+        }, transportDuration);
       }
       break;
     case IS_MOBILE_SET:

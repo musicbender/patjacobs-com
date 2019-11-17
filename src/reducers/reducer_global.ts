@@ -1,4 +1,5 @@
-import initialState from '../configs/initial-state';
+import initialState from '../store/initial-state';
+import { AnyAction } from 'redux';
 import {
   PAGE_LOADED,
   SPLASH_CHANGED,
@@ -8,7 +9,7 @@ import {
   IS_MOBILE_SET
 } from '../configs/constants';
 
-export default function global(state = initialState.global, action) {
+export default function global(state = initialState.global, action: AnyAction) {
   const { type, payload } = action;
   switch (type) {
     case PAGE_LOADED:

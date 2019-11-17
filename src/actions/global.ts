@@ -7,6 +7,7 @@ import {
   RECENT_WORK_TOP_SET,
   IS_MOBILE_SET
 } from '../configs/constants';
+import { AnyAction } from 'redux';
 
 export function loadPage() {
   return {
@@ -14,35 +15,35 @@ export function loadPage() {
   }
 }
 
-export function changeTransport(open) {
+export function changeTransport(open: boolean): AnyAction {
   return {
     type: TRANSPORT_CHANGED,
     payload: open
   }
 }
 
-export function changeSplash(open) {
+export function changeSplash(open: boolean): AnyAction {
   return {
     type: SPLASH_CHANGED,
     payload: open
   }
 }
 
-export function changeMenu(open) {
+export function changeMenu(open: boolean): AnyAction {
   return {
     type: MENU_CHANGED,
     payload: open
   }
 }
 
-export function setRecentWorkTop(value) {
+export function setRecentWorkTop(value: number): AnyAction {
   return {
     type: RECENT_WORK_TOP_SET,
     payload: value
   }
 }
 
-export function setIsMobile() {
+export function setIsMobile(): AnyAction {
   return {
     type: IS_MOBILE_SET
   }
