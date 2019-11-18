@@ -1,4 +1,4 @@
-export const hasWindow = () => {
+export const hasWindow = (): boolean => {
   return typeof window !== 'undefined';
 }
 
@@ -10,14 +10,14 @@ export const getIndexOrLast = (array = [], index = 0) => {
   return array[index] || array[array.length - 1];
 }
 
-export const countLongestArray = (arrays = []) => {
+export const countLongestArray = (arrays: any[] = []): number | boolean => {
   let output = 0;
 
   if (arrays.length < 1) {
     return false;
   }
 
-  arrays.forEach((arr) => {
+  arrays.forEach((arr: any[]) => {
     if (arr.length > output) {
       output = arr.length;
     }
@@ -26,9 +26,9 @@ export const countLongestArray = (arrays = []) => {
   return output;
 }
 
-export const throttle = (func, wait) => {
+export const throttle = (func: any, wait: number): any => {
   let time = Date.now();
-  return function(e) {
+  return function(e: any) {
     if ((time + wait - Date.now()) < 0) {
       func(e);
       time = Date.now();
@@ -36,7 +36,7 @@ export const throttle = (func, wait) => {
   }
 }
 
-export const minMax = (num, min = 0, max = 255) => {
+export const minMax = (num: number, min: number = 0, max: number = 255): number => {
   return num <= min ? min : num >= max ? max : num;
 }
 

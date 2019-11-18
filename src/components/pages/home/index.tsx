@@ -1,7 +1,29 @@
 import React, { PureComponent } from 'react'
+import { bindActionCreators, Dispatch, AnyAction} from 'redux';
+import { connect } from 'react-redux';
 import { HomePage } from './styles';
 
-export class Home extends PureComponent {
+interface IProps {
+  
+}
+
+interface IReduxProps {
+  mode?: string
+}
+
+interface IState {
+  
+}
+
+class Home extends PureComponent<IProps & IReduxProps, IState> {
+  static defaultProps: IProps;
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+
+    }
+  }
+
   render() {
     return (
       <HomePage>
@@ -11,5 +33,22 @@ export class Home extends PureComponent {
   }
 }
 
-export default Home;
+const mapStateToProps = (state: any) => ({
+  mode: state.global.mode
+})
+
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
+  return bindActionCreators({
+    
+  }, dispatch);
+}
+
+Home.defaultProps = {
+  
+};
+
+export default connect<IReduxProps, {}, IProps, IState>(mapStateToProps, mapDispatchToProps)(Home);
+
+
+
 

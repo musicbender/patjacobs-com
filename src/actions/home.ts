@@ -4,7 +4,7 @@ import {
   SKILLS_TOP_SET
 } from '../configs/constants';
 import { AnyAction } from 'redux';
-import { IHomeActionPayload } from '../types/global';
+import { IHomeActionPayload } from '../types/state';
 
 export function setAboutTop(params: IHomeActionPayload): AnyAction {
   return {

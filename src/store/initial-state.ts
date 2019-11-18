@@ -1,5 +1,3 @@
-const { config } = require('../../shared/config.json');
-
 export default {
   global: {
     pageLoaded: false,
@@ -12,7 +10,7 @@ export default {
   home: {
     aboutTop: 915,
     recentWorkTop: 1819,
-    skillsTop: config.skillsTop
+    skillsTop: 5540
   },
   stats: {
     data: null,
