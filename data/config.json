@@ -1,0 +1,13 @@
+{
+  "gridLines": [8, 17, 8, 17, 34, 8, 8],
+  "pageLoadTimeout": 4000,
+  "splashScreenDebug": false,
+  "splashScreenTimeout": 6000,
+  "transportDuration": 2500,
+  "workItemsAmount": 5,
+  "homeBottom": 5562,
+  "skillsTop": 5540, 
+  "mobileBreakpoint": 768,
+  "windowHeightConstant": 939,
+  "scrollDebug": false
+}

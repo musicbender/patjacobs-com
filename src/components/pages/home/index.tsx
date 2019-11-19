@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 import { HomePage } from './styles';
 
 interface IProps {
-  
-}
-
-interface IReduxProps {
   mode?: string
 }
 
@@ -15,7 +11,7 @@ interface IState {
   
 }
 
-class Home extends PureComponent<IProps & IReduxProps, IState> {
+class Home extends PureComponent<IProps, IState> {
   static defaultProps: IProps;
   constructor(props: IProps) {
     super(props);
@@ -47,7 +43,7 @@ Home.defaultProps = {
   
 };
 
-export default connect<IReduxProps, {}, IProps, IState>(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 
 

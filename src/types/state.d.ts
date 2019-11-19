@@ -1,4 +1,4 @@
-export interface IState {
+export interface IStore {
   global: {
     pageLoaded: boolean
     splashOpen: boolean
