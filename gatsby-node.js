@@ -28,6 +28,7 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
 
       const node = Object.assign({}, data, nodeMeta)
       createNode(node);
+      resolve();
     })();
   });
 }

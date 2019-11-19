@@ -10,6 +10,7 @@ import { changeSplash, changeTransport, setIsMobile } from '../actions/global';
 import GlobalStyles from '../styles/global-styles';
 import Head from '../components/global/head';
 import { IStore } from '../types/state';
+import GridLines from '../global/grid-lines';
 import { 
   AppWrapper, 
   MainWrapper, 
@@ -24,7 +25,8 @@ interface IReduxProps {
   skillsTop?: number
   changeTransport?: any
   setIsMobile?: any
-  changeSplash?: any
+  changeSplash?: any,
+  mode?: string
 }
 
 interface IProps {
@@ -54,6 +56,10 @@ export class Layout extends PureComponent<IProps & IReduxProps> {
 
     window.addEventListener('resize', this.handleResize);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
   
   handleToTop = () =>{
     this.props.changeTransport(true);
@@ -70,7 +76,7 @@ export class Layout extends PureComponent<IProps & IReduxProps> {
     if (!this.props.isMobile && window.innerWidth < this.props.config.mobileBreakpoint) {
       this.props.setIsMobile();
     }
-  }
+  }∫
 
   render() {
     return (
@@ -78,8 +84,12 @@ export class Layout extends PureComponent<IProps & IReduxProps> {
         <GlobalStyles />
         <Head pathname={location.pathname} />
         <ThemeProvider theme={theme}>
-          <MainWrapper>
+          <MainWrapper 
+            mode={this.props.mode} 
+            splashOpen={this.props.splashOpen}
+          >
             <OutterWrapper>
+              <GridLines gridLines={this.props.config.gridLines} />
               <InnerWrapper>
                 {this.props.children}
               </InnerWrapper> 
@@ -95,7 +105,8 @@ const mapStateToProps = ({ global, home }: IStore) => ({
   splashOpen: global.splashOpen,
   transportOpen: global.transportOpen,
   isMobile: global.isMobile,
-  skillsTop: home.skillsTop
+  skillsTop: home.skillsTop,
+  mode: global.mode
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
@@ -119,6 +130,7 @@ export default (props: any) => (
         }
         staticData {
           config {
+            gridLines
             transportDuration
             mobileBreakpoint
             splashScreenDebug
@@ -129,7 +141,7 @@ export default (props: any) => (
     `}
     render={data => (
       <ConnectedLayout 
-        config={data.statucData.config}
+        config={data.staticData.config}
         {...props} 
       />
     )}
