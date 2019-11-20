@@ -84,7 +84,7 @@ export class Layout extends PureComponent<IProps & IReduxProps> {
         <GlobalStyles />
         <Head pathname={location.pathname} />
         <ThemeProvider theme={theme}>
-          <MainWrapper 
+          <MainWrapper
             mode={this.props.mode} 
             splashOpen={this.props.splashOpen}
           >

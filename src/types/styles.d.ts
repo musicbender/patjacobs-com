@@ -28,9 +28,9 @@ export interface ITheme {
     inconsolata: string;
   }
   gridSizes: {
-    s: number
-    m:  number
-    l:  number
+    s: number,
+    m:  number,
+    l:  number,
   }
   sizes: {
     toolbarHeight: string;
@@ -64,3 +64,11 @@ export interface IBreakPoints {
   mobileM: number
   mobileS: number
 };
+
+export interface IGridPositionParams {
+  gridLines: number[] = []
+  index: number = 0
+  prop: string = 'left'
+  unit: string = '%'
+  attach: string = 'left'
+}

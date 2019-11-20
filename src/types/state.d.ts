@@ -1,3 +1,4 @@
+// interfaces
 export interface IStore {
   global: {
     pageLoaded: boolean
@@ -20,3 +21,9 @@ export interface IHomeActionPayload {
 }
 
 export { AppState } from '../reducers';
+
+// enums
+export enum EModes {
+  'light',
+  'dark'
+}
