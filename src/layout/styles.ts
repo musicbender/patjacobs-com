@@ -1,17 +1,22 @@
 import styled, { css } from 'styled-components';
 import { media } from '../styles/breakpoints';
 
+interface IMainWrapperProps {
+  splashOpen?: boolean
+  mode?: string,
+}
+
 export const AppWrapper = styled.div`
   position: relative;
 `;
 
-export const MainWrapper = styled.main`
+export const MainWrapper = styled('main')<IMainWrapperProps>`
   position: relative;
-  ${props => props.splashOpen && `overflow: hidden;`}
-  ${props => props.mode === 'light' && css`
-    background-color: ${props.theme.modePallete.lightBg};
+  ${(props) => props.splashOpen && `overflow: hidden;`}
+  ${(props) => props.mode === 'light' && css`
+    background-color: ${props.theme.modePalette.lightBg};
     p, h1, h2, h3, h4, h5, h6, div, input, form, span, div {
-      color: rgba(${props.theme.matteBlack}, 0.87);
+      color: rgba(${props.theme.palette.matteBlack}, 0.87);
     }
   `}
 `;

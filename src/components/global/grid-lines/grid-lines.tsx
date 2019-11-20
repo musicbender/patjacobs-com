@@ -1,8 +1,8 @@
 import React from 'react';
 import { 
-  GridLinesWrapper
-  GridItem
-  GridLine
+  GridLinesWrapper,
+  GridItem,
+  GridLine,
 } from './styles';
 
 interface IProps {
@@ -14,7 +14,7 @@ const GridLines = ({
 }: IProps) => (
   <GridLinesWrapper>
     {
-      config.gridLines.map((column, i) => (
+      gridLines.map((column, i) => (
         <GridItem width={column}>
           <GridLine />
         </GridItem>
@@ -22,5 +22,9 @@ const GridLines = ({
     }
   </GridLinesWrapper>
 );
+
+GridLines.defaultProps = {
+  gridLines: []
+}
 
 export default GridLines;

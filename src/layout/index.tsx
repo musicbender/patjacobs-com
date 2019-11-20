@@ -10,7 +10,7 @@ import { changeSplash, changeTransport, setIsMobile } from '../actions/global';
 import GlobalStyles from '../styles/global-styles';
 import Head from '../components/global/head';
 import { IStore } from '../types/state';
-import GridLines from '../global/grid-lines';
+import GridLines from '../components/global/grid-lines';
 import { 
   AppWrapper, 
   MainWrapper, 
@@ -76,7 +76,7 @@ export class Layout extends PureComponent<IProps & IReduxProps> {
     if (!this.props.isMobile && window.innerWidth < this.props.config.mobileBreakpoint) {
       this.props.setIsMobile();
     }
-  }∫
+  }
 
   render() {
     return (
