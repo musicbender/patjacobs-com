@@ -15,7 +15,7 @@ const GridLines = ({
   <GridLinesWrapper>
     {
       gridLines.map((column, i) => (
-        <GridItem width={column}>
+        <GridItem width={column} key={i + column + 'gridline'}>
           <GridLine />
         </GridItem>
       ))

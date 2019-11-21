@@ -1,6 +1,12 @@
 import React from 'react';
 import Logo from '../logo';
 import { EModes } from '../../../types/state';
+import {
+  ToolBarWrapper,
+  InnerWrapper,
+  Hamburger,
+  HamburbarBar,
+} from './styles';
 
 interface IProps {
   pageLoaded: boolean,
@@ -19,19 +25,19 @@ const Toolbar = ({
 }: IProps) => {
   const renderHamburger = () => {
     return (
-      <div className={cx(style.hamburger)}>
-        <div className={cx(style.bar1)}></div>
-        <div className={cx(style.bar2)}></div>
-      </div>
+      <Hamburger>
+        <HamburbarBar barNum={0} />
+        <HamburbarBar barNum={1} />
+      </Hamburger>
     );
   }
 
   return (
-    <div className={cx(style.toolbar)}>
-      <div className={cx(style.innerWrapper)}>
-        <Logo classNames={cx(style.toolbarLogo)} color="white"/>
-      </div>
-    </div>
+    <ToolBarWrapper>
+      <InnerWrapper>
+        <Logo color="white" />
+      </InnerWrapper>
+    </ToolBarWrapper>
   );
 }
 

@@ -11,6 +11,7 @@ import GlobalStyles from '../styles/global-styles';
 import Head from '../components/global/head';
 import { IStore } from '../types/state';
 import GridLines from '../components/global/grid-lines';
+import Logo from '../components/global/logo';
 import { 
   AppWrapper, 
   MainWrapper, 
@@ -90,6 +91,7 @@ export class Layout extends PureComponent<IProps & IReduxProps> {
           >
             <OutterWrapper>
               <GridLines gridLines={this.props.config.gridLines} />
+              <Logo />
               <InnerWrapper>
                 {this.props.children}
               </InnerWrapper> 

@@ -9,9 +9,11 @@ export interface ITheme {
     darkerGrey: string
     darkGrey: string
     grey: string
+  }
+  corePalette: {
     yellow: string
-    purple:string
-    orange:string
+    purple: string
+    orange: string
     aqua: string
   }
   modePalette: {

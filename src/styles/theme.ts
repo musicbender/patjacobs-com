@@ -1,6 +1,6 @@
 import { ITheme } from '../types/styles';
 
-const theme: ITheme = {
+const theme: ITheme = { 
   palette: {
     white: '#fff',
     offWhite: 'rgb(245,245,245)',
@@ -11,6 +11,8 @@ const theme: ITheme = {
     darkerGrey: '#242424',
     darkGrey: 'rgb(57,57,57)',
     grey: 'rgb(85, 85, 85)',
+  },
+  corePalette: {
     yellow: '#F9D413',
     purple: '#633DFF',
     orange: '#F98D51',
