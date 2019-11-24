@@ -5,6 +5,9 @@ declare global {
   }
 }
 
+// types
+
+// interfaces
 export interface ISeo {
   title: string
   description: string
@@ -14,4 +17,24 @@ export interface ISeo {
   site: string
   color: string
   language: string
+}
+
+//enums
+export enum ECurtainTypes {
+  'none',
+  'blocks',
+  'reverse-blocks',
+  'rows',
+  'full'
+}
+
+export enum ECurtainColorLayouts {
+  'blocks',
+  'rows',
+  'full'
+}
+
+export enum ECurtainTransition {
+  'enter',
+  'exit',
 }

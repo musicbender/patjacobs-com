@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
-import { ISeo } from '../../../types/global';
+import { ISeo } from '../../../../types/global';
 
 interface IProps {
   pathname: string,

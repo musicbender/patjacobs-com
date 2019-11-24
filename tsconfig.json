@@ -20,6 +20,6 @@
     "jsx": "preserve"
   },
   "include": [
-    "src", "gatsby-browser.js"
+    "src", "gatsby-browser.js", "types"
   ]
 }

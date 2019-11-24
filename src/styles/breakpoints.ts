@@ -1,5 +1,5 @@
 import { css, ThemedCssFunction } from 'styled-components'
-import { IBreakPoints, ITheme } from '../types/styles';
+import { IBreakPoints, ITheme } from '../../types/styles';
 
 export const sizes: IBreakPoints = {
   desktopXXL: 1920,
@@ -18,7 +18,7 @@ export const media = (Object.keys(sizes) as Array<keyof typeof sizes>)
     const emSize = sizes[label] / 16;
 
     accumulator[label] = (first: any, ...interpolations: any[]) => css`
-      @media (max-width: ${emSize}em) {
+      @media screen and (max-width: ${emSize}em) {
         ${css(first, ...interpolations)}
       }
     `;

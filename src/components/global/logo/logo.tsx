@@ -12,7 +12,7 @@ enum EColors {
 }
 
 interface IProps {
-  color: EColors,
+  color: keyof typeof EColors,
 }
 
 const Logo = ({ color }: IProps) => {

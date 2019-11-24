@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../logo';
-import { EModes } from '../../../types/state';
+import { EModes } from '../../../../types/state';
 import {
   ToolBarWrapper,
   InnerWrapper,

@@ -9,7 +9,7 @@ export const GridLinesWrapper = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  max-width: ${sizes.desktopXXL};
+  max-width: ${sizes.desktopXXL}px;
 `;
 
 export const GridItem = styled('div')<IGridItemProps>`

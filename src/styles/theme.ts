@@ -1,25 +1,23 @@
-import { ITheme } from '../types/styles';
-
-const theme: ITheme = { 
+const theme = { 
   palette: {
-    white: '#fff',
-    offWhite: 'rgb(245,245,245)',
-    black: 'rgb(40,40,40)',
-    darkBlack: 'rgb(30, 30, 30)',
-    darkerBlack: 'rgb(17, 17, 17)',
-    matteBlack: '#000',
+    white: '#ffffff',
+    offWhite: '#f5f5f5',
+    black: '#282828',
+    darkBlack: '#1e1e1e',
+    darkerBlack: '#111111',
+    matteBlack: '#000000',
     darkerGrey: '#242424',
-    darkGrey: 'rgb(57,57,57)',
-    grey: 'rgb(85, 85, 85)',
+    darkGrey: '#393939',
+    grey: '#555555',
   },
   corePalette: {
     yellow: '#F9D413',
-    purple: '#633DFF',
+    purple: '#5e3ce6',
     orange: '#F98D51',
     aqua: '#32D2C9',
   },
   modePalette: {
-    darkBg: 'rgb(30, 30, 30)',
+    darkBg: '#1e1e1e',
     darkLines: 'rgba(0, 0, 0, 0.5)',
     lightBg: '#fff',
     lightLines: 'rgba(0, 0, 0, 0.1)',

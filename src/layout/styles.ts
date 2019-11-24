@@ -1,36 +1,45 @@
 import styled, { css } from 'styled-components';
-import { media } from '../styles/breakpoints';
+import hexRgb from 'hex-to-rgba';
+import { media, sizes } from '../styles/breakpoints';
 
-interface IMainWrapperProps {
+interface IAppWrapperProps {
   splashOpen?: boolean
   mode?: string,
 }
 
-export const AppWrapper = styled.div`
+export const AppWrapper = styled('div')<IAppWrapperProps>`
   position: relative;
-`;
-
-export const MainWrapper = styled('main')<IMainWrapperProps>`
-  position: relative;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: ${props => props.theme.modePalette.darkBg};
+  max-width: ${sizes.desktopXXL}px;
   ${(props) => props.splashOpen && `overflow: hidden;`}
-  ${(props) => props.mode === 'light' && css`
-    background-color: ${props.theme.modePalette.lightBg};
-    p, h1, h2, h3, h4, h5, h6, div, input, form, span, div {
-      color: rgba(${props.theme.palette.matteBlack}, 0.87);
-    }
-  `}
+  ${(props) => {
+    const color = props.theme.modePalette[`${props.mode}Bg`];
+    return css`
+      background-color: ${color};
+      p, h1, h2, h3, h4, h5, h6, div, input, form, span, div {
+        color: ${hexRgb(color, 0.87)};
+      }
+    `
+  }}
 `;
 
 export const OutterWrapper = styled.div`
   position: relative;
+  z-index: 1;
   margin-bottom: ${props => props.theme.sizes.footerHeightM};
-  @media (min-width: ${media.tablet}) {
+  @media (${media.tablet}) {
     margin-bottom: ${props => props.theme.sizes.footerHeightD};
   }
 `;
 
 export const InnerWrapper = styled.div`
   padding: 0;
+  height: auto;
+  @media ${media.tablet}) {
+    padding-top: ${props => props.theme.sizs.toolbatHeightD};
+  }
 `;
 
 

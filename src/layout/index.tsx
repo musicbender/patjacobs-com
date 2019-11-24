@@ -9,14 +9,14 @@ import { requestTimeout } from '../util/shims';
 import { changeSplash, changeTransport, setIsMobile } from '../actions/global';
 import GlobalStyles from '../styles/global-styles';
 import Head from '../components/global/head';
-import { IStore } from '../types/state';
+import { IStore } from '../../types/state';
 import GridLines from '../components/global/grid-lines';
-import Logo from '../components/global/logo';
+import Toolbar from '../components/global/logo';
+import SplashScreen from '../components/sections/splash-screen';
 import { 
   AppWrapper, 
-  MainWrapper, 
   OutterWrapper,
-  InnerWrapper 
+  InnerWrapper,
 } from './styles';
 
 interface IReduxProps {
@@ -81,24 +81,26 @@ export class Layout extends PureComponent<IProps & IReduxProps> {
 
   render() {
     return (
-      <AppWrapper>
-        <GlobalStyles />
-        <Head pathname={location.pathname} />
-        <ThemeProvider theme={theme}>
-          <MainWrapper
-            mode={this.props.mode} 
-            splashOpen={this.props.splashOpen}
-          >
+      <ThemeProvider theme={theme}>
+        <AppWrapper
+          mode={this.props.mode} 
+          splashOpen={this.props.splashOpen}
+        >
+            <GlobalStyles />
+            <Head pathname={location.pathname} />
             <OutterWrapper>
               <GridLines gridLines={this.props.config.gridLines} />
-              <Logo />
+              <Toolbar />
+              {
+                this.props.splashOpen &&
+                <SplashScreen />
+              }
               <InnerWrapper>
                 {this.props.children}
               </InnerWrapper> 
             </OutterWrapper>
-          </MainWrapper>
-        </ThemeProvider>
-      </AppWrapper>
+        </AppWrapper>
+      </ThemeProvider>
     );
   }
 }

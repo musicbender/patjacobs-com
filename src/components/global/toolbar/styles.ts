@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from '../../../styles/breakpoints';
-import { superCenter, gridValue } from '../../../styles/style-utils';
+import { superCenter, gridValue } from '../../../styles/utils/global';
 
 const iconSize: string = '5em';
 const iconOpacity: number = 0.675;

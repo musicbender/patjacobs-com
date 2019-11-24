@@ -20,7 +20,7 @@ export interface IHomeActionPayload {
   value: number
 }
 
-export { AppState } from '../reducers';
+export { AppState } from '../src/reducers';
 
 // enums
 export enum EModes {
