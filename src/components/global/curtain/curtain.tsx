@@ -4,22 +4,26 @@ import Logo from '../logo';
 import { clearRequestTimeout, requestTimeout } from '../../../util/shims';
 import { CurtainWrapper, Block, InnerBlock } from './styles';
 import { ECurtainTypes, ECurtainColorLayouts, ECurtainTransition } from '../../../../types/global';
+import { StaticDataDataConfig } from '../../../../types/graphql-types';
 
-interface IProps {
-  config: any
-  duration: number
-  entrance: keyof typeof ECurtainTypes
-  exit: keyof typeof ECurtainTypes
-  colorLayout: keyof typeof ECurtainColorLayouts
-  withLogo: boolean
-  logoProps: any
+type Props = {
+  duration?: number
+  entrance?: keyof typeof ECurtainTypes
+  exit?: keyof typeof ECurtainTypes
+  colorLayout?: keyof typeof ECurtainColorLayouts
+  withLogo?: boolean
+  logoProps?: any
 }
 
-interface IState {
+type QueryProps = {
+  config: StaticDataDataConfig
+}
+
+type State = {
   exiting: boolean
 }
 
-class Curtain extends PureComponent<IProps, IState> {
+class Curtain extends PureComponent<Props & QueryProps, State> {
   blockNum: number;
   baseDelay: number;
   timeout: any;
@@ -33,7 +37,7 @@ class Curtain extends PureComponent<IProps, IState> {
     logoProps: {}
   }
 
-  constructor(props: IProps) {
+  constructor(props: Props & QueryProps) {
     super(props);
     this.blockNum = 7;
     this.baseDelay = 55;
@@ -53,7 +57,7 @@ class Curtain extends PureComponent<IProps, IState> {
     clearRequestTimeout(this.timeout);
   }
 
-  getBlockDelay(i, j) {
+  getBlockDelay(i: number, j: number): number {
     const { entrance, exit } = this.props;
     const { exiting } = this.state;
 
@@ -114,7 +118,7 @@ class Curtain extends PureComponent<IProps, IState> {
   }
 }
 
-export default (props: any) => (
+export default (props: Props) => (
   <StaticQuery
     query={graphql`
       query {

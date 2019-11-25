@@ -1,17 +1,27 @@
 import React from 'react';
-import Logo from '../../global/logo';
+import { useStaticQuery, graphql } from 'gatsby';
 import Curtain from '../../global/curtain';
+import { SplashScreenWrapper, LogoOutterWrapper, StyledLogo } from './styles';
 
-const SplashScreen = () => (
-  <div className={cx(style.splashScreen)}>
-    <Curtain duration={config.splashScreenDebug ? 3000000 : 3000}/>
-    <div className={cx(
-      style.logoWrapper,
-      { [style.debug]: config.splashScreenDebug }
-    )}>
-      <Logo color="aqua" />
-    </div>
-  </div>
-);
+const SplashScreen: React.SFC = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      staticData {
+        config {
+          splashScreenDebug
+        }
+      }
+    }
+  `);
+
+  return (
+    <SplashScreenWrapper>
+      <Curtain duration={data.staticData.config.splashScreenDebug ? 3000000 : 3000} />
+      <LogoOutterWrapper>
+        <StyledLogo color="aqua" debug={data.staticData.config.splashScreenDebug } />
+      </LogoOutterWrapper>
+    </SplashScreenWrapper>
+  );
+};
 
 export default SplashScreen;

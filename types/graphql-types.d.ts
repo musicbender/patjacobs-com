@@ -2581,6 +2581,26 @@ export type StringQueryOperatorInput = {
   glob?: Maybe<Scalars['String']>,
 };
 
+export type Unnamed_1_QueryVariables = {};
+
+
+export type Unnamed_1_Query = { staticData: Maybe<{ config: Maybe<Pick<StaticDataConfig, 'gridLines'>> }> };
+
+export type Unnamed_2_QueryVariables = {};
+
+
+export type Unnamed_2_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site' | 'title' | 'titleTemplate' | 'description' | 'siteUrl' | 'language' | 'color' | 'twitter'>> }> };
+
+export type Unnamed_3_QueryVariables = {};
+
+
+export type Unnamed_3_Query = { staticData: Maybe<{ config: Maybe<Pick<StaticDataConfig, 'splashScreenDebug'>> }> };
+
+export type Unnamed_4_QueryVariables = {};
+
+
+export type Unnamed_4_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, staticData: Maybe<{ config: Maybe<Pick<StaticDataConfig, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
+
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
 export type GatsbyImageSharpFixed_TracedSvgFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;

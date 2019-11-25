@@ -38,7 +38,7 @@ export const InnerWrapper = styled.div`
   padding: 0;
   height: auto;
   @media ${media.tablet}) {
-    padding-top: ${props => props.theme.sizs.toolbatHeightD};
+    padding-top: ${props => props.theme.sizes.toolbarHeight};
   }
 `;
 

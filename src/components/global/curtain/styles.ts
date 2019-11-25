@@ -2,7 +2,8 @@ import styled, { keyframes } from 'styled-components';
 import { getBlockAnimation } from '../../../styles/utils/animate';
 import { ECurtainTransition } from '../../../../types/global';
 
-interface IInnerBlockProps {
+// types
+type InnerBlockProps = {
   transition: keyof typeof ECurtainTransition | null
   enterType?: string
   exitType?: string
@@ -43,7 +44,7 @@ export const Block = styled.div`
   overflow: hidden;
 `;
 
-export const InnerBlock = styled('div')<IInnerBlockProps>`
+export const InnerBlock = styled('div')<InnerBlockProps>`
   position: absolute;
   top: 0;
   left: 0;

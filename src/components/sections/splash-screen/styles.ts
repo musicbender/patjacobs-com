@@ -1,41 +1,9 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+import { superCenter } from '../../../styles/utils/global';
+import Logo from '../../global/logo'
 
-.splash-screen {
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: transparent;
-  z-index: 10;
-  > .logo-wrapper {
-    @mixin super-center;
-    width: auto;
-    height: auto;
-    overflow: hidden;
-    > [class*="logo"] {
-      margin: 0 auto;
-      width: 6em;
-      transform: translate3d(0, 0, 0);
-      animation: hideLogo $moderate $logoIn forwards;
-      animation-delay: 3425ms;
-      path {
-        stroke-dasharray: 36;
-        stroke-dashoffset: 36;
-        opacity: 0;
-        animation: showSplashLogo 1000ms $logoIn forwards;
-        animation-delay: 1000ms;
-        /* animation-delay: 1000000ms */
-      }
-    }
-    &.debug {
-      > [class*="logo"] {
-        animation-delay: 3000000ms;
-      }
-    }
-  }
-}
-
-@keyframes showSplashLogo {
+// keyframes
+const showSplashLogo = keyframes`
   0% {
     opacity: 0;
     stroke-dashoffset: 36;
@@ -48,13 +16,46 @@ import styled from 'styled-components';
     opacity: 1;
     stroke-dashoffset: 0;
   }
-}
+`;
 
-@keyframes hideLogo {
+const hideLogo = keyframes`
   0% {
     transform: translate3d(0, 0, 0);
   }
   100% {
     transform: translate3d(-110%, 0, 0);
   }
-}
+`
+
+// components
+export const SplashScreenWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: transparent;
+  z-index: 10;
+`;
+
+export const LogoOutterWrapper = styled.div`
+  ${superCenter()}
+  width: auto;
+  height: auto;
+  overflow: hidden;
+`;
+
+export const StyledLogo = styled(Logo)<{ debug: boolean }>`
+  margin: 0 auto;
+  width: 6em;
+  transform: translate3d(0, 0, 0);
+  animation: ${({ theme }) => css`${hideLogo} ${theme.animate.moderate} ${theme.animate.logoIn} forwards`};
+  animation-delay: 3425ms;
+  ${props => props.debug && `animation-delay: 3000000ms;`}
+  path {
+    stroke-dasharray: 36;
+    stroke-dashoffset: 36;
+    opacity: 0;
+    animation: ${({ theme }) => css`${showSplashLogo} 1000ms ${theme.animate.logoIn} forwards`};
+    animation-delay: 1000ms;
+  }
+`;
