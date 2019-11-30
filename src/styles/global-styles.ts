@@ -2,16 +2,16 @@ import { createGlobalStyle } from 'styled-components'
 import { media } from './breakpoints';
 import { ITheme } from '../../types/styles';
 
-interface IGlobalStyles {
-  theme: ITheme,
+type GlobalStyles = {
+  theme: ITheme
   media: any
 }
 
-export default createGlobalStyle<IGlobalStyles>`
+export default createGlobalStyle<GlobalStyles>`
   html {
     -webkit-font-smoothing: antialiased;
     margin: 0;
-    background: #000; 
+    background: ${props => props.theme.modePalette.darkBg}; 
     box-sizing: border-box;
     font-size: 16px;
     @media (${media.tablet}) {

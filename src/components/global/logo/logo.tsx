@@ -13,9 +13,10 @@ enum EColors {
 
 interface IProps {
   color: keyof typeof EColors,
+  className?: string
 }
 
-const Logo = ({ color }: IProps) => {
+const Logo = ({ color, className }: IProps) => {
   const colors: any = {
     white: '#fff',
     black: 'rgb(30,30,30)',
@@ -30,6 +31,7 @@ const Logo = ({ color }: IProps) => {
       height="100%"
       viewBox="0 0 21 21"
       color={colorValue}
+      className={className}
     >
       <g>
         <path d="M19.5,1.5l0,18l-11.938,0l-0.062,-6" />

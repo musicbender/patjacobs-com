@@ -7,12 +7,12 @@ import { ECurtainTypes, ECurtainColorLayouts, ECurtainTransition } from '../../.
 import { StaticDataDataConfig } from '../../../../types/graphql-types';
 
 type Props = {
-  duration?: number
-  entrance?: keyof typeof ECurtainTypes
-  exit?: keyof typeof ECurtainTypes
-  colorLayout?: keyof typeof ECurtainColorLayouts
-  withLogo?: boolean
-  logoProps?: any
+  duration: number
+  entrance: keyof typeof ECurtainTypes
+  exit: keyof typeof ECurtainTypes
+  colorLayout: keyof typeof ECurtainColorLayouts
+  withLogo: boolean
+  logoProps: any
 }
 
 type QueryProps = {

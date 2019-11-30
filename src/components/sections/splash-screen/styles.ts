@@ -48,14 +48,14 @@ export const StyledLogo = styled(Logo)<{ debug: boolean }>`
   margin: 0 auto;
   width: 6em;
   transform: translate3d(0, 0, 0);
-  animation: ${({ theme }) => css`${hideLogo} ${theme.animate.moderate} ${theme.animate.logoIn} forwards`};
+  ${({ theme }) => css`animation: ${hideLogo} ${theme.animate.moderate} ${theme.animate.logoIn} forwards;`}
   animation-delay: 3425ms;
   ${props => props.debug && `animation-delay: 3000000ms;`}
   path {
     stroke-dasharray: 36;
     stroke-dashoffset: 36;
     opacity: 0;
-    animation: ${({ theme }) => css`${showSplashLogo} 1000ms ${theme.animate.logoIn} forwards`};
+    ${({ theme }) => css`animation: ${showSplashLogo} 1000ms ${theme.animate.logoIn} forwards;`}
     animation-delay: 1000ms;
   }
 `;

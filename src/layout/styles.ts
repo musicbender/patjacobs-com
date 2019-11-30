@@ -2,12 +2,12 @@ import styled, { css } from 'styled-components';
 import hexRgb from 'hex-to-rgba';
 import { media, sizes } from '../styles/breakpoints';
 
-interface IAppWrapperProps {
+type AppWrapperProps = {
   splashOpen?: boolean
   mode?: string,
 }
 
-export const AppWrapper = styled('div')<IAppWrapperProps>`
+export const AppWrapper = styled('div')<AppWrapperProps>`
   position: relative;
   min-height: 100vh;
   margin: 0 auto;

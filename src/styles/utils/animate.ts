@@ -13,28 +13,28 @@ export const getBlockAnimation = (config: IgetBlockAnimation): string => {
   const { slow } = theme.animate;
   const { enterFrames, exitFrames, enterType, exitType, transition } = config;
 
-  if (!transition) return 'animation: none';
+  if (!transition) return 'animation: none;';
   
   const type = transition === 'enter' ? enterType : exitType;
 
   switch(`${transition}-${type}`) {
     case 'enter-blocks': 
-      return `animation: ${enterFrames} ${slow} ease-in forwards`;
+      return `animation: ${enterFrames} ${slow} ease-in forwards;`;
     case 'enter-reverse-blocks': 
-      return `animation: ${enterFrames} ${slow} ease-in forwards`;
+      return `animation: ${enterFrames} ${slow} ease-in forwards;`;
     case 'enter-rows':
-      return `animation: ${enterFrames} ${slow} ease-in forwards`;
+      return `animation: ${enterFrames} ${slow} ease-in forwards;`;
     case 'enter-full':
-      return `animation: ${enterFrames} 1000ms ease-in-out forwards`;
+      return `animation: ${enterFrames} 1000ms ease-in-out forwards;`;
     case 'exit-blocks': 
-      return `animation: ${exitFrames} ${slow} ease-in forwards`;
+      return `animation: ${exitFrames} ${slow} ease-in forwards;`;
     case 'exit-reverse-blocks': 
-      return `animation: ${exitFrames} ${slow} ease-in forwards`;
+      return `animation: ${exitFrames} ${slow} ease-in forwards;`;
     case 'exit-rows':
-      return `animation: ${exitFrames} ${slow} ease-in forwards`;
+      return `animation: ${exitFrames} ${slow} ease-in forwards;`;
     case 'exit-full':
-      return `animation: ${exitFrames} 1000ms ease-in-out forwards`;
+      return `animation: ${exitFrames} 1000ms ease-in-out forwards;`;
     default:
-      return 'animation: none';
+      return 'animation: none;';
   }
 }
