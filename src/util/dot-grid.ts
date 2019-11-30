@@ -1,13 +1,6 @@
+import { Skill } from '../../types/static-data';
 
-/**
- * getTextWidth - get css width for split text inside dot grid
- * @param {string} text - text to get width for
- * @param {number} spacing - spacing between chracters
- * @param {number} offset - any offset to subtract in px
- * @return {string} css value for width
- */
-
-export const getTextWidth = (text = '', spacing, offset = 0) => {
+export const getTextWidth = (text: string = '', spacing: number, offset: number = 0): string => {
   if (!spacing || !text || typeof text !== 'string' || typeof spacing !== 'number') {
     return '0px';
   }
@@ -22,18 +15,9 @@ export const getTextWidth = (text = '', spacing, offset = 0) => {
   return `calc(${limitedSum}% - ${offset / 2}px)`;
 }
 
-/**
- * dotsFromCoords - get dot indexes when given x & y coordinates
- * @param {array} position - array with x and y coordinates
- * @param {string} text - text used to dertermine how many dots are affected
- * @param {string} direction - direction of text
- * @param {number} columns - how many columns in the grid
- * @return {array} list of dot indexes
- */
-
-export const dotsFromCoords = (position = [0, 0], text = '', direction = 'right', columns = 15) => {
-  let coords = position;
-  let output = [];
+export const dotsFromCoords = (position: number[] = [0, 0], text: string = '', direction: string = 'right', columns: number = 15): number[] => {
+  let coords: number[] = position;
+  let output: number[] = [];
 
   if (!text) {
     return [];
@@ -80,17 +64,10 @@ export const dotsFromCoords = (position = [0, 0], text = '', direction = 'right'
   return output;
 }
 
-/**
- * mapDotsWithText - maps over each tect config item to find dot indexes
- * @param {object} textConfig - config for text that includes text, direction, and position
- * @param {number} columns - number of columns in grid
- * @return {array} array of all dot indexes
- **/
+export const mapDotsWithText = (textConfig: Skill[], columns: number): number[] => {
+  let output: number[] = [];
 
-export const mapDotsWithText = (textConfig, columns) => {
-  let output = [];
-
-  textConfig.forEach((item) => {
+  textConfig.forEach((item: Skill): void => {
     const { position, text, direction } = item;
     const dotArr = dotsFromCoords(position, text, direction, columns);
     output = [ ...output, ...dotArr ];

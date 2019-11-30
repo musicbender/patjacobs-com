@@ -2,7 +2,7 @@ export const hasWindow = (): boolean => {
   return typeof window !== 'undefined';
 }
 
-export const getIndexOrLast = (array = [], index = 0) => {
+export const getIndexOrLast = (array: any[] = [], index: number = 0) => {
   if (array.length < 1 || !Array.isArray(array)) {
     return false;
   }
@@ -40,6 +40,6 @@ export const minMax = (num: number, min: number = 0, max: number = 255): number 
   return num <= min ? min : num >= max ? max : num;
 }
 
-export const isMobileSize = () => {
-  return window.innerWidth < 768;
+export const isMobileSize = (): boolean => {
+  return hasWindow() && window.innerWidth < 768;
 }

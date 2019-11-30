@@ -6,6 +6,18 @@ declare global {
 }
 
 // types
+type StartSequenceOptions = {
+  length?: number
+  delay?: number
+  interval?: number
+  index?: number
+}
+
+export type TestItem = {
+  assert: any,
+  expected: any,
+  description?: string
+}
 
 // interfaces
 export interface ISeo {

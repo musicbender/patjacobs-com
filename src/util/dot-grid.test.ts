@@ -1,10 +1,10 @@
-import { expect } from 'chai';
 import { getTextWidth, dotsFromCoords, mapDotsWithText } from './dot-grid';
-import mockDotTextConfig from '../../../test/mocks/dot-text-config.json';
+import mockDotTextConfig from '../../test/mocks/dot-text-config.json';
+import { TestItem } from '../../types/global';
 
-describe('util/dot-grid.js', function () {
-  describe('dotsFromCoords()', function () {
-    const tests = [
+describe('util/dot-grid.js', () => {
+  describe('dotsFromCoords()', () => {
+    const tests: TestItem[] = [
       {
         assert: [[0, 0], 'text', 'right', 15],
         expected: [0, 1]
@@ -133,13 +133,13 @@ describe('util/dot-grid.js', function () {
 
     tests.forEach(({ assert, expected }) => {
       it(`Inputing ${JSON.stringify(assert)} will return ${JSON.stringify(expected)}`, function () {
-        expect(dotsFromCoords(...assert)).to.eql(expected);
+        expect(dotsFromCoords(...assert)).toEqual(expected);
       });
     });
   });
 
-  describe('mapDotsWithText()', function () {
-    const tests = [
+  describe('mapDotsWithText()', () => {
+    const tests: TestItem[] = [
       {
         assert: [
           mockDotTextConfig[0],
@@ -198,13 +198,13 @@ describe('util/dot-grid.js', function () {
 
     tests.forEach(({ assert, expected }) => {
       it(`Giving certain params will output correct array with ${expected.length} items`, function () {
-        expect(mapDotsWithText(...assert)).to.eql(expected);
+        expect(mapDotsWithText(assert[0], assert[1])).toEqual(expected);
       });
     })
   });
 
   describe('getTextWidth()', function () {
-    const tests = [
+    const tests: TestItem[] = [
       {
         assert: ['text', 7, 6],
         expected: 'calc(14% - 3px)'
@@ -261,7 +261,7 @@ describe('util/dot-grid.js', function () {
 
     tests.forEach(({ assert, expected }) => {
       it(`imput of ${assert.join()} should output ${expected}`, function () {
-        expect(getTextWidth(...assert)).to.equal(expected);
+        expect(getTextWidth(assert[0], assert[1], assert[2])).toEqual(expected);
       });
     });
   });
