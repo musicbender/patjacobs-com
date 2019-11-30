@@ -7,12 +7,12 @@ import { ECurtainTypes, ECurtainColorLayouts, ECurtainTransition } from '../../.
 import { StaticDataDataConfig } from '../../../../types/graphql-types';
 
 type Props = {
-  duration: number
-  entrance: keyof typeof ECurtainTypes
-  exit: keyof typeof ECurtainTypes
-  colorLayout: keyof typeof ECurtainColorLayouts
-  withLogo: boolean
-  logoProps: any
+  duration?: number
+  entrance?: keyof typeof ECurtainTypes
+  exit?: keyof typeof ECurtainTypes
+  colorLayout?: keyof typeof ECurtainColorLayouts
+  withLogo?: boolean
+  logoProps?: any
 }
 
 type QueryProps = {
@@ -80,11 +80,15 @@ class Curtain extends PureComponent<Props & QueryProps, State> {
   getTransitionState(): keyof typeof ECurtainTransition | null {
     const isEnter: boolean = !this.state.exiting && this.props.entrance !== 'none';
     const isExit: boolean = this.state.exiting && this.props.exit !== 'none';
+
     return isEnter ? 'enter' : isExit ? 'exit' : null;
   }
 
   renderBlock(i: number, j: number) {
     const delay: number = this.getBlockDelay(i, j);
+    
+    console.log(`delay: ${delay}`);
+    
     return (
       <Block key={'splash-block' + i + '_' + j}>
         <InnerBlock

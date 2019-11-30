@@ -55,14 +55,14 @@ export const InnerBlock = styled('div')<InnerBlockProps>`
   animation-delay: 0ms;
   ${props => props.transition === 'enter' && 'transform: translate3d(110%, 0, 0);'}
   ${props => props.transition === 'exit' && 'transform: translate3d(0, 0, 0);'}
-  ${props => props.delay && `animation-delay: ${props.delay};`}
   ${props => css`
     ${getBlockAnimation({
       enterFrames: splashBlockEnter, 
       exitFrames: splashBlockExit, 
       transition: props.transition, 
       enterType: props.enterType,
-      exitType: props.enterType
+      exitType: props.exitType
     })
   }`}
+  ${props => props.delay && `animation-delay: ${props.delay};`}
 `;
