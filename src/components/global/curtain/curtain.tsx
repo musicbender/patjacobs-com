@@ -87,8 +87,6 @@ class Curtain extends PureComponent<Props & QueryProps, State> {
   renderBlock(i: number, j: number) {
     const delay: number = this.getBlockDelay(i, j);
     
-    console.log(`delay: ${delay}`);
-    
     return (
       <Block key={'splash-block' + i + '_' + j}>
         <InnerBlock

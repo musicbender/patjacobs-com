@@ -4,7 +4,7 @@ import { ITheme } from '../../types/styles';
 
 type GlobalStyles = {
   theme: ITheme
-  media: any
+  media?: any
 }
 
 export default createGlobalStyle<GlobalStyles>`

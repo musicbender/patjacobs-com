@@ -11,7 +11,7 @@ import GlobalStyles from '../styles/global-styles';
 import Head from '../components/global/head';
 import { IStore } from '../../types/state';
 import GridLines from '../components/global/grid-lines';
-import Toolbar from '../components/global/logo';
+import Toolbar from '../components/global/toolbar';
 import SplashScreen from '../components/sections/splash-screen';
 import { 
   AppWrapper, 

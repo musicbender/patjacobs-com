@@ -12,9 +12,9 @@ export const ToolBarWrapper = styled.div`
   height: ${props => props.theme.sizes.toolbarHeight};
   background-color: transparent;
   z-index: 9;
-  @media (${media.tablet}) {
+  ${media.tablet`
     position: fixed;
-  }
+  `}
 `; 
 
 export const InnerWrapper = styled.div`
@@ -23,15 +23,15 @@ export const InnerWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  > svg {
-    @mixin super-center ${gridS}, 0, -50%, 0;
+  svg {
+    ${superCenter(gridS, '0', '-50%', '0')}
     display: inline-block;
     width: 1.85em;
     fill: ${props => props.theme.palette.white};
     opacity: ${iconOpacity};
-    @media (${media.tablet}) {
-      left: calc(${gridS} / 2);
-    }
+    ${media.tablet`
+      left: ${`calc(${gridS} / 2)`};
+    `}
   }
 `;
 

@@ -15,7 +15,7 @@ export const GridLinesWrapper = styled.div`
 export const GridItem = styled('div')<IGridItemProps>`
   display: inline-block;
   height: 100%;
-  width: ${props => `${props.width}%`}
+  width: ${props => `${props.width}%`};
 `;
 
 export const GridLine = styled.div`

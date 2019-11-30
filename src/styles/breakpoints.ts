@@ -18,7 +18,7 @@ export const media = (Object.keys(sizes) as Array<keyof typeof sizes>)
     const emSize = sizes[label] / 16;
 
     accumulator[label] = (first: any, ...interpolations: any[]) => css`
-      @media screen and (max-width: ${emSize}em) {
+      @media screen and (min-width: ${emSize}em) {
         ${css(first, ...interpolations)}
       }
     `;

@@ -8,12 +8,12 @@ import {
   HamburbarBar,
 } from './styles';
 
-interface IProps {
-  pageLoaded: boolean,
-  mode: EModes,
-  menuOpen: boolean,
-  handleMode: any,
-  handleMenu: any
+type Props = {
+  pageLoaded?: boolean,
+  mode?: EModes,
+  menuOpen?: boolean,
+  handleMode?: any,
+  handleMenu?: any
 }
 
 const Toolbar = ({
@@ -22,7 +22,7 @@ const Toolbar = ({
   menuOpen,
   handleMode,
   handleMenu
-}: IProps) => {
+}: Props) => {
   const renderHamburger = () => {
     return (
       <Hamburger>

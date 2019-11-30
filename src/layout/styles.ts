@@ -29,17 +29,17 @@ export const OutterWrapper = styled.div`
   position: relative;
   z-index: 1;
   margin-bottom: ${props => props.theme.sizes.footerHeightM};
-  @media (${media.tablet}) {
+  ${media.tablet`
     margin-bottom: ${props => props.theme.sizes.footerHeightD};
-  }
+  `}
 `;
 
 export const InnerWrapper = styled.div`
   padding: 0;
   height: auto;
-  @media ${media.tablet}) {
+  ${media.tablet`
     padding-top: ${props => props.theme.sizes.toolbarHeight};
-  }
+  `}
 `;
 
 
