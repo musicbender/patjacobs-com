@@ -3,17 +3,25 @@ import { bindActionCreators, Dispatch, AnyAction} from 'redux';
 import { connect } from 'react-redux';
 import { HomePage } from './styles';
 
-interface IProps {
-  mode?: string
-}
-
-interface IState {
+type Props = {
   
 }
 
-class Home extends PureComponent<IProps, IState> {
-  static defaultProps: IProps;
-  constructor(props: IProps) {
+type ReduxProps = {
+  mode?: string
+}
+
+
+type State = {
+  
+}
+
+class Home extends PureComponent<Props & ReduxProps, State> {
+  static defaultProps = {
+
+  }
+
+  constructor(props: Props) {
     super(props);
     this.state = {
 
@@ -39,12 +47,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
   }, dispatch);
 }
 
-Home.defaultProps = {
-  
-};
-
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
-
-
-

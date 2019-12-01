@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class ScrollToTop extends Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
   }
 
@@ -13,4 +13,5 @@ class ScrollToTop extends Component {
     );
   }
 }
+
 export default ScrollToTop;

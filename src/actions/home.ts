@@ -2,7 +2,7 @@ import {
   ABOUT_TOP_SET,
   RECENT_WORK_TOP_SET,
   SKILLS_TOP_SET
-} from '../configs/constants';
+} from '../constants/constants';
 import { AnyAction } from 'redux';
 import { IHomeActionPayload } from '../../types/state';
 

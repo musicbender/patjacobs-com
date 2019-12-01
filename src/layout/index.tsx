@@ -19,7 +19,7 @@ import {
   InnerWrapper,
 } from './styles';
 
-interface IReduxProps {
+type ReduxProps = {
   splashOpen?: boolean
   transportOpen?: boolean
   isMobile?: boolean
@@ -30,7 +30,7 @@ interface IReduxProps {
   mode?: string
 }
 
-interface IProps {
+type Props = {
   children?: any
   location?: {
     pathname: string
@@ -38,9 +38,12 @@ interface IProps {
   config?: any
 }
 
-export class Layout extends PureComponent<IProps & IReduxProps> {
-  static defaultProps: IProps;
-  constructor(props: IProps) {
+export class Layout extends PureComponent<Props & ReduxProps> {
+  static defaultProps = {
+
+  };
+
+  constructor(props: Props) {
     super(props);
     this.handleResize = throttle(this.handleResize, 100);
   }

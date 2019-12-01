@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import { IGridPositionParams, ITheme } from '../../../types/styles';
+import { IGridPositionParams } from '../../../types/styles';
 import theme from '../theme';
 
 export const px2rem = (px: number) => `${px / 16}rem`;

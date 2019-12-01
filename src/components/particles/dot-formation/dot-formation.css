@@ -1,0 +1,29 @@
+@import '../../../style/helpers/variables';
+@import '../../../style/helpers/mixins';
+
+.dot-formation {
+  position: relative;
+  > .dots {
+    position: absolute;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    &.active {
+      > .dot {
+        &.has-text {
+          opacity: 0;
+          transition: opacity 0ms linear 1s;
+        }
+      }
+    }
+    > .dot {
+      position: absolute;
+      opacity: 1;
+      visibility: visible;
+      transition: fill 150ms linear;
+      &.hide {
+        visibility: hidden;
+      }
+    }
+  }
+}

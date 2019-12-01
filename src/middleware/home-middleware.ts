@@ -1,5 +1,5 @@
 import { Middleware, Dispatch, AnyAction, MiddlewareAPI } from 'redux';
-import { ABOUT_TOP_SET, RECENT_WORK_TOP_SET, SKILLS_TOP_SET } from '../configs/constants';
+import { ABOUT_TOP_SET, RECENT_WORK_TOP_SET, SKILLS_TOP_SET } from '../constants/constants';
 
 const homeMiddleware: Middleware<Dispatch> = (store: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: AnyAction) => {
   const { type, payload } = action;

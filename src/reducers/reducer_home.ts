@@ -4,7 +4,7 @@ import {
   ABOUT_TOP_SET,
   RECENT_WORK_TOP_SET,
   SKILLS_TOP_SET
-} from '../configs/constants';
+} from '../constants/constants';
 
 export default function home(state = initialState.home, action: AnyAction) {
   const { type, payload } = action;

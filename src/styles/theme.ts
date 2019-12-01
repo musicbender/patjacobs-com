@@ -9,6 +9,7 @@ const theme = {
     darkerGrey: '#242424',
     darkGrey: '#393939',
     grey: '#555555',
+    error: '#E8233A'
   },
   corePalette: {
     yellow: '#F9D413',

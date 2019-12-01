@@ -1,4 +1,4 @@
-import { TRANSPORT_CHANGED, IS_MOBILE_SET } from '../configs/constants';
+import { TRANSPORT_CHANGED, IS_MOBILE_SET } from '../constants/constants';
 import { changeTransport } from '../actions/global';
 import { isMobileSize } from '../util/util';
 import { requestTimeout } from '../util/shims';

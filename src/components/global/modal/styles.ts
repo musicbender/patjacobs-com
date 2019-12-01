@@ -1,7 +1,6 @@
-@import '../../../style/helpers/variables';
-@import '../../../style/helpers/mixins';
+import styled from 'styled-components';
 
-.modal {
+export const ModalWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -10,4 +9,4 @@
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 80;
-}
+`;

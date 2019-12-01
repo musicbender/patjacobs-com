@@ -6,7 +6,7 @@ import {
   MODE_CHANGED,
   RECENT_WORK_TOP_SET,
   IS_MOBILE_SET
-} from '../configs/constants';
+} from '../constants/constants';
 import { AnyAction } from 'redux';
 
 export function loadPage() {

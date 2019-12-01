@@ -7,7 +7,7 @@ import {
   TRANSPORT_CHANGED,
   MENU_CHANGED,
   IS_MOBILE_SET
-} from '../configs/constants';
+} from '../constants/constants';
 
 export default function global(state = initialState.global, action: AnyAction) {
   const { type, payload } = action;
