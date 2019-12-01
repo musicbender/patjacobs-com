@@ -37,16 +37,39 @@ export enum ECurtainTypes {
   'blocks',
   'reverse-blocks',
   'rows',
-  'full'
+  'full',
 }
 
 export enum ECurtainColorLayouts {
   'blocks',
   'rows',
-  'full'
+  'full',
 }
 
 export enum ECurtainTransition {
   'enter',
   'exit',
+}
+
+export enum CoreColors {
+  'aqua',
+  'purple',
+  'yellow',
+  'orange',
+}
+
+export enum TriangleSizes {
+  'micro',
+  'tiny',
+  'small',
+  'medium',
+  'giant',
+}
+
+export enum ParticleColors {
+  'aqua',
+  'purple',
+  'yellow',
+  'orange',
+  'white',
 }
