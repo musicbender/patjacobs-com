@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import cn from 'classnames/bind';
 import Plx from 'react-plx';
-import ColorDots from './color-dots';
-import Svg from '../_global/svg';
+import ColorDots from '../../particles/color-dot-row/color-dots';
 import { Triangle, DotGrid, LilSquare } from '../_particles';
 import { dotGridA, dotGridB, dotGridC, dotGridD } from './dots';
 import { countLongestArray, hasWindow } from '../../util/util';

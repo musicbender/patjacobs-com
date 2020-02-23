@@ -32,6 +32,12 @@ export interface ISeo {
 }
 
 //enums
+export type CoreColors = 
+  'aqua' |
+  'purple' |
+  'yellow' |
+  'orange';
+
 export enum ECurtainTypes {
   'none',
   'blocks',
@@ -49,13 +55,6 @@ export enum ECurtainColorLayouts {
 export enum ECurtainTransition {
   'enter',
   'exit',
-}
-
-export enum CoreColors {
-  'aqua',
-  'purple',
-  'yellow',
-  'orange',
 }
 
 export enum TriangleSizes {

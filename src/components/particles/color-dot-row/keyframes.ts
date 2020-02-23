@@ -1,139 +1,6 @@
-@import '../../style/helpers/variables';
-@import '../../style/helpers/mixins';
+import { keyframes } from 'styled-components';
 
-.color-dots-wrapper {
-  $diameter: 0.7em;
-  width: 100%;
-  height: $diameter;
-  @media (min-width: $tablet-width) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .dot {
-    width: $diameter;
-    height: $diameter;
-    border-radius: $diameter;
-    &.yellow {
-      background-color: $yellow;
-    }
-    &.purple {
-      background-color: $purple;
-    }
-    &.orange {
-      background-color: $orange;
-    }
-    &.aqua {
-      background-color: $aqua;
-    }
-  }
-  > .desktop-wrapper {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    @media (min-width: $tablet-width) {
-      display: block;
-    }
-    > .dot {
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0;
-      &.yellow {
-        transform: translate3d(10vw, 5em, 0);
-        animation-name: yellowDot;
-      }
-      &.purple {
-        transform: translate3d(34vw, 0em, 0);
-        animation-name: purpleDot;
-      }
-      &.orange {
-        transform: translate3d(86vw, 13em, 0);
-        animation-name: orangeDot;
-      }
-      &.aqua {
-        transform: translate3d(86vw, 13em, 0);
-        animation-name: aquaDot;
-      }
-    }
-    &.entering {
-      > .dot {
-        animation-duration: $header-duration;
-        animation-delay: $header-delay;
-        animation-timing-function: steps(1);
-        animation-fill-mode: forwards;
-        &.yellow {
-          animation-name: yellowDot;
-        }
-        &.purple {
-          animation-name: purpleDot;
-        }
-        &.orange {
-          animation-name: orangeDot;
-        }
-        &.aqua {
-          animation-name: aquaDot;
-        }
-      }
-    }
-    &.finished {
-      > .dot {
-        animation: none;
-        opacity: 1;
-        &.yellow {
-          transform: translate3d(8vw, 24em, 0);
-        }
-        &.purple {
-          transform: translate3d(8vw, 28em, 0) scale(1);
-        }
-        &.orange {
-          transform: translate3d(8vw, 32em, 0) scale(1);
-        }
-        &.aqua {
-          transform: translate3d(8vw, 36em, 0) scale(1);
-        }
-      }
-    }
-  }
-  > .mobileWrapper {
-    display: block;
-    width: 100%;
-    margin-top: 2.75em;
-    @media (min-width: $tablet-width) {
-      display: none;
-    }
-    > .dot {
-      display: inline-block;
-      float: left;
-      margin-right: calc($(diameter) * 2);
-      opacity: 0;
-      transform: translate3d(0, 2em, 0);
-    }
-    &.entering {
-      > .dot {
-        animation: mobileDot $slow $easeInOut forwards;
-        &:nth-child(1) { animation-delay: 1000ms}
-        &:nth-child(2) { animation-delay: 1500ms}
-        &:nth-child(3) { animation-delay: 2000ms}
-        &:nth-child(4) { animation-delay: 2500ms}
-      }
-    }
-    &.finished {
-      > .dot {
-        animation: none;
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-  }
-}
-
-@keyframes mobileDot {
+export const mobileDot = keyframes`
   0% {
     opacity: 0;
     transform: translate3d(0, 2em, 0);
@@ -142,9 +9,9 @@
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
-}
+`;
 
-@keyframes yellowDot {
+export const yellowDot = keyframes`
   0% {
     opacity: 0;
     transform: translate3d(10vw, 5em, 0);
@@ -178,9 +45,9 @@
     opacity: 1;
     transform: translate3d(8vw, 24em, 0);
   }
-}
+`;
 
-@keyframes purpleDot {
+export const purpleDot = keyframes`
   0% {
     opacity: 0;
     transform: translate3d(36vw, 0em, 0) scale(1);
@@ -226,9 +93,9 @@
     opacity: 1;
     transform: translate3d(8vw, 28em, 0) scale(1);
   }
-}
+`;
 
-@keyframes orangeDot {
+export const orangeDot = keyframes`
   0% {
     opacity: 1;
     transform: translate3d(86vw, 25em, 0) scale(1);
@@ -276,9 +143,9 @@
     opacity: 1;
     transform: translate3d(8vw, 32em, 0) scale(1);
   }
-}
+`;
 
-@keyframes aquaDot {
+export const aquaDot = keyframes`
   0% {
     opacity: 0;
     transform: translate3d(12vw, 41em, 0) scale(1);
@@ -327,4 +194,4 @@
     opacity: 1;
     transform: translate3d(8vw, 36em, 0) scale(1);
   }
-}
+`;

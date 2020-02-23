@@ -1501,6 +1501,7 @@ export type QueryStaticDataArgs = {
   internal?: Maybe<InternalFilterInput>,
   config?: Maybe<StaticDataConfigFilterInput>,
   meta?: Maybe<StaticDataMetaFilterInput>,
+  headerConfig?: Maybe<StaticDataHeaderConfigFilterInput>,
   data?: Maybe<StaticDataDataFilterInput>
 };
 
@@ -2308,6 +2309,7 @@ export type StaticData = Node & {
   internal: Internal,
   config?: Maybe<StaticDataConfig>,
   meta?: Maybe<StaticDataMeta>,
+  headerConfig?: Maybe<StaticDataHeaderConfig>,
   data?: Maybe<StaticDataData>,
 };
 
@@ -2363,6 +2365,7 @@ export type StaticDataConnectionGroupArgs = {
 export type StaticDataData = {
   config?: Maybe<StaticDataDataConfig>,
   meta?: Maybe<StaticDataDataMeta>,
+  headerConfig?: Maybe<StaticDataDataHeaderConfig>,
 };
 
 export type StaticDataDataConfig = {
@@ -2396,6 +2399,37 @@ export type StaticDataDataConfigFilterInput = {
 export type StaticDataDataFilterInput = {
   config?: Maybe<StaticDataDataConfigFilterInput>,
   meta?: Maybe<StaticDataDataMetaFilterInput>,
+  headerConfig?: Maybe<StaticDataDataHeaderConfigFilterInput>,
+};
+
+export type StaticDataDataHeaderConfig = {
+  triangles?: Maybe<Array<Maybe<StaticDataDataHeaderConfigTriangles>>>,
+};
+
+export type StaticDataDataHeaderConfigFilterInput = {
+  triangles?: Maybe<StaticDataDataHeaderConfigTrianglesFilterListInput>,
+};
+
+export type StaticDataDataHeaderConfigTriangles = {
+  id?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
+  plx?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  start?: Maybe<Scalars['Int']>,
+  end?: Maybe<Scalars['Int']>,
+  color?: Maybe<Scalars['String']>,
+};
+
+export type StaticDataDataHeaderConfigTrianglesFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  size?: Maybe<StringQueryOperatorInput>,
+  plx?: Maybe<IntQueryOperatorInput>,
+  start?: Maybe<IntQueryOperatorInput>,
+  end?: Maybe<IntQueryOperatorInput>,
+  color?: Maybe<StringQueryOperatorInput>,
+};
+
+export type StaticDataDataHeaderConfigTrianglesFilterListInput = {
+  elemMatch?: Maybe<StaticDataDataHeaderConfigTrianglesFilterInput>,
 };
 
 export type StaticDataDataMeta = {
@@ -2517,6 +2551,13 @@ export type StaticDataFieldsEnum =
   'meta___role' |
   'meta___name' |
   'meta___email' |
+  'headerConfig___triangles' |
+  'headerConfig___triangles___id' |
+  'headerConfig___triangles___size' |
+  'headerConfig___triangles___plx' |
+  'headerConfig___triangles___start' |
+  'headerConfig___triangles___end' |
+  'headerConfig___triangles___color' |
   'data___config___gridLines' |
   'data___config___pageLoadTimeout' |
   'data___config___splashScreenDebug' |
@@ -2530,7 +2571,14 @@ export type StaticDataFieldsEnum =
   'data___config___scrollDebug' |
   'data___meta___role' |
   'data___meta___name' |
-  'data___meta___email';
+  'data___meta___email' |
+  'data___headerConfig___triangles' |
+  'data___headerConfig___triangles___id' |
+  'data___headerConfig___triangles___size' |
+  'data___headerConfig___triangles___plx' |
+  'data___headerConfig___triangles___start' |
+  'data___headerConfig___triangles___end' |
+  'data___headerConfig___triangles___color';
 
 export type StaticDataFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
@@ -2539,6 +2587,7 @@ export type StaticDataFilterInput = {
   internal?: Maybe<InternalFilterInput>,
   config?: Maybe<StaticDataConfigFilterInput>,
   meta?: Maybe<StaticDataMetaFilterInput>,
+  headerConfig?: Maybe<StaticDataHeaderConfigFilterInput>,
   data?: Maybe<StaticDataDataFilterInput>,
 };
 
@@ -2549,6 +2598,36 @@ export type StaticDataGroupConnection = {
   pageInfo: PageInfo,
   field: Scalars['String'],
   fieldValue?: Maybe<Scalars['String']>,
+};
+
+export type StaticDataHeaderConfig = {
+  triangles?: Maybe<Array<Maybe<StaticDataHeaderConfigTriangles>>>,
+};
+
+export type StaticDataHeaderConfigFilterInput = {
+  triangles?: Maybe<StaticDataHeaderConfigTrianglesFilterListInput>,
+};
+
+export type StaticDataHeaderConfigTriangles = {
+  id?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
+  plx?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  start?: Maybe<Scalars['Int']>,
+  end?: Maybe<Scalars['Int']>,
+  color?: Maybe<Scalars['String']>,
+};
+
+export type StaticDataHeaderConfigTrianglesFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  size?: Maybe<StringQueryOperatorInput>,
+  plx?: Maybe<IntQueryOperatorInput>,
+  start?: Maybe<IntQueryOperatorInput>,
+  end?: Maybe<IntQueryOperatorInput>,
+  color?: Maybe<StringQueryOperatorInput>,
+};
+
+export type StaticDataHeaderConfigTrianglesFilterListInput = {
+  elemMatch?: Maybe<StaticDataHeaderConfigTrianglesFilterInput>,
 };
 
 export type StaticDataMeta = {
