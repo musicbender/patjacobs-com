@@ -1,13 +1,12 @@
 import React, { PureComponent } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import Logo from '../logo';
 import { clearRequestTimeout, requestTimeout } from '../../../util/shims';
 import { CurtainWrapper, Block, InnerBlock } from './styles';
 import { ECurtainTypes, ECurtainColorLayouts, ECurtainTransition } from '../../../../types/global';
 import { StaticDataDataConfig } from '../../../../types/graphql-types';
 
 type Props = {
-  duration?: number
+  duration: number
   entrance?: keyof typeof ECurtainTypes
   exit?: keyof typeof ECurtainTypes
   colorLayout?: keyof typeof ECurtainColorLayouts
@@ -16,7 +15,7 @@ type Props = {
 }
 
 type QueryProps = {
-  config: StaticDataDataConfig
+  config?: StaticDataDataConfig
 }
 
 type State = {
@@ -24,7 +23,7 @@ type State = {
 }
 
 class Curtain extends PureComponent<Props & QueryProps, State> {
-  blockNum: number;
+  blockNum: number; 
   baseDelay: number;
   timeout: any;
 
@@ -57,8 +56,8 @@ class Curtain extends PureComponent<Props & QueryProps, State> {
     clearRequestTimeout(this.timeout);
   }
 
-  getBlockDelay(i: number, j: number): number {
-    const { entrance, exit } = this.props;
+  getBlockDelay = (i: number, j: number): number => { 
+    const { entrance, exit } = this.props; 
     const { exiting } = this.state;
 
     switch (true) {
@@ -96,11 +95,12 @@ class Curtain extends PureComponent<Props & QueryProps, State> {
           delay={delay + 'ms'}
         ></InnerBlock>
       </Block>
-    )
+    );
   }
 
   renderBlocks() {
-    return this.props.config.gridLines.map((g: number, i: number) => {
+    const lines = this.props.config.gridLines;
+    return lines.map((g: number, i: number) => {
       let blocks: any[] = [];
 
       for (let j = 0; j < this.blockNum; j++) {

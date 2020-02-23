@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "gatsby build",
-    "dev": "gatsby develop -o -H local.patjacobs.io -p 8000",
+    "dev": "gatsby develop -o -H local.patjacobs.com -p 8000",
     "format": "prettier --write src/**/*.{ts,tsx}",
     "lint": "tslint 'src/**/*.{ts,tsx}'",
     "start": "yarn dev",

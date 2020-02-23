@@ -9,6 +9,7 @@ export const GridLinesWrapper = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   max-width: ${sizes.desktopXXL}px;
 `;
 

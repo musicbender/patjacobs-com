@@ -1,0 +1,279 @@
+@import '../../style/helpers/variables';
+@import '../../style/helpers/mixins';
+
+.home-header {
+  position: relative;
+  height: 100vh;
+  @media (min-width: $tablet-width) {
+    height: 61em;
+  }
+  &.splash-open {
+    overflow: hidden;
+  }
+  > [class*="lil-square"] {
+    position: absolute;
+    top: 33em;
+    left: 85%;
+    border-color: $grey;
+    animation: moveLilSquare $header-duration steps(1) $header-delay forwards;
+    transform: translate3d(-30vw, -24em, 0) rotate(0deg);
+  }
+  > [class*="triangle-parallax"] {
+    $accumulator: 400;
+    position: absolute;
+    &[class*=small],
+    &[class*=medium] {
+      animation: triangleEnter $header-duration ease-out forwards;
+      opacity: 0;
+      transform: translate3d(0, 2em, 0);
+    }
+    &[class*="giant-1"] {
+      @mixin grid-position 4, left, %, right;
+      top: 2em;
+      width: 70%;
+      [class*="triangle"] {
+        width: 100%;
+      }
+    }
+    &[class*="orange-1"] {
+      $delay: calc($(header-delay) + 1800ms);
+      @mixin grid-position 2, left, %, right;
+      top: -1em;
+      animation-delay: $delay;
+      @media (min-width: $tablet-width) {
+        top: 1em;
+      }
+    }
+    &[class*="purple-1"] {
+      $delay: calc($(header-delay) + 1200ms);
+      @mixin grid-position 1, left, %, right;
+      top: 45em;
+      animation-delay: $delay;
+    }
+    &[class*="yellow-1"] {
+      $delay: calc($(header-delay) + 0ms);
+      @mixin grid-position 5, left, %, right;
+      top: 4em;
+      animation-delay: $delay;
+      @media (min-width: $tablet-width) {
+        top: 10em;
+      }
+    }
+    &[class*="aqua-1"] {
+      $delay: calc($(header-delay) + 600ms);
+      @mixin grid-position 3, left, %, right;
+      top: 29em;
+      animation-delay: $delay;
+    }
+    &[class*="yellow-2"] {
+      $delay: calc($(header-delay) + 2400ms);
+      @mixin grid-position 2, left, %, right;
+      top: 75em;
+      animation-delay: $delay;
+    }
+  }
+  > .dot-grid-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    > .dot-grid-a {
+      display: none;
+      position: absolute;
+      top: 8em;
+      left: 51%;
+      @media (min-width: $tablet-width) {
+        display: block;
+      }
+    }
+    > .dot-grid-b {
+      display: none;
+      position: absolute;
+      top: 32em;
+      left: 2%;
+      @media (min-width: $tablet-width) {
+        display: block;
+        top: 5em;
+      }
+    }
+    > .dot-grid-c {
+      display: none;
+      position: absolute;
+      top: -4em;
+      left: 170%;
+      transform: translateX(-100%);
+      @media (min-width: $tablet-width) {
+        display: block;
+        left: 100%;
+      }
+    }
+    > .dot-grid-d {
+      display: none;
+      position: absolute;
+      top: 38em;
+      left: 100%;
+      transform: translateX(-100%);
+      @media (min-width: $tablet-width) {
+        display: block;
+      }
+    }
+  }
+  > .title-wrapper {
+    margin: 0 0 0 $grid-s;
+    padding-top: 5em;
+    @media (min-width: $tablet-width) {
+      padding-top: 8em;
+    }
+    > .title {
+      margin: 0 0 0.45em -0.08em;
+      font-family: $futura;
+      font-size: 5.5rem;
+      font-weight: normal;
+      line-height: 1.1;
+      opacity: 0;
+      transform: translate3d(0, -1em, 0);
+      animation: titleEnter $header-duration ease-out $header-delay forwards;
+      @media (min-width: $tablet-width) {
+        margin-bottom: 0.15em;
+        font-size: 7.5rem;
+        line-height: normal;
+      }
+    }
+    > .subtitle {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: normal;
+      letter-spacing: 0.67em;
+      opacity: 0;
+      transform: translate3d(0, 2em, 0);
+      animation: subtitleEnter $header-duration ease-out $header-delay forwards;
+      @media (min-width: $tablet-width) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@keyframes titleEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -1em, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes subtitleEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 2em, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes triangleEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(-100%, 2em, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes moveLilSquare {
+  0% {
+    transform: translate3d(-30vw, -24em, 0) rotate(0deg);
+    border-color: $yellow;
+  }
+  4% {
+    transform: translate3d(-30vw, -25em, 0) rotate(0deg);
+  }
+  8%{
+    transform: translate3d(-30vw, -26em, 0) rotate(0deg);
+  }
+  12% {
+    transform: translate3d(-30vw, -27em, 0) rotate(0deg);
+    border-color: $grey;
+  }
+  16% {
+    transform: translate3d(-22vw, -35em, 0) rotate(45deg);
+  }
+  20% {
+    transform: translate3d(-22vw, -34em, 0) rotate(0deg);
+    border-color: $orange;
+  }
+  24% {
+    transform: translate3d(-30vw, -24em, 0) rotate(0deg);
+  }
+  28% {
+    transform: translate3d(-30vw, -24em, 0) rotate(0deg);
+    border-color: $white;
+  }
+  32% {
+    transform: translate3d(-30vw, -24em, 0) rotate(0deg);
+    border-color: $yellow;
+  }
+  36% {
+    transform: translate3d(-30vw, -24em, 0) rotate(0deg);
+    height: 25em;
+  }
+  40% {
+    transform: translate3d(-30vw, -1em, 0) rotate(0deg);
+    height: 1.25em;
+  }
+  44% {
+    transform: translate3d(-33vw, 0, 0) rotate(0deg);
+  }
+  48% {
+    transform: translate3d(-33vw, 0, 0) rotate(0deg);
+    border-color: $orange;
+  }
+  52% {
+    transform: translate3d(-33vw, 0, 0) rotate(0deg);
+    border-color: $white;
+  }
+  56% {
+    transform: translate3d(-33vw, 0, 0) rotate(0deg);
+    border-color: $grey;
+  }
+  60% {
+    transform: translate3d(-33vw, 0, 0) rotate(0deg);
+    width: 34em;
+  }
+  64% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    width: 1.25em;
+  }
+  68% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  72% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  76% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    border-color: $orange;
+  }
+  80%, 84%, 88% {
+    transform: translate3d(0, 0, 0) rotate(45deg);
+  }
+  92% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  96% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    border-color: $grey;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(45deg);
+  }
+}
