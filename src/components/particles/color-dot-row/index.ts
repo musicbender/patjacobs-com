@@ -1,1 +1,1 @@
-export { default } from './color-dots';
+export { default } from './color-dot-row';

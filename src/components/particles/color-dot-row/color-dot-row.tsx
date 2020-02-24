@@ -5,10 +5,12 @@ import { requestTimeout } from '../../../util/shims';
 
 type Props = {
   forMobile?: boolean,
+  splashOpen: boolean,
 };
 
 const ColorDots = ({ 
-  forMobile = false ,
+  forMobile = false,
+  splashOpen,
 }: Props) => {
   const [mounted, setMounted] = useState(false);
   const [entering, setEntering] = useState(false);
@@ -45,15 +47,11 @@ const ColorDots = ({
     <ColorDotsRow>
       {
         !forMobile &&
-        <DesktopWrapper>
-          { mapDots() }
-        </DesktopWrapper>
+        <DesktopWrapper>{ mapDots() }</DesktopWrapper>
       }
       {
-        forMobile &&
-        <MobileWrapper>
-          { mapDots() }
-        </MobileWrapper>
+        forMobile && 
+        <MobileWrapper>{ mapDots() }</MobileWrapper>
       }
     </ColorDotsRow>
   );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cn from 'classnames/bind';
 import Plx from 'react-plx';
-import ColorDots from '../../particles/color-dot-row/color-dots';
+import ColorDotRow from '../../particles/color-dot-row';
 import { Triangle, DotGrid, LilSquare } from '../_particles';
 import { dotGridA, dotGridB, dotGridC, dotGridD } from './dots';
 import { countLongestArray, hasWindow } from '../../util/util';
@@ -83,7 +83,7 @@ class Header extends Component {
         style.homeHeader,
         { [style.splashOpen]: this.props.splashOpen }
       )}>
-        <ColorDots splashOpen={this.props.splashOpen} />
+        <ColorDotRow splashOpen={this.props.splashOpen} />
         <LilSquare />
         {this.renderTriangles()}
         <div className={cx(style.dotGridWrapper)}>
@@ -111,7 +111,7 @@ class Header extends Component {
         <div className={cx(style.titleWrapper)}>
           <h1 className={cx(style.title)}>{meta.name}</h1>
           <h2 className={cx(style.subtitle)}>{meta.role}</h2>
-          <ColorDots splashOpen={this.props.splashOpen} forMobile />
+          <ColorDotRow splashOpen={this.props.splashOpen} forMobile />
         </div>
       </div>
     );
