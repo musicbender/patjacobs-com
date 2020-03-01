@@ -14,7 +14,7 @@ const Triangle = ({
   size = 'medium',
   opacity,
   className,
-}: Props) => {
+}: Props) => {  
   const opacities: { [ key in keyof typeof TriangleSizes]: number } = {
     micro: 1,
     tiny: 1,

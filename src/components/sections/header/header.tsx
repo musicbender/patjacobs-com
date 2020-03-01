@@ -7,8 +7,7 @@ import Triangle, { Props as TriangleProps } from '../../particles/triangle';
 import { dotGridA, dotGridB, dotGridC, dotGridD } from './dots';
 import { countLongestArray, hasWindow } from '../../../util/util';
 import { startSequence } from '../../../util/animation';
-import { triangles } from './config.json';
-import { Modes, TriangleSizes, ParticleColors, StaticData } from '../../../../types';
+import { Modes, TriangleSizes, ParticleColors, StaticData, StaticDataHeaderConfigTriangles } from '../../../../types';
 import {
   HomeHeader,
   DotGridWrapper,
@@ -74,12 +73,12 @@ class Header extends PureComponent<Props & ReduxProps, State> {
     }, this.handleSequence);
   }
 
-  handleSequence(index) {
+  handleSequence(index: number): void {
     let newState = { dotGridIndex: index || 0 };
     this.setState(newState);
   }
 
-  getPlxData({ plx, start, end }) {
+  getPlxData({ plx, start, end }: StaticDataHeaderConfigTriangles) {
     return [
       {
         start,
@@ -97,12 +96,15 @@ class Header extends PureComponent<Props & ReduxProps, State> {
   }
 
   renderTriangles() {
+    const { triangles } = this.props.staticData.headerConfig;
+    console.log(triangles);
+    
     return triangles.map((tri, i: number) => (
       <TriangleParallax
         color={tri.color}
         size={tri.size}
         id={tri.id}
-        gridLines={[]}
+        gridLines={this.props.staticData.config.gridLines}
         key={i + tri.id}
       >
         <Plx
@@ -152,7 +154,14 @@ export default (props: Omit<Props, 'staticData'>) => (
             role
           }
           headerConfig {
-            triangles
+            triangles {
+              id
+              color
+              size
+              plx
+              start
+              end
+            }
           }
           config {
             gridLines

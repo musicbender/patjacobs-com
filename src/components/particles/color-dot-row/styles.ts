@@ -55,7 +55,7 @@ export const Dot = styled('div')<DotProps>`
   width: ${diameter};
   height: ${diameter};
   border-radius: ${diameter};
-  background-color: ${props => props.theme.colorPalette[props.color]};
+  background-color: ${props => props.theme.palette[props.color]};
   ${props => props.entering && !props.forMobile && css`
     animation-duration: $header-duration;
     animation-delay: $header-delay;
@@ -63,19 +63,19 @@ export const Dot = styled('div')<DotProps>`
     animation-fill-mode: forwards;
   `}
   ${props => !props.forMobile && css`
-      ${props.color === 'yellow' && `
+      ${props.color === 'yellow' && css`
         transform: translate3d(10vw, 5em, 0);
         animation-name: ${yellowDot};
       `} 
-      ${props.color === 'purple' && `
+      ${props.color === 'purple' && css`
         transform: translate3d(34vw, 0em, 0);
         animation-name: ${purpleDot};
       `} 
-      ${props.color === 'orange' && `
+      ${props.color === 'orange' && css`
         transform: translate3d(86vw, 13em, 0);
         animation-name: ${orangeDot};
       `} 
-      ${props.color === 'aqua' && `
+      ${props.color === 'aqua' && css`
         transform: translate3d(86vw, 13em, 0);
         animation-name: ${aquaDot};
       `} 

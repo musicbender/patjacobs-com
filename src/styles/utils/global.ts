@@ -41,9 +41,8 @@ export const gridPosition = (config: IGridPositionParams) => {
     return i <= index ? total + cur : total;
   });
 
-
   return css`
-   ${prop}: ${percent}${unit}
-   ${attach === 'right' && 'transform: translateX(-100%)'}
-  `;
+  ${prop}: ${percent}${unit};
+  ${attach === 'right' && 'transform: translateX(-100%)'};
+  `
 }

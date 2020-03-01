@@ -11,7 +11,7 @@ export default createGlobalStyle<GlobalStyles>`
   html {
     -webkit-font-smoothing: antialiased;
     margin: 0;
-    background: ${props => props.theme.modePalette.darkBg}; 
+    background: ${props => props.theme.modes.dark.bg}; 
     box-sizing: border-box;
     font-size: 16px;
     @media (${media.tablet}) {

@@ -17,11 +17,17 @@ const theme = {
     orange: '#F98D51',
     aqua: '#32D2C9',
   },
-  modePalette: {
-    darkBg: '#1e1e1e',
-    darkLines: 'rgba(0, 0, 0, 0.5)',
-    lightBg: '#fff',
-    lightLines: 'rgba(0, 0, 0, 0.1)',
+  modes: {
+    dark: {
+      bg: '#1e1e1e',
+      lines: 'rgba(0, 0, 0, 0.5)',
+      text: '#fff'
+    },
+    light: {
+      bg: '#fff',
+      lines: 'rgba(0, 0, 0, 0.1)',
+      text: '#1e1e1e'
+    }
   },
   spacing: {
     unit: 8,

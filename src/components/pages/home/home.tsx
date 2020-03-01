@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { bindActionCreators, Dispatch, AnyAction} from 'redux';
 import { connect } from 'react-redux';
+import Header from '../../sections/header';
 import { setAboutTop } from '../../../actions/home';
 import { throttle } from '../../../util/util';
 import { HomePage, OutterWrapper, DotSequenceWrapper } from './styles';
@@ -75,6 +76,7 @@ class Home extends PureComponent<ReduxProps, State> {
     return (
       <HomePage>
         <OutterWrapper>
+          <Header />
           <DotSequenceWrapper>
             home home home
           </DotSequenceWrapper>

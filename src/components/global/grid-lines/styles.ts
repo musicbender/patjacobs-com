@@ -21,5 +21,5 @@ export const GridItem = styled('div')<IGridItemProps>`
 
 export const GridLine = styled.div`
   height: 100%;
-  border-left: ${props => `1px solid ${props.theme.modePalette.darkLines}`};
+  border-left: ${props => `1px solid ${props.theme.modes.dark.lines}`};
 `;

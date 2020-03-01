@@ -11,15 +11,15 @@ export const AppWrapper = styled('div')<AppWrapperProps>`
   position: relative;
   min-height: 100vh;
   margin: 0 auto;
-  background-color: ${props => props.theme.modePalette.darkBg};
+  background-color: ${props => props.theme.modes[props.mode].bg};
   max-width: ${sizes.desktopXXL}px;
   ${(props) => props.splashOpen && `overflow: hidden;`}
   ${(props) => {
-    const color = props.theme.modePalette[`${props.mode}Bg`];
+    const { bg, text } = props.theme.modes[props.mode];
     return css`
-      background-color: ${color};
+      background-color: ${bg};
       p, h1, h2, h3, h4, h5, h6, div, input, form, span, div {
-        color: ${hexRgb(color, 0.87)};
+        color: ${hexRgb(text, 0.87)};
       }
     `
   }}

@@ -2,6 +2,7 @@
   "triangles": [
     {
       "id": "giant-1",
+      "color": "white",
       "size": "giant",
       "plx": [-8, 8],
       "start": 0,

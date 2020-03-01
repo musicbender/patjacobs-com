@@ -5,9 +5,16 @@ import { ParticleColors } from '../../../../types/global';
 type Props = {
   color: keyof typeof ParticleColors,
   opacity: number,
+  className: string,
 }
 
-const LilSquare = ({ color, opacity }: Props) => <LilSquareWrapper color={color} opacity={opacity} />;
+const LilSquare = ({ 
+  color, 
+  opacity, 
+  className,
+}: Props) => (
+  <LilSquareWrapper color={color} opacity={opacity} className={className} />
+);
 
 LilSquare.defaultProps = {
   color: 'orange',

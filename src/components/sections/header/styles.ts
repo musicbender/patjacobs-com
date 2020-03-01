@@ -49,7 +49,7 @@ export const TitleWrapper = styled.div`
   `}
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h1` 
   margin: 0 0 0.45em -0.08em;
   font-family: ${props => props.theme.fonts.futura};
   font-size: 5.5rem;
@@ -57,7 +57,7 @@ export const Title = styled.h1`
   line-height: 1.1;
   opacity: 0;
   transform: translate3d(0, -1em, 0);
-  animation: ${({ theme }) => `${titleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate.headerDelay} forwards`};
+  animation: ${({ theme }) => css`${titleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate.headerDelay} forwards`};
   ${media.tablet`
     margin-bottom: 0.15em;
     font-size: 7.5rem;
@@ -72,7 +72,7 @@ export const SubTitle = styled.h2`
   letter-spacing: 0.67em;
   opacity: 0;
   transform: translate3d(0, 2em, 0);
-  animation: ${({ theme }) => `${subtitleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate.headerDelay} forwards`};
+  animation: ${({ theme }) => css`${subtitleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate.headerDelay} forwards`};
   ${media.tablet`
     font-size: 1.5rem;
   `}
@@ -80,7 +80,7 @@ export const SubTitle = styled.h2`
 
 export const TriangleParallax = styled('div')<TriangleParallaxProps>`
   position: absolute;
-  ${({ size, theme }) => size === ('small' || 'medium') && css`
+  ${({ size, theme }) => (size === 'small' || size === 'medium') && css`
       animation: ${triangleEnter} ${theme.animate.headerDuration} ease-out forwards;
       opacity: 0;
       transform: translate3d(0, 2em, 0);
@@ -131,7 +131,7 @@ export const StyledLilSquare = styled(LilSquare)`
   top: 33em;
   left: 85%;
   border-color: ${({ theme }) => theme.palette.grey};
-  animation: ${({ theme }) => `${moveLilSquare} ${theme.animate.headerDuration} steps(1) ${theme.animate.headerDelay} forwards`};
+  animation: ${({ theme }) => css`${moveLilSquare} ${theme.animate.headerDuration} steps(1) ${theme.animate.headerDelay} forwards`};
   transform: translate3d(-30vw, -24em, 0) rotate(0deg);
 `;
 

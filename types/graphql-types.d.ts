@@ -2412,20 +2412,20 @@ export type StaticDataDataHeaderConfigFilterInput = {
 
 export type StaticDataDataHeaderConfigTriangles = {
   id?: Maybe<Scalars['String']>,
+  color?: Maybe<Scalars['String']>,
   size?: Maybe<Scalars['String']>,
   plx?: Maybe<Array<Maybe<Scalars['Int']>>>,
   start?: Maybe<Scalars['Int']>,
   end?: Maybe<Scalars['Int']>,
-  color?: Maybe<Scalars['String']>,
 };
 
 export type StaticDataDataHeaderConfigTrianglesFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
+  color?: Maybe<StringQueryOperatorInput>,
   size?: Maybe<StringQueryOperatorInput>,
   plx?: Maybe<IntQueryOperatorInput>,
   start?: Maybe<IntQueryOperatorInput>,
   end?: Maybe<IntQueryOperatorInput>,
-  color?: Maybe<StringQueryOperatorInput>,
 };
 
 export type StaticDataDataHeaderConfigTrianglesFilterListInput = {
@@ -2553,11 +2553,11 @@ export type StaticDataFieldsEnum =
   'meta___email' |
   'headerConfig___triangles' |
   'headerConfig___triangles___id' |
+  'headerConfig___triangles___color' |
   'headerConfig___triangles___size' |
   'headerConfig___triangles___plx' |
   'headerConfig___triangles___start' |
   'headerConfig___triangles___end' |
-  'headerConfig___triangles___color' |
   'data___config___gridLines' |
   'data___config___pageLoadTimeout' |
   'data___config___splashScreenDebug' |
@@ -2574,11 +2574,11 @@ export type StaticDataFieldsEnum =
   'data___meta___email' |
   'data___headerConfig___triangles' |
   'data___headerConfig___triangles___id' |
+  'data___headerConfig___triangles___color' |
   'data___headerConfig___triangles___size' |
   'data___headerConfig___triangles___plx' |
   'data___headerConfig___triangles___start' |
-  'data___headerConfig___triangles___end' |
-  'data___headerConfig___triangles___color';
+  'data___headerConfig___triangles___end';
 
 export type StaticDataFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
@@ -2610,20 +2610,20 @@ export type StaticDataHeaderConfigFilterInput = {
 
 export type StaticDataHeaderConfigTriangles = {
   id?: Maybe<Scalars['String']>,
+  color?: Maybe<Scalars['String']>,
   size?: Maybe<Scalars['String']>,
   plx?: Maybe<Array<Maybe<Scalars['Int']>>>,
   start?: Maybe<Scalars['Int']>,
   end?: Maybe<Scalars['Int']>,
-  color?: Maybe<Scalars['String']>,
 };
 
 export type StaticDataHeaderConfigTrianglesFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
+  color?: Maybe<StringQueryOperatorInput>,
   size?: Maybe<StringQueryOperatorInput>,
   plx?: Maybe<IntQueryOperatorInput>,
   start?: Maybe<IntQueryOperatorInput>,
   end?: Maybe<IntQueryOperatorInput>,
-  color?: Maybe<StringQueryOperatorInput>,
 };
 
 export type StaticDataHeaderConfigTrianglesFilterListInput = {
@@ -2669,12 +2669,17 @@ export type Unnamed_2_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteM
 export type Unnamed_3_QueryVariables = {};
 
 
-export type Unnamed_3_Query = { staticData: Maybe<{ config: Maybe<Pick<StaticDataConfig, 'splashScreenDebug'>> }> };
+export type Unnamed_3_Query = { staticData: Maybe<{ meta: Maybe<Pick<StaticDataMeta, 'name' | 'role'>>, headerConfig: Maybe<{ triangles: Maybe<Array<Maybe<Pick<StaticDataHeaderConfigTriangles, 'id' | 'color' | 'size' | 'plx' | 'start' | 'end'>>>> }>, config: Maybe<Pick<StaticDataConfig, 'gridLines'>> }> };
 
 export type Unnamed_4_QueryVariables = {};
 
 
-export type Unnamed_4_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, staticData: Maybe<{ config: Maybe<Pick<StaticDataConfig, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
+export type Unnamed_4_Query = { staticData: Maybe<{ config: Maybe<Pick<StaticDataConfig, 'splashScreenDebug'>> }> };
+
+export type Unnamed_5_QueryVariables = {};
+
+
+export type Unnamed_5_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, staticData: Maybe<{ config: Maybe<Pick<StaticDataConfig, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

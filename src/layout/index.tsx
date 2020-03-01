@@ -18,6 +18,7 @@ import {
   OutterWrapper,
   InnerWrapper,
 } from './styles';
+import { StaticData } from '../../types';
 
 type ReduxProps = {
   splashOpen?: boolean
@@ -35,7 +36,8 @@ type Props = {
   location?: {
     pathname: string
   }
-  config?: any
+  config?: any,
+  staticData: StaticData,
 }
 
 const mapStateToProps = ({ global, home }: IStore) => ({
@@ -54,7 +56,6 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
   }, dispatch);
 }
 
-@(connect(mapStateToProps, mapDispatchToProps) as any)
 export class Layout extends PureComponent<Props & ReduxProps> {
   constructor(props: Props) {
     super(props);
@@ -63,9 +64,9 @@ export class Layout extends PureComponent<Props & ReduxProps> {
 
   componentDidMount() {
     this.props.setIsMobile();
-    const splashTimeout = this.props.config.splashScreenDebug 
+    const splashTimeout = this.props.staticData.config.splashScreenDebug 
       ? 6000000 
-      : this.props.config.splashScreenTimeout;
+      : this.props.staticData.config.splashScreenTimeout;
 
     requestTimeout(() => {
       this.props.changeSplash(false);
@@ -82,15 +83,15 @@ export class Layout extends PureComponent<Props & ReduxProps> {
     this.props.changeTransport(true);
     requestTimeout(() => {
       window.scrollTo(0, 0);
-    }, this.props.config.transportDuration / 2.5);
+    }, this.props.staticData.config.transportDuration / 2.5);
   }
 
   handleResize = () => {
-    if (this.props.isMobile && window.innerWidth > this.props.config.mobileBreakpoint) {
+    if (this.props.isMobile && window.innerWidth > this.props.staticData.config.mobileBreakpoint) {
       this.props.setIsMobile();
     }
 
-    if (!this.props.isMobile && window.innerWidth < this.props.config.mobileBreakpoint) {
+    if (!this.props.isMobile && window.innerWidth < this.props.staticData.config.mobileBreakpoint) {
       this.props.setIsMobile();
     }
   }
@@ -105,7 +106,7 @@ export class Layout extends PureComponent<Props & ReduxProps> {
             <GlobalStyles />
             <Head pathname={location.pathname} />
             <OutterWrapper>
-              <GridLines gridLines={this.props.config.gridLines} />
+              <GridLines gridLines={this.props.staticData.config.gridLines} />
               <Toolbar />
               {
                 this.props.splashOpen &&
@@ -121,7 +122,9 @@ export class Layout extends PureComponent<Props & ReduxProps> {
   }
 }
 
-export default (props: any) => (
+const ConnectedLayout = connect(mapStateToProps, mapDispatchToProps)(Layout);
+
+export default (props: Omit<Props, 'staticData'>) => (
   <StaticQuery 
     query={graphql`
       query {
@@ -142,8 +145,8 @@ export default (props: any) => (
       }
     `}
     render={data => (
-      <Layout 
-        config={data.staticData.config}
+      <ConnectedLayout 
+        staticData={data.staticData}
         {...props} 
       />
     )}
