@@ -38,11 +38,24 @@ type Props = {
   config?: any
 }
 
+const mapStateToProps = ({ global, home }: IStore) => ({
+  splashOpen: global.splashOpen,
+  transportOpen: global.transportOpen,
+  isMobile: global.isMobile,
+  skillsTop: home.skillsTop,
+  mode: global.mode
+})
+
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
+  return bindActionCreators({
+    changeSplash,
+    changeTransport,
+    setIsMobile,
+  }, dispatch);
+}
+
+@(connect(mapStateToProps, mapDispatchToProps) as any)
 export class Layout extends PureComponent<Props & ReduxProps> {
-  static defaultProps = {
-
-  };
-
   constructor(props: Props) {
     super(props);
     this.handleResize = throttle(this.handleResize, 100);
@@ -108,24 +121,6 @@ export class Layout extends PureComponent<Props & ReduxProps> {
   }
 }
 
-const mapStateToProps = ({ global, home }: IStore) => ({
-  splashOpen: global.splashOpen,
-  transportOpen: global.transportOpen,
-  isMobile: global.isMobile,
-  skillsTop: home.skillsTop,
-  mode: global.mode
-})
-
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
-  return bindActionCreators({
-    changeSplash,
-    changeTransport,
-    setIsMobile,
-  }, dispatch);
-}
-
-const ConnectedLayout = connect(mapStateToProps, mapDispatchToProps)(Layout);
-
 export default (props: any) => (
   <StaticQuery 
     query={graphql`
@@ -147,7 +142,7 @@ export default (props: any) => (
       }
     `}
     render={data => (
-      <ConnectedLayout 
+      <Layout 
         config={data.staticData.config}
         {...props} 
       />

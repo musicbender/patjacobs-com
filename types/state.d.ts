@@ -23,7 +23,4 @@ export interface IHomeActionPayload {
 export { AppState } from '../src/reducers';
 
 // enums
-export enum EModes {
-  'light',
-  'dark'
-}
+export type Modes = 'light' | 'dark';

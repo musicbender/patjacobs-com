@@ -2,14 +2,15 @@ import React from 'react';
 import { startSequence } from '../../../util/animation';
 import { DotGridSvg, Dot, DotProps } from './styles';
 
-type Props = {
+export type Props = {
   sequence: number[][][],
-  index: number,
-  started: boolean,
-  handleSequence: () => any,
-  spacing: number,
-  interval: number,
-  delay: number,
+  index?: number,
+  started?: boolean,
+  handleSequence?: () => any,
+  spacing?: number,
+  interval?: number,
+  delay?: number,
+  className?: string,
 }
 
 const DotGrid = ({
@@ -19,7 +20,8 @@ const DotGrid = ({
   started = true,
   spacing = 65,
   delay = 0,
-  interval = 500
+  interval = 500,
+  className,
 }: Props) => {
   const offset: number = spacing / 2;
   const radius: number = 3;
@@ -30,7 +32,7 @@ const DotGrid = ({
     'orange',
     'purple',
     'aqua',
-    'yellow'
+    'yellow',
   ];
 
   const getIndexOrLast = (s: any[], i: number): number => {
@@ -66,6 +68,7 @@ const DotGrid = ({
     <DotGridSvg
       width={`${sequence[0][0].length * spacing}px`}
       height={`${sequence[0].length * spacing}px`}
+      className={className}
     >
       {
         !!handleSequence &&

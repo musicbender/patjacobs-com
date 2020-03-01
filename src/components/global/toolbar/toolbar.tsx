@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../logo';
-import { EModes } from '../../../../types/state';
+import { Modes } from '../../../../types/state';
 import {
   ToolBarWrapper,
   InnerWrapper,
@@ -10,7 +10,7 @@ import {
 
 type Props = {
   pageLoaded?: boolean,
-  mode?: EModes,
+  mode?: Modes,
   menuOpen?: boolean,
   handleMode?: any,
   handleMenu?: any

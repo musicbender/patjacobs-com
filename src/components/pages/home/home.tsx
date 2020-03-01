@@ -4,13 +4,10 @@ import { connect } from 'react-redux';
 import { setAboutTop } from '../../../actions/home';
 import { throttle } from '../../../util/util';
 import { HomePage, OutterWrapper, DotSequenceWrapper } from './styles';
-
-type Props = {
-  
-}
+import { Modes } from '../../../../types';
 
 type ReduxProps = {
-  mode?: string,
+  mode?: Modes,
   pageLoaded: boolean,
   splashOpen: boolean,
   isMobile: boolean,
@@ -19,18 +16,13 @@ type ReduxProps = {
   skillsTop: number,
 }
 
-
 type State = {
   atAbout: boolean,
   atBottom: boolean,
 }
 
-class Home extends PureComponent<Props & ReduxProps, State> {
-  static defaultProps = {
-
-  }
-
-  constructor(props: Props & ReduxProps) {
+class Home extends PureComponent<ReduxProps, State> {
+  constructor(props: ReduxProps) {
     super(props);
     this.handleScroll = throttle(this.handleScroll.bind(this), 80);
     this.state = {

@@ -2,16 +2,18 @@ import React from 'react';
 import { TriangleWrapper } from './styles';
 import { ParticleColors, TriangleSizes } from '../../../../types/global';
 
-type Props = {
-  color: keyof typeof ParticleColors,
-  size: keyof typeof TriangleSizes,
+export type Props = {
+  color?: keyof typeof ParticleColors,
+  size?: keyof typeof TriangleSizes,
   opacity?: number,
+  className?: string,
 }
 
 const Triangle = ({
-  color,
-  size,
+  color = 'white',
+  size = 'medium',
   opacity,
+  className,
 }: Props) => {
   const opacities: { [ key in keyof typeof TriangleSizes]: number } = {
     micro: 1,
@@ -23,6 +25,7 @@ const Triangle = ({
 
   return (
     <TriangleWrapper
+      className={className}
       viewBox="0 0 10 11"
       size={size}
       color={color}
@@ -35,11 +38,6 @@ const Triangle = ({
       </g>
     </TriangleWrapper>
   )
-}
-
-Triangle.defaultProps = {
-  color: 'white',
-  size: 'medium',
 }
 
 export default Triangle;
