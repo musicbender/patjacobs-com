@@ -97,8 +97,6 @@ class Header extends PureComponent<Props & ReduxProps, State> {
 
   renderTriangles() {
     const { triangles } = this.props.staticData.headerConfig;
-    console.log(triangles);
-    
     return triangles.map((tri, i: number) => (
       <TriangleParallax
         color={tri.color}
