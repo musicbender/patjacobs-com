@@ -31,6 +31,8 @@ export interface ISeo {
   language: string
 }
 
+export type ButtonTypes = 'line' | 'ridicularge-XL';
+
 //enums
 export type CoreColors = 
   'aqua' |

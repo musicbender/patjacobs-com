@@ -1502,6 +1502,7 @@ export type QueryStaticDataArgs = {
   config?: Maybe<StaticDataConfigFilterInput>,
   meta?: Maybe<StaticDataMetaFilterInput>,
   headerConfig?: Maybe<StaticDataHeaderConfigFilterInput>,
+  aboutMe?: Maybe<StaticDataAboutMeFilterInput>,
   data?: Maybe<StaticDataDataFilterInput>
 };
 
@@ -2310,7 +2311,18 @@ export type StaticData = Node & {
   config?: Maybe<StaticDataConfig>,
   meta?: Maybe<StaticDataMeta>,
   headerConfig?: Maybe<StaticDataHeaderConfig>,
+  aboutMe?: Maybe<StaticDataAboutMe>,
   data?: Maybe<StaticDataData>,
+};
+
+export type StaticDataAboutMe = {
+  heading?: Maybe<Scalars['String']>,
+  body?: Maybe<Array<Maybe<Scalars['String']>>>,
+};
+
+export type StaticDataAboutMeFilterInput = {
+  heading?: Maybe<StringQueryOperatorInput>,
+  body?: Maybe<StringQueryOperatorInput>,
 };
 
 export type StaticDataConfig = {
@@ -2366,6 +2378,17 @@ export type StaticDataData = {
   config?: Maybe<StaticDataDataConfig>,
   meta?: Maybe<StaticDataDataMeta>,
   headerConfig?: Maybe<StaticDataDataHeaderConfig>,
+  aboutMe?: Maybe<StaticDataDataAboutMe>,
+};
+
+export type StaticDataDataAboutMe = {
+  heading?: Maybe<Scalars['String']>,
+  body?: Maybe<Array<Maybe<Scalars['String']>>>,
+};
+
+export type StaticDataDataAboutMeFilterInput = {
+  heading?: Maybe<StringQueryOperatorInput>,
+  body?: Maybe<StringQueryOperatorInput>,
 };
 
 export type StaticDataDataConfig = {
@@ -2400,6 +2423,7 @@ export type StaticDataDataFilterInput = {
   config?: Maybe<StaticDataDataConfigFilterInput>,
   meta?: Maybe<StaticDataDataMetaFilterInput>,
   headerConfig?: Maybe<StaticDataDataHeaderConfigFilterInput>,
+  aboutMe?: Maybe<StaticDataDataAboutMeFilterInput>,
 };
 
 export type StaticDataDataHeaderConfig = {
@@ -2558,6 +2582,8 @@ export type StaticDataFieldsEnum =
   'headerConfig___triangles___plx' |
   'headerConfig___triangles___start' |
   'headerConfig___triangles___end' |
+  'aboutMe___heading' |
+  'aboutMe___body' |
   'data___config___gridLines' |
   'data___config___pageLoadTimeout' |
   'data___config___splashScreenDebug' |
@@ -2578,7 +2604,9 @@ export type StaticDataFieldsEnum =
   'data___headerConfig___triangles___size' |
   'data___headerConfig___triangles___plx' |
   'data___headerConfig___triangles___start' |
-  'data___headerConfig___triangles___end';
+  'data___headerConfig___triangles___end' |
+  'data___aboutMe___heading' |
+  'data___aboutMe___body';
 
 export type StaticDataFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
@@ -2588,6 +2616,7 @@ export type StaticDataFilterInput = {
   config?: Maybe<StaticDataConfigFilterInput>,
   meta?: Maybe<StaticDataMetaFilterInput>,
   headerConfig?: Maybe<StaticDataHeaderConfigFilterInput>,
+  aboutMe?: Maybe<StaticDataAboutMeFilterInput>,
   data?: Maybe<StaticDataDataFilterInput>,
 };
 
@@ -2655,31 +2684,6 @@ export type StringQueryOperatorInput = {
   regex?: Maybe<Scalars['String']>,
   glob?: Maybe<Scalars['String']>,
 };
-
-export type Unnamed_1_QueryVariables = {};
-
-
-export type Unnamed_1_Query = { staticData: Maybe<{ config: Maybe<Pick<StaticDataConfig, 'gridLines'>> }> };
-
-export type Unnamed_2_QueryVariables = {};
-
-
-export type Unnamed_2_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site' | 'title' | 'titleTemplate' | 'description' | 'siteUrl' | 'language' | 'color' | 'twitter'>> }> };
-
-export type Unnamed_3_QueryVariables = {};
-
-
-export type Unnamed_3_Query = { staticData: Maybe<{ meta: Maybe<Pick<StaticDataMeta, 'name' | 'role'>>, headerConfig: Maybe<{ triangles: Maybe<Array<Maybe<Pick<StaticDataHeaderConfigTriangles, 'id' | 'color' | 'size' | 'plx' | 'start' | 'end'>>>> }>, config: Maybe<Pick<StaticDataConfig, 'gridLines'>> }> };
-
-export type Unnamed_4_QueryVariables = {};
-
-
-export type Unnamed_4_Query = { staticData: Maybe<{ config: Maybe<Pick<StaticDataConfig, 'splashScreenDebug'>> }> };
-
-export type Unnamed_5_QueryVariables = {};
-
-
-export type Unnamed_5_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, staticData: Maybe<{ config: Maybe<Pick<StaticDataConfig, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

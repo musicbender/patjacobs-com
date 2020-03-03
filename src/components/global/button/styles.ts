@@ -1,5 +1,85 @@
-@import '../../../style/helpers/variables';
-@import '../../../style/helpers/mixins';
+import styled, { css } from 'styled-components';
+import rgbHex from 'hex-to-rgba';
+import { Link as GatsbyLink, GatsbyLinkProps } from 'gatsby';
+import { media } from '../../../styles/breakpoints';
+import { ButtonTypes, ITheme } from '../../../../types';
+import hexToRgba from 'hex-to-rgba';
+
+type ButtonProps = {
+  type: ButtonTypes,
+}
+
+export const buttonStyles = (props: ButtonProps & { theme: ITheme} ) => css`
+  color: ${rgbHex(props.theme.palette.white, 0.87)};
+  &:hover {
+    cursor: pointer;
+  }
+  ${props.type === 'ridicularge-XL' && css`
+    padding: 1.5em 2em;
+    font-size: 3rem;
+    background-color: ${props.theme.palette.black};
+  `}
+  ${props.type === 'line' && css`
+    position: relative;
+    display: inline-block;
+    max-width: 10em;
+    width: 75%;
+    overflow-x: hidden;
+    ${media.tablet`
+      width: 100%;
+    `}
+    ${media.desktopS`
+      width: 75%;
+    `}
+    ${InnerWrapper} {
+      width: 250%;
+      transform: translate3d(-63%, 0, 0);
+      > p {
+        display: inline-block;
+      }
+      > .line {
+        display: inline-block;
+        width: 70%;
+        height: 0.075em;
+        background-color: rgba($white, 0.87);
+        transform: translate3d(0, 0.01em, 0);
+      }
+    }
+  `}
+`;
+
+export const InnerWrapper = styled('div')<ButtonProps>`
+  ${props => props.type === 'line' && css`
+     width: 250%;
+     transform: translate3d(-63%, 0, 0);
+  `}
+`;
+
+export const ButtonA = styled('a')<ButtonProps>`
+  ${props => buttonStyles(props)}
+`;
+
+export const ButtonLink = styled(GatsbyLink)<ButtonProps & GatsbyLinkProps<any>>`
+  ${props => buttonStyles(props)}
+`;
+
+export const ButtonDiv = styled('div')<ButtonProps>`
+  ${props => buttonStyles(props)}
+`;
+
+export const Line = styled('span')`
+  display: inline-block;
+  width: 70%;
+  height: 0.075em;
+  background-color: ${props => hexToRgba(props.theme.palette.white, 0.87)};
+  transform: translate3d(0, 0.01em, 0);
+`;
+
+export const Text = styled('p')`
+  display: inline-block;
+`;
+
+
 
 .btn {
   color: rgba($white, 0.87);

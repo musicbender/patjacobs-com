@@ -1,0 +1,155 @@
+@import '../../style/helpers/variables';
+@import '../../style/helpers/mixins';
+
+.work-item {
+  position: relative;
+  margin-bottom: 0;
+  height: 15em;
+  @media (min-width: $tablet-width) {
+    height: 23.5em;
+    margin-bottom: 10em;
+  }
+  > .image-outter-wrapper {
+    display: none;
+    position: relative;
+    width: 59.52%;
+    height: 100%;
+    @media (min-width: $tablet-width) {
+      display: block;
+    }
+    > .parallax {
+      position: absolute;
+      height: 100%;
+      &.index-0 {
+        left: 0;
+        width: calc($grid-m * 4);
+        > .parallax-inner  {
+          padding-top: calc(1 / 1 * 145%);
+        }
+      }
+      &.index-1 {
+        left: calc($grid-m * 4);
+        width: calc($grid-s * 4);
+        > .parallax-inner  {
+          padding-top: calc(1 / 1 * 308%);
+        }
+      }
+      > .parallax-inner {
+        position: relative;
+        width: 100%;
+        height: 0;
+        > .wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 101.3%;
+          overflow-x: hidden;
+          overflow-y: auto;
+          > * {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          }
+          > .image {
+            display: none;
+            background-size: cover;
+            background-position: left;
+            background-repeat: no-repeat;
+            @media (min-width: $tablet-width) {
+              display: block;
+            }
+            &.index-0 {
+              background-position: left;
+            }
+            &.index-1 {
+              background-position: right;
+            }
+          }
+          > .image-filter {
+            background-color: $purple;
+            opacity: 0.15;
+          }
+          > .image-cover {
+            background-color: $dark-grey;
+            opacity: 0.93;
+            transform: translate3d(0, 0, 0);
+            transition: transform 350ms $easeIn;
+            &.stopped {
+              transform: translate3d(-100%, 0, 0);
+              transition: transform 350ms $easeIn;
+            }
+          }
+        }
+      }
+    }
+  }
+  > .info-outter-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @media (min-width: $tablet-width) {
+      top: 6em;
+      width: 59.52%;
+    }
+    > [class*="item-info"] {
+      visibility: hidden;
+      position: absolute;
+      top: 0;
+      @media (min-width: $tablet-width) {
+        left: calc(17% * 4);
+        top: auto;
+      }
+    }
+    > .parallax {
+      position: absolute;
+      [class*="item-info"] {
+        margin: 0;
+      }
+      &.index-0 {
+        left: $grid-s;
+        width: calc($grid-m + $grid-s + $grid-m);
+        @media (min-width: $tablet-width) {
+          left: calc($grid-m * 4);
+          width: calc($grid-s * 4);
+        }
+      }
+      &.index-1 {
+        left: 50vw;
+        width: calc(42vw);
+        [class*="item-info"] {
+          transform: translateX(-42vw);
+        }
+        @media (min-width: $tablet-width) {
+          left: calc(($grid-m * 4) + ($grid-s * 4));
+          width: calc($grid-m * 4);
+          [class*="item-info"] {
+            transform: translateX(-$(s)vw);
+          }
+        }
+      }
+      > .parallax-inner {
+        position: relative;
+        width: 100%;
+        > .wrapper {
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+  &.stopped {
+    > .info-outter-wrapper {
+      > [class*="item-info"] {
+        visibility: visible;
+      }
+      > .parallax {
+        visibility: hidden;
+      }
+    }
+  }
+}

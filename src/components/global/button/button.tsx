@@ -1,18 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import cn from 'classnames/bind';
-import style from './button.css';
-const cx = cn.bind(style);
+import { Link } from 'gatsby';
+import { ButtonTypes } from '../../../../types';
+
+type Props = {
+  type: ButtonTypes,
+  text: string,
+  url: string,
+  isExternal: boolean,
+  classNames: string,
+  callback: () => any,
+}
+
 
 const Button = ({
-  type,
-  text,
-  url,
-  isExternal,
+  type = 'line',
+  text = 'Learn More',
+  url = '/',
+  isExternal = false,
   classNames,
-  callback
-}) => {
+  callback = () => false
+}: Props) => {
   const buttonClass = cx(style.btn, style[type], classNames);
 
   const getInnerContent = (
@@ -52,24 +59,6 @@ const Button = ({
         </div>
       );
   }
-}
-
-Button.defaultProps = {
-  type: 'line',
-  text: 'Learn More',
-  url: '/',
-  isExternal: false,
-  classNames: '',
-  callback: () => false
-}
-
-Button.propTypes = {
-  type: PropTypes.oneOf(['line', 'ridicularge-XL']),
-  text: PropTypes.string,
-  url: PropTypes.string,
-  isExternal: PropTypes.bool,
-  classNames: PropTypes.string,
-  callback: PropTypes.func
 }
 
 export default Button;
