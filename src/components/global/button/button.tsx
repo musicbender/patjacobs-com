@@ -3,12 +3,12 @@ import { ButtonTypes } from '../../../../types';
 import { InnerWrapper, Line, Text, ButtonA, ButtonLink, ButtonDiv } from './styles';
 
 type Props = {
-  type: ButtonTypes,
-  text: string,
-  url: string,
-  isExternal: boolean,
-  className: string,
-  callback: (event: React.MouseEvent) => any,
+  type?: ButtonTypes,
+  text?: string,
+  url?: string,
+  isExternal?: boolean,
+  className?: string,
+  callback?: (event: React.MouseEvent) => any,
 }
 
 const Button = ({

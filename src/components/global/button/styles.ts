@@ -3,7 +3,6 @@ import rgbHex from 'hex-to-rgba';
 import { Link as GatsbyLink, GatsbyLinkProps } from 'gatsby';
 import { media } from '../../../styles/breakpoints';
 import { ButtonTypes, ITheme } from '../../../../types';
-import hexToRgba from 'hex-to-rgba';
 
 type ButtonProps = {
   type: ButtonTypes,
@@ -74,7 +73,7 @@ export const Line = styled('span')`
   display: inline-block;
   width: 70%;
   height: 0.075em;
-  background-color: ${props => hexToRgba(props.theme.palette.white, 0.87)};
+  background-color: ${props => rgbHex(props.theme.palette.white, 0.87)};
   transform: translate3d(0, 0.01em, 0);
 `;
 
