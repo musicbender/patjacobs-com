@@ -1,62 +1,49 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import { ButtonTypes } from '../../../../types';
+import { InnerWrapper, Line, Text, ButtonA, ButtonLink, ButtonDiv } from './styles';
 
 type Props = {
   type: ButtonTypes,
   text: string,
   url: string,
   isExternal: boolean,
-  classNames: string,
-  callback: () => any,
+  className: string,
+  callback: (event: React.MouseEvent) => any,
 }
-
 
 const Button = ({
   type = 'line',
   text = 'Learn More',
   url = '/',
   isExternal = false,
-  classNames,
-  callback = () => false
+  className,
+  callback = null
 }: Props) => {
-  const buttonClass = cx(style.btn, style[type], classNames);
-
   const getInnerContent = (
-    <div className={style.innerWrapper}>
-      {
-        type === 'line' &&
-        <span className={cx(style.line)}></span>
-      }
-      <p>{text}</p>
-    </div>
+    <InnerWrapper type={type}>
+      { type === 'line' && <Line /> }
+      <Text>{text}</Text>
+    </InnerWrapper>
   );
 
   switch (true) {
     case isExternal:
       return (
-        <a className={cx(buttonClass)} href={url} target="_blank">
+        <ButtonA type={type} href={url} target="_blank" className={className}>
           {getInnerContent}
-        </a>
+        </ButtonA>
       );
     case !!url:
       return (
-        <Link
-          className={cx(buttonClass)}
-          to={url}
-          onClick={(callback) ? callback : null}
-        >
+        <ButtonLink type={type} to={url} onClick={callback} className={className}>
           {getInnerContent}
-        </Link>
+        </ButtonLink>
       );
     default:
       return (
-        <div
-          className={cx(buttonClass)}
-          onClick={(e) => { callback(e) }}
-        >
+        <ButtonDiv type={type} onClick={callback} className={className}>
           {getInnerContent}
-        </div>
+        </ButtonDiv>
       );
   }
 }

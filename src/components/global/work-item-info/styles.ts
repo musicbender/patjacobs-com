@@ -44,3 +44,63 @@
     opacity: 0.6;
   }
 }
+
+// button styles
+&[class*="work"] {
+  $color: $purple;
+  > .inner-wrapper {
+    color: $color;
+    > .line {
+      background-color: $color;
+    }
+  }
+  &[class*="static"] {
+    &[class*="stopped"] {
+      > .inner-wrapper {
+        transition: transform 1s ease-in-out $fast;
+        > p {
+          transform: translate3d(0, 0, 0);
+          transition: transform $fast $easeInOut;
+        }
+        > .line {
+          transform: translate3d(0, 0.01em, 0);
+          transition: transform $fast $easeInOut;
+        }
+      }
+      &:hover {
+        > .inner-wrapper {
+          cursor: pointer;
+          > p {
+            transform: translate3d(1em, 0, 0);
+          }
+          > .line {
+            transform: translate3d(1em, 0.01em, 0);
+          }
+        }
+      }
+    }
+    &[class*="not-stopped"] {
+      /* $x: calc(100% + $(r-padding)); */
+      > .inner-wrapper {
+        transform: translate3d(50%, 0, 0);
+        /* > p {
+          transform: translate3d($x, 0, 0);
+          transition: transform $fast $easeInOut;
+        }
+        > .line {
+          width: 100%;
+          transform: translate3d($x, 0, 0);
+        } */
+      }
+    }
+  }
+  &[class*="parallax"] {
+    &[class*="stopped"] {
+      opacity: 1;
+    }
+    &[class*="not-stopped"] {
+      opacity: 0;
+      transition: opacity $fast $easeIn;
+    }
+  }
+}
