@@ -12,11 +12,11 @@ type Props = {
 }
 
 const ItemInfo = ({
-  title,
+  title = 'Project Item',
   description,
-  isStopped,
-  isParallax,
-  isMobile,
+  isStopped = false,
+  isParallax = false,
+  isMobile = false,
   buttonUrl,
   buttonText = 'view project',
 }) => {

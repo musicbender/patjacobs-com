@@ -1,21 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ItemInfo from '../work-item-info/work-item-info';
 import Plx from 'react-plx';
-import Button from '../_global/button';
-import { workItemPlx } from './config.json';
-import { hasWindow } from '../../util/util';
-import cn from 'classnames/bind';
-import style from './styles.ts';
-const cx = cn.bind(style);
+import { hasWindow } from '../../../util/util';
+
+type Props = {
+  item: any,
+  index: number,
+  isStopped?: boolean,
+  handleWorkStops?: (...args: any) => any;
+  isMobile?: boolean,
+  baseTop?: number,
+}
 
 const WorkItem = ({
   item,
-  index,
-  isStopped,
+  index = 0,
+  isStopped = false,
   handleWorkStops,
   baseTop,
-  isMobile
+  isMobile = false,
 }) => {
   const baseEnd = isMobile ? baseTop - 200 : baseTop;
   const accumulator = isMobile ? 250 : 535;
@@ -84,12 +87,7 @@ const WorkItem = ({
                 buttonUrl={item.url}
                 isStopped={isStopped}
                 isMobile={isMobile}
-                buttonClasses={cx(
-                  'work',
-                  'parallax',
-                  { ['stopped']: isStopped },
-                  { ['not-stopped']: !isStopped }
-                )}
+                isParallax
               />
             </div>
           </div>
@@ -110,29 +108,10 @@ const WorkItem = ({
           description={item.description}
           buttonUrl={item.url}
           isStopped={isStopped}
-          buttonClasses={cx(
-            'work',
-            'static',
-            { ['stopped']: isStopped },
-            { ['not-stopped']: !isStopped }
-          )}
         />
       </div>
     </div>
   );
-}
-
-WorkItem.propTypes = {
-  // item data
-  item: PropTypes.object.isRequired,
-  // index number within list of work items
-  index: PropTypes.number.isRequired,
-  // Boolean is this item has stopped parallax animation
-  isStopped: PropTypes.bool,
-  // Function controlling if parallax animation has stopped
-  handleWorkStops: PropTypes.func,
-  // is a mobile sized window
-  isMobile: PropTypes.bool
 }
 
 export default WorkItem;
