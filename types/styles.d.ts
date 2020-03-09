@@ -17,11 +17,11 @@ export interface IBreakPoints {
 };
 
 export interface IGridPositionParams {
-  gridLines: number[] = []
-  index: number = 0
-  prop: string = 'left'
-  unit: string = '%'
-  attach: string = 'left'
+  gridLines?: number[] = []
+  index?: number = 0
+  prop?: string = 'left'
+  unit?: string = '%'
+  attach?: string = 'left'
 }
 
 // enums

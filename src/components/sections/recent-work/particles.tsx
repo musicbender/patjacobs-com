@@ -10,23 +10,27 @@ import cn from 'classnames/bind';
 import style from './particles-styles.ts';
 const cx = cn.bind(style);
 
-const Particles = ({ isMobile }) => {
-  const getPlxData = (values) => {
-    return [
-      {
-        start: 'self',
-        duration: '100vh',
-        properties: [
-          {
-            startValue: values[0],
-            endValue: values[1],
-            unit: 'em',
-            property: 'translateY'
-          }
-        ]
-      }
-    ];
-  }
+type Props = {
+  isMobile?: boolean,
+}
+
+const Particles = ({ 
+  isMobile = false 
+}: Props) => {
+  const getPlxData = (values) => [
+    {
+      start: 'self',
+      duration: '100vh',
+      properties: [
+        {
+          startValue: values[0],
+          endValue: values[1],
+          unit: 'em',
+          property: 'translateY'
+        }
+      ]
+    }
+  ];
 
   const getParticle = (p) => {
     const { name, type, ...params } = p;
