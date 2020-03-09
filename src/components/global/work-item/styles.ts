@@ -1,27 +1,29 @@
 import styled, { css } from 'styled-components';
+import Plx from 'react-plx';
 import WorkItemInfo from '../work-item-info';
 import { media } from '../../../styles/breakpoints';
 
 type WorkItemWrapperProps = {
-  isStopped: boolean,
+  isStopped?: boolean,
 }
 
 type ParallaxProps = {
   index: number,
-  isStopped: boolean,
+  isStopped?: boolean,
 }
 
 type StyledWorkItemInfoProps = {
-  isStopped: boolean,
-  isParallax: boolean,
+  isStopped?: boolean,
+  isParallax?: boolean,
 }
 
 type ImageProps = {
   index: number,
+  bgImage: string,
 }
 
 type ImageCoverProps = {
-  isStopped: boolean,
+  isStopped?: boolean,
 }
 
 export const WorkItemWrapper = styled('div')<WorkItemWrapperProps>`
@@ -44,7 +46,7 @@ export const ImageOutterWrapper = styled.div`
   `}
 `;
 
-export const ImageParallax = styled('div')<ParallaxProps>`
+export const ImageParallax = styled(Plx)<ParallaxProps>`
   position: absolute;
   height: 100%;
   ${props => props.index === 0 && css`
@@ -86,11 +88,12 @@ export const ImageInnerWrapper = styled.div`
   }
 `;
 
-export const Image = styled('img')<ImageProps>`
+export const WorkImage = styled('div')<ImageProps>`
   display: none;
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
+  background-image: ${props => props.bgImage};
   ${media.tablet`
     display: block;
   `}
@@ -143,7 +146,7 @@ export const StyledWorkItemInfo = styled(WorkItemInfo)<StyledWorkItemInfoProps>`
   `}
 `;
 
-export const InfoParallax = styled('div')<ParallaxProps>`
+export const InfoParallax = styled(Plx)<ParallaxProps>`
   position: absolute;
   ${StyledWorkItemInfo} {
     margin: 0;
