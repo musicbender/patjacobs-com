@@ -20,9 +20,9 @@ const WorkItem = ({
   baseTop,
   isMobile = false,
 }: Props) => {
-  const { staticData } = useStaticQuery(graphql`
+  const { configs } = useStaticQuery(graphql`
     query {
-      staticData {
+      configs {
         recentWork {
           workItemPlx {
             image {
@@ -62,7 +62,7 @@ const WorkItem = ({
   ];
 
   const renderImageSection = () => {
-    return staticData.recentWork.workItemPlx.image.map((seg, i) => (
+    return configs.recentWork.workItemPlx.image.map((seg, i) => (
       <ImageParallax
         index={i}
         parallaxData={getPlxData(seg, i)}
@@ -81,8 +81,8 @@ const WorkItem = ({
   }
 
   const renderInfoSection = () => {
-    return staticData.recentWork.workItemPlx.info.map((seg, i) => {
-      const plxSeg = isMobile ? staticData.recentWork.workItemPlx.mobileInfo[i] : seg;
+    return configs.recentWork.workItemPlx.info.map((seg, i) => {
+      const plxSeg = isMobile ? configs.recentWork.workItemPlx.mobileInfo[i] : seg;
       return (
         <InfoParallax
           index={i}

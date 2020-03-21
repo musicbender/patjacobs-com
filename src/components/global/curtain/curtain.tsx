@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import { clearRequestTimeout, requestTimeout } from '../../../util/shims';
 import { CurtainWrapper, Block, InnerBlock } from './styles';
 import { ECurtainTypes, ECurtainColorLayouts, ECurtainTransition } from '../../../../types/global';
-import { StaticDataDataConfig } from '../../../../types/graphql-types';
+import { ConfigsConfig } from '../../../../types/graphql-types';
 
 type Props = {
   duration: number
@@ -15,7 +15,7 @@ type Props = {
 }
 
 type QueryProps = {
-  config?: StaticDataDataConfig
+  config?: ConfigsConfig
 }
 
 type State = {
@@ -124,7 +124,7 @@ export default (props: Props) => (
   <StaticQuery
     query={graphql`
       query {
-        staticData {
+        configs {
           config {
             gridLines
           }
@@ -132,7 +132,7 @@ export default (props: Props) => (
       }
     `}
     render={data => (
-      <Curtain config={data.staticData.config} {...props} />
+      <Curtain config={data.configs.config} {...props} />
     )}
   />
 );

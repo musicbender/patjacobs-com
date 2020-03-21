@@ -6,7 +6,7 @@ import { SplashScreenWrapper, LogoOutterWrapper, StyledLogo } from './styles';
 const SplashScreen: React.SFC = () => {
   const data = useStaticQuery(graphql`
     query {
-      staticData {
+      configs {
         config {
           splashScreenDebug
         }
@@ -16,9 +16,9 @@ const SplashScreen: React.SFC = () => {
 
   return (
     <SplashScreenWrapper>
-      <Curtain duration={data.staticData.config.splashScreenDebug ? 3000000 : 3000} />
+      <Curtain duration={data.configs.config.splashScreenDebug ? 3000000 : 3000} />
       <LogoOutterWrapper>
-        <StyledLogo color="aqua" debug={data.staticData.config.splashScreenDebug } />
+        <StyledLogo color="aqua" debug={data.configs.config.splashScreenDebug } />
       </LogoOutterWrapper>
     </SplashScreenWrapper>
   );

@@ -288,7 +288,7 @@
       "SCSS",
       "Webpack"
     ],
-    "url": false,
+    "url": null,
     "content": [
       {
         "type": "video",
@@ -335,7 +335,7 @@
       "Webpack",
       "Material-UI"
     ],
-    "url": false,
+    "url": null,
     "content": [
       {
         "type": "video",
@@ -389,7 +389,7 @@
       "Server Side Rendering",
       "Material-UI"
     ],
-    "url": false,
+    "url": null,
     "content": [
       {
         "type": "video",

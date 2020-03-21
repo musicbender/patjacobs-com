@@ -1,6 +1,26 @@
 const path = require('path');
 const fs = require('fs');
 
+// Utils
+const createNewNode = (id, srcPath, gatsbyFuncs) => {
+  const data = require(path.resolve(__dirname, srcPath));
+
+  const nodeMeta = {
+    id: gatsbyFuncs.createNodeId(id),
+    parent: null,
+    children: [],
+    internal: {
+      type: id,
+      content: JSON.stringify(data),
+      contentDigest: gatsbyFuncs.createContentDigest(data)
+    },
+    data
+  }
+
+  const node = Object.assign({}, data, nodeMeta)
+  gatsbyFuncs.createNode(node);
+}
+
 //********************************************//
 //--//--//--// GATSBY NODE CONFIG //--//--//--//
 //********************************************//
@@ -10,24 +30,15 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
 
     //--//--//--// Create Static Data Nodes //--//--//--//
     (function() {
-      const staticData = require('./data');
-      const id = 'staticData';
-      const data = staticData;
-
-      const nodeMeta = {
-        id: createNodeId(id),
-        parent: null,
-        children: [],
-        internal: {
-          type: id,
-          content: JSON.stringify(data),
-          contentDigest: createContentDigest(data)
-        },
-        data
+      const gatsbyFuncs = {
+        createNode,
+        createNodeId,
+        createContentDigest,
       }
 
-      const node = Object.assign({}, data, nodeMeta)
-      createNode(node);
+      createNewNode('configs', './data/configs', gatsbyFuncs);
+      createNewNode('projects', './data/projects', gatsbyFuncs);
+      createNewNode('skills', './data/skills', gatsbyFuncs);
       resolve();
     })();
   });
@@ -39,7 +50,7 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
 //     graphql(
 //       `
 //         query {
-//           staticData {
+//           configs {
 
 //           }
 //         }

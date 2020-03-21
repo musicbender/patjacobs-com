@@ -1,24 +1,53 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { StaticQuery, graphql } from 'gatsby';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import update from 'immutability-helper';
-import Heading from '../_global/heading';
 import Particles from './particles';
+import Heading from '../../global/heading';
 import WorkItem from '../../global/work-item/work-item';
-import { filterProjectData } from '../../util/data';
-import { throttle } from '../../util/util';
-import contentConf from '../../configs/content';
-import { config } from '../../../shared/config.json';
-import { setRecentWorkTop } from '../../actions/global';
-import cn from 'classnames/bind';
-import style from './styles.ts';
-const cx = cn.bind(style);
+import { filterProjectData } from '../../../util/data';
+import { throttle } from '../../../util/util';
+import { setRecentWorkTop } from '../../../actions/global';
+import { RecentWorkWrapper, ParentWrapper, WorkItemsWrapper } from './styles';
 
-class RecentWork extends Component {
-  constructor(props) {
+type Props = {
+  configs: any, 
+  projects: any,
+}
+
+type ReduxProps = {
+  recentWorkTop: number,
+  isMobile: boolean,
+  transportOpen: boolean,
+  setRecentWorkTop: (args: any) => any,
+}
+
+type State = {
+  workStops: boolean[],
+}
+
+const mapStateToProps = ({ global, home }) => {
+  return {
+    recentWorkTop: home.recentWorkTop,
+    isMobile: global.isMobile,
+    transportOpen: global.transportOpen
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    setRecentWorkTop
+  }, dispatch);
+}
+
+class RecentWork extends PureComponent<Props & ReduxProps, State> {
+  workData: any;
+  defaultWorkStops: boolean[];
+
+  constructor(props: Props & ReduxProps) {
     super(props);
-    this.content = contentConf.home.sections.recentWork;
-    this.workData = filterProjectData('work');
+    this.workData = filterProjectData('work', props.configs.projects);
     this.defaultWorkStops = this.workData.map(w => false);
     this.handleResize = throttle(this.handleResize.bind(this), 100);
     this.handleWorkStops = this.handleWorkStops.bind(this);
@@ -45,7 +74,7 @@ class RecentWork extends Component {
     this.setTop(true);
   }
 
-  setTop(didResize = false, input) {
+  setTop(didResize: boolean = false, input?: any): void {
     let value = input;
 
     if (value == null) {
@@ -78,48 +107,78 @@ class RecentWork extends Component {
   }
 
   renderWorkItems() {
-    return this.workData.map((item, i) => {
-      return i < config.workItemsAmount && (
-        <WorkItem
-          item={item}
-          index={i}
-          isStopped={this.state.workStops[i]}
-          handleWorkStops={this.handleWorkStops}
-          baseTop={this.props.recentWorkTop}
-          isMobile={this.props.isMobile}
-          key={item.title + `${(i * 7)}`}
-        />
-      );
+    return this.props.projects.map((item, i: number) => {
+      console.log('item:', item);
+      
+      return null;
+      // return i < this.props.configs.config.workItemsAmount && (
+      //   <WorkItem
+      //     item={item}
+      //     index={i}
+      //     isStopped={this.state.workStops[i]}
+      //     handleWorkStops={this.handleWorkStops}
+      //     baseTop={this.props.recentWorkTop}
+      //     isMobile={this.props.isMobile}
+      //     key={item.title + `${(i * 7)}`}
+      //   />
+      // );
     });
   }
 
   render() {
     return (
-      <div id="recent-work-section" className={cx(style.recentWork)}>
-        <Heading text={this.content.heading} />
-        <div className={cx(style.parentWrapper)}>
-          <div className={cx(style.workItemsWrapper)}>
+      <RecentWorkWrapper id="recent-work-section">
+        <Heading text={this.props.configs.content.home.sections.recentWork.heading} />
+        <ParentWrapper>
+          <WorkItemsWrapper>
             {this.renderWorkItems()}
-          </div>
-        </div>
+          </WorkItemsWrapper>
+        </ParentWrapper>
         <Particles isMobile={this.props.isMobile} />
-      </div>
+      </RecentWorkWrapper>
     );
   }
 }
 
-const mapStateToProps = ({ global, home }) => {
-  return {
-    recentWorkTop: home.recentWorkTop,
-    isMobile: global.isMobile,
-    transportOpen: global.transportOpen
-  }
-}
+const ConnectedRecentWork = connect(mapStateToProps, mapDispatchToProps)(RecentWork);
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    setRecentWorkTop
-  }, dispatch);
-}
+export default (props: Omit<Props, 'configs'>) => (
+  <StaticQuery
+    query={graphql`
+      query {
+        configs {
+          config {
+            workItemsAmount
+          }
+          content {
+            home {
+              sections {
+                recentWork {
+                  heading
+                }
+              }
+            }
+          }
+        }
+        projects {
+          id
+        }
+      }
+    `}
+    render={data => (
+      <ConnectedRecentWork 
+        configs={data.configs} 
+        projects={data.projects}
+        {...props} 
+      />
+    )}
+  />
+);
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecentWork);
+// type
+// title
+// imageDesktop
+// imageMobile
+// description
+// url
+// disabled

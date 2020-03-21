@@ -32,6 +32,624 @@ export type BooleanQueryOperatorInput = {
   nin?: Maybe<Array<Maybe<Scalars['Boolean']>>>,
 };
 
+export type Configs = Node & {
+  id: Scalars['ID'],
+  parent?: Maybe<Node>,
+  children: Array<Node>,
+  internal: Internal,
+  config?: Maybe<ConfigsConfig>,
+  meta?: Maybe<ConfigsMeta>,
+  headerConfig?: Maybe<ConfigsHeaderConfig>,
+  recentWork?: Maybe<ConfigsRecentWork>,
+  content?: Maybe<ConfigsContent>,
+  data?: Maybe<ConfigsData>,
+};
+
+export type ConfigsConfig = {
+  gridLines?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  pageLoadTimeout?: Maybe<Scalars['Int']>,
+  splashScreenDebug?: Maybe<Scalars['Boolean']>,
+  splashScreenTimeout?: Maybe<Scalars['Int']>,
+  transportDuration?: Maybe<Scalars['Int']>,
+  workItemsAmount?: Maybe<Scalars['Int']>,
+  homeBottom?: Maybe<Scalars['Int']>,
+  skillsTop?: Maybe<Scalars['Int']>,
+  mobileBreakpoint?: Maybe<Scalars['Int']>,
+  windowHeightConstant?: Maybe<Scalars['Int']>,
+  scrollDebug?: Maybe<Scalars['Boolean']>,
+};
+
+export type ConfigsConfigFilterInput = {
+  gridLines?: Maybe<IntQueryOperatorInput>,
+  pageLoadTimeout?: Maybe<IntQueryOperatorInput>,
+  splashScreenDebug?: Maybe<BooleanQueryOperatorInput>,
+  splashScreenTimeout?: Maybe<IntQueryOperatorInput>,
+  transportDuration?: Maybe<IntQueryOperatorInput>,
+  workItemsAmount?: Maybe<IntQueryOperatorInput>,
+  homeBottom?: Maybe<IntQueryOperatorInput>,
+  skillsTop?: Maybe<IntQueryOperatorInput>,
+  mobileBreakpoint?: Maybe<IntQueryOperatorInput>,
+  windowHeightConstant?: Maybe<IntQueryOperatorInput>,
+  scrollDebug?: Maybe<BooleanQueryOperatorInput>,
+};
+
+export type ConfigsConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<ConfigsEdge>,
+  nodes: Array<Configs>,
+  pageInfo: PageInfo,
+  distinct: Array<Scalars['String']>,
+  group: Array<ConfigsGroupConnection>,
+};
+
+
+export type ConfigsConnectionDistinctArgs = {
+  field: ConfigsFieldsEnum
+};
+
+
+export type ConfigsConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>,
+  field: ConfigsFieldsEnum
+};
+
+export type ConfigsContent = {
+  home?: Maybe<ConfigsContentHome>,
+};
+
+export type ConfigsContentFilterInput = {
+  home?: Maybe<ConfigsContentHomeFilterInput>,
+};
+
+export type ConfigsContentHome = {
+  sections?: Maybe<ConfigsContentHomeSections>,
+};
+
+export type ConfigsContentHomeFilterInput = {
+  sections?: Maybe<ConfigsContentHomeSectionsFilterInput>,
+};
+
+export type ConfigsContentHomeSections = {
+  aboutMe?: Maybe<ConfigsContentHomeSectionsAboutMe>,
+  recentWork?: Maybe<ConfigsContentHomeSectionsRecentWork>,
+};
+
+export type ConfigsContentHomeSectionsAboutMe = {
+  heading?: Maybe<Scalars['String']>,
+  body?: Maybe<Array<Maybe<Scalars['String']>>>,
+};
+
+export type ConfigsContentHomeSectionsAboutMeFilterInput = {
+  heading?: Maybe<StringQueryOperatorInput>,
+  body?: Maybe<StringQueryOperatorInput>,
+};
+
+export type ConfigsContentHomeSectionsFilterInput = {
+  aboutMe?: Maybe<ConfigsContentHomeSectionsAboutMeFilterInput>,
+  recentWork?: Maybe<ConfigsContentHomeSectionsRecentWorkFilterInput>,
+};
+
+export type ConfigsContentHomeSectionsRecentWork = {
+  heading?: Maybe<Scalars['String']>,
+};
+
+export type ConfigsContentHomeSectionsRecentWorkFilterInput = {
+  heading?: Maybe<StringQueryOperatorInput>,
+};
+
+export type ConfigsData = {
+  config?: Maybe<ConfigsDataConfig>,
+  meta?: Maybe<ConfigsDataMeta>,
+  headerConfig?: Maybe<ConfigsDataHeaderConfig>,
+  recentWork?: Maybe<ConfigsDataRecentWork>,
+  content?: Maybe<ConfigsDataContent>,
+};
+
+export type ConfigsDataConfig = {
+  gridLines?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  pageLoadTimeout?: Maybe<Scalars['Int']>,
+  splashScreenDebug?: Maybe<Scalars['Boolean']>,
+  splashScreenTimeout?: Maybe<Scalars['Int']>,
+  transportDuration?: Maybe<Scalars['Int']>,
+  workItemsAmount?: Maybe<Scalars['Int']>,
+  homeBottom?: Maybe<Scalars['Int']>,
+  skillsTop?: Maybe<Scalars['Int']>,
+  mobileBreakpoint?: Maybe<Scalars['Int']>,
+  windowHeightConstant?: Maybe<Scalars['Int']>,
+  scrollDebug?: Maybe<Scalars['Boolean']>,
+};
+
+export type ConfigsDataConfigFilterInput = {
+  gridLines?: Maybe<IntQueryOperatorInput>,
+  pageLoadTimeout?: Maybe<IntQueryOperatorInput>,
+  splashScreenDebug?: Maybe<BooleanQueryOperatorInput>,
+  splashScreenTimeout?: Maybe<IntQueryOperatorInput>,
+  transportDuration?: Maybe<IntQueryOperatorInput>,
+  workItemsAmount?: Maybe<IntQueryOperatorInput>,
+  homeBottom?: Maybe<IntQueryOperatorInput>,
+  skillsTop?: Maybe<IntQueryOperatorInput>,
+  mobileBreakpoint?: Maybe<IntQueryOperatorInput>,
+  windowHeightConstant?: Maybe<IntQueryOperatorInput>,
+  scrollDebug?: Maybe<BooleanQueryOperatorInput>,
+};
+
+export type ConfigsDataContent = {
+  home?: Maybe<ConfigsDataContentHome>,
+};
+
+export type ConfigsDataContentFilterInput = {
+  home?: Maybe<ConfigsDataContentHomeFilterInput>,
+};
+
+export type ConfigsDataContentHome = {
+  sections?: Maybe<ConfigsDataContentHomeSections>,
+};
+
+export type ConfigsDataContentHomeFilterInput = {
+  sections?: Maybe<ConfigsDataContentHomeSectionsFilterInput>,
+};
+
+export type ConfigsDataContentHomeSections = {
+  aboutMe?: Maybe<ConfigsDataContentHomeSectionsAboutMe>,
+  recentWork?: Maybe<ConfigsDataContentHomeSectionsRecentWork>,
+};
+
+export type ConfigsDataContentHomeSectionsAboutMe = {
+  heading?: Maybe<Scalars['String']>,
+  body?: Maybe<Array<Maybe<Scalars['String']>>>,
+};
+
+export type ConfigsDataContentHomeSectionsAboutMeFilterInput = {
+  heading?: Maybe<StringQueryOperatorInput>,
+  body?: Maybe<StringQueryOperatorInput>,
+};
+
+export type ConfigsDataContentHomeSectionsFilterInput = {
+  aboutMe?: Maybe<ConfigsDataContentHomeSectionsAboutMeFilterInput>,
+  recentWork?: Maybe<ConfigsDataContentHomeSectionsRecentWorkFilterInput>,
+};
+
+export type ConfigsDataContentHomeSectionsRecentWork = {
+  heading?: Maybe<Scalars['String']>,
+};
+
+export type ConfigsDataContentHomeSectionsRecentWorkFilterInput = {
+  heading?: Maybe<StringQueryOperatorInput>,
+};
+
+export type ConfigsDataFilterInput = {
+  config?: Maybe<ConfigsDataConfigFilterInput>,
+  meta?: Maybe<ConfigsDataMetaFilterInput>,
+  headerConfig?: Maybe<ConfigsDataHeaderConfigFilterInput>,
+  recentWork?: Maybe<ConfigsDataRecentWorkFilterInput>,
+  content?: Maybe<ConfigsDataContentFilterInput>,
+};
+
+export type ConfigsDataHeaderConfig = {
+  triangles?: Maybe<Array<Maybe<ConfigsDataHeaderConfigTriangles>>>,
+};
+
+export type ConfigsDataHeaderConfigFilterInput = {
+  triangles?: Maybe<ConfigsDataHeaderConfigTrianglesFilterListInput>,
+};
+
+export type ConfigsDataHeaderConfigTriangles = {
+  id?: Maybe<Scalars['String']>,
+  color?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
+  plx?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  start?: Maybe<Scalars['Int']>,
+  end?: Maybe<Scalars['Int']>,
+};
+
+export type ConfigsDataHeaderConfigTrianglesFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  color?: Maybe<StringQueryOperatorInput>,
+  size?: Maybe<StringQueryOperatorInput>,
+  plx?: Maybe<IntQueryOperatorInput>,
+  start?: Maybe<IntQueryOperatorInput>,
+  end?: Maybe<IntQueryOperatorInput>,
+};
+
+export type ConfigsDataHeaderConfigTrianglesFilterListInput = {
+  elemMatch?: Maybe<ConfigsDataHeaderConfigTrianglesFilterInput>,
+};
+
+export type ConfigsDataMeta = {
+  role?: Maybe<Scalars['String']>,
+  name?: Maybe<Scalars['String']>,
+  email?: Maybe<Scalars['String']>,
+};
+
+export type ConfigsDataMetaFilterInput = {
+  role?: Maybe<StringQueryOperatorInput>,
+  name?: Maybe<StringQueryOperatorInput>,
+  email?: Maybe<StringQueryOperatorInput>,
+};
+
+export type ConfigsDataRecentWork = {
+  workItemPlx?: Maybe<ConfigsDataRecentWorkWorkItemPlx>,
+  particleData?: Maybe<Array<Maybe<ConfigsDataRecentWorkParticleData>>>,
+};
+
+export type ConfigsDataRecentWorkFilterInput = {
+  workItemPlx?: Maybe<ConfigsDataRecentWorkWorkItemPlxFilterInput>,
+  particleData?: Maybe<ConfigsDataRecentWorkParticleDataFilterListInput>,
+};
+
+export type ConfigsDataRecentWorkParticleData = {
+  name?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  color?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
+  plx?: Maybe<Array<Maybe<Scalars['Int']>>>,
+};
+
+export type ConfigsDataRecentWorkParticleDataFilterInput = {
+  name?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  color?: Maybe<StringQueryOperatorInput>,
+  size?: Maybe<StringQueryOperatorInput>,
+  plx?: Maybe<IntQueryOperatorInput>,
+};
+
+export type ConfigsDataRecentWorkParticleDataFilterListInput = {
+  elemMatch?: Maybe<ConfigsDataRecentWorkParticleDataFilterInput>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlx = {
+  image?: Maybe<Array<Maybe<ConfigsDataRecentWorkWorkItemPlxImage>>>,
+  info?: Maybe<Array<Maybe<ConfigsDataRecentWorkWorkItemPlxInfo>>>,
+  mobileInfo?: Maybe<Array<Maybe<ConfigsDataRecentWorkWorkItemPlxMobileInfo>>>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlxFilterInput = {
+  image?: Maybe<ConfigsDataRecentWorkWorkItemPlxImageFilterListInput>,
+  info?: Maybe<ConfigsDataRecentWorkWorkItemPlxInfoFilterListInput>,
+  mobileInfo?: Maybe<ConfigsDataRecentWorkWorkItemPlxMobileInfoFilterListInput>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlxImage = {
+  startValue?: Maybe<Scalars['Int']>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlxImageFilterInput = {
+  startValue?: Maybe<IntQueryOperatorInput>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlxImageFilterListInput = {
+  elemMatch?: Maybe<ConfigsDataRecentWorkWorkItemPlxImageFilterInput>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlxInfo = {
+  startValue?: Maybe<Scalars['Int']>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlxInfoFilterInput = {
+  startValue?: Maybe<IntQueryOperatorInput>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlxInfoFilterListInput = {
+  elemMatch?: Maybe<ConfigsDataRecentWorkWorkItemPlxInfoFilterInput>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlxMobileInfo = {
+  startValue?: Maybe<Scalars['Int']>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlxMobileInfoFilterInput = {
+  startValue?: Maybe<IntQueryOperatorInput>,
+};
+
+export type ConfigsDataRecentWorkWorkItemPlxMobileInfoFilterListInput = {
+  elemMatch?: Maybe<ConfigsDataRecentWorkWorkItemPlxMobileInfoFilterInput>,
+};
+
+export type ConfigsEdge = {
+  next?: Maybe<Configs>,
+  node: Configs,
+  previous?: Maybe<Configs>,
+};
+
+export type ConfigsFieldsEnum = 
+  'id' |
+  'parent___id' |
+  'parent___parent___id' |
+  'parent___parent___parent___id' |
+  'parent___parent___parent___children' |
+  'parent___parent___children' |
+  'parent___parent___children___id' |
+  'parent___parent___children___children' |
+  'parent___parent___internal___content' |
+  'parent___parent___internal___contentDigest' |
+  'parent___parent___internal___description' |
+  'parent___parent___internal___fieldOwners' |
+  'parent___parent___internal___ignoreType' |
+  'parent___parent___internal___mediaType' |
+  'parent___parent___internal___owner' |
+  'parent___parent___internal___type' |
+  'parent___children' |
+  'parent___children___id' |
+  'parent___children___parent___id' |
+  'parent___children___parent___children' |
+  'parent___children___children' |
+  'parent___children___children___id' |
+  'parent___children___children___children' |
+  'parent___children___internal___content' |
+  'parent___children___internal___contentDigest' |
+  'parent___children___internal___description' |
+  'parent___children___internal___fieldOwners' |
+  'parent___children___internal___ignoreType' |
+  'parent___children___internal___mediaType' |
+  'parent___children___internal___owner' |
+  'parent___children___internal___type' |
+  'parent___internal___content' |
+  'parent___internal___contentDigest' |
+  'parent___internal___description' |
+  'parent___internal___fieldOwners' |
+  'parent___internal___ignoreType' |
+  'parent___internal___mediaType' |
+  'parent___internal___owner' |
+  'parent___internal___type' |
+  'children' |
+  'children___id' |
+  'children___parent___id' |
+  'children___parent___parent___id' |
+  'children___parent___parent___children' |
+  'children___parent___children' |
+  'children___parent___children___id' |
+  'children___parent___children___children' |
+  'children___parent___internal___content' |
+  'children___parent___internal___contentDigest' |
+  'children___parent___internal___description' |
+  'children___parent___internal___fieldOwners' |
+  'children___parent___internal___ignoreType' |
+  'children___parent___internal___mediaType' |
+  'children___parent___internal___owner' |
+  'children___parent___internal___type' |
+  'children___children' |
+  'children___children___id' |
+  'children___children___parent___id' |
+  'children___children___parent___children' |
+  'children___children___children' |
+  'children___children___children___id' |
+  'children___children___children___children' |
+  'children___children___internal___content' |
+  'children___children___internal___contentDigest' |
+  'children___children___internal___description' |
+  'children___children___internal___fieldOwners' |
+  'children___children___internal___ignoreType' |
+  'children___children___internal___mediaType' |
+  'children___children___internal___owner' |
+  'children___children___internal___type' |
+  'children___internal___content' |
+  'children___internal___contentDigest' |
+  'children___internal___description' |
+  'children___internal___fieldOwners' |
+  'children___internal___ignoreType' |
+  'children___internal___mediaType' |
+  'children___internal___owner' |
+  'children___internal___type' |
+  'internal___content' |
+  'internal___contentDigest' |
+  'internal___description' |
+  'internal___fieldOwners' |
+  'internal___ignoreType' |
+  'internal___mediaType' |
+  'internal___owner' |
+  'internal___type' |
+  'config___gridLines' |
+  'config___pageLoadTimeout' |
+  'config___splashScreenDebug' |
+  'config___splashScreenTimeout' |
+  'config___transportDuration' |
+  'config___workItemsAmount' |
+  'config___homeBottom' |
+  'config___skillsTop' |
+  'config___mobileBreakpoint' |
+  'config___windowHeightConstant' |
+  'config___scrollDebug' |
+  'meta___role' |
+  'meta___name' |
+  'meta___email' |
+  'headerConfig___triangles' |
+  'headerConfig___triangles___id' |
+  'headerConfig___triangles___color' |
+  'headerConfig___triangles___size' |
+  'headerConfig___triangles___plx' |
+  'headerConfig___triangles___start' |
+  'headerConfig___triangles___end' |
+  'recentWork___workItemPlx___image' |
+  'recentWork___workItemPlx___image___startValue' |
+  'recentWork___workItemPlx___info' |
+  'recentWork___workItemPlx___info___startValue' |
+  'recentWork___workItemPlx___mobileInfo' |
+  'recentWork___workItemPlx___mobileInfo___startValue' |
+  'recentWork___particleData' |
+  'recentWork___particleData___name' |
+  'recentWork___particleData___type' |
+  'recentWork___particleData___color' |
+  'recentWork___particleData___size' |
+  'recentWork___particleData___plx' |
+  'data___config___gridLines' |
+  'data___config___pageLoadTimeout' |
+  'data___config___splashScreenDebug' |
+  'data___config___splashScreenTimeout' |
+  'data___config___transportDuration' |
+  'data___config___workItemsAmount' |
+  'data___config___homeBottom' |
+  'data___config___skillsTop' |
+  'data___config___mobileBreakpoint' |
+  'data___config___windowHeightConstant' |
+  'data___config___scrollDebug' |
+  'data___meta___role' |
+  'data___meta___name' |
+  'data___meta___email' |
+  'data___headerConfig___triangles' |
+  'data___headerConfig___triangles___id' |
+  'data___headerConfig___triangles___color' |
+  'data___headerConfig___triangles___size' |
+  'data___headerConfig___triangles___plx' |
+  'data___headerConfig___triangles___start' |
+  'data___headerConfig___triangles___end' |
+  'data___recentWork___workItemPlx___image' |
+  'data___recentWork___workItemPlx___info' |
+  'data___recentWork___workItemPlx___mobileInfo' |
+  'data___recentWork___particleData' |
+  'data___recentWork___particleData___name' |
+  'data___recentWork___particleData___type' |
+  'data___recentWork___particleData___color' |
+  'data___recentWork___particleData___size' |
+  'data___recentWork___particleData___plx';
+
+export type ConfigsFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  config?: Maybe<ConfigsConfigFilterInput>,
+  meta?: Maybe<ConfigsMetaFilterInput>,
+  headerConfig?: Maybe<ConfigsHeaderConfigFilterInput>,
+  recentWork?: Maybe<ConfigsRecentWorkFilterInput>,
+  content?: Maybe<ConfigsContentFilterInput>,
+  data?: Maybe<ConfigsDataFilterInput>,
+};
+
+export type ConfigsGroupConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<ConfigsEdge>,
+  nodes: Array<Configs>,
+  pageInfo: PageInfo,
+  field: Scalars['String'],
+  fieldValue?: Maybe<Scalars['String']>,
+};
+
+export type ConfigsHeaderConfig = {
+  triangles?: Maybe<Array<Maybe<ConfigsHeaderConfigTriangles>>>,
+};
+
+export type ConfigsHeaderConfigFilterInput = {
+  triangles?: Maybe<ConfigsHeaderConfigTrianglesFilterListInput>,
+};
+
+export type ConfigsHeaderConfigTriangles = {
+  id?: Maybe<Scalars['String']>,
+  color?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
+  plx?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  start?: Maybe<Scalars['Int']>,
+  end?: Maybe<Scalars['Int']>,
+};
+
+export type ConfigsHeaderConfigTrianglesFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  color?: Maybe<StringQueryOperatorInput>,
+  size?: Maybe<StringQueryOperatorInput>,
+  plx?: Maybe<IntQueryOperatorInput>,
+  start?: Maybe<IntQueryOperatorInput>,
+  end?: Maybe<IntQueryOperatorInput>,
+};
+
+export type ConfigsHeaderConfigTrianglesFilterListInput = {
+  elemMatch?: Maybe<ConfigsHeaderConfigTrianglesFilterInput>,
+};
+
+export type ConfigsMeta = {
+  role?: Maybe<Scalars['String']>,
+  name?: Maybe<Scalars['String']>,
+  email?: Maybe<Scalars['String']>,
+};
+
+export type ConfigsMetaFilterInput = {
+  role?: Maybe<StringQueryOperatorInput>,
+  name?: Maybe<StringQueryOperatorInput>,
+  email?: Maybe<StringQueryOperatorInput>,
+};
+
+export type ConfigsRecentWork = {
+  workItemPlx?: Maybe<ConfigsRecentWorkWorkItemPlx>,
+  particleData?: Maybe<Array<Maybe<ConfigsRecentWorkParticleData>>>,
+};
+
+export type ConfigsRecentWorkFilterInput = {
+  workItemPlx?: Maybe<ConfigsRecentWorkWorkItemPlxFilterInput>,
+  particleData?: Maybe<ConfigsRecentWorkParticleDataFilterListInput>,
+};
+
+export type ConfigsRecentWorkParticleData = {
+  name?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  color?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
+  plx?: Maybe<Array<Maybe<Scalars['Int']>>>,
+};
+
+export type ConfigsRecentWorkParticleDataFilterInput = {
+  name?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  color?: Maybe<StringQueryOperatorInput>,
+  size?: Maybe<StringQueryOperatorInput>,
+  plx?: Maybe<IntQueryOperatorInput>,
+};
+
+export type ConfigsRecentWorkParticleDataFilterListInput = {
+  elemMatch?: Maybe<ConfigsRecentWorkParticleDataFilterInput>,
+};
+
+export type ConfigsRecentWorkWorkItemPlx = {
+  image?: Maybe<Array<Maybe<ConfigsRecentWorkWorkItemPlxImage>>>,
+  info?: Maybe<Array<Maybe<ConfigsRecentWorkWorkItemPlxInfo>>>,
+  mobileInfo?: Maybe<Array<Maybe<ConfigsRecentWorkWorkItemPlxMobileInfo>>>,
+};
+
+export type ConfigsRecentWorkWorkItemPlxFilterInput = {
+  image?: Maybe<ConfigsRecentWorkWorkItemPlxImageFilterListInput>,
+  info?: Maybe<ConfigsRecentWorkWorkItemPlxInfoFilterListInput>,
+  mobileInfo?: Maybe<ConfigsRecentWorkWorkItemPlxMobileInfoFilterListInput>,
+};
+
+export type ConfigsRecentWorkWorkItemPlxImage = {
+  startValue?: Maybe<Scalars['Int']>,
+};
+
+export type ConfigsRecentWorkWorkItemPlxImageFilterInput = {
+  startValue?: Maybe<IntQueryOperatorInput>,
+};
+
+export type ConfigsRecentWorkWorkItemPlxImageFilterListInput = {
+  elemMatch?: Maybe<ConfigsRecentWorkWorkItemPlxImageFilterInput>,
+};
+
+export type ConfigsRecentWorkWorkItemPlxInfo = {
+  startValue?: Maybe<Scalars['Int']>,
+};
+
+export type ConfigsRecentWorkWorkItemPlxInfoFilterInput = {
+  startValue?: Maybe<IntQueryOperatorInput>,
+};
+
+export type ConfigsRecentWorkWorkItemPlxInfoFilterListInput = {
+  elemMatch?: Maybe<ConfigsRecentWorkWorkItemPlxInfoFilterInput>,
+};
+
+export type ConfigsRecentWorkWorkItemPlxMobileInfo = {
+  startValue?: Maybe<Scalars['Int']>,
+};
+
+export type ConfigsRecentWorkWorkItemPlxMobileInfoFilterInput = {
+  startValue?: Maybe<IntQueryOperatorInput>,
+};
+
+export type ConfigsRecentWorkWorkItemPlxMobileInfoFilterListInput = {
+  elemMatch?: Maybe<ConfigsRecentWorkWorkItemPlxMobileInfoFilterInput>,
+};
+
+export type ConfigsSortInput = {
+  fields?: Maybe<Array<Maybe<ConfigsFieldsEnum>>>,
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>,
+};
+
 
 export type DateQueryOperatorInput = {
   eq?: Maybe<Scalars['Date']>,
@@ -1329,6 +1947,902 @@ export type PotraceTurnPolicy =
   'TURNPOLICY_MINORITY' |
   'TURNPOLICY_MAJORITY';
 
+export type Projects = Node & {
+  id: Scalars['ID'],
+  parent?: Maybe<Node>,
+  children: Array<Node>,
+  internal: Internal,
+  _0?: Maybe<Projects_0>,
+  _1?: Maybe<Projects_1>,
+  _2?: Maybe<Projects_2>,
+  _3?: Maybe<Projects_3>,
+  _4?: Maybe<Projects_4>,
+  _5?: Maybe<Projects_5>,
+  _6?: Maybe<Projects_6>,
+  _7?: Maybe<Projects_7>,
+  _8?: Maybe<Projects_8>,
+  _9?: Maybe<Projects_9>,
+  _10?: Maybe<Projects_10>,
+  _11?: Maybe<Projects_11>,
+  data?: Maybe<Array<Maybe<ProjectsData>>>,
+};
+
+export type Projects_0 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  url?: Maybe<Scalars['String']>,
+  content?: Maybe<Array<Maybe<Projects_0Content>>>,
+};
+
+export type Projects_0Content = {
+  type?: Maybe<Scalars['String']>,
+  imgFile?: Maybe<Scalars['String']>,
+  caption?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+};
+
+export type Projects_0ContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  imgFile?: Maybe<StringQueryOperatorInput>,
+  caption?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_0ContentFilterListInput = {
+  elemMatch?: Maybe<Projects_0ContentFilterInput>,
+};
+
+export type Projects_0FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<Projects_0ContentFilterListInput>,
+};
+
+export type Projects_1 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  url?: Maybe<Scalars['String']>,
+};
+
+export type Projects_10 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  url?: Maybe<Scalars['String']>,
+  content?: Maybe<Array<Maybe<Projects_10Content>>>,
+};
+
+export type Projects_10Content = {
+  type?: Maybe<Scalars['String']>,
+  imgFile?: Maybe<Scalars['String']>,
+  caption?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+  p2?: Maybe<Scalars['String']>,
+};
+
+export type Projects_10ContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  imgFile?: Maybe<StringQueryOperatorInput>,
+  caption?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+  p2?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_10ContentFilterListInput = {
+  elemMatch?: Maybe<Projects_10ContentFilterInput>,
+};
+
+export type Projects_10FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<Projects_10ContentFilterListInput>,
+};
+
+export type Projects_11 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  url?: Maybe<Scalars['String']>,
+  content?: Maybe<Array<Maybe<Projects_11Content>>>,
+};
+
+export type Projects_11Content = {
+  type?: Maybe<Scalars['String']>,
+  imgFile?: Maybe<Scalars['String']>,
+  caption?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+};
+
+export type Projects_11ContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  imgFile?: Maybe<StringQueryOperatorInput>,
+  caption?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_11ContentFilterListInput = {
+  elemMatch?: Maybe<Projects_11ContentFilterInput>,
+};
+
+export type Projects_11FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<Projects_11ContentFilterListInput>,
+};
+
+export type Projects_1FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_2 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  url?: Maybe<Scalars['String']>,
+  content?: Maybe<Array<Maybe<Projects_2Content>>>,
+};
+
+export type Projects_2Content = {
+  type?: Maybe<Scalars['String']>,
+  imgFile?: Maybe<Scalars['String']>,
+  caption?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+};
+
+export type Projects_2ContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  imgFile?: Maybe<StringQueryOperatorInput>,
+  caption?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_2ContentFilterListInput = {
+  elemMatch?: Maybe<Projects_2ContentFilterInput>,
+};
+
+export type Projects_2FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<Projects_2ContentFilterListInput>,
+};
+
+export type Projects_3 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  url?: Maybe<Scalars['String']>,
+};
+
+export type Projects_3FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_4 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  url?: Maybe<Scalars['String']>,
+  content?: Maybe<Array<Maybe<Projects_4Content>>>,
+};
+
+export type Projects_4Content = {
+  type?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+  p2?: Maybe<Scalars['String']>,
+};
+
+export type Projects_4ContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+  p2?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_4ContentFilterListInput = {
+  elemMatch?: Maybe<Projects_4ContentFilterInput>,
+};
+
+export type Projects_4FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<Projects_4ContentFilterListInput>,
+};
+
+export type Projects_5 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  url?: Maybe<Scalars['String']>,
+  content?: Maybe<Array<Maybe<Projects_5Content>>>,
+};
+
+export type Projects_5Content = {
+  type?: Maybe<Scalars['String']>,
+  imgFile?: Maybe<Scalars['String']>,
+  caption?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+  p2?: Maybe<Scalars['String']>,
+};
+
+export type Projects_5ContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  imgFile?: Maybe<StringQueryOperatorInput>,
+  caption?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+  p2?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_5ContentFilterListInput = {
+  elemMatch?: Maybe<Projects_5ContentFilterInput>,
+};
+
+export type Projects_5FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<Projects_5ContentFilterListInput>,
+};
+
+export type Projects_6 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  url?: Maybe<Scalars['String']>,
+  content?: Maybe<Array<Maybe<Projects_6Content>>>,
+};
+
+export type Projects_6Content = {
+  type?: Maybe<Scalars['String']>,
+  imgFile?: Maybe<Scalars['String']>,
+  caption?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+  p2?: Maybe<Scalars['String']>,
+};
+
+export type Projects_6ContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  imgFile?: Maybe<StringQueryOperatorInput>,
+  caption?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+  p2?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_6ContentFilterListInput = {
+  elemMatch?: Maybe<Projects_6ContentFilterInput>,
+};
+
+export type Projects_6FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<Projects_6ContentFilterListInput>,
+};
+
+export type Projects_7 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  content?: Maybe<Array<Maybe<Projects_7Content>>>,
+};
+
+export type Projects_7Content = {
+  type?: Maybe<Scalars['String']>,
+  videoFile?: Maybe<Scalars['String']>,
+  caption?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+  p2?: Maybe<Scalars['String']>,
+  text?: Maybe<Scalars['String']>,
+};
+
+export type Projects_7ContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  videoFile?: Maybe<StringQueryOperatorInput>,
+  caption?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+  p2?: Maybe<StringQueryOperatorInput>,
+  text?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_7ContentFilterListInput = {
+  elemMatch?: Maybe<Projects_7ContentFilterInput>,
+};
+
+export type Projects_7FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<Projects_7ContentFilterListInput>,
+};
+
+export type Projects_8 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  content?: Maybe<Array<Maybe<Projects_8Content>>>,
+};
+
+export type Projects_8Content = {
+  type?: Maybe<Scalars['String']>,
+  videoFile?: Maybe<Scalars['String']>,
+  caption?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+  p2?: Maybe<Scalars['String']>,
+};
+
+export type Projects_8ContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  videoFile?: Maybe<StringQueryOperatorInput>,
+  caption?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+  p2?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_8ContentFilterListInput = {
+  elemMatch?: Maybe<Projects_8ContentFilterInput>,
+};
+
+export type Projects_8FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<Projects_8ContentFilterListInput>,
+};
+
+export type Projects_9 = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  content?: Maybe<Array<Maybe<Projects_9Content>>>,
+};
+
+export type Projects_9Content = {
+  type?: Maybe<Scalars['String']>,
+  videoFile?: Maybe<Scalars['String']>,
+  caption?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+  p2?: Maybe<Scalars['String']>,
+};
+
+export type Projects_9ContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  videoFile?: Maybe<StringQueryOperatorInput>,
+  caption?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+  p2?: Maybe<StringQueryOperatorInput>,
+};
+
+export type Projects_9ContentFilterListInput = {
+  elemMatch?: Maybe<Projects_9ContentFilterInput>,
+};
+
+export type Projects_9FilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<Projects_9ContentFilterListInput>,
+};
+
+export type ProjectsConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<ProjectsEdge>,
+  nodes: Array<Projects>,
+  pageInfo: PageInfo,
+  distinct: Array<Scalars['String']>,
+  group: Array<ProjectsGroupConnection>,
+};
+
+
+export type ProjectsConnectionDistinctArgs = {
+  field: ProjectsFieldsEnum
+};
+
+
+export type ProjectsConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>,
+  field: ProjectsFieldsEnum
+};
+
+export type ProjectsData = {
+  id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  imageDesktop?: Maybe<Scalars['String']>,
+  imageMobile?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  disabled?: Maybe<Scalars['Boolean']>,
+  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
+  url?: Maybe<Scalars['String']>,
+  content?: Maybe<Array<Maybe<ProjectsDataContent>>>,
+};
+
+export type ProjectsDataContent = {
+  type?: Maybe<Scalars['String']>,
+  imgFile?: Maybe<Scalars['String']>,
+  caption?: Maybe<Scalars['String']>,
+  p1?: Maybe<Scalars['String']>,
+  p2?: Maybe<Scalars['String']>,
+  videoFile?: Maybe<Scalars['String']>,
+  text?: Maybe<Scalars['String']>,
+};
+
+export type ProjectsDataContentFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>,
+  imgFile?: Maybe<StringQueryOperatorInput>,
+  caption?: Maybe<StringQueryOperatorInput>,
+  p1?: Maybe<StringQueryOperatorInput>,
+  p2?: Maybe<StringQueryOperatorInput>,
+  videoFile?: Maybe<StringQueryOperatorInput>,
+  text?: Maybe<StringQueryOperatorInput>,
+};
+
+export type ProjectsDataContentFilterListInput = {
+  elemMatch?: Maybe<ProjectsDataContentFilterInput>,
+};
+
+export type ProjectsDataFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<ProjectsDataContentFilterListInput>,
+};
+
+export type ProjectsDataFilterListInput = {
+  elemMatch?: Maybe<ProjectsDataFilterInput>,
+};
+
+export type ProjectsEdge = {
+  next?: Maybe<Projects>,
+  node: Projects,
+  previous?: Maybe<Projects>,
+};
+
+export type ProjectsFieldsEnum = 
+  'id' |
+  'parent___id' |
+  'parent___parent___id' |
+  'parent___parent___parent___id' |
+  'parent___parent___parent___children' |
+  'parent___parent___children' |
+  'parent___parent___children___id' |
+  'parent___parent___children___children' |
+  'parent___parent___internal___content' |
+  'parent___parent___internal___contentDigest' |
+  'parent___parent___internal___description' |
+  'parent___parent___internal___fieldOwners' |
+  'parent___parent___internal___ignoreType' |
+  'parent___parent___internal___mediaType' |
+  'parent___parent___internal___owner' |
+  'parent___parent___internal___type' |
+  'parent___children' |
+  'parent___children___id' |
+  'parent___children___parent___id' |
+  'parent___children___parent___children' |
+  'parent___children___children' |
+  'parent___children___children___id' |
+  'parent___children___children___children' |
+  'parent___children___internal___content' |
+  'parent___children___internal___contentDigest' |
+  'parent___children___internal___description' |
+  'parent___children___internal___fieldOwners' |
+  'parent___children___internal___ignoreType' |
+  'parent___children___internal___mediaType' |
+  'parent___children___internal___owner' |
+  'parent___children___internal___type' |
+  'parent___internal___content' |
+  'parent___internal___contentDigest' |
+  'parent___internal___description' |
+  'parent___internal___fieldOwners' |
+  'parent___internal___ignoreType' |
+  'parent___internal___mediaType' |
+  'parent___internal___owner' |
+  'parent___internal___type' |
+  'children' |
+  'children___id' |
+  'children___parent___id' |
+  'children___parent___parent___id' |
+  'children___parent___parent___children' |
+  'children___parent___children' |
+  'children___parent___children___id' |
+  'children___parent___children___children' |
+  'children___parent___internal___content' |
+  'children___parent___internal___contentDigest' |
+  'children___parent___internal___description' |
+  'children___parent___internal___fieldOwners' |
+  'children___parent___internal___ignoreType' |
+  'children___parent___internal___mediaType' |
+  'children___parent___internal___owner' |
+  'children___parent___internal___type' |
+  'children___children' |
+  'children___children___id' |
+  'children___children___parent___id' |
+  'children___children___parent___children' |
+  'children___children___children' |
+  'children___children___children___id' |
+  'children___children___children___children' |
+  'children___children___internal___content' |
+  'children___children___internal___contentDigest' |
+  'children___children___internal___description' |
+  'children___children___internal___fieldOwners' |
+  'children___children___internal___ignoreType' |
+  'children___children___internal___mediaType' |
+  'children___children___internal___owner' |
+  'children___children___internal___type' |
+  'children___internal___content' |
+  'children___internal___contentDigest' |
+  'children___internal___description' |
+  'children___internal___fieldOwners' |
+  'children___internal___ignoreType' |
+  'children___internal___mediaType' |
+  'children___internal___owner' |
+  'children___internal___type' |
+  'internal___content' |
+  'internal___contentDigest' |
+  'internal___description' |
+  'internal___fieldOwners' |
+  'internal___ignoreType' |
+  'internal___mediaType' |
+  'internal___owner' |
+  'internal___type' |
+  '_0___id' |
+  '_0___title' |
+  '_0___type' |
+  '_0___imageDesktop' |
+  '_0___imageMobile' |
+  '_0___description' |
+  '_0___disabled' |
+  '_0___techList' |
+  '_0___url' |
+  '_0___content' |
+  '_0___content___type' |
+  '_0___content___imgFile' |
+  '_0___content___caption' |
+  '_0___content___p1' |
+  '_1___id' |
+  '_1___title' |
+  '_1___type' |
+  '_1___imageDesktop' |
+  '_1___imageMobile' |
+  '_1___description' |
+  '_1___disabled' |
+  '_1___techList' |
+  '_1___url' |
+  '_2___id' |
+  '_2___title' |
+  '_2___type' |
+  '_2___imageDesktop' |
+  '_2___imageMobile' |
+  '_2___description' |
+  '_2___disabled' |
+  '_2___techList' |
+  '_2___url' |
+  '_2___content' |
+  '_2___content___type' |
+  '_2___content___imgFile' |
+  '_2___content___caption' |
+  '_2___content___p1' |
+  '_3___id' |
+  '_3___title' |
+  '_3___type' |
+  '_3___imageDesktop' |
+  '_3___imageMobile' |
+  '_3___description' |
+  '_3___disabled' |
+  '_3___techList' |
+  '_3___url' |
+  '_4___id' |
+  '_4___title' |
+  '_4___type' |
+  '_4___imageDesktop' |
+  '_4___imageMobile' |
+  '_4___description' |
+  '_4___disabled' |
+  '_4___techList' |
+  '_4___url' |
+  '_4___content' |
+  '_4___content___type' |
+  '_4___content___p1' |
+  '_4___content___p2' |
+  '_5___id' |
+  '_5___title' |
+  '_5___type' |
+  '_5___imageDesktop' |
+  '_5___imageMobile' |
+  '_5___description' |
+  '_5___disabled' |
+  '_5___techList' |
+  '_5___url' |
+  '_5___content' |
+  '_5___content___type' |
+  '_5___content___imgFile' |
+  '_5___content___caption' |
+  '_5___content___p1' |
+  '_5___content___p2' |
+  '_6___id' |
+  '_6___title' |
+  '_6___type' |
+  '_6___imageDesktop' |
+  '_6___imageMobile' |
+  '_6___description' |
+  '_6___disabled' |
+  '_6___techList' |
+  '_6___url' |
+  '_6___content' |
+  '_6___content___type' |
+  '_6___content___imgFile' |
+  '_6___content___caption' |
+  '_6___content___p1' |
+  '_6___content___p2' |
+  '_7___id' |
+  '_7___title' |
+  '_7___type' |
+  '_7___imageDesktop' |
+  '_7___imageMobile' |
+  '_7___description' |
+  '_7___disabled' |
+  '_7___techList' |
+  '_7___content' |
+  '_7___content___type' |
+  '_7___content___videoFile' |
+  '_7___content___caption' |
+  '_7___content___p1' |
+  '_7___content___p2' |
+  '_7___content___text' |
+  '_8___id' |
+  '_8___title' |
+  '_8___type' |
+  '_8___imageDesktop' |
+  '_8___imageMobile' |
+  '_8___description' |
+  '_8___disabled' |
+  '_8___techList' |
+  '_8___content' |
+  '_8___content___type' |
+  '_8___content___videoFile' |
+  '_8___content___caption' |
+  '_8___content___p1' |
+  '_8___content___p2' |
+  '_9___id' |
+  '_9___title' |
+  '_9___type' |
+  '_9___imageDesktop' |
+  '_9___imageMobile' |
+  '_9___description' |
+  '_9___disabled' |
+  '_9___techList' |
+  '_9___content' |
+  '_9___content___type' |
+  '_9___content___videoFile' |
+  '_9___content___caption' |
+  '_9___content___p1' |
+  '_9___content___p2' |
+  '_10___id' |
+  '_10___title' |
+  '_10___type' |
+  '_10___imageDesktop' |
+  '_10___imageMobile' |
+  '_10___description' |
+  '_10___disabled' |
+  '_10___techList' |
+  '_10___url' |
+  '_10___content' |
+  '_10___content___type' |
+  '_10___content___imgFile' |
+  '_10___content___caption' |
+  '_10___content___p1' |
+  '_10___content___p2' |
+  '_11___id' |
+  '_11___title' |
+  '_11___type' |
+  '_11___imageDesktop' |
+  '_11___imageMobile' |
+  '_11___description' |
+  '_11___disabled' |
+  '_11___techList' |
+  '_11___url' |
+  '_11___content' |
+  '_11___content___type' |
+  '_11___content___imgFile' |
+  '_11___content___caption' |
+  '_11___content___p1' |
+  'data' |
+  'data___id' |
+  'data___title' |
+  'data___type' |
+  'data___imageDesktop' |
+  'data___imageMobile' |
+  'data___description' |
+  'data___disabled' |
+  'data___techList' |
+  'data___url' |
+  'data___content' |
+  'data___content___type' |
+  'data___content___imgFile' |
+  'data___content___caption' |
+  'data___content___p1' |
+  'data___content___p2' |
+  'data___content___videoFile' |
+  'data___content___text';
+
+export type ProjectsFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  _0?: Maybe<Projects_0FilterInput>,
+  _1?: Maybe<Projects_1FilterInput>,
+  _2?: Maybe<Projects_2FilterInput>,
+  _3?: Maybe<Projects_3FilterInput>,
+  _4?: Maybe<Projects_4FilterInput>,
+  _5?: Maybe<Projects_5FilterInput>,
+  _6?: Maybe<Projects_6FilterInput>,
+  _7?: Maybe<Projects_7FilterInput>,
+  _8?: Maybe<Projects_8FilterInput>,
+  _9?: Maybe<Projects_9FilterInput>,
+  _10?: Maybe<Projects_10FilterInput>,
+  _11?: Maybe<Projects_11FilterInput>,
+  data?: Maybe<ProjectsDataFilterListInput>,
+};
+
+export type ProjectsGroupConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<ProjectsEdge>,
+  nodes: Array<Projects>,
+  pageInfo: PageInfo,
+  field: Scalars['String'],
+  fieldValue?: Maybe<Scalars['String']>,
+};
+
+export type ProjectsSortInput = {
+  fields?: Maybe<Array<Maybe<ProjectsFieldsEnum>>>,
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>,
+};
+
 export type Query = {
   file?: Maybe<File>,
   allFile: FileConnection,
@@ -1338,8 +2852,12 @@ export type Query = {
   allSitePage: SitePageConnection,
   imageSharp?: Maybe<ImageSharp>,
   allImageSharp: ImageSharpConnection,
-  staticData?: Maybe<StaticData>,
-  allStaticData: StaticDataConnection,
+  skills?: Maybe<Skills>,
+  allSkills: SkillsConnection,
+  projects?: Maybe<Projects>,
+  allProjects: ProjectsConnection,
+  configs?: Maybe<Configs>,
+  allConfigs: ConfigsConnection,
   site?: Maybe<Site>,
   allSite: SiteConnection,
   sitePlugin?: Maybe<SitePlugin>,
@@ -1494,22 +3012,71 @@ export type QueryAllImageSharpArgs = {
 };
 
 
-export type QueryStaticDataArgs = {
+export type QuerySkillsArgs = {
   id?: Maybe<StringQueryOperatorInput>,
   parent?: Maybe<NodeFilterInput>,
   children?: Maybe<NodeFilterListInput>,
   internal?: Maybe<InternalFilterInput>,
-  config?: Maybe<StaticDataConfigFilterInput>,
-  meta?: Maybe<StaticDataMetaFilterInput>,
-  headerConfig?: Maybe<StaticDataHeaderConfigFilterInput>,
-  aboutMe?: Maybe<StaticDataAboutMeFilterInput>,
-  data?: Maybe<StaticDataDataFilterInput>
+  mobile?: Maybe<SkillsMobileFilterListInput>,
+  desktop?: Maybe<SkillsDesktopFilterListInput>,
+  data?: Maybe<SkillsDataFilterInput>
 };
 
 
-export type QueryAllStaticDataArgs = {
-  filter?: Maybe<StaticDataFilterInput>,
-  sort?: Maybe<StaticDataSortInput>,
+export type QueryAllSkillsArgs = {
+  filter?: Maybe<SkillsFilterInput>,
+  sort?: Maybe<SkillsSortInput>,
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryProjectsArgs = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  _0?: Maybe<Projects_0FilterInput>,
+  _1?: Maybe<Projects_1FilterInput>,
+  _2?: Maybe<Projects_2FilterInput>,
+  _3?: Maybe<Projects_3FilterInput>,
+  _4?: Maybe<Projects_4FilterInput>,
+  _5?: Maybe<Projects_5FilterInput>,
+  _6?: Maybe<Projects_6FilterInput>,
+  _7?: Maybe<Projects_7FilterInput>,
+  _8?: Maybe<Projects_8FilterInput>,
+  _9?: Maybe<Projects_9FilterInput>,
+  _10?: Maybe<Projects_10FilterInput>,
+  _11?: Maybe<Projects_11FilterInput>,
+  data?: Maybe<ProjectsDataFilterListInput>
+};
+
+
+export type QueryAllProjectsArgs = {
+  filter?: Maybe<ProjectsFilterInput>,
+  sort?: Maybe<ProjectsSortInput>,
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryConfigsArgs = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  config?: Maybe<ConfigsConfigFilterInput>,
+  meta?: Maybe<ConfigsMetaFilterInput>,
+  headerConfig?: Maybe<ConfigsHeaderConfigFilterInput>,
+  recentWork?: Maybe<ConfigsRecentWorkFilterInput>,
+  content?: Maybe<ConfigsContentFilterInput>,
+  data?: Maybe<ConfigsDataFilterInput>
+};
+
+
+export type QueryAllConfigsArgs = {
+  filter?: Maybe<ConfigsFilterInput>,
+  sort?: Maybe<ConfigsSortInput>,
   skip?: Maybe<Scalars['Int']>,
   limit?: Maybe<Scalars['Int']>
 };
@@ -2299,182 +3866,102 @@ export type SiteSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>,
 };
 
-export type SortOrderEnum = 
-  'ASC' |
-  'DESC';
-
-export type StaticData = Node & {
+export type Skills = Node & {
   id: Scalars['ID'],
   parent?: Maybe<Node>,
   children: Array<Node>,
   internal: Internal,
-  config?: Maybe<StaticDataConfig>,
-  meta?: Maybe<StaticDataMeta>,
-  headerConfig?: Maybe<StaticDataHeaderConfig>,
-  aboutMe?: Maybe<StaticDataAboutMe>,
-  data?: Maybe<StaticDataData>,
+  mobile?: Maybe<Array<Maybe<SkillsMobile>>>,
+  desktop?: Maybe<Array<Maybe<SkillsDesktop>>>,
+  data?: Maybe<SkillsData>,
 };
 
-export type StaticDataAboutMe = {
-  heading?: Maybe<Scalars['String']>,
-  body?: Maybe<Array<Maybe<Scalars['String']>>>,
-};
-
-export type StaticDataAboutMeFilterInput = {
-  heading?: Maybe<StringQueryOperatorInput>,
-  body?: Maybe<StringQueryOperatorInput>,
-};
-
-export type StaticDataConfig = {
-  gridLines?: Maybe<Array<Maybe<Scalars['Int']>>>,
-  pageLoadTimeout?: Maybe<Scalars['Int']>,
-  splashScreenDebug?: Maybe<Scalars['Boolean']>,
-  splashScreenTimeout?: Maybe<Scalars['Int']>,
-  transportDuration?: Maybe<Scalars['Int']>,
-  workItemsAmount?: Maybe<Scalars['Int']>,
-  homeBottom?: Maybe<Scalars['Int']>,
-  skillsTop?: Maybe<Scalars['Int']>,
-  mobileBreakpoint?: Maybe<Scalars['Int']>,
-  windowHeightConstant?: Maybe<Scalars['Int']>,
-  scrollDebug?: Maybe<Scalars['Boolean']>,
-};
-
-export type StaticDataConfigFilterInput = {
-  gridLines?: Maybe<IntQueryOperatorInput>,
-  pageLoadTimeout?: Maybe<IntQueryOperatorInput>,
-  splashScreenDebug?: Maybe<BooleanQueryOperatorInput>,
-  splashScreenTimeout?: Maybe<IntQueryOperatorInput>,
-  transportDuration?: Maybe<IntQueryOperatorInput>,
-  workItemsAmount?: Maybe<IntQueryOperatorInput>,
-  homeBottom?: Maybe<IntQueryOperatorInput>,
-  skillsTop?: Maybe<IntQueryOperatorInput>,
-  mobileBreakpoint?: Maybe<IntQueryOperatorInput>,
-  windowHeightConstant?: Maybe<IntQueryOperatorInput>,
-  scrollDebug?: Maybe<BooleanQueryOperatorInput>,
-};
-
-export type StaticDataConnection = {
+export type SkillsConnection = {
   totalCount: Scalars['Int'],
-  edges: Array<StaticDataEdge>,
-  nodes: Array<StaticData>,
+  edges: Array<SkillsEdge>,
+  nodes: Array<Skills>,
   pageInfo: PageInfo,
   distinct: Array<Scalars['String']>,
-  group: Array<StaticDataGroupConnection>,
+  group: Array<SkillsGroupConnection>,
 };
 
 
-export type StaticDataConnectionDistinctArgs = {
-  field: StaticDataFieldsEnum
+export type SkillsConnectionDistinctArgs = {
+  field: SkillsFieldsEnum
 };
 
 
-export type StaticDataConnectionGroupArgs = {
+export type SkillsConnectionGroupArgs = {
   skip?: Maybe<Scalars['Int']>,
   limit?: Maybe<Scalars['Int']>,
-  field: StaticDataFieldsEnum
+  field: SkillsFieldsEnum
 };
 
-export type StaticDataData = {
-  config?: Maybe<StaticDataDataConfig>,
-  meta?: Maybe<StaticDataDataMeta>,
-  headerConfig?: Maybe<StaticDataDataHeaderConfig>,
-  aboutMe?: Maybe<StaticDataDataAboutMe>,
+export type SkillsData = {
+  mobile?: Maybe<Array<Maybe<SkillsDataMobile>>>,
+  desktop?: Maybe<Array<Maybe<SkillsDataDesktop>>>,
 };
 
-export type StaticDataDataAboutMe = {
-  heading?: Maybe<Scalars['String']>,
-  body?: Maybe<Array<Maybe<Scalars['String']>>>,
+export type SkillsDataDesktop = {
+  text?: Maybe<Scalars['String']>,
+  position?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  direction?: Maybe<Scalars['String']>,
 };
 
-export type StaticDataDataAboutMeFilterInput = {
-  heading?: Maybe<StringQueryOperatorInput>,
-  body?: Maybe<StringQueryOperatorInput>,
+export type SkillsDataDesktopFilterInput = {
+  text?: Maybe<StringQueryOperatorInput>,
+  position?: Maybe<IntQueryOperatorInput>,
+  direction?: Maybe<StringQueryOperatorInput>,
 };
 
-export type StaticDataDataConfig = {
-  gridLines?: Maybe<Array<Maybe<Scalars['Int']>>>,
-  pageLoadTimeout?: Maybe<Scalars['Int']>,
-  splashScreenDebug?: Maybe<Scalars['Boolean']>,
-  splashScreenTimeout?: Maybe<Scalars['Int']>,
-  transportDuration?: Maybe<Scalars['Int']>,
-  workItemsAmount?: Maybe<Scalars['Int']>,
-  homeBottom?: Maybe<Scalars['Int']>,
-  skillsTop?: Maybe<Scalars['Int']>,
-  mobileBreakpoint?: Maybe<Scalars['Int']>,
-  windowHeightConstant?: Maybe<Scalars['Int']>,
-  scrollDebug?: Maybe<Scalars['Boolean']>,
+export type SkillsDataDesktopFilterListInput = {
+  elemMatch?: Maybe<SkillsDataDesktopFilterInput>,
 };
 
-export type StaticDataDataConfigFilterInput = {
-  gridLines?: Maybe<IntQueryOperatorInput>,
-  pageLoadTimeout?: Maybe<IntQueryOperatorInput>,
-  splashScreenDebug?: Maybe<BooleanQueryOperatorInput>,
-  splashScreenTimeout?: Maybe<IntQueryOperatorInput>,
-  transportDuration?: Maybe<IntQueryOperatorInput>,
-  workItemsAmount?: Maybe<IntQueryOperatorInput>,
-  homeBottom?: Maybe<IntQueryOperatorInput>,
-  skillsTop?: Maybe<IntQueryOperatorInput>,
-  mobileBreakpoint?: Maybe<IntQueryOperatorInput>,
-  windowHeightConstant?: Maybe<IntQueryOperatorInput>,
-  scrollDebug?: Maybe<BooleanQueryOperatorInput>,
+export type SkillsDataFilterInput = {
+  mobile?: Maybe<SkillsDataMobileFilterListInput>,
+  desktop?: Maybe<SkillsDataDesktopFilterListInput>,
 };
 
-export type StaticDataDataFilterInput = {
-  config?: Maybe<StaticDataDataConfigFilterInput>,
-  meta?: Maybe<StaticDataDataMetaFilterInput>,
-  headerConfig?: Maybe<StaticDataDataHeaderConfigFilterInput>,
-  aboutMe?: Maybe<StaticDataDataAboutMeFilterInput>,
+export type SkillsDataMobile = {
+  text?: Maybe<Scalars['String']>,
+  position?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  direction?: Maybe<Scalars['String']>,
 };
 
-export type StaticDataDataHeaderConfig = {
-  triangles?: Maybe<Array<Maybe<StaticDataDataHeaderConfigTriangles>>>,
+export type SkillsDataMobileFilterInput = {
+  text?: Maybe<StringQueryOperatorInput>,
+  position?: Maybe<IntQueryOperatorInput>,
+  direction?: Maybe<StringQueryOperatorInput>,
 };
 
-export type StaticDataDataHeaderConfigFilterInput = {
-  triangles?: Maybe<StaticDataDataHeaderConfigTrianglesFilterListInput>,
+export type SkillsDataMobileFilterListInput = {
+  elemMatch?: Maybe<SkillsDataMobileFilterInput>,
 };
 
-export type StaticDataDataHeaderConfigTriangles = {
-  id?: Maybe<Scalars['String']>,
-  color?: Maybe<Scalars['String']>,
-  size?: Maybe<Scalars['String']>,
-  plx?: Maybe<Array<Maybe<Scalars['Int']>>>,
-  start?: Maybe<Scalars['Int']>,
-  end?: Maybe<Scalars['Int']>,
+export type SkillsDesktop = {
+  text?: Maybe<Scalars['String']>,
+  position?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  direction?: Maybe<Scalars['String']>,
 };
 
-export type StaticDataDataHeaderConfigTrianglesFilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  color?: Maybe<StringQueryOperatorInput>,
-  size?: Maybe<StringQueryOperatorInput>,
-  plx?: Maybe<IntQueryOperatorInput>,
-  start?: Maybe<IntQueryOperatorInput>,
-  end?: Maybe<IntQueryOperatorInput>,
+export type SkillsDesktopFilterInput = {
+  text?: Maybe<StringQueryOperatorInput>,
+  position?: Maybe<IntQueryOperatorInput>,
+  direction?: Maybe<StringQueryOperatorInput>,
 };
 
-export type StaticDataDataHeaderConfigTrianglesFilterListInput = {
-  elemMatch?: Maybe<StaticDataDataHeaderConfigTrianglesFilterInput>,
+export type SkillsDesktopFilterListInput = {
+  elemMatch?: Maybe<SkillsDesktopFilterInput>,
 };
 
-export type StaticDataDataMeta = {
-  role?: Maybe<Scalars['String']>,
-  name?: Maybe<Scalars['String']>,
-  email?: Maybe<Scalars['String']>,
+export type SkillsEdge = {
+  next?: Maybe<Skills>,
+  node: Skills,
+  previous?: Maybe<Skills>,
 };
 
-export type StaticDataDataMetaFilterInput = {
-  role?: Maybe<StringQueryOperatorInput>,
-  name?: Maybe<StringQueryOperatorInput>,
-  email?: Maybe<StringQueryOperatorInput>,
-};
-
-export type StaticDataEdge = {
-  next?: Maybe<StaticData>,
-  node: StaticData,
-  previous?: Maybe<StaticData>,
-};
-
-export type StaticDataFieldsEnum = 
+export type SkillsFieldsEnum = 
   'id' |
   'parent___id' |
   'parent___parent___id' |
@@ -2561,120 +4048,66 @@ export type StaticDataFieldsEnum =
   'internal___mediaType' |
   'internal___owner' |
   'internal___type' |
-  'config___gridLines' |
-  'config___pageLoadTimeout' |
-  'config___splashScreenDebug' |
-  'config___splashScreenTimeout' |
-  'config___transportDuration' |
-  'config___workItemsAmount' |
-  'config___homeBottom' |
-  'config___skillsTop' |
-  'config___mobileBreakpoint' |
-  'config___windowHeightConstant' |
-  'config___scrollDebug' |
-  'meta___role' |
-  'meta___name' |
-  'meta___email' |
-  'headerConfig___triangles' |
-  'headerConfig___triangles___id' |
-  'headerConfig___triangles___color' |
-  'headerConfig___triangles___size' |
-  'headerConfig___triangles___plx' |
-  'headerConfig___triangles___start' |
-  'headerConfig___triangles___end' |
-  'aboutMe___heading' |
-  'aboutMe___body' |
-  'data___config___gridLines' |
-  'data___config___pageLoadTimeout' |
-  'data___config___splashScreenDebug' |
-  'data___config___splashScreenTimeout' |
-  'data___config___transportDuration' |
-  'data___config___workItemsAmount' |
-  'data___config___homeBottom' |
-  'data___config___skillsTop' |
-  'data___config___mobileBreakpoint' |
-  'data___config___windowHeightConstant' |
-  'data___config___scrollDebug' |
-  'data___meta___role' |
-  'data___meta___name' |
-  'data___meta___email' |
-  'data___headerConfig___triangles' |
-  'data___headerConfig___triangles___id' |
-  'data___headerConfig___triangles___color' |
-  'data___headerConfig___triangles___size' |
-  'data___headerConfig___triangles___plx' |
-  'data___headerConfig___triangles___start' |
-  'data___headerConfig___triangles___end' |
-  'data___aboutMe___heading' |
-  'data___aboutMe___body';
+  'mobile' |
+  'mobile___text' |
+  'mobile___position' |
+  'mobile___direction' |
+  'desktop' |
+  'desktop___text' |
+  'desktop___position' |
+  'desktop___direction' |
+  'data___mobile' |
+  'data___mobile___text' |
+  'data___mobile___position' |
+  'data___mobile___direction' |
+  'data___desktop' |
+  'data___desktop___text' |
+  'data___desktop___position' |
+  'data___desktop___direction';
 
-export type StaticDataFilterInput = {
+export type SkillsFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
   parent?: Maybe<NodeFilterInput>,
   children?: Maybe<NodeFilterListInput>,
   internal?: Maybe<InternalFilterInput>,
-  config?: Maybe<StaticDataConfigFilterInput>,
-  meta?: Maybe<StaticDataMetaFilterInput>,
-  headerConfig?: Maybe<StaticDataHeaderConfigFilterInput>,
-  aboutMe?: Maybe<StaticDataAboutMeFilterInput>,
-  data?: Maybe<StaticDataDataFilterInput>,
+  mobile?: Maybe<SkillsMobileFilterListInput>,
+  desktop?: Maybe<SkillsDesktopFilterListInput>,
+  data?: Maybe<SkillsDataFilterInput>,
 };
 
-export type StaticDataGroupConnection = {
+export type SkillsGroupConnection = {
   totalCount: Scalars['Int'],
-  edges: Array<StaticDataEdge>,
-  nodes: Array<StaticData>,
+  edges: Array<SkillsEdge>,
+  nodes: Array<Skills>,
   pageInfo: PageInfo,
   field: Scalars['String'],
   fieldValue?: Maybe<Scalars['String']>,
 };
 
-export type StaticDataHeaderConfig = {
-  triangles?: Maybe<Array<Maybe<StaticDataHeaderConfigTriangles>>>,
+export type SkillsMobile = {
+  text?: Maybe<Scalars['String']>,
+  position?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  direction?: Maybe<Scalars['String']>,
 };
 
-export type StaticDataHeaderConfigFilterInput = {
-  triangles?: Maybe<StaticDataHeaderConfigTrianglesFilterListInput>,
+export type SkillsMobileFilterInput = {
+  text?: Maybe<StringQueryOperatorInput>,
+  position?: Maybe<IntQueryOperatorInput>,
+  direction?: Maybe<StringQueryOperatorInput>,
 };
 
-export type StaticDataHeaderConfigTriangles = {
-  id?: Maybe<Scalars['String']>,
-  color?: Maybe<Scalars['String']>,
-  size?: Maybe<Scalars['String']>,
-  plx?: Maybe<Array<Maybe<Scalars['Int']>>>,
-  start?: Maybe<Scalars['Int']>,
-  end?: Maybe<Scalars['Int']>,
+export type SkillsMobileFilterListInput = {
+  elemMatch?: Maybe<SkillsMobileFilterInput>,
 };
 
-export type StaticDataHeaderConfigTrianglesFilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  color?: Maybe<StringQueryOperatorInput>,
-  size?: Maybe<StringQueryOperatorInput>,
-  plx?: Maybe<IntQueryOperatorInput>,
-  start?: Maybe<IntQueryOperatorInput>,
-  end?: Maybe<IntQueryOperatorInput>,
-};
-
-export type StaticDataHeaderConfigTrianglesFilterListInput = {
-  elemMatch?: Maybe<StaticDataHeaderConfigTrianglesFilterInput>,
-};
-
-export type StaticDataMeta = {
-  role?: Maybe<Scalars['String']>,
-  name?: Maybe<Scalars['String']>,
-  email?: Maybe<Scalars['String']>,
-};
-
-export type StaticDataMetaFilterInput = {
-  role?: Maybe<StringQueryOperatorInput>,
-  name?: Maybe<StringQueryOperatorInput>,
-  email?: Maybe<StringQueryOperatorInput>,
-};
-
-export type StaticDataSortInput = {
-  fields?: Maybe<Array<Maybe<StaticDataFieldsEnum>>>,
+export type SkillsSortInput = {
+  fields?: Maybe<Array<Maybe<SkillsFieldsEnum>>>,
   order?: Maybe<Array<Maybe<SortOrderEnum>>>,
 };
+
+export type SortOrderEnum = 
+  'ASC' |
+  'DESC';
 
 export type StringQueryOperatorInput = {
   eq?: Maybe<Scalars['String']>,
@@ -2684,6 +4117,46 @@ export type StringQueryOperatorInput = {
   regex?: Maybe<Scalars['String']>,
   glob?: Maybe<Scalars['String']>,
 };
+
+export type Unnamed_1_QueryVariables = {};
+
+
+export type Unnamed_1_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'gridLines'>> }> };
+
+export type Unnamed_2_QueryVariables = {};
+
+
+export type Unnamed_2_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site' | 'title' | 'titleTemplate' | 'description' | 'siteUrl' | 'language' | 'color' | 'twitter'>> }> };
+
+export type Unnamed_3_QueryVariables = {};
+
+
+export type Unnamed_3_Query = { configs: Maybe<{ recentWork: Maybe<{ workItemPlx: Maybe<{ image: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxImage, 'startValue'>>>>, info: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxInfo, 'startValue'>>>>, mobileInfo: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxMobileInfo, 'startValue'>>>> }> }> }> };
+
+export type Unnamed_4_QueryVariables = {};
+
+
+export type Unnamed_4_Query = { configs: Maybe<{ content: Maybe<{ home: Maybe<{ sections: Maybe<{ aboutMe: Maybe<Pick<ConfigsContentHomeSectionsAboutMe, 'heading' | 'body'>> }> }> }> }> };
+
+export type Unnamed_5_QueryVariables = {};
+
+
+export type Unnamed_5_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'name' | 'role'>>, headerConfig: Maybe<{ triangles: Maybe<Array<Maybe<Pick<ConfigsHeaderConfigTriangles, 'id' | 'color' | 'size' | 'plx' | 'start' | 'end'>>>> }>, config: Maybe<Pick<ConfigsConfig, 'gridLines'>> }> };
+
+export type Unnamed_6_QueryVariables = {};
+
+
+export type Unnamed_6_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'workItemsAmount'>>, content: Maybe<{ home: Maybe<{ sections: Maybe<{ recentWork: Maybe<Pick<ConfigsContentHomeSectionsRecentWork, 'heading'>> }> }> }> }>, projects: Maybe<Pick<Projects, 'id'>> };
+
+export type Unnamed_7_QueryVariables = {};
+
+
+export type Unnamed_7_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'splashScreenDebug'>> }> };
+
+export type Unnamed_8_QueryVariables = {};
+
+
+export type Unnamed_8_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

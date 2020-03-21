@@ -17,12 +17,18 @@ const AboutMe = ({
   setAboutTop,
   isMobile
 }: Props) => {
-  const { staticData } = useStaticQuery(graphql`
+  const { configs } = useStaticQuery(graphql`
     query {
-      staticData {
-        aboutMe {
-          heading
-          body
+      configs {
+        content {
+          home {
+            sections {
+              aboutMe {
+                heading
+                body
+              }
+            }
+          }
         }
       }
     }
@@ -59,7 +65,7 @@ const AboutMe = ({
 
   return (
     <AboutMeSection id="about-section">
-      <StyledHeading text={staticData.aboutMe.heading} />
+      <StyledHeading text={configs.content.home.sections.aboutMe.heading} />
       <StyledDotGrid
         sequence={dotGridA}
         index={dotGridIndex}
@@ -82,7 +88,7 @@ const AboutMe = ({
       >
         <ContentBox>
           { 
-            staticData.aboutMe.body.map((t, i) => (
+            configs.content.home.sections.aboutMe.body.map((t, i) => (
               <ContentText key={'about-p-' + i}>{t}</ContentText>
             )) 
           }

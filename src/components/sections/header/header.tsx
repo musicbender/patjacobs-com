@@ -7,7 +7,7 @@ import Triangle, { Props as TriangleProps } from '../../particles/triangle';
 import { dotGridA, dotGridB, dotGridC, dotGridD } from './dots';
 import { countLongestArray, hasWindow } from '../../../util/util';
 import { startSequence } from '../../../util/animation';
-import { Modes, TriangleSizes, ParticleColors, StaticData, StaticDataHeaderConfigTriangles } from '../../../../types';
+import { Modes, TriangleSizes, ParticleColors, Configs, ConfigsHeaderConfigTriangles } from '../../../../types';
 import {
   HomeHeader,
   DotGridWrapper,
@@ -23,7 +23,7 @@ import {
 } from './styles';
 
 type Props = {
-  staticData: StaticData,
+  configs: Configs,
 }
 
 type ReduxProps = {
@@ -78,7 +78,7 @@ class Header extends PureComponent<Props & ReduxProps, State> {
     this.setState(newState);
   }
 
-  getPlxData({ plx, start, end }: StaticDataHeaderConfigTriangles) {
+  getPlxData({ plx, start, end }: ConfigsHeaderConfigTriangles) {
     return [
       {
         start,
@@ -96,13 +96,13 @@ class Header extends PureComponent<Props & ReduxProps, State> {
   }
 
   renderTriangles() {
-    const { triangles } = this.props.staticData.headerConfig;
+    const { triangles } = this.props.configs.headerConfig;
     return triangles.map((tri, i: number) => (
       <TriangleParallax
         color={tri.color}
         size={tri.size}
         id={tri.id}
-        gridLines={this.props.staticData.config.gridLines}
+        gridLines={this.props.configs.config.gridLines}
         key={i + tri.id}
       >
         <Plx
@@ -131,8 +131,8 @@ class Header extends PureComponent<Props & ReduxProps, State> {
           <DotGridD sequence={dotGridD} index={this.state.dotGridIndex} />
         </DotGridWrapper>
         <TitleWrapper>
-          <Title>{this.props.staticData.meta.name}</Title>
-          <SubTitle>{this.props.staticData.meta.role}</SubTitle>
+          <Title>{this.props.configs.meta.name}</Title>
+          <SubTitle>{this.props.configs.meta.role}</SubTitle>
           <ColorDotRow splashOpen={this.props.splashOpen} forMobile />
         </TitleWrapper>
       </HomeHeader>
@@ -142,11 +142,11 @@ class Header extends PureComponent<Props & ReduxProps, State> {
 
 const ConnectedHeader = connect(mapStateToProps)(Header);
 
-export default (props: Omit<Props, 'staticData'>) => (
+export default (props: Omit<Props, 'configs'>) => (
   <StaticQuery
     query={graphql`
       query {
-        staticData {
+        configs {
           meta {
             name
             role
@@ -169,7 +169,7 @@ export default (props: Omit<Props, 'staticData'>) => (
     `}
     render={data => (
       <ConnectedHeader 
-        staticData={data.staticData}
+        configs={data.configs}
         {...props}
       />
     )}
