@@ -1952,23 +1952,7 @@ export type Projects = Node & {
   parent?: Maybe<Node>,
   children: Array<Node>,
   internal: Internal,
-  _0?: Maybe<Projects_0>,
-  _1?: Maybe<Projects_1>,
-  _2?: Maybe<Projects_2>,
-  _3?: Maybe<Projects_3>,
-  _4?: Maybe<Projects_4>,
-  _5?: Maybe<Projects_5>,
-  _6?: Maybe<Projects_6>,
-  _7?: Maybe<Projects_7>,
-  _8?: Maybe<Projects_8>,
-  _9?: Maybe<Projects_9>,
-  _10?: Maybe<Projects_10>,
-  _11?: Maybe<Projects_11>,
-  data?: Maybe<Array<Maybe<ProjectsData>>>,
-};
-
-export type Projects_0 = {
-  id?: Maybe<Scalars['String']>,
+  projectId?: Maybe<Scalars['String']>,
   title?: Maybe<Scalars['String']>,
   type?: Maybe<Scalars['String']>,
   imageDesktop?: Maybe<Scalars['String']>,
@@ -1977,488 +1961,7 @@ export type Projects_0 = {
   disabled?: Maybe<Scalars['Boolean']>,
   techList?: Maybe<Array<Maybe<Scalars['String']>>>,
   url?: Maybe<Scalars['String']>,
-  content?: Maybe<Array<Maybe<Projects_0Content>>>,
-};
-
-export type Projects_0Content = {
-  type?: Maybe<Scalars['String']>,
-  imgFile?: Maybe<Scalars['String']>,
-  caption?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-};
-
-export type Projects_0ContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  imgFile?: Maybe<StringQueryOperatorInput>,
-  caption?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_0ContentFilterListInput = {
-  elemMatch?: Maybe<Projects_0ContentFilterInput>,
-};
-
-export type Projects_0FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<Projects_0ContentFilterListInput>,
-};
-
-export type Projects_1 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  url?: Maybe<Scalars['String']>,
-};
-
-export type Projects_10 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  url?: Maybe<Scalars['String']>,
-  content?: Maybe<Array<Maybe<Projects_10Content>>>,
-};
-
-export type Projects_10Content = {
-  type?: Maybe<Scalars['String']>,
-  imgFile?: Maybe<Scalars['String']>,
-  caption?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-  p2?: Maybe<Scalars['String']>,
-};
-
-export type Projects_10ContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  imgFile?: Maybe<StringQueryOperatorInput>,
-  caption?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-  p2?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_10ContentFilterListInput = {
-  elemMatch?: Maybe<Projects_10ContentFilterInput>,
-};
-
-export type Projects_10FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<Projects_10ContentFilterListInput>,
-};
-
-export type Projects_11 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  url?: Maybe<Scalars['String']>,
-  content?: Maybe<Array<Maybe<Projects_11Content>>>,
-};
-
-export type Projects_11Content = {
-  type?: Maybe<Scalars['String']>,
-  imgFile?: Maybe<Scalars['String']>,
-  caption?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-};
-
-export type Projects_11ContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  imgFile?: Maybe<StringQueryOperatorInput>,
-  caption?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_11ContentFilterListInput = {
-  elemMatch?: Maybe<Projects_11ContentFilterInput>,
-};
-
-export type Projects_11FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<Projects_11ContentFilterListInput>,
-};
-
-export type Projects_1FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_2 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  url?: Maybe<Scalars['String']>,
-  content?: Maybe<Array<Maybe<Projects_2Content>>>,
-};
-
-export type Projects_2Content = {
-  type?: Maybe<Scalars['String']>,
-  imgFile?: Maybe<Scalars['String']>,
-  caption?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-};
-
-export type Projects_2ContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  imgFile?: Maybe<StringQueryOperatorInput>,
-  caption?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_2ContentFilterListInput = {
-  elemMatch?: Maybe<Projects_2ContentFilterInput>,
-};
-
-export type Projects_2FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<Projects_2ContentFilterListInput>,
-};
-
-export type Projects_3 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  url?: Maybe<Scalars['String']>,
-};
-
-export type Projects_3FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_4 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  url?: Maybe<Scalars['String']>,
-  content?: Maybe<Array<Maybe<Projects_4Content>>>,
-};
-
-export type Projects_4Content = {
-  type?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-  p2?: Maybe<Scalars['String']>,
-};
-
-export type Projects_4ContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-  p2?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_4ContentFilterListInput = {
-  elemMatch?: Maybe<Projects_4ContentFilterInput>,
-};
-
-export type Projects_4FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<Projects_4ContentFilterListInput>,
-};
-
-export type Projects_5 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  url?: Maybe<Scalars['String']>,
-  content?: Maybe<Array<Maybe<Projects_5Content>>>,
-};
-
-export type Projects_5Content = {
-  type?: Maybe<Scalars['String']>,
-  imgFile?: Maybe<Scalars['String']>,
-  caption?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-  p2?: Maybe<Scalars['String']>,
-};
-
-export type Projects_5ContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  imgFile?: Maybe<StringQueryOperatorInput>,
-  caption?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-  p2?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_5ContentFilterListInput = {
-  elemMatch?: Maybe<Projects_5ContentFilterInput>,
-};
-
-export type Projects_5FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<Projects_5ContentFilterListInput>,
-};
-
-export type Projects_6 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  url?: Maybe<Scalars['String']>,
-  content?: Maybe<Array<Maybe<Projects_6Content>>>,
-};
-
-export type Projects_6Content = {
-  type?: Maybe<Scalars['String']>,
-  imgFile?: Maybe<Scalars['String']>,
-  caption?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-  p2?: Maybe<Scalars['String']>,
-};
-
-export type Projects_6ContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  imgFile?: Maybe<StringQueryOperatorInput>,
-  caption?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-  p2?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_6ContentFilterListInput = {
-  elemMatch?: Maybe<Projects_6ContentFilterInput>,
-};
-
-export type Projects_6FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<Projects_6ContentFilterListInput>,
-};
-
-export type Projects_7 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  content?: Maybe<Array<Maybe<Projects_7Content>>>,
-};
-
-export type Projects_7Content = {
-  type?: Maybe<Scalars['String']>,
-  videoFile?: Maybe<Scalars['String']>,
-  caption?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-  p2?: Maybe<Scalars['String']>,
-  text?: Maybe<Scalars['String']>,
-};
-
-export type Projects_7ContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  videoFile?: Maybe<StringQueryOperatorInput>,
-  caption?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-  p2?: Maybe<StringQueryOperatorInput>,
-  text?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_7ContentFilterListInput = {
-  elemMatch?: Maybe<Projects_7ContentFilterInput>,
-};
-
-export type Projects_7FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<Projects_7ContentFilterListInput>,
-};
-
-export type Projects_8 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  content?: Maybe<Array<Maybe<Projects_8Content>>>,
-};
-
-export type Projects_8Content = {
-  type?: Maybe<Scalars['String']>,
-  videoFile?: Maybe<Scalars['String']>,
-  caption?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-  p2?: Maybe<Scalars['String']>,
-};
-
-export type Projects_8ContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  videoFile?: Maybe<StringQueryOperatorInput>,
-  caption?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-  p2?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_8ContentFilterListInput = {
-  elemMatch?: Maybe<Projects_8ContentFilterInput>,
-};
-
-export type Projects_8FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<Projects_8ContentFilterListInput>,
-};
-
-export type Projects_9 = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  content?: Maybe<Array<Maybe<Projects_9Content>>>,
-};
-
-export type Projects_9Content = {
-  type?: Maybe<Scalars['String']>,
-  videoFile?: Maybe<Scalars['String']>,
-  caption?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-  p2?: Maybe<Scalars['String']>,
-};
-
-export type Projects_9ContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  videoFile?: Maybe<StringQueryOperatorInput>,
-  caption?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-  p2?: Maybe<StringQueryOperatorInput>,
-};
-
-export type Projects_9ContentFilterListInput = {
-  elemMatch?: Maybe<Projects_9ContentFilterInput>,
-};
-
-export type Projects_9FilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<Projects_9ContentFilterListInput>,
+  content?: Maybe<Array<Maybe<ProjectsContent>>>,
 };
 
 export type ProjectsConnection = {
@@ -2482,20 +1985,7 @@ export type ProjectsConnectionGroupArgs = {
   field: ProjectsFieldsEnum
 };
 
-export type ProjectsData = {
-  id?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  url?: Maybe<Scalars['String']>,
-  content?: Maybe<Array<Maybe<ProjectsDataContent>>>,
-};
-
-export type ProjectsDataContent = {
+export type ProjectsContent = {
   type?: Maybe<Scalars['String']>,
   imgFile?: Maybe<Scalars['String']>,
   caption?: Maybe<Scalars['String']>,
@@ -2505,7 +1995,7 @@ export type ProjectsDataContent = {
   text?: Maybe<Scalars['String']>,
 };
 
-export type ProjectsDataContentFilterInput = {
+export type ProjectsContentFilterInput = {
   type?: Maybe<StringQueryOperatorInput>,
   imgFile?: Maybe<StringQueryOperatorInput>,
   caption?: Maybe<StringQueryOperatorInput>,
@@ -2515,25 +2005,8 @@ export type ProjectsDataContentFilterInput = {
   text?: Maybe<StringQueryOperatorInput>,
 };
 
-export type ProjectsDataContentFilterListInput = {
-  elemMatch?: Maybe<ProjectsDataContentFilterInput>,
-};
-
-export type ProjectsDataFilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<ProjectsDataContentFilterListInput>,
-};
-
-export type ProjectsDataFilterListInput = {
-  elemMatch?: Maybe<ProjectsDataFilterInput>,
+export type ProjectsContentFilterListInput = {
+  elemMatch?: Maybe<ProjectsContentFilterInput>,
 };
 
 export type ProjectsEdge = {
@@ -2629,204 +2102,39 @@ export type ProjectsFieldsEnum =
   'internal___mediaType' |
   'internal___owner' |
   'internal___type' |
-  '_0___id' |
-  '_0___title' |
-  '_0___type' |
-  '_0___imageDesktop' |
-  '_0___imageMobile' |
-  '_0___description' |
-  '_0___disabled' |
-  '_0___techList' |
-  '_0___url' |
-  '_0___content' |
-  '_0___content___type' |
-  '_0___content___imgFile' |
-  '_0___content___caption' |
-  '_0___content___p1' |
-  '_1___id' |
-  '_1___title' |
-  '_1___type' |
-  '_1___imageDesktop' |
-  '_1___imageMobile' |
-  '_1___description' |
-  '_1___disabled' |
-  '_1___techList' |
-  '_1___url' |
-  '_2___id' |
-  '_2___title' |
-  '_2___type' |
-  '_2___imageDesktop' |
-  '_2___imageMobile' |
-  '_2___description' |
-  '_2___disabled' |
-  '_2___techList' |
-  '_2___url' |
-  '_2___content' |
-  '_2___content___type' |
-  '_2___content___imgFile' |
-  '_2___content___caption' |
-  '_2___content___p1' |
-  '_3___id' |
-  '_3___title' |
-  '_3___type' |
-  '_3___imageDesktop' |
-  '_3___imageMobile' |
-  '_3___description' |
-  '_3___disabled' |
-  '_3___techList' |
-  '_3___url' |
-  '_4___id' |
-  '_4___title' |
-  '_4___type' |
-  '_4___imageDesktop' |
-  '_4___imageMobile' |
-  '_4___description' |
-  '_4___disabled' |
-  '_4___techList' |
-  '_4___url' |
-  '_4___content' |
-  '_4___content___type' |
-  '_4___content___p1' |
-  '_4___content___p2' |
-  '_5___id' |
-  '_5___title' |
-  '_5___type' |
-  '_5___imageDesktop' |
-  '_5___imageMobile' |
-  '_5___description' |
-  '_5___disabled' |
-  '_5___techList' |
-  '_5___url' |
-  '_5___content' |
-  '_5___content___type' |
-  '_5___content___imgFile' |
-  '_5___content___caption' |
-  '_5___content___p1' |
-  '_5___content___p2' |
-  '_6___id' |
-  '_6___title' |
-  '_6___type' |
-  '_6___imageDesktop' |
-  '_6___imageMobile' |
-  '_6___description' |
-  '_6___disabled' |
-  '_6___techList' |
-  '_6___url' |
-  '_6___content' |
-  '_6___content___type' |
-  '_6___content___imgFile' |
-  '_6___content___caption' |
-  '_6___content___p1' |
-  '_6___content___p2' |
-  '_7___id' |
-  '_7___title' |
-  '_7___type' |
-  '_7___imageDesktop' |
-  '_7___imageMobile' |
-  '_7___description' |
-  '_7___disabled' |
-  '_7___techList' |
-  '_7___content' |
-  '_7___content___type' |
-  '_7___content___videoFile' |
-  '_7___content___caption' |
-  '_7___content___p1' |
-  '_7___content___p2' |
-  '_7___content___text' |
-  '_8___id' |
-  '_8___title' |
-  '_8___type' |
-  '_8___imageDesktop' |
-  '_8___imageMobile' |
-  '_8___description' |
-  '_8___disabled' |
-  '_8___techList' |
-  '_8___content' |
-  '_8___content___type' |
-  '_8___content___videoFile' |
-  '_8___content___caption' |
-  '_8___content___p1' |
-  '_8___content___p2' |
-  '_9___id' |
-  '_9___title' |
-  '_9___type' |
-  '_9___imageDesktop' |
-  '_9___imageMobile' |
-  '_9___description' |
-  '_9___disabled' |
-  '_9___techList' |
-  '_9___content' |
-  '_9___content___type' |
-  '_9___content___videoFile' |
-  '_9___content___caption' |
-  '_9___content___p1' |
-  '_9___content___p2' |
-  '_10___id' |
-  '_10___title' |
-  '_10___type' |
-  '_10___imageDesktop' |
-  '_10___imageMobile' |
-  '_10___description' |
-  '_10___disabled' |
-  '_10___techList' |
-  '_10___url' |
-  '_10___content' |
-  '_10___content___type' |
-  '_10___content___imgFile' |
-  '_10___content___caption' |
-  '_10___content___p1' |
-  '_10___content___p2' |
-  '_11___id' |
-  '_11___title' |
-  '_11___type' |
-  '_11___imageDesktop' |
-  '_11___imageMobile' |
-  '_11___description' |
-  '_11___disabled' |
-  '_11___techList' |
-  '_11___url' |
-  '_11___content' |
-  '_11___content___type' |
-  '_11___content___imgFile' |
-  '_11___content___caption' |
-  '_11___content___p1' |
-  'data' |
-  'data___id' |
-  'data___title' |
-  'data___type' |
-  'data___imageDesktop' |
-  'data___imageMobile' |
-  'data___description' |
-  'data___disabled' |
-  'data___techList' |
-  'data___url' |
-  'data___content' |
-  'data___content___type' |
-  'data___content___imgFile' |
-  'data___content___caption' |
-  'data___content___p1' |
-  'data___content___p2' |
-  'data___content___videoFile' |
-  'data___content___text';
+  'projectId' |
+  'title' |
+  'type' |
+  'imageDesktop' |
+  'imageMobile' |
+  'description' |
+  'disabled' |
+  'techList' |
+  'url' |
+  'content' |
+  'content___type' |
+  'content___imgFile' |
+  'content___caption' |
+  'content___p1' |
+  'content___p2' |
+  'content___videoFile' |
+  'content___text';
 
 export type ProjectsFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
   parent?: Maybe<NodeFilterInput>,
   children?: Maybe<NodeFilterListInput>,
   internal?: Maybe<InternalFilterInput>,
-  _0?: Maybe<Projects_0FilterInput>,
-  _1?: Maybe<Projects_1FilterInput>,
-  _2?: Maybe<Projects_2FilterInput>,
-  _3?: Maybe<Projects_3FilterInput>,
-  _4?: Maybe<Projects_4FilterInput>,
-  _5?: Maybe<Projects_5FilterInput>,
-  _6?: Maybe<Projects_6FilterInput>,
-  _7?: Maybe<Projects_7FilterInput>,
-  _8?: Maybe<Projects_8FilterInput>,
-  _9?: Maybe<Projects_9FilterInput>,
-  _10?: Maybe<Projects_10FilterInput>,
-  _11?: Maybe<Projects_11FilterInput>,
-  data?: Maybe<ProjectsDataFilterListInput>,
+  projectId?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<ProjectsContentFilterListInput>,
 };
 
 export type ProjectsGroupConnection = {
@@ -3018,8 +2326,7 @@ export type QuerySkillsArgs = {
   children?: Maybe<NodeFilterListInput>,
   internal?: Maybe<InternalFilterInput>,
   mobile?: Maybe<SkillsMobileFilterListInput>,
-  desktop?: Maybe<SkillsDesktopFilterListInput>,
-  data?: Maybe<SkillsDataFilterInput>
+  desktop?: Maybe<SkillsDesktopFilterListInput>
 };
 
 
@@ -3036,19 +2343,16 @@ export type QueryProjectsArgs = {
   parent?: Maybe<NodeFilterInput>,
   children?: Maybe<NodeFilterListInput>,
   internal?: Maybe<InternalFilterInput>,
-  _0?: Maybe<Projects_0FilterInput>,
-  _1?: Maybe<Projects_1FilterInput>,
-  _2?: Maybe<Projects_2FilterInput>,
-  _3?: Maybe<Projects_3FilterInput>,
-  _4?: Maybe<Projects_4FilterInput>,
-  _5?: Maybe<Projects_5FilterInput>,
-  _6?: Maybe<Projects_6FilterInput>,
-  _7?: Maybe<Projects_7FilterInput>,
-  _8?: Maybe<Projects_8FilterInput>,
-  _9?: Maybe<Projects_9FilterInput>,
-  _10?: Maybe<Projects_10FilterInput>,
-  _11?: Maybe<Projects_11FilterInput>,
-  data?: Maybe<ProjectsDataFilterListInput>
+  projectId?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<StringQueryOperatorInput>,
+  imageMobile?: Maybe<StringQueryOperatorInput>,
+  description?: Maybe<StringQueryOperatorInput>,
+  disabled?: Maybe<BooleanQueryOperatorInput>,
+  techList?: Maybe<StringQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  content?: Maybe<ProjectsContentFilterListInput>
 };
 
 
@@ -3873,7 +3177,6 @@ export type Skills = Node & {
   internal: Internal,
   mobile?: Maybe<Array<Maybe<SkillsMobile>>>,
   desktop?: Maybe<Array<Maybe<SkillsDesktop>>>,
-  data?: Maybe<SkillsData>,
 };
 
 export type SkillsConnection = {
@@ -3895,48 +3198,6 @@ export type SkillsConnectionGroupArgs = {
   skip?: Maybe<Scalars['Int']>,
   limit?: Maybe<Scalars['Int']>,
   field: SkillsFieldsEnum
-};
-
-export type SkillsData = {
-  mobile?: Maybe<Array<Maybe<SkillsDataMobile>>>,
-  desktop?: Maybe<Array<Maybe<SkillsDataDesktop>>>,
-};
-
-export type SkillsDataDesktop = {
-  text?: Maybe<Scalars['String']>,
-  position?: Maybe<Array<Maybe<Scalars['Int']>>>,
-  direction?: Maybe<Scalars['String']>,
-};
-
-export type SkillsDataDesktopFilterInput = {
-  text?: Maybe<StringQueryOperatorInput>,
-  position?: Maybe<IntQueryOperatorInput>,
-  direction?: Maybe<StringQueryOperatorInput>,
-};
-
-export type SkillsDataDesktopFilterListInput = {
-  elemMatch?: Maybe<SkillsDataDesktopFilterInput>,
-};
-
-export type SkillsDataFilterInput = {
-  mobile?: Maybe<SkillsDataMobileFilterListInput>,
-  desktop?: Maybe<SkillsDataDesktopFilterListInput>,
-};
-
-export type SkillsDataMobile = {
-  text?: Maybe<Scalars['String']>,
-  position?: Maybe<Array<Maybe<Scalars['Int']>>>,
-  direction?: Maybe<Scalars['String']>,
-};
-
-export type SkillsDataMobileFilterInput = {
-  text?: Maybe<StringQueryOperatorInput>,
-  position?: Maybe<IntQueryOperatorInput>,
-  direction?: Maybe<StringQueryOperatorInput>,
-};
-
-export type SkillsDataMobileFilterListInput = {
-  elemMatch?: Maybe<SkillsDataMobileFilterInput>,
 };
 
 export type SkillsDesktop = {
@@ -4055,15 +3316,7 @@ export type SkillsFieldsEnum =
   'desktop' |
   'desktop___text' |
   'desktop___position' |
-  'desktop___direction' |
-  'data___mobile' |
-  'data___mobile___text' |
-  'data___mobile___position' |
-  'data___mobile___direction' |
-  'data___desktop' |
-  'data___desktop___text' |
-  'data___desktop___position' |
-  'data___desktop___direction';
+  'desktop___direction';
 
 export type SkillsFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
@@ -4072,7 +3325,6 @@ export type SkillsFilterInput = {
   internal?: Maybe<InternalFilterInput>,
   mobile?: Maybe<SkillsMobileFilterListInput>,
   desktop?: Maybe<SkillsDesktopFilterListInput>,
-  data?: Maybe<SkillsDataFilterInput>,
 };
 
 export type SkillsGroupConnection = {

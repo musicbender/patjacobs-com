@@ -4,7 +4,7 @@ module.exports = {
     title: `Pat Jacobs | Web Engineer`,
     titleTemplate: `%s | Pat Jacobs | Web Engineer`,
     description: `Portolfio site for Pat Jacobs, Full-stack Web Engineer`,
-    siteUrl: `https://www.patjacobs.io`,
+    siteUrl: `https://www.patjacobs.com`,
     language: `en`,
     color: `#1e1e1e`,
     twitter: 'jatpacobs',
