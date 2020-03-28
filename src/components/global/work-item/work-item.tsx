@@ -1,7 +1,8 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import Plx from 'react-plx';
 import { hasWindow } from '../../../util/util';
-import { WorkItemWrapper, ImageOutterWrapper, InfoOutterWrapper, StyledWorkItemInfo, ImageParallax, InfoParallax, InfoParallaxInner, InfoInnerWrapper, ImageParallaxInner, ImageInnerWrapper, WorkImage, ImageFilter, ImageCover } from './styles';
+import { WorkItemWrapper, ImageOutterWrapper, InfoOutterWrapper, StyledWorkItemInfo, InfoParallaxInner, InfoInnerWrapper, ImageParallaxInner, ImageInnerWrapper, WorkImage, ImageFilter, ImageCover } from './styles';
 
 type Props = {
   item: any,
@@ -63,10 +64,10 @@ const WorkItem = ({
 
   const renderImageSection = () => {
     return configs.recentWork.workItemPlx.image.map((seg, i) => (
-      <ImageParallax
-        index={i}
-        parallaxData={getPlxData(seg, i)}
+      <Plx
+        parallaxData={getPlxData(seg)}
         disabled={!onClient}
+        className={`parallax index-${i}`}
         key={`${i}` + item.title + 'image' + JSON.stringify(seg)}
       >
         <ImageParallaxInner index={i}>
@@ -76,7 +77,7 @@ const WorkItem = ({
             <ImageCover isStopped={isStopped} />
           </ImageInnerWrapper>
         </ImageParallaxInner>
-      </ImageParallax>
+      </Plx>
     ));
   }
 
@@ -84,13 +85,12 @@ const WorkItem = ({
     return configs.recentWork.workItemPlx.info.map((seg, i) => {
       const plxSeg = isMobile ? configs.recentWork.workItemPlx.mobileInfo[i] : seg;
       return (
-        <InfoParallax
-          index={i}
-          parallaxData={getPlxData(plxSeg, i)}
+        <Plx
+          parallaxData={getPlxData(plxSeg)}
           onPlxStart={onClient ? handleWorkStops(index, false) : null}
           onPlxEnd={onClient ? handleWorkStops(index, true) : null}
           disabled={!onClient}
-          isStopped={isStopped}
+          className={`parallax index-${i}`}
           key={`${i}` + item.label + 'info' + JSON.stringify(seg)}
         >
           <InfoParallaxInner>
@@ -105,17 +105,17 @@ const WorkItem = ({
               />
             </InfoInnerWrapper>
           </InfoParallaxInner>
-        </InfoParallax>
+        </Plx>
       );
     });
   }
 
   return (
     <WorkItemWrapper isStopped={isStopped}>
-      <ImageOutterWrapper>
+      <ImageOutterWrapper isStopped={isStopped}>
         {!isMobile && renderImageSection()}
       </ImageOutterWrapper>
-      <InfoOutterWrapper>
+      <InfoOutterWrapper isStopped={isStopped}>
         {renderInfoSection()}
         <StyledWorkItemInfo
           title={item.title}

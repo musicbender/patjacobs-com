@@ -1,22 +1,39 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Plx from 'react-plx';
-import DotGrid from '../_particles/dot-grid';
-import Triangle from '../_particles/triangle';
-import { particleData } from './config.json';
+import DotGrid from '../../particles/dot-grid';
+import Triangle from '../../particles/triangle';
 import dotGrids from './dots';
-import { hasWindow } from '../../util/util';
-import cn from 'classnames/bind';
-import style from './particles-styles.ts';
-const cx = cn.bind(style);
+import { hasWindow } from '../../../util/util';
+import { RecentWorkParticle } from './styles';
+import { ConfigsRecentWork, Query } from '../../../../types';
+import { useStaticQuery, graphql } from 'gatsby';
 
 type Props = {
   isMobile?: boolean,
 }
 
 const Particles = ({ 
-  isMobile = false 
+  isMobile = false,
 }: Props) => {
+  const { configs }: Query = useStaticQuery(graphql`
+    query {
+      configs {
+        recentWork {
+          particleData {
+            name
+            type
+            color
+            size
+            plx
+          }
+        }
+        config {
+          gridLines
+        }
+      }
+    }
+  `);
+
   const getPlxData = (values) => [
     {
       start: 'self',
@@ -38,30 +55,26 @@ const Particles = ({
       case 'triangle':
         return <Triangle {...params} />;
       case 'dots':
-        return <DotGrid classNames={cx(style[name])} sequence={dotGrids[name]} />;
+        return <DotGrid sequence={dotGrids[name]} />;
     }
   }
 
-  return particleData.map((p, i) => {
+  return configs.recentWork.particleData.map((p, i) => {
     return (
-      <div
-        className={cx(style.particle, style[p.name])}
+      <RecentWorkParticle
+        particleID={p.name}
+        gridLines={configs.config.gridLines}
         key={'work-particle' + i + p.name}
       >
         <Plx
-          className={cx(style.plxInner)}
           parallaxData={getPlxData(p.plx)}
           disabled={!hasWindow() || isMobile}
         >
           {getParticle(p)}
         </Plx>
-      </div>
+      </RecentWorkParticle>
     );
   });
-}
-
-Particles.propTypes = {
-  isMobile: PropTypes.bool
 }
 
 export default Particles;

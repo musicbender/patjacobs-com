@@ -38,7 +38,7 @@ export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
 
 export const Title = styled.h5`
   margin: 0 0 1em;
-  font-family: ${props => props.theme.font.futura};
+  font-family: ${props => props.theme.fonts.futura};
   font-size: 1rem;
   font-weight: 200;
   text-transform: uppercase;
@@ -50,7 +50,7 @@ export const Title = styled.h5`
 
 export const Description = styled.p`
   margin: 0 0 1.5em;
-  font-family: ${props => props.theme.font.inconsolata};
+  font-family: ${props => props.theme.fonts.inconsolata};
   font-size: 1rem;
   color: inherit;
   opacity: 0.6;

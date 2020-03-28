@@ -6,14 +6,13 @@ import update from 'immutability-helper';
 import Particles from './particles';
 import Heading from '../../global/heading';
 import WorkItem from '../../global/work-item/work-item';
-import { filterProjectData } from '../../../util/data';
 import { throttle } from '../../../util/util';
 import { setRecentWorkTop } from '../../../actions/global';
 import { RecentWorkWrapper, ParentWrapper, WorkItemsWrapper } from './styles';
 
 type Props = {
-  configs: any, 
-  projects: any,
+  configs?: any, 
+  projects?: any,
 }
 
 type ReduxProps = {
@@ -42,13 +41,13 @@ const mapDispatchToProps = dispatch => {
 }
 
 class RecentWork extends PureComponent<Props & ReduxProps, State> {
-  workData: any;
   defaultWorkStops: boolean[];
 
   constructor(props: Props & ReduxProps) {
     super(props);
-    this.workData = filterProjectData('work', props.configs.projects);
-    this.defaultWorkStops = this.workData.map(w => false);
+    console.log(props);
+    
+    this.defaultWorkStops = props.projects.map(() => false);
     this.handleResize = throttle(this.handleResize.bind(this), 100);
     this.handleWorkStops = this.handleWorkStops.bind(this);
     this.state = {
@@ -108,20 +107,17 @@ class RecentWork extends PureComponent<Props & ReduxProps, State> {
 
   renderWorkItems() {
     return this.props.projects.map((item, i: number) => {
-      console.log('item:', item);
-      
-      return null;
-      // return i < this.props.configs.config.workItemsAmount && (
-      //   <WorkItem
-      //     item={item}
-      //     index={i}
-      //     isStopped={this.state.workStops[i]}
-      //     handleWorkStops={this.handleWorkStops}
-      //     baseTop={this.props.recentWorkTop}
-      //     isMobile={this.props.isMobile}
-      //     key={item.title + `${(i * 7)}`}
-      //   />
-      // );
+      return i < this.props.configs.config.workItemsAmount && (
+        <WorkItem
+          item={item}
+          index={i}
+          isStopped={this.state.workStops[i]}
+          handleWorkStops={this.handleWorkStops}
+          baseTop={this.props.recentWorkTop}
+          isMobile={this.props.isMobile}
+          key={item.title + `${(i * 7)}`}
+        />
+      );
     });
   }
 
@@ -160,25 +156,24 @@ export default (props: Omit<Props, 'configs'>) => (
             }
           }
         }
-        projects {
-          id
+        allProjects(limit: 5, filter: {type: {eq: "work"}, disabled: {eq: false}}) {
+          nodes {
+            type
+            title
+            imageDesktop
+            imageMobile
+            description
+            url
+          }
         }
       }
     `}
     render={data => (
       <ConnectedRecentWork 
         configs={data.configs} 
-        projects={data.projects}
+        projects={data.allProjects.nodes}
         {...props} 
       />
     )}
   />
 );
-
-// type
-// title
-// imageDesktop
-// imageMobile
-// description
-// url
-// disabled

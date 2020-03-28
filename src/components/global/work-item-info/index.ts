@@ -1,1 +1,1 @@
-export { default } from './work-item-info';
+export { default, Props as WorkItemInfoProps } from './work-item-info';

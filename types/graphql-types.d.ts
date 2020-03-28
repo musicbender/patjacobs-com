@@ -3398,17 +3398,22 @@ export type Unnamed_5_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, '
 export type Unnamed_6_QueryVariables = {};
 
 
-export type Unnamed_6_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'workItemsAmount'>>, content: Maybe<{ home: Maybe<{ sections: Maybe<{ recentWork: Maybe<Pick<ConfigsContentHomeSectionsRecentWork, 'heading'>> }> }> }> }>, projects: Maybe<Pick<Projects, 'id'>> };
+export type Unnamed_6_Query = { configs: Maybe<{ recentWork: Maybe<{ particleData: Maybe<Array<Maybe<Pick<ConfigsRecentWorkParticleData, 'name' | 'type' | 'color' | 'size' | 'plx'>>>> }>, config: Maybe<Pick<ConfigsConfig, 'gridLines'>> }> };
 
 export type Unnamed_7_QueryVariables = {};
 
 
-export type Unnamed_7_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'splashScreenDebug'>> }> };
+export type Unnamed_7_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'workItemsAmount'>>, content: Maybe<{ home: Maybe<{ sections: Maybe<{ recentWork: Maybe<Pick<ConfigsContentHomeSectionsRecentWork, 'heading'>> }> }> }> }>, allProjects: { nodes: Array<Pick<Projects, 'type' | 'title' | 'imageDesktop' | 'imageMobile' | 'description' | 'url'>> } };
 
 export type Unnamed_8_QueryVariables = {};
 
 
-export type Unnamed_8_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
+export type Unnamed_8_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'splashScreenDebug'>> }> };
+
+export type Unnamed_9_QueryVariables = {};
+
+
+export type Unnamed_9_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

@@ -1,14 +1,15 @@
 import React from 'react';
 import { ItemInfoWrapper, Title, Description, StyledButton } from './styles';
 
-type Props = {
+export type Props = {
   title: string,
   description?: string,
   isStopped: boolean,
   isParallax: boolean,
   isMobile: boolean,
   buttonUrl?: string,
-  buttonText?: string
+  buttonText?: string,
+  className?: string
 }
 
 const ItemInfo = ({
@@ -19,6 +20,7 @@ const ItemInfo = ({
   isMobile = false,
   buttonUrl,
   buttonText = 'view project',
+  className
 }) => {
   const handleParentClick = () => {
       // TODO: change to js routing link when case study pages are built
@@ -26,7 +28,11 @@ const ItemInfo = ({
   }
 
   return (
-    <ItemInfoWrapper stopped={isStopped} onClick={isMobile ? handleParentClick : null}>
+    <ItemInfoWrapper 
+      stopped={isStopped} 
+      onClick={isMobile ? handleParentClick : null} 
+      className={className}
+    >
       <Title>{title}</Title>
       <Description>{description}</Description>
       {

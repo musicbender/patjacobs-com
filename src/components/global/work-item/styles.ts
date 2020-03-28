@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-import Plx from 'react-plx';
-import WorkItemInfo from '../work-item-info';
+import WorkItemInfo, { WorkItemInfoProps } from '../work-item-info';
 import { media } from '../../../styles/breakpoints';
 
 type WorkItemWrapperProps = {
@@ -8,14 +7,14 @@ type WorkItemWrapperProps = {
 }
 
 type ParallaxProps = {
-  index: number,
+  index?: number,
   isStopped?: boolean,
 }
 
-type StyledWorkItemInfoProps = {
-  isStopped?: boolean,
-  isParallax?: boolean,
-}
+// type StyledWorkItemInfoProps = {
+//   isStopped?: boolean,
+//   isParallax?: boolean,
+// }
 
 type ImageProps = {
   index: number,
@@ -36,7 +35,7 @@ export const WorkItemWrapper = styled('div')<WorkItemWrapperProps>`
   `}
 `;
 
-export const ImageOutterWrapper = styled.div`
+export const ImageOutterWrapper = styled('div')<ParallaxProps>`
   display: none;
   position: relative;
   width: 59.52%;
@@ -44,19 +43,18 @@ export const ImageOutterWrapper = styled.div`
   ${media.tablet`
     display: block;
   `}
-`;
-
-export const ImageParallax = styled(Plx)<ParallaxProps>`
-  position: absolute;
-  height: 100%;
-  ${props => props.index === 0 && css`
-    left: 0;
-    width: ${`calc(${props.theme.gridSizes.m}% * 4)`};
-  `}
-  ${props => props.index === 1 && css`
-    left: ${`calc(${props.theme.gridSizes.m}% * 4)`};
-    width: ${`calc(${props.theme.gridSizes.s}% * 4)`};
-  `}
+  > .parallax {
+    position: absolute;
+    height: 100%;
+    &.index-0 {
+      left: 0;
+      width: ${props => `calc(${props.theme.gridSizes.m}% * 4)`};
+    }
+    &.index-1 {
+      left: ${props => `calc(${props.theme.gridSizes.m}% * 4)`};
+      width: ${props => `calc(${props.theme.gridSizes.s}% * 4)`};
+    }
+  }
 `;
 
 export const ImageParallaxInner = styled('div')<ParallaxProps>`
@@ -121,7 +119,25 @@ export const ImageCover = styled('div')<ImageCoverProps>`
   `}
 `;
 
-export const InfoOutterWrapper = styled.div`
+export const StyledWorkItemInfo = styled(WorkItemInfo)`
+  ${props => !props.isParallax && css`
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    ${media.tablet`
+      left: calc(17% * 4);
+      top: auto;
+    `}
+  `}
+  ${props => props.isParallax && props.isStopped && css`
+    visibility: hidden;
+  `}
+  ${props => !props.isParallax && props.isStopped && css`
+    visibility: visible;
+  `}
+`;
+
+export const InfoOutterWrapper = styled('div')<ParallaxProps>`
   position: absolute;
   top: 0;
   left: 0;
@@ -131,51 +147,41 @@ export const InfoOutterWrapper = styled.div`
     top: 6em;
     width: 59.52%;
   `}
-`;
-
-export const StyledWorkItemInfo = styled(WorkItemInfo)<StyledWorkItemInfoProps>`
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  ${media.tablet`
-    left: calc(17% * 4);
-    top: auto;
-  `}
-  ${props => props.isParallax && props.isStopped && css`
-    visibility: visible;
-  `}
-`;
-
-export const InfoParallax = styled(Plx)<ParallaxProps>`
-  position: absolute;
-  ${StyledWorkItemInfo} {
-    margin: 0;
-  }
-  ${({ index, theme }) => index === 0 && css`
-    left: ${`${theme.gridSizes.s}%`};
-    width: ${`calc(${theme.gridSizes.m}% + ${theme.gridSizes.s}% + ${theme.gridSizes.m}%)`};
-    ${media.tablet`
-      left: ${`calc(${theme.gridSizes.m}% * 4)`};
-      width: ${`calc(${theme.gridSizes.s}% * 4)`};
-    `}
-  `}
-  ${({ index, theme }) => index === 1 && css`
-    left: 50vw;
-    width: calc(42vw);
+  > .parallax {
+    position: absolute;
     ${StyledWorkItemInfo} {
-      transform: translateX(-42vw);
+      margin: 0;
     }
-    ${media.tablet`
-      left: ${`calc(${theme.gridSizes.m}% * 4)+ calc(${theme.gridSizes.s}% * 4)`};
-      width: ${`calc(${theme.gridSizes.s}% * 4)`};
+    &.index-0 {
+      ${({ theme }) => css`
+        left: ${`${theme.gridSizes.s}%`};
+        width: ${`calc(${theme.gridSizes.m}% + ${theme.gridSizes.s}% + ${theme.gridSizes.m}%)`};
+        ${media.tablet`
+          left: ${`calc(${theme.gridSizes.m}% * 4)`};
+          width: ${`calc(${theme.gridSizes.s}% * 4)`};
+        `}
+      `}
+    }
+    &.index-1 {
+      ${({ theme }) => css`
+      left: 50vw;
+      width: calc(42vw);
       ${StyledWorkItemInfo} {
-        transform: ${`translateX(-${theme.gridSizes.s}vw)`};
+        transform: translateX(-42vw);
       }
+      ${media.tablet`
+        left: ${`calc((${theme.gridSizes.m}% * 4) + (${theme.gridSizes.s}% * 4))`};
+        width: ${`calc(${theme.gridSizes.m}% * 4)`};
+        ${StyledWorkItemInfo} {
+          transform: ${`translateX(-${theme.gridSizes.s}vw)`};
+        }
+      `}
     `}
-  `}
-  ${props => props.isStopped && css`
-    visibility: hidden;
-  `}
+    }
+    ${props => props.isStopped && css`
+      visibility: hidden;
+    `}
+  }
 `;
 
 export const InfoParallaxInner = styled.div`
