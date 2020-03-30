@@ -38,7 +38,8 @@ export const WorkItemsWrapper = styled.div`
 `;
 
 export const RecentWorkParticle = styled('div')<RecentWorkParticleProps>`
-  ${({ particleID }) => particleID.includes('dot-drig-') && css`
+  position: absolute;
+  ${({ particleID }) => particleID.includes('dot-grid-') && css`
     display: none;
     ${media.tablet`
       display: block;

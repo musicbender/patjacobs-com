@@ -83,17 +83,17 @@
       "plx": [15, -15]
     },
     {
-      "name": "dotGridA",
+      "name": "dot-grid-a",
       "type": "dots",
       "plx": [1, -18]
     },
     {
-      "name": "dotGridB",
+      "name": "dot-grid-b",
       "type": "dots",
       "plx": [3, -2]
     },
     {
-      "name": "dotGridC",
+      "name": "dot-grid-c",
       "type": "dots",
       "plx": [10, -10]
     }

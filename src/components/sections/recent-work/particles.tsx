@@ -5,7 +5,7 @@ import Triangle from '../../particles/triangle';
 import dotGrids from './dots';
 import { hasWindow } from '../../../util/util';
 import { RecentWorkParticle } from './styles';
-import { ConfigsRecentWork, Query } from '../../../../types';
+import { Query } from '../../../../types';
 import { useStaticQuery, graphql } from 'gatsby';
 
 type Props = {

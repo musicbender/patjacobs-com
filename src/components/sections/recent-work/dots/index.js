@@ -3,7 +3,7 @@ import { default as dotGridB } from './b.json';
 import { default as dotGridC } from './c.json';
 
 export default {
-  dotGridA,
-  dotGridB,
-  dotGridC
+  'dot-grid-a': dotGridA,
+  'dot-grid-b': dotGridB,
+  'dot-grid-c': dotGridC
 }
