@@ -1,6 +1,5 @@
 import React from 'react';
-import { DorFormationTextEmbedOffsets, DotFormationTextEmbedDirection } from '../../../../types/sections';
-import { Skill } from '../../../../types/static-data';
+import { Skill, DorFormationTextEmbedOffsets, DotFormationTextEmbedDirection } from '../../../../types';
 import { TextEmbedWrapper, TextEmbedTextWrapper, RevealBar, InnerTextWrapper } from './styles';
 
 type Props = {

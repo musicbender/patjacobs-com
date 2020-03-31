@@ -1,26 +1,33 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TextEmbed from './text-embed';
 import { getTextWidth } from '../../../util/dot-grid';
-import cn from 'classnames/bind';
-import style from './text-embeds.css';
-const cx = cn.bind(style);
+import { Skill, Axis, DotFormationTextEmbedDirection } from '../../../../types';
+import { TextEmbedsWrapper } from './styles';
+
+type Props = { 
+  textConfig: Skill[],
+  spacing?: number[],
+  getDotOffset(index: number, axis: Axis): number,
+  dotSize?: number,
+  active?: boolean,
+  rowMajority?: boolean
+}
 
 const TextEmbeds = ({
   textConfig,
-  spacing,
+  spacing = [7, 7],
   getDotOffset,
   dotSize,
   active,
   rowMajority
-}) => {
-  const getTextOffset = (item) => {
+}: Props) => {
+  const getTextOffset = (item: Skill): number => {
     return item.direction === 'right'
       ? getDotOffset(item.position[0], 'x')
       : getDotOffset(item.position[1], 'y')
   }
 
-  const getTextSpacing = (direction) => {
+  const getTextSpacing = (direction: DotFormationTextEmbedDirection): number => {
     switch(direction) {
       case 'up':
         return rowMajority 
@@ -36,7 +43,7 @@ const TextEmbeds = ({
   }
 
   return (
-    <div className={cx(style.textEmbeds)}>
+    <TextEmbedsWrapper>
       {
         textConfig.map((item, i) => (
           <TextEmbed
@@ -47,23 +54,17 @@ const TextEmbeds = ({
               x: getDotOffset(item.position[0], 'x'),
               y: getDotOffset(item.position[1], 'y') + (dotSize / 2)
             }}
-            width={getTextWidth(item.text, getTextSpacing(item.direction), getTextOffset(item))}
+            width={getTextWidth(
+              item.text, 
+              getTextSpacing(item.direction as DotFormationTextEmbedDirection), 
+              getTextOffset(item)
+            )}
             key={item.text + i}
           />
         ))
       }
-    </div>
+    </TextEmbedsWrapper>
   );
-}
-
-TextEmbeds.propTypes = {
-  textConfig: PropTypes.arrayOf(PropTypes.object).isRequired,
-  spacing: PropTypes.arrayOf(PropTypes.number),
-  getDotOffset: PropTypes.func
-}
-
-TextEmbeds.defaultProps = {
-  spacing: [7, 7]
 }
 
 export default TextEmbeds;
