@@ -4,7 +4,7 @@ import TextEmbeds from './text-embeds';
 import Triangle from '../triangle';
 import { mapDotsWithText } from '../../../util/dot-grid';
 import cn from 'classnames/bind';
-import style from './dot-formation.css';
+import style from './styles.ts';
 const cx = cn.bind(style);
 
 const DotFormation = ({
