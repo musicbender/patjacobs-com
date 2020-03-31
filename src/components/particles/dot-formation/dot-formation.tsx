@@ -1,30 +1,38 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TextEmbeds from './text-embeds';
 import Triangle from '../triangle';
 import { mapDotsWithText } from '../../../util/dot-grid';
-import cn from 'classnames/bind';
-import style from './styles.ts';
-const cx = cn.bind(style);
+import { Skill, Axis } from '../../../../types';
+import { Dots, DotFormationWrapper, Dot } from './styles';
+
+type Props = {
+  columns: number,
+  rows: number,
+  dotSize: number,
+  active: boolean,
+  hideArray: number[],
+  color: string,
+  shape: 'square' | 'triangle',
+  textConfig: Skill[],
+}
 
 const DotFormation = ({
-  columns,
-  rows,
-  dotSize,
-  active,
+  columns = 32,
+  rows = 8,
+  dotSize = 12,
+  active = false,
+  color = '#F98D51',
+  shape = 'square',
   hideArray,
-  color,
-  shape,
   textConfig,
-  classNames
-}) => {
-  const hideEnabled = !active && hideArray && hideArray.length > 0;
-  const ySpacing = 100 / (rows - 1);
-  const xSpacing = 100 / (columns - 1);
-  const dotAmount = columns * rows;
-  const textAffectedDots = textConfig ? mapDotsWithText(textConfig, columns) : [];
+}: Props) => {
+  const hideEnabled: boolean = !active && hideArray && hideArray.length > 0;
+  const ySpacing: number = 100 / (rows - 1);
+  const xSpacing: number = 100 / (columns - 1);
+  const dotAmount: number = columns * rows;
+  const textAffectedDots: number[] = textConfig ? mapDotsWithText(textConfig, columns) : [];
 
-  const getDotOffset = (index, axis) => {
+  const getDotOffset = (index: number, axis: Axis): number => {
     const vector = axis === 'x' ? columns : rows;
     return ((index + 1) / vector) * dotSize;
   }
@@ -32,13 +40,9 @@ const DotFormation = ({
   const renderDot = (config) => {
     const { i, x, y, row, column, hide, xOffset, yOffset } = config;
     return (
-      <svg
-        className={cx(
-          style.dot,
-          `dot-${i}`,
-          { [style.hide]: hide },
-          { [style.hasText]: textAffectedDots.indexOf(i) > -1}
-        )}
+      <Dot
+        hide={hide}
+        hasText={textAffectedDots.indexOf(i) > -1}
         key={`dot-formation-$${i}-${i + x + y}`}
         width={dotSize}
         height={dotSize}
@@ -54,9 +58,9 @@ const DotFormation = ({
         }
         {
           shape === 'triangle' &&
-          <Triangle width="micro" color="orange" opacity={1} />
+          <Triangle size="micro" color="orange" opacity={1} />
         }
-      </svg>
+      </Dot>
     );
   }
 
@@ -64,11 +68,10 @@ const DotFormation = ({
     let dots = [];
 
     for (let i = 0; i < dotAmount; i++) {
-      const row = Math.floor(i / columns);
-      const column = i - (columns * row);
-      const hide = hideEnabled && hideArray.indexOf(i) > -1;
+      const row: number = Math.floor(i / columns);
+      const column: number = i - (columns * row);
 
-      const dotConfig = {
+      const dotConfig: DotFormationConfig = {
         i,
         y: row * ySpacing,
         x: column * xSpacing,
@@ -86,15 +89,11 @@ const DotFormation = ({
       ];
     }
 
-    return (
-      <div className={cx(style.dots, { [style.active]: active })}>
-        {dots}
-      </div>
-    );
+    return <Dots>{dots}</Dots>;
   }
 
   return (
-    <div className={cx(style.dotFormation, classNames)}>
+    <DotFormationWrapper>
       { renderDots() }
       {
         textConfig &&
@@ -107,30 +106,8 @@ const DotFormation = ({
           rowMajority={rows > columns}
         />
       }
-    </div>
+    </DotFormationWrapper>
   );
-}
-
-DotFormation.propTypes = {
-  columns: PropTypes.number,
-  rows: PropTypes.number,
-  dotSize: PropTypes.number,
-  active: PropTypes.bool,
-  hideArray: PropTypes.arrayOf(PropTypes.number),
-  color: PropTypes.string,
-  shape: PropTypes.oneOf(['square', 'triangle']),
-  textConfig: PropTypes.arrayOf(PropTypes.object),
-  classNames: PropTypes.string
-}
-
-DotFormation.defaultProps = {
-  columns: 32,
-  rows: 8,
-  dotSize: 12,
-  active: false,
-  color: '#F98D51',
-  shape: 'square',
-  classNames: ''
 }
 
 export default DotFormation;

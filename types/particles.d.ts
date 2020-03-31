@@ -6,3 +6,14 @@ type CavieDotConfig = {
   xOffset?: number,
   yOffset?: number,
 }
+
+type DotFormationConfig = {
+  i: number,
+  y: number,
+  x: number,
+  row: number,
+  column: number,
+  hide: boolean,
+  xOffset?: number,
+  yOffset?: number,
+}
