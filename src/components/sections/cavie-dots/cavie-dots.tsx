@@ -14,19 +14,21 @@ type Props = {
 const CavieDots = ({
   atBottom, 
   bottom, 
-  baseStart = 0 
+  baseStart = 0,
 }: Props) => {
   const { configs } = useStaticQuery(graphql`
-    configs {
-      config {
-        homeBottom
+    query {
+      configs {
+        config {
+          homeBottom
+        }
       }
     }
   `);
 
   const dotAmount = 25;
   const accumulator = 100;
-  bottom = bottom || configs.homeBottom;
+  const bottomLoc = bottom || configs.homeBottom;
 
   const getPlxData = (i) => {
     const start = i === 0 ? 0 : baseStart + (i * accumulator);
@@ -44,8 +46,8 @@ const CavieDots = ({
         ]
       },
       {
-        start: bottom - 1400,
-        end: bottom - 300,
+        start: bottomLoc - 1400,
+        end: bottomLoc - 300,
         properties: [
           {
             startValue: theme.corePalette.purple,
@@ -121,8 +123,3 @@ const CavieDots = ({
 }
 
 export default CavieDots;
-
-// CavieDots.defaultProps = {
-//   baseStart: 0,
-//   bottom: config.homeBottom
-// }

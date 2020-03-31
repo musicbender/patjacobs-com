@@ -8,6 +8,7 @@ import { setAboutTop } from '../../../actions/home';
 import { throttle } from '../../../util/util';
 import { HomePage, OutterWrapper, DotSequenceWrapper } from './styles';
 import { Modes } from '../../../../types';
+import CavieDots from '../../sections/cavie-dots';
 
 type ReduxProps = {
   mode?: Modes,
@@ -87,6 +88,7 @@ class Home extends PureComponent<ReduxProps, State> {
               isMobile={this.props.isMobile}
             />
             <RecentWork />
+            <CavieDots baseStart={this.props.recentWorkTop - 400} atBottom={this.state.atBottom} />
           </DotSequenceWrapper>
         </OutterWrapper>
       </HomePage>
