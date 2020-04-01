@@ -26,11 +26,11 @@ const CavieDots = ({
     }
   `);
 
-  const dotAmount = 25;
-  const accumulator = 100;
-  const bottomLoc = bottom || configs.homeBottom;
+  const dotAmount: number = 25;
+  const accumulator: number = 100;
+  const bottomLoc: number = bottom || configs.config.homeBottom;
 
-  const getPlxData = (i) => {
+  const getPlxData = (i: number) => {
     const start = i === 0 ? 0 : baseStart + (i * accumulator);
     return [
       {
@@ -72,7 +72,7 @@ const CavieDots = ({
         tagName="svg"
         disabled={!hasWindow()}
         animateWhenNotInViewport={true}
-        key={`cavie-dot-$${index}-${index + x + y}`}
+        key={`cavie-dot-${index}-${index + x + y}`}
         width={dotSize}
         height={dotSize}
         style={{

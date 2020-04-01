@@ -12,6 +12,9 @@ import Head from '../components/global/head';
 import { IStore } from '../../types/state';
 import GridLines from '../components/global/grid-lines';
 import Toolbar from '../components/global/toolbar';
+import Curtain from '../components/global/curtain';
+import Footer from '../components/global/footer';
+import Modal from '../components/global/modal';
 import SplashScreen from '../components/sections/splash-screen';
 import { 
   AppWrapper, 
@@ -19,7 +22,6 @@ import {
   InnerWrapper,
 } from './styles';
 import { Configs } from '../../types';
-import Footer from '../components/global/footer';
 
 type ReduxProps = {
   splashOpen?: boolean
@@ -118,6 +120,12 @@ export class Layout extends PureComponent<Props & ReduxProps> {
               </InnerWrapper> 
             </OutterWrapper>
             <Footer handleToTop={this.handleToTop} />
+            {
+              this.props.transportOpen &&
+              <Modal>
+                <Curtain entrance="full" exit="full" duration={1275} />
+              </Modal>
+            }
         </AppWrapper>
       </ThemeProvider>
     );

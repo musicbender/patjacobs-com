@@ -5,7 +5,7 @@ import { requestTimeout } from '../util/shims';
 import { Middleware, Dispatch, AnyAction, MiddlewareAPI } from 'redux';
 
 // TEMP
-var transportDuration = 1000;
+var transportDuration = 2500;
 
 const globalMiddleware: Middleware<Dispatch> = (store: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: AnyAction) => {
   const { type, payload } = action;
@@ -13,7 +13,9 @@ const globalMiddleware: Middleware<Dispatch> = (store: MiddlewareAPI) => (next: 
     case TRANSPORT_CHANGED:
       next(action);
       if (!!payload) {
+        console.log('mw: change transport', payload);
         requestTimeout(() => {
+          console.log('mw: change transport', false);
           store.dispatch(changeTransport(false))
         }, transportDuration);
       }
