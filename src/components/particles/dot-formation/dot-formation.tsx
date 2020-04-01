@@ -6,14 +6,15 @@ import { Skill, Axis } from '../../../../types';
 import { Dots, DotFormationWrapper, Dot } from './styles';
 
 type Props = {
-  columns: number,
-  rows: number,
-  dotSize: number,
-  active: boolean,
-  hideArray: number[],
-  color: string,
-  shape: 'square' | 'triangle',
+  columns?: number,
+  rows?: number,
+  dotSize?: number,
+  active?: boolean,
+  hideArray?: number[],
+  color?: string,
+  shape?: 'square' | 'triangle',
   textConfig: Skill[],
+  className?: string
 }
 
 const DotFormation = ({
@@ -25,6 +26,7 @@ const DotFormation = ({
   shape = 'square',
   hideArray,
   textConfig,
+  className,
 }: Props) => {
   const hideEnabled: boolean = !active && hideArray && hideArray.length > 0;
   const ySpacing: number = 100 / (rows - 1);
@@ -38,11 +40,12 @@ const DotFormation = ({
   }
 
   const renderDot = (config) => {
-    const { i, x, y, row, column, hide, xOffset, yOffset } = config;
+    const { i, x, y, hide, xOffset, yOffset } = config;
     return (
       <Dot
         hide={hide}
         hasText={textAffectedDots.indexOf(i) > -1}
+        active={active}
         key={`dot-formation-$${i}-${i + x + y}`}
         width={dotSize}
         height={dotSize}
@@ -93,7 +96,7 @@ const DotFormation = ({
   }
 
   return (
-    <DotFormationWrapper>
+    <DotFormationWrapper className={className}>
       { renderDots() }
       {
         textConfig &&

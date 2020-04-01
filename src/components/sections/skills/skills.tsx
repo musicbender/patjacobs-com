@@ -1,19 +1,48 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import Heading from '../_global/heading';
-import DotFormation from '../_particles/dot-formation';
-import { setSkillsTop } from '../../actions/home';
-import { meta, config } from '../../../shared/config.json';
-import { hasWindow, throttle, minMax } from '../../util/util';
-import skillsData from '../../../shared/skills.json';
-import cn from 'classnames/bind';
-import style from './styles.ts';
-const cx = cn.bind(style);
+import Heading from '../../global/heading';
+import { setSkillsTop } from '../../../actions/home';
+import { hasWindow, throttle, minMax } from '../../../util/util';
+import { SkillsWrapper, DotWrapper, StyledDotFormation } from './styles';
+import { StaticQuery, graphql } from 'gatsby';
+import { Configs, Skills, Skill, Query } from '../../../../types';
 
-class Skills extends Component {
-  constructor(props) {
+type Props = {
+  configs: Configs,
+  skills: Skills,
+  atBottom?: boolean,
+}
+
+type ReduxProps = {
+  skillsTop: number,
+  setSkillsTop: any,
+}
+
+type State = {
+  dotsWidth: number,
+  dotsHeight: number,
+  color: string,
+}
+
+const mapStateToProps = ({ global, home }) => {
+  return {
+    skillsTop: home.skillsTop
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    setSkillsTop
+  }, dispatch);
+}
+
+class SkillsSection extends PureComponent<Props & ReduxProps, State> {
+  gridID: string;
+  defaultColor: string;
+  hideArray: number[];
+
+  constructor(props: Props & ReduxProps) {
     super(props);
     this.handleResize = throttle(this.handleResize.bind(this), 100);
     this.gridID = 'skills-dot-grid';
@@ -33,94 +62,109 @@ class Skills extends Component {
     }
   }
 
-  componentDidMount() {
-    const elm = document.getElementById(this.gridID);
-    const rect = elm.getBoundingClientRect();
+  componentDidMount(): void {
+    const elm: HTMLElement = document.getElementById(this.gridID);
+    const rect: ClientRect = elm.getBoundingClientRect();
 
     window.addEventListener('resize', this.handleResize);
     this.setState({ dotsWidth: rect.width, dotsHeight: rect.height });
-    this.setTop(false, config.skillsTop);
+    this.setTop(false, this.props.configs.config.skillsTop);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props & ReduxProps): void {
     if (prevProps.atBottom && !this.props.atBottom) {
       this.setState({ color: this.defaultColor })
     }
   }
 
-  componentWillUnmount() {
-    window.removeEventListner('resize', this.handleResize);
+  componentWillUnmount(): void {
+    window.removeEventListener('resize', this.handleResize);
   }
 
-  setTop(didResize = false, input) {
+  setTop(didResize = false, input?: number): void {
     let value = input;
 
     if (value == null) {
-      const elm = document.getElementById(this.gridID);
-      const rect = elm.getBoundingClientRect();
+      const elm: HTMLElement = document.getElementById(this.gridID);
+      const rect: ClientRect = elm.getBoundingClientRect();
       value = (rect.top - (rect.height / 2)) + 490;
     }
 
     this.props.setSkillsTop({ value, didResize });
   }
 
-  handleResize() {
+  handleResize(): void {
     this.setTop(true);
   }
 
-  handleButton(e) {
+  handleButton(e: Event): void {
     e.preventDefault();
-    if (hasWindow()) {
-      window.location.href = `mailto:${meta.email}`;
-    }
+    if (hasWindow()) window.location.href = `mailto:${this.props.configs.meta.email}`;
   }
 
   render() {
+    console.log('props skills', this.props, this.props.atBottom);
+    
     return (
-      <div className={cx(style.skills)}>
+      <SkillsWrapper>
         <Heading text="tech_i_know" />
-        <div id={this.gridID} className={cx(style.dotWrapper)}>
-          <DotFormation
-            classNames={cx('desktop')}
+        <DotWrapper id={this.gridID}>
+          <StyledDotFormation
+            breakpoint="desktop"
             columns={15}
             active={this.props.atBottom}
             hideArray={this.hideArray}
             color={this.state.color}
-            textConfig={skillsData.desktop}
+            textConfig={this.props.skills.desktop as Skill[]}
           />
-          <DotFormation
-            classNames={cx('mobile')}
+          <StyledDotFormation
+            breakpoint="mobile"
             columns={8}
             rows={20}
             active={true}
             color={this.state.color}
-            textConfig={skillsData.mobile}
+            textConfig={this.props.skills.mobile as Skill[]}
           />
-          <div
-            className={cx(
-              style.skillsCta,
-              { [style.show]: this.props.atBottom },
-              { [style.hide]: !this.props.atBottom }
-            )}
-          >
-            <p style={{ color: this.state.color }}>Say Hello</p>
-          </div>
-        </div>
-      </div>
+        </DotWrapper>
+      </SkillsWrapper>
     );
   }
 }
 
-const mapStateToProps = ({ global, home }) => {
-  return {
-    skillsTop: home.skillsTop
-  }
-}
+const ConnectedSkills = connect(mapStateToProps, mapDispatchToProps)(SkillsSection);
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    setSkillsTop
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Skills);
+export default (props: Omit<Props, 'configs' | 'skills'>) => (
+  <StaticQuery
+    query={graphql`
+      query {
+        configs {
+          meta {
+            email
+          }
+          config {
+            skillsTop
+          }
+        }
+        skills {
+          mobile {
+            text
+            position
+            direction
+          }
+          desktop {
+            text
+            position
+            direction
+          }
+        }
+      }
+    `}
+    render={(data: Query) => (
+      <ConnectedSkills
+        configs={data.configs}
+        skills={data.skills}
+        {...props}
+      />
+    )}
+  />
+);

@@ -59,22 +59,28 @@ const Particles = ({
     }
   }
 
-  return configs.recentWork.particleData.map((p, i) => {
-    return (
-      <RecentWorkParticle
-        particleID={p.name}
-        gridLines={configs.config.gridLines}
-        key={'work-particle' + i + p.name}
-      >
-        <Plx
-          parallaxData={getPlxData(p.plx)}
-          disabled={!hasWindow() || isMobile}
-        >
-          {getParticle(p)}
-        </Plx>
-      </RecentWorkParticle>
-    );
-  });
+  return (
+    <>
+      {
+        configs.recentWork.particleData.map((p, i) => {
+          return (
+            <RecentWorkParticle
+              particleID={p.name}
+              gridLines={configs.config.gridLines}
+              key={'work-particle' + i + p.name}
+            >
+              <Plx
+                parallaxData={getPlxData(p.plx)}
+                disabled={!hasWindow() || isMobile}
+              >
+                {getParticle(p)}
+              </Plx>
+            </RecentWorkParticle>
+          );
+        })
+      }
+    </>
+  )
 }
 
 export default Particles;
