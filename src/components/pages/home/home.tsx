@@ -94,8 +94,6 @@ class Home extends PureComponent<ReduxProps, State> {
   }
 
   render() {
-    console.log('home at bottom:', this.state.atBottom);
-    
     return (
       <HomePage>
         <OutterWrapper>

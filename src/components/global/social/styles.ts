@@ -26,7 +26,7 @@ export const InnerWrapper = styled.div`
 export const LinkText = styled.a`
   display: inline-block;
   margin: 0;
-  color: ${({ theme }) => hexToRgb(theme.pellete.white, 0.7)};
+  color: ${({ theme }) => hexToRgb(theme.palette.white, 0.7)};
   text-decoration: none;
   justify-self: center;
   transform: rotate(-90deg);

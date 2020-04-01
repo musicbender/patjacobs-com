@@ -19,6 +19,7 @@ import {
   InnerWrapper,
 } from './styles';
 import { Configs } from '../../types';
+import Footer from '../components/global/footer';
 
 type ReduxProps = {
   splashOpen?: boolean
@@ -79,7 +80,7 @@ export class Layout extends PureComponent<Props & ReduxProps> {
     window.removeEventListener('resize', this.handleResize);
   }
   
-  handleToTop = () =>{
+  handleToTop = () => {
     this.props.changeTransport(true);
     requestTimeout(() => {
       window.scrollTo(0, 0);
@@ -116,6 +117,7 @@ export class Layout extends PureComponent<Props & ReduxProps> {
                 {this.props.children}
               </InnerWrapper> 
             </OutterWrapper>
+            <Footer handleToTop={this.handleToTop} />
         </AppWrapper>
       </ThemeProvider>
     );
