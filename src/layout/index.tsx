@@ -98,7 +98,7 @@ export class Layout extends PureComponent<Props & ReduxProps> {
     }
   }
 
-  render() {
+  render() {  
     return (
       <ThemeProvider theme={theme}>
         <AppWrapper

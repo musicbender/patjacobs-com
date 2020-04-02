@@ -30,6 +30,17 @@ module.exports = {
         include_favicon: true,
       },
     },
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+          typeName: "GCMS",
+          fieldName: "gcms",
+          url: "https://api-uswest.graphcms.com/v1/ck2u0yms81him01c95r6i6noi/master",
+          headers: {
+            Authorization: `Bearer ${process.env.GCMS_TOKEN}`
+          }
+      }
+    },
     `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-graphql-codegen`,
