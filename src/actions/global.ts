@@ -15,10 +15,13 @@ export function loadPage() {
   }
 }
 
-export function changeTransport(open: boolean): AnyAction {
+export function changeTransport(open: boolean, transportDuration?: number): AnyAction {
   return {
     type: TRANSPORT_CHANGED,
-    payload: open
+    payload: {
+      open,
+      transportDuration
+    }
   }
 }
 

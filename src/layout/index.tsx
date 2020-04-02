@@ -82,13 +82,10 @@ export class Layout extends PureComponent<Props & ReduxProps> {
   }
   
   handleToTop = () => {
-    this.props.changeTransport(true);
+    this.props.changeTransport(true, this.props.configs.config.transportDuration);
     requestTimeout(() => {
       window.scrollTo(0, 0);
     }, this.props.configs.config.transportDuration / 2);
-
-    // TODO change back
-    // this.props.configs.config.transportDuration / 2.5
   }
 
   handleResize = () => {

@@ -17,7 +17,7 @@ export default function global(state = initialState.global, action: AnyAction) {
     case SPLASH_CHANGED:
       return { ...state, splashOpen: payload };
     case TRANSPORT_CHANGED:
-      return { ...state, transportOpen: payload };
+      return { ...state, transportOpen: payload.open };
     case MENU_CHANGED:
       return { ...state, menuhOpen: payload };
     case MODE_CHANGED:

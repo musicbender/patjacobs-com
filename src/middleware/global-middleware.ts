@@ -4,21 +4,18 @@ import { isMobileSize } from '../util/util';
 import { requestTimeout } from '../util/shims';
 import { Middleware, Dispatch, AnyAction, MiddlewareAPI } from 'redux';
 
-// TEMP
-var transportDuration = 2500;
-
 const globalMiddleware: Middleware<Dispatch> = (store: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: AnyAction) => {
   const { type, payload } = action;
   switch (type) {
     case TRANSPORT_CHANGED:
       next(action);
-      if (!!payload) {
-        console.log('mw: change transport', payload);
+
+      if (!!payload.open) {
         requestTimeout(() => {
-          console.log('mw: change transport', false);
           store.dispatch(changeTransport(false))
-        }, transportDuration);
+        }, payload.transportDuration || 2500);
       }
+
       break;
     case IS_MOBILE_SET:
       const newAction = action;
