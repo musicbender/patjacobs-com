@@ -4,12 +4,11 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../styles/theme';
 import { bindActionCreators, Dispatch, AnyAction } from 'redux';
 import { connect } from 'react-redux';
-import { throttle, hasWindow } from '../util/util';
+import { throttle } from '../util/util';
 import { requestTimeout } from '../util/shims';
 import { changeSplash, changeTransport, setIsMobile } from '../actions/global';
 import GlobalStyles from '../styles/global-styles';
 import Head from '../components/global/head';
-import { IStore } from '../../types/state';
 import GridLines from '../components/global/grid-lines';
 import Toolbar from '../components/global/toolbar';
 import Curtain from '../components/global/curtain';
@@ -21,17 +20,17 @@ import {
   OutterWrapper,
   InnerWrapper,
 } from './styles';
-import { Configs } from '../../types';
+import { Configs, IStore } from '../../types';
 
 type ReduxProps = {
-  splashOpen?: boolean
-  transportOpen?: boolean
-  isMobile?: boolean
-  skillsTop?: number
-  changeTransport?: any
+  splashOpen?: boolean,
+  transportOpen?: boolean,
+  isMobile?: boolean,
+  skillsTop?: number,
+  changeTransport?: any,
   setIsMobile?: any
   changeSplash?: any,
-  mode?: string
+  mode?: string,
 }
 
 type Props = {
@@ -86,7 +85,10 @@ export class Layout extends PureComponent<Props & ReduxProps> {
     this.props.changeTransport(true);
     requestTimeout(() => {
       window.scrollTo(0, 0);
-    }, this.props.configs.config.transportDuration / 2.5);
+    }, this.props.configs.config.transportDuration / 2);
+
+    // TODO change back
+    // this.props.configs.config.transportDuration / 2.5
   }
 
   handleResize = () => {
