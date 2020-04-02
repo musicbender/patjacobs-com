@@ -2789,7 +2789,6 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___display' |
   'pluginCreator___pluginOptions___icon' |
   'pluginCreator___pluginOptions___include_favicon' |
-  'pluginCreator___pluginOptions___pathToConfigModule' |
   'pluginCreator___pluginOptions___fileName' |
   'pluginCreator___pluginOptions___codegen' |
   'pluginCreator___pluginOptions___pathCheck' |
@@ -2988,7 +2987,6 @@ export type SitePluginFieldsEnum =
   'pluginOptions___display' |
   'pluginOptions___icon' |
   'pluginOptions___include_favicon' |
-  'pluginOptions___pathToConfigModule' |
   'pluginOptions___fileName' |
   'pluginOptions___codegen' |
   'pluginOptions___pathCheck' |
@@ -3116,7 +3114,6 @@ export type SitePluginPluginOptions = {
   display?: Maybe<Scalars['String']>,
   icon?: Maybe<Scalars['String']>,
   include_favicon?: Maybe<Scalars['Boolean']>,
-  pathToConfigModule?: Maybe<Scalars['String']>,
   fileName?: Maybe<Scalars['String']>,
   codegen?: Maybe<Scalars['Boolean']>,
   pathCheck?: Maybe<Scalars['Boolean']>,
@@ -3132,7 +3129,6 @@ export type SitePluginPluginOptionsFilterInput = {
   display?: Maybe<StringQueryOperatorInput>,
   icon?: Maybe<StringQueryOperatorInput>,
   include_favicon?: Maybe<BooleanQueryOperatorInput>,
-  pathToConfigModule?: Maybe<StringQueryOperatorInput>,
   fileName?: Maybe<StringQueryOperatorInput>,
   codegen?: Maybe<BooleanQueryOperatorInput>,
   pathCheck?: Maybe<BooleanQueryOperatorInput>,
