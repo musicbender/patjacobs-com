@@ -89,7 +89,7 @@ export const TriangleParallax = styled('div')<TriangleParallaxProps>`
       ${ gridPosition({ ...trianglePos, gridLines, index: 4 }) };
       top: 2em;
       width: 70%;
-      [class*="triangle"] {
+      svg {
         width: 100%;
       }
   `}

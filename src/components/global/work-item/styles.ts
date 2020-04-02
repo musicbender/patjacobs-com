@@ -11,11 +11,6 @@ type ParallaxProps = {
   isStopped?: boolean,
 }
 
-// type StyledWorkItemInfoProps = {
-//   isStopped?: boolean,
-//   isParallax?: boolean,
-// }
-
 type ImageProps = {
   index: number,
   bgImage: string,

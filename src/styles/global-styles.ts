@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
-import { sizes } from './breakpoints';
+import { media } from './breakpoints';
+import { normalize } from 'styled-normalize';
 import { ITheme } from '../../types/styles';
 import Fonts from './fonts';
 
@@ -9,6 +10,7 @@ type GlobalStyles = {
 }
 
 export default createGlobalStyle<GlobalStyles>`
+  ${normalize}
   @font-face {
     font-family: 'Futura';
     font-weight: normal;
@@ -37,9 +39,9 @@ export default createGlobalStyle<GlobalStyles>`
     background: ${props => props.theme.modes.dark.bg}; 
     box-sizing: border-box;
     font-size: 16px;
-    @media (${sizes.tablet}) {
-      font-size: 17px;
-    }
+    ${media.tablet`
+     font-size: 17px;
+    `}
   }
   body {
     position: relative;
