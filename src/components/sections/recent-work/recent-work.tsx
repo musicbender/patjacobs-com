@@ -156,14 +156,17 @@ export default (props: Omit<Props, 'configs'>) => (
             }
           }
         }
-        allProjects(limit: 5, filter: {type: {eq: "work"}, disabled: {eq: false}}) {
-          nodes {
-            type
+        gcms {
+          projects(first: 5, where: {projectType: Work, disabled: false}) {
+            id
+            projectType
             title
-            imageDesktop
-            imageMobile
             description
-            url
+            projectId
+            externalUrl
+            imageDesktop {
+              url
+            }
           }
         }
       }
@@ -171,7 +174,7 @@ export default (props: Omit<Props, 'configs'>) => (
     render={data => (
       <ConnectedRecentWork 
         configs={data.configs} 
-        projects={data.allProjects.nodes}
+        projects={data.gcms.projects}
         {...props} 
       />
     )}

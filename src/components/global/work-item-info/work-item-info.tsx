@@ -2,11 +2,11 @@ import React from 'react';
 import { ItemInfoWrapper, Title, Description, StyledButton } from './styles';
 
 export type Props = {
-  title: string,
+  title?: string,
   description?: string,
-  isStopped: boolean,
-  isParallax: boolean,
-  isMobile: boolean,
+  isStopped?: boolean,
+  isParallax?: boolean,
+  isMobile?: boolean,
   buttonUrl?: string,
   buttonText?: string,
   className?: string
@@ -20,7 +20,7 @@ const ItemInfo = ({
   isMobile = false,
   buttonUrl,
   buttonText = 'view project',
-  className
+  className = '',
 }) => {
   const handleParentClick = () => {
       // TODO: change to js routing link when case study pages are built

@@ -35,7 +35,7 @@ module.exports = {
       options: {
           typeName: "GCMS",
           fieldName: "gcms",
-          url: "https://api-uswest.graphcms.com/v1/ck2u0yms81him01c95r6i6noi/master",
+          url: process.env.GCMS_ENDPOINT,
           headers: {
             Authorization: `Bearer ${process.env.GCMS_TOKEN}`
           }

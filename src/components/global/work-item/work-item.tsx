@@ -1,8 +1,10 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import Plx from 'react-plx';
 import { hasWindow } from '../../../util/util';
 import { WorkItemWrapper, ImageOutterWrapper, InfoOutterWrapper, StyledWorkItemInfo, InfoParallaxInner, InfoInnerWrapper, ImageParallaxInner, ImageInnerWrapper, WorkImage, ImageFilter, ImageCover } from './styles';
+import { ConfigsRecentWorkWorkItemPlxImage, ConfigsRecentWorkWorkItemPlxInfo } from '../../../../types';
 
 type Props = {
   item: any,
@@ -43,10 +45,10 @@ const WorkItem = ({
 
   const baseEnd: number = isMobile ? baseTop - 200 : baseTop;
   const accumulator: number = isMobile ? 250 : 535;
-  const imgDir: string = `${process.env.ASSET_ROOT}assets/images/recent-work/`;
+  const itemUrl: string = item.externalUrl || `/${item.projectId}`;
   const onClient: boolean = hasWindow();
 
-  const getPlxData = seg => [
+  const getPlxData = (seg: ConfigsRecentWorkWorkItemPlxImage) => [
     {
       start: 'self',
       end: baseEnd + (accumulator * index),
@@ -63,16 +65,16 @@ const WorkItem = ({
   ];
 
   const renderImageSection = () => {
-    return configs.recentWork.workItemPlx.image.map((seg, i) => (
+    return configs.recentWork.workItemPlx.image.map((seg: ConfigsRecentWorkWorkItemPlxImage, i: number) => (
       <Plx
         parallaxData={getPlxData(seg)}
         disabled={!onClient}
         className={`parallax index-${i}`}
-        key={`${i}` + item.title + 'image' + JSON.stringify(seg)}
+        key={`${i}` + item.id + 'image' + JSON.stringify(seg)}
       >
         <ImageParallaxInner index={i}>
           <ImageInnerWrapper>
-            <WorkImage index={i} bgImage={`url(${imgDir}${item.imageDesktop})`} />
+            <WorkImage index={i} bgImage={`url(${item.imageDesktop.url})`} />
             <ImageFilter />
             <ImageCover isStopped={isStopped} />
           </ImageInnerWrapper>
@@ -82,7 +84,7 @@ const WorkItem = ({
   }
 
   const renderInfoSection = () => {
-    return configs.recentWork.workItemPlx.info.map((seg, i) => {
+    return configs.recentWork.workItemPlx.info.map((seg: ConfigsRecentWorkWorkItemPlxInfo, i: number) => {
       const plxSeg = isMobile ? configs.recentWork.workItemPlx.mobileInfo[i] : seg;
       return (
         <Plx
@@ -91,14 +93,14 @@ const WorkItem = ({
           onPlxEnd={onClient ? handleWorkStops(index, true) : null}
           disabled={!onClient}
           className={`parallax index-${i}`}
-          key={`${i}` + item.label + 'info' + JSON.stringify(seg)}
+          key={`${i}` + item.id + 'info' + JSON.stringify(seg)}
         >
           <InfoParallaxInner>
             <InfoInnerWrapper>
               <StyledWorkItemInfo
                 title={item.title}
                 description={item.description}
-                buttonUrl={item.url}
+                buttonUrl={itemUrl}
                 isStopped={isStopped}
                 isMobile={isMobile}
                 isParallax
@@ -120,7 +122,7 @@ const WorkItem = ({
         <StyledWorkItemInfo
           title={item.title}
           description={item.description}
-          buttonUrl={item.url}
+          buttonUrl={itemUrl}
           isStopped={isStopped}
         />
       </InfoOutterWrapper>

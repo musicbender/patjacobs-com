@@ -2268,7 +2268,7 @@ export type Gcms_Project = Gcms_Node & {
   description?: Maybe<Scalars['String']>,
   disabled?: Maybe<Scalars['Boolean']>,
   techList: Array<Scalars['String']>,
-  path?: Maybe<Scalars['String']>,
+  externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Gcms_RichText>,
 };
 
@@ -2288,7 +2288,7 @@ export type Gcms_ProjectCreateInput = {
   projectType: Gcms_ProjectType,
   description?: Maybe<Scalars['String']>,
   disabled?: Maybe<Scalars['Boolean']>,
-  path?: Maybe<Scalars['String']>,
+  externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   techList?: Maybe<Gcms_ProjectCreatetechListInput>,
   imageDesktop?: Maybe<Gcms_AssetCreateOneWithoutImageDesktopProjectInput>,
@@ -2310,7 +2310,7 @@ export type Gcms_ProjectCreateWithoutImageDesktopInput = {
   projectType: Gcms_ProjectType,
   description?: Maybe<Scalars['String']>,
   disabled?: Maybe<Scalars['Boolean']>,
-  path?: Maybe<Scalars['String']>,
+  externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   techList?: Maybe<Gcms_ProjectCreatetechListInput>,
 };
@@ -2342,8 +2342,8 @@ export type Gcms_ProjectOrderByInput =
   'description_DESC' |
   'disabled_ASC' |
   'disabled_DESC' |
-  'path_ASC' |
-  'path_DESC' |
+  'externalUrl_ASC' |
+  'externalUrl_DESC' |
   'body_ASC' |
   'body_DESC';
 
@@ -2358,7 +2358,7 @@ export type Gcms_ProjectPreviousValues = {
   description?: Maybe<Scalars['String']>,
   disabled?: Maybe<Scalars['Boolean']>,
   techList: Array<Scalars['String']>,
-  path?: Maybe<Scalars['String']>,
+  externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Gcms_RichText>,
 };
 
@@ -2525,33 +2525,33 @@ export type Gcms_ProjectScalarWhereInput = {
   disabled?: Maybe<Scalars['Boolean']>,
   /** All values that are not equal to given value. */
   disabled_not?: Maybe<Scalars['Boolean']>,
-  path?: Maybe<Scalars['String']>,
+  externalUrl?: Maybe<Scalars['String']>,
   /** All values that are not equal to given value. */
-  path_not?: Maybe<Scalars['String']>,
+  externalUrl_not?: Maybe<Scalars['String']>,
   /** All values that are contained in given list. */
-  path_in?: Maybe<Array<Scalars['String']>>,
+  externalUrl_in?: Maybe<Array<Scalars['String']>>,
   /** All values that are not contained in given list. */
-  path_not_in?: Maybe<Array<Scalars['String']>>,
+  externalUrl_not_in?: Maybe<Array<Scalars['String']>>,
   /** All values less than the given value. */
-  path_lt?: Maybe<Scalars['String']>,
+  externalUrl_lt?: Maybe<Scalars['String']>,
   /** All values less than or equal the given value. */
-  path_lte?: Maybe<Scalars['String']>,
+  externalUrl_lte?: Maybe<Scalars['String']>,
   /** All values greater than the given value. */
-  path_gt?: Maybe<Scalars['String']>,
+  externalUrl_gt?: Maybe<Scalars['String']>,
   /** All values greater than or equal the given value. */
-  path_gte?: Maybe<Scalars['String']>,
+  externalUrl_gte?: Maybe<Scalars['String']>,
   /** All values containing the given string. */
-  path_contains?: Maybe<Scalars['String']>,
+  externalUrl_contains?: Maybe<Scalars['String']>,
   /** All values not containing the given string. */
-  path_not_contains?: Maybe<Scalars['String']>,
+  externalUrl_not_contains?: Maybe<Scalars['String']>,
   /** All values starting with the given string. */
-  path_starts_with?: Maybe<Scalars['String']>,
+  externalUrl_starts_with?: Maybe<Scalars['String']>,
   /** All values not starting with the given string. */
-  path_not_starts_with?: Maybe<Scalars['String']>,
+  externalUrl_not_starts_with?: Maybe<Scalars['String']>,
   /** All values ending with the given string. */
-  path_ends_with?: Maybe<Scalars['String']>,
+  externalUrl_ends_with?: Maybe<Scalars['String']>,
   /** All values not ending with the given string. */
-  path_not_ends_with?: Maybe<Scalars['String']>,
+  externalUrl_not_ends_with?: Maybe<Scalars['String']>,
 };
 
 export type Gcms_ProjectSubscriptionPayload = {
@@ -2590,7 +2590,7 @@ export type Gcms_ProjectUpdateInput = {
   projectType?: Maybe<Gcms_ProjectType>,
   description?: Maybe<Scalars['String']>,
   disabled?: Maybe<Scalars['Boolean']>,
-  path?: Maybe<Scalars['String']>,
+  externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   techList?: Maybe<Gcms_ProjectUpdatetechListInput>,
   imageDesktop?: Maybe<Gcms_AssetUpdateOneWithoutImageDesktopProjectInput>,
@@ -2603,7 +2603,7 @@ export type Gcms_ProjectUpdateManyDataInput = {
   projectType?: Maybe<Gcms_ProjectType>,
   description?: Maybe<Scalars['String']>,
   disabled?: Maybe<Scalars['Boolean']>,
-  path?: Maybe<Scalars['String']>,
+  externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   techList?: Maybe<Gcms_ProjectUpdatetechListInput>,
 };
@@ -2615,7 +2615,7 @@ export type Gcms_ProjectUpdateManyMutationInput = {
   projectType?: Maybe<Gcms_ProjectType>,
   description?: Maybe<Scalars['String']>,
   disabled?: Maybe<Scalars['Boolean']>,
-  path?: Maybe<Scalars['String']>,
+  externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   techList?: Maybe<Gcms_ProjectUpdatetechListInput>,
 };
@@ -2648,7 +2648,7 @@ export type Gcms_ProjectUpdateWithoutImageDesktopDataInput = {
   projectType?: Maybe<Gcms_ProjectType>,
   description?: Maybe<Scalars['String']>,
   disabled?: Maybe<Scalars['Boolean']>,
-  path?: Maybe<Scalars['String']>,
+  externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   techList?: Maybe<Gcms_ProjectUpdatetechListInput>,
 };
@@ -2827,33 +2827,33 @@ export type Gcms_ProjectWhereInput = {
   disabled?: Maybe<Scalars['Boolean']>,
   /** All values that are not equal to given value. */
   disabled_not?: Maybe<Scalars['Boolean']>,
-  path?: Maybe<Scalars['String']>,
+  externalUrl?: Maybe<Scalars['String']>,
   /** All values that are not equal to given value. */
-  path_not?: Maybe<Scalars['String']>,
+  externalUrl_not?: Maybe<Scalars['String']>,
   /** All values that are contained in given list. */
-  path_in?: Maybe<Array<Scalars['String']>>,
+  externalUrl_in?: Maybe<Array<Scalars['String']>>,
   /** All values that are not contained in given list. */
-  path_not_in?: Maybe<Array<Scalars['String']>>,
+  externalUrl_not_in?: Maybe<Array<Scalars['String']>>,
   /** All values less than the given value. */
-  path_lt?: Maybe<Scalars['String']>,
+  externalUrl_lt?: Maybe<Scalars['String']>,
   /** All values less than or equal the given value. */
-  path_lte?: Maybe<Scalars['String']>,
+  externalUrl_lte?: Maybe<Scalars['String']>,
   /** All values greater than the given value. */
-  path_gt?: Maybe<Scalars['String']>,
+  externalUrl_gt?: Maybe<Scalars['String']>,
   /** All values greater than or equal the given value. */
-  path_gte?: Maybe<Scalars['String']>,
+  externalUrl_gte?: Maybe<Scalars['String']>,
   /** All values containing the given string. */
-  path_contains?: Maybe<Scalars['String']>,
+  externalUrl_contains?: Maybe<Scalars['String']>,
   /** All values not containing the given string. */
-  path_not_contains?: Maybe<Scalars['String']>,
+  externalUrl_not_contains?: Maybe<Scalars['String']>,
   /** All values starting with the given string. */
-  path_starts_with?: Maybe<Scalars['String']>,
+  externalUrl_starts_with?: Maybe<Scalars['String']>,
   /** All values not starting with the given string. */
-  path_not_starts_with?: Maybe<Scalars['String']>,
+  externalUrl_not_starts_with?: Maybe<Scalars['String']>,
   /** All values ending with the given string. */
-  path_ends_with?: Maybe<Scalars['String']>,
+  externalUrl_ends_with?: Maybe<Scalars['String']>,
   /** All values not ending with the given string. */
-  path_not_ends_with?: Maybe<Scalars['String']>,
+  externalUrl_not_ends_with?: Maybe<Scalars['String']>,
   imageDesktop?: Maybe<Gcms_AssetWhereInput>,
 };
 
@@ -5637,7 +5637,10 @@ export type Unnamed_7_Query = { configs: Maybe<{ recentWork: Maybe<{ particleDat
 export type Unnamed_8_QueryVariables = {};
 
 
-export type Unnamed_8_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'workItemsAmount'>>, content: Maybe<{ home: Maybe<{ sections: Maybe<{ recentWork: Maybe<Pick<ConfigsContentHomeSectionsRecentWork, 'heading'>> }> }> }> }>, allProjects: { nodes: Array<Pick<Projects, 'type' | 'title' | 'imageDesktop' | 'imageMobile' | 'description' | 'url'>> } };
+export type Unnamed_8_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'workItemsAmount'>>, content: Maybe<{ home: Maybe<{ sections: Maybe<{ recentWork: Maybe<Pick<ConfigsContentHomeSectionsRecentWork, 'heading'>> }> }> }> }>, gcms: { projects: Array<Maybe<(
+      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl'>
+      & { imageDesktop: Maybe<Pick<Gcms_Asset, 'url'>> }
+    )>> } };
 
 export type Unnamed_9_QueryVariables = {};
 
