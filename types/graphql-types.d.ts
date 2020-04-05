@@ -1384,20 +1384,20 @@ export type FloatQueryOperatorInput = {
 
 export type Gcms = {
   assets: Array<Maybe<Gcms_Asset>>,
-  aboutBodies: Array<Maybe<Gcms_AboutBody>>,
   skills: Array<Maybe<Gcms_Skill>>,
   projects: Array<Maybe<Gcms_Project>>,
   socialLinks: Array<Maybe<Gcms_SocialLink>>,
+  sections: Array<Maybe<Gcms_Section>>,
   asset?: Maybe<Gcms_Asset>,
-  aboutBody?: Maybe<Gcms_AboutBody>,
   skill?: Maybe<Gcms_Skill>,
   project?: Maybe<Gcms_Project>,
   socialLink?: Maybe<Gcms_SocialLink>,
+  section?: Maybe<Gcms_Section>,
   assetsConnection: Gcms_AssetConnection,
-  aboutBodiesConnection: Gcms_AboutBodyConnection,
   skillsConnection: Gcms_SkillConnection,
   projectsConnection: Gcms_ProjectConnection,
   socialLinksConnection: Gcms_SocialLinkConnection,
+  sectionsConnection: Gcms_SectionConnection,
   /** Fetches an object given its ID */
   node?: Maybe<Gcms_Node>,
 };
@@ -1406,17 +1406,6 @@ export type Gcms = {
 export type GcmsAssetsArgs = {
   where?: Maybe<Gcms_AssetWhereInput>,
   orderBy?: Maybe<Gcms_AssetOrderByInput>,
-  skip?: Maybe<Scalars['Int']>,
-  after?: Maybe<Scalars['String']>,
-  before?: Maybe<Scalars['String']>,
-  first?: Maybe<Scalars['Int']>,
-  last?: Maybe<Scalars['Int']>
-};
-
-
-export type GcmsAboutBodiesArgs = {
-  where?: Maybe<Gcms_AboutBodyWhereInput>,
-  orderBy?: Maybe<Gcms_AboutBodyOrderByInput>,
   skip?: Maybe<Scalars['Int']>,
   after?: Maybe<Scalars['String']>,
   before?: Maybe<Scalars['String']>,
@@ -1458,13 +1447,19 @@ export type GcmsSocialLinksArgs = {
 };
 
 
-export type GcmsAssetArgs = {
-  where: Gcms_AssetWhereUniqueInput
+export type GcmsSectionsArgs = {
+  where?: Maybe<Gcms_SectionWhereInput>,
+  orderBy?: Maybe<Gcms_SectionOrderByInput>,
+  skip?: Maybe<Scalars['Int']>,
+  after?: Maybe<Scalars['String']>,
+  before?: Maybe<Scalars['String']>,
+  first?: Maybe<Scalars['Int']>,
+  last?: Maybe<Scalars['Int']>
 };
 
 
-export type GcmsAboutBodyArgs = {
-  where: Gcms_AboutBodyWhereUniqueInput
+export type GcmsAssetArgs = {
+  where: Gcms_AssetWhereUniqueInput
 };
 
 
@@ -1483,20 +1478,14 @@ export type GcmsSocialLinkArgs = {
 };
 
 
-export type GcmsAssetsConnectionArgs = {
-  where?: Maybe<Gcms_AssetWhereInput>,
-  orderBy?: Maybe<Gcms_AssetOrderByInput>,
-  skip?: Maybe<Scalars['Int']>,
-  after?: Maybe<Scalars['String']>,
-  before?: Maybe<Scalars['String']>,
-  first?: Maybe<Scalars['Int']>,
-  last?: Maybe<Scalars['Int']>
+export type GcmsSectionArgs = {
+  where: Gcms_SectionWhereUniqueInput
 };
 
 
-export type GcmsAboutBodiesConnectionArgs = {
-  where?: Maybe<Gcms_AboutBodyWhereInput>,
-  orderBy?: Maybe<Gcms_AboutBodyOrderByInput>,
+export type GcmsAssetsConnectionArgs = {
+  where?: Maybe<Gcms_AssetWhereInput>,
+  orderBy?: Maybe<Gcms_AssetOrderByInput>,
   skip?: Maybe<Scalars['Int']>,
   after?: Maybe<Scalars['String']>,
   before?: Maybe<Scalars['String']>,
@@ -1538,175 +1527,19 @@ export type GcmsSocialLinksConnectionArgs = {
 };
 
 
+export type GcmsSectionsConnectionArgs = {
+  where?: Maybe<Gcms_SectionWhereInput>,
+  orderBy?: Maybe<Gcms_SectionOrderByInput>,
+  skip?: Maybe<Scalars['Int']>,
+  after?: Maybe<Scalars['String']>,
+  before?: Maybe<Scalars['String']>,
+  first?: Maybe<Scalars['Int']>,
+  last?: Maybe<Scalars['Int']>
+};
+
+
 export type GcmsNodeArgs = {
   id: Scalars['ID']
-};
-
-export type Gcms_AboutBody = Gcms_Node & {
-  status: Gcms_Status,
-  updatedAt: Scalars['GCMS_DateTime'],
-  createdAt: Scalars['GCMS_DateTime'],
-  id: Scalars['ID'],
-  body?: Maybe<Gcms_RichText>,
-};
-
-/** A connection to a list of items. */
-export type Gcms_AboutBodyConnection = {
-  /** Information to aid in pagination. */
-  pageInfo: Gcms_PageInfo,
-  /** A list of edges. */
-  edges: Array<Maybe<Gcms_AboutBodyEdge>>,
-  aggregate: Gcms_AggregateAboutBody,
-};
-
-export type Gcms_AboutBodyCreateInput = {
-  status?: Maybe<Gcms_Status>,
-  body?: Maybe<Scalars['GCMS_RichTextAST']>,
-};
-
-/** An edge in a connection. */
-export type Gcms_AboutBodyEdge = {
-  /** The item at the end of the edge. */
-  node: Gcms_AboutBody,
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String'],
-};
-
-export type Gcms_AboutBodyOrderByInput = 
-  'status_ASC' |
-  'status_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC' |
-  'id_ASC' |
-  'id_DESC' |
-  'body_ASC' |
-  'body_DESC';
-
-export type Gcms_AboutBodyPreviousValues = {
-  status: Gcms_Status,
-  updatedAt: Scalars['GCMS_DateTime'],
-  createdAt: Scalars['GCMS_DateTime'],
-  id: Scalars['ID'],
-  body?: Maybe<Gcms_RichText>,
-};
-
-export type Gcms_AboutBodySubscriptionPayload = {
-  mutation: Gcms_MutationType,
-  node?: Maybe<Gcms_AboutBody>,
-  updatedFields?: Maybe<Array<Scalars['String']>>,
-  previousValues?: Maybe<Gcms_AboutBodyPreviousValues>,
-};
-
-export type Gcms_AboutBodySubscriptionWhereInput = {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<Gcms_AboutBodySubscriptionWhereInput>>,
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<Gcms_AboutBodySubscriptionWhereInput>>,
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<Gcms_AboutBodySubscriptionWhereInput>>,
-  /** The subscription event gets dispatched when it's listed in mutation_in */
-  mutation_in?: Maybe<Array<Gcms_MutationType>>,
-  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
-  updatedFields_contains?: Maybe<Scalars['String']>,
-  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
-  updatedFields_contains_every?: Maybe<Array<Scalars['String']>>,
-  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
-  updatedFields_contains_some?: Maybe<Array<Scalars['String']>>,
-  node?: Maybe<Gcms_AboutBodyWhereInput>,
-};
-
-export type Gcms_AboutBodyUpdateInput = {
-  status?: Maybe<Gcms_Status>,
-  body?: Maybe<Scalars['GCMS_RichTextAST']>,
-};
-
-export type Gcms_AboutBodyUpdateManyMutationInput = {
-  status?: Maybe<Gcms_Status>,
-  body?: Maybe<Scalars['GCMS_RichTextAST']>,
-};
-
-export type Gcms_AboutBodyWhereInput = {
-  _search?: Maybe<Scalars['String']>,
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<Gcms_AboutBodyWhereInput>>,
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<Gcms_AboutBodyWhereInput>>,
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<Gcms_AboutBodyWhereInput>>,
-  status?: Maybe<Gcms_Status>,
-  /** All values that are not equal to given value. */
-  status_not?: Maybe<Gcms_Status>,
-  /** All values that are contained in given list. */
-  status_in?: Maybe<Array<Gcms_Status>>,
-  /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<Gcms_Status>>,
-  updatedAt?: Maybe<Scalars['GCMS_DateTime']>,
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>,
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>,
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>,
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>,
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>,
-  createdAt?: Maybe<Scalars['GCMS_DateTime']>,
-  /** All values that are not equal to given value. */
-  createdAt_not?: Maybe<Scalars['GCMS_DateTime']>,
-  /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
-  /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
-  /** All values less than the given value. */
-  createdAt_lt?: Maybe<Scalars['GCMS_DateTime']>,
-  /** All values less than or equal the given value. */
-  createdAt_lte?: Maybe<Scalars['GCMS_DateTime']>,
-  /** All values greater than the given value. */
-  createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>,
-  /** All values greater than or equal the given value. */
-  createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>,
-  id?: Maybe<Scalars['ID']>,
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<Scalars['ID']>,
-  /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>,
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>,
-  /** All values less than the given value. */
-  id_lt?: Maybe<Scalars['ID']>,
-  /** All values less than or equal the given value. */
-  id_lte?: Maybe<Scalars['ID']>,
-  /** All values greater than the given value. */
-  id_gt?: Maybe<Scalars['ID']>,
-  /** All values greater than or equal the given value. */
-  id_gte?: Maybe<Scalars['ID']>,
-  /** All values containing the given string. */
-  id_contains?: Maybe<Scalars['ID']>,
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<Scalars['ID']>,
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<Scalars['ID']>,
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<Scalars['ID']>,
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<Scalars['ID']>,
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<Scalars['ID']>,
-};
-
-export type Gcms_AboutBodyWhereUniqueInput = {
-  id?: Maybe<Scalars['ID']>,
-};
-
-export type Gcms_AggregateAboutBody = {
-  count: Scalars['Int'],
 };
 
 export type Gcms_AggregateAsset = {
@@ -1714,6 +1547,10 @@ export type Gcms_AggregateAsset = {
 };
 
 export type Gcms_AggregateProject = {
+  count: Scalars['Int'],
+};
+
+export type Gcms_AggregateSection = {
   count: Scalars['Int'],
 };
 
@@ -2870,6 +2707,238 @@ export type Gcms_RichText = {
   text?: Maybe<Scalars['String']>,
 };
 
+
+export type Gcms_Section = Gcms_Node & {
+  status: Gcms_Status,
+  updatedAt: Scalars['GCMS_DateTime'],
+  createdAt: Scalars['GCMS_DateTime'],
+  id: Scalars['ID'],
+  body?: Maybe<Gcms_RichText>,
+  sectionId?: Maybe<Scalars['String']>,
+  heading?: Maybe<Scalars['String']>,
+};
+
+/** A connection to a list of items. */
+export type Gcms_SectionConnection = {
+  /** Information to aid in pagination. */
+  pageInfo: Gcms_PageInfo,
+  /** A list of edges. */
+  edges: Array<Maybe<Gcms_SectionEdge>>,
+  aggregate: Gcms_AggregateSection,
+};
+
+export type Gcms_SectionCreateInput = {
+  status?: Maybe<Gcms_Status>,
+  body?: Maybe<Scalars['GCMS_RichTextAST']>,
+  sectionId?: Maybe<Scalars['String']>,
+  heading?: Maybe<Scalars['String']>,
+};
+
+/** An edge in a connection. */
+export type Gcms_SectionEdge = {
+  /** The item at the end of the edge. */
+  node: Gcms_Section,
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'],
+};
+
+export type Gcms_SectionOrderByInput = 
+  'status_ASC' |
+  'status_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC' |
+  'id_ASC' |
+  'id_DESC' |
+  'body_ASC' |
+  'body_DESC' |
+  'sectionId_ASC' |
+  'sectionId_DESC' |
+  'heading_ASC' |
+  'heading_DESC';
+
+export type Gcms_SectionPreviousValues = {
+  status: Gcms_Status,
+  updatedAt: Scalars['GCMS_DateTime'],
+  createdAt: Scalars['GCMS_DateTime'],
+  id: Scalars['ID'],
+  body?: Maybe<Gcms_RichText>,
+  sectionId?: Maybe<Scalars['String']>,
+  heading?: Maybe<Scalars['String']>,
+};
+
+export type Gcms_SectionSubscriptionPayload = {
+  mutation: Gcms_MutationType,
+  node?: Maybe<Gcms_Section>,
+  updatedFields?: Maybe<Array<Scalars['String']>>,
+  previousValues?: Maybe<Gcms_SectionPreviousValues>,
+};
+
+export type Gcms_SectionSubscriptionWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<Gcms_SectionSubscriptionWhereInput>>,
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<Gcms_SectionSubscriptionWhereInput>>,
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<Gcms_SectionSubscriptionWhereInput>>,
+  /** The subscription event gets dispatched when it's listed in mutation_in */
+  mutation_in?: Maybe<Array<Gcms_MutationType>>,
+  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
+  updatedFields_contains?: Maybe<Scalars['String']>,
+  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
+  updatedFields_contains_every?: Maybe<Array<Scalars['String']>>,
+  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
+  updatedFields_contains_some?: Maybe<Array<Scalars['String']>>,
+  node?: Maybe<Gcms_SectionWhereInput>,
+};
+
+export type Gcms_SectionUpdateInput = {
+  status?: Maybe<Gcms_Status>,
+  body?: Maybe<Scalars['GCMS_RichTextAST']>,
+  sectionId?: Maybe<Scalars['String']>,
+  heading?: Maybe<Scalars['String']>,
+};
+
+export type Gcms_SectionUpdateManyMutationInput = {
+  status?: Maybe<Gcms_Status>,
+  body?: Maybe<Scalars['GCMS_RichTextAST']>,
+  sectionId?: Maybe<Scalars['String']>,
+  heading?: Maybe<Scalars['String']>,
+};
+
+export type Gcms_SectionWhereInput = {
+  _search?: Maybe<Scalars['String']>,
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<Gcms_SectionWhereInput>>,
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<Gcms_SectionWhereInput>>,
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<Gcms_SectionWhereInput>>,
+  status?: Maybe<Gcms_Status>,
+  /** All values that are not equal to given value. */
+  status_not?: Maybe<Gcms_Status>,
+  /** All values that are contained in given list. */
+  status_in?: Maybe<Array<Gcms_Status>>,
+  /** All values that are not contained in given list. */
+  status_not_in?: Maybe<Array<Gcms_Status>>,
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>,
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>,
+  id?: Maybe<Scalars['ID']>,
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>,
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>,
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>,
+  /** All values less than the given value. */
+  id_lt?: Maybe<Scalars['ID']>,
+  /** All values less than or equal the given value. */
+  id_lte?: Maybe<Scalars['ID']>,
+  /** All values greater than the given value. */
+  id_gt?: Maybe<Scalars['ID']>,
+  /** All values greater than or equal the given value. */
+  id_gte?: Maybe<Scalars['ID']>,
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>,
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>,
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>,
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>,
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>,
+  /** All values not ending with the given string. */
+  id_not_ends_with?: Maybe<Scalars['ID']>,
+  sectionId?: Maybe<Scalars['String']>,
+  /** All values that are not equal to given value. */
+  sectionId_not?: Maybe<Scalars['String']>,
+  /** All values that are contained in given list. */
+  sectionId_in?: Maybe<Array<Scalars['String']>>,
+  /** All values that are not contained in given list. */
+  sectionId_not_in?: Maybe<Array<Scalars['String']>>,
+  /** All values less than the given value. */
+  sectionId_lt?: Maybe<Scalars['String']>,
+  /** All values less than or equal the given value. */
+  sectionId_lte?: Maybe<Scalars['String']>,
+  /** All values greater than the given value. */
+  sectionId_gt?: Maybe<Scalars['String']>,
+  /** All values greater than or equal the given value. */
+  sectionId_gte?: Maybe<Scalars['String']>,
+  /** All values containing the given string. */
+  sectionId_contains?: Maybe<Scalars['String']>,
+  /** All values not containing the given string. */
+  sectionId_not_contains?: Maybe<Scalars['String']>,
+  /** All values starting with the given string. */
+  sectionId_starts_with?: Maybe<Scalars['String']>,
+  /** All values not starting with the given string. */
+  sectionId_not_starts_with?: Maybe<Scalars['String']>,
+  /** All values ending with the given string. */
+  sectionId_ends_with?: Maybe<Scalars['String']>,
+  /** All values not ending with the given string. */
+  sectionId_not_ends_with?: Maybe<Scalars['String']>,
+  heading?: Maybe<Scalars['String']>,
+  /** All values that are not equal to given value. */
+  heading_not?: Maybe<Scalars['String']>,
+  /** All values that are contained in given list. */
+  heading_in?: Maybe<Array<Scalars['String']>>,
+  /** All values that are not contained in given list. */
+  heading_not_in?: Maybe<Array<Scalars['String']>>,
+  /** All values less than the given value. */
+  heading_lt?: Maybe<Scalars['String']>,
+  /** All values less than or equal the given value. */
+  heading_lte?: Maybe<Scalars['String']>,
+  /** All values greater than the given value. */
+  heading_gt?: Maybe<Scalars['String']>,
+  /** All values greater than or equal the given value. */
+  heading_gte?: Maybe<Scalars['String']>,
+  /** All values containing the given string. */
+  heading_contains?: Maybe<Scalars['String']>,
+  /** All values not containing the given string. */
+  heading_not_contains?: Maybe<Scalars['String']>,
+  /** All values starting with the given string. */
+  heading_starts_with?: Maybe<Scalars['String']>,
+  /** All values not starting with the given string. */
+  heading_not_starts_with?: Maybe<Scalars['String']>,
+  /** All values ending with the given string. */
+  heading_ends_with?: Maybe<Scalars['String']>,
+  /** All values not ending with the given string. */
+  heading_not_ends_with?: Maybe<Scalars['String']>,
+};
+
+export type Gcms_SectionWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>,
+  sectionId?: Maybe<Scalars['String']>,
+};
 
 export type Gcms_Skill = Gcms_Node & {
   status: Gcms_Status,
@@ -4135,210 +4204,6 @@ export type PotraceTurnPolicy =
   'TURNPOLICY_MINORITY' |
   'TURNPOLICY_MAJORITY';
 
-export type Projects = Node & {
-  id: Scalars['ID'],
-  parent?: Maybe<Node>,
-  children: Array<Node>,
-  internal: Internal,
-  projectId?: Maybe<Scalars['String']>,
-  title?: Maybe<Scalars['String']>,
-  type?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<Scalars['String']>,
-  imageMobile?: Maybe<Scalars['String']>,
-  description?: Maybe<Scalars['String']>,
-  disabled?: Maybe<Scalars['Boolean']>,
-  techList?: Maybe<Array<Maybe<Scalars['String']>>>,
-  url?: Maybe<Scalars['String']>,
-  content?: Maybe<Array<Maybe<ProjectsContent>>>,
-};
-
-export type ProjectsConnection = {
-  totalCount: Scalars['Int'],
-  edges: Array<ProjectsEdge>,
-  nodes: Array<Projects>,
-  pageInfo: PageInfo,
-  distinct: Array<Scalars['String']>,
-  group: Array<ProjectsGroupConnection>,
-};
-
-
-export type ProjectsConnectionDistinctArgs = {
-  field: ProjectsFieldsEnum
-};
-
-
-export type ProjectsConnectionGroupArgs = {
-  skip?: Maybe<Scalars['Int']>,
-  limit?: Maybe<Scalars['Int']>,
-  field: ProjectsFieldsEnum
-};
-
-export type ProjectsContent = {
-  type?: Maybe<Scalars['String']>,
-  imgFile?: Maybe<Scalars['String']>,
-  caption?: Maybe<Scalars['String']>,
-  p1?: Maybe<Scalars['String']>,
-  p2?: Maybe<Scalars['String']>,
-  videoFile?: Maybe<Scalars['String']>,
-  text?: Maybe<Scalars['String']>,
-};
-
-export type ProjectsContentFilterInput = {
-  type?: Maybe<StringQueryOperatorInput>,
-  imgFile?: Maybe<StringQueryOperatorInput>,
-  caption?: Maybe<StringQueryOperatorInput>,
-  p1?: Maybe<StringQueryOperatorInput>,
-  p2?: Maybe<StringQueryOperatorInput>,
-  videoFile?: Maybe<StringQueryOperatorInput>,
-  text?: Maybe<StringQueryOperatorInput>,
-};
-
-export type ProjectsContentFilterListInput = {
-  elemMatch?: Maybe<ProjectsContentFilterInput>,
-};
-
-export type ProjectsEdge = {
-  next?: Maybe<Projects>,
-  node: Projects,
-  previous?: Maybe<Projects>,
-};
-
-export type ProjectsFieldsEnum = 
-  'id' |
-  'parent___id' |
-  'parent___parent___id' |
-  'parent___parent___parent___id' |
-  'parent___parent___parent___children' |
-  'parent___parent___children' |
-  'parent___parent___children___id' |
-  'parent___parent___children___children' |
-  'parent___parent___internal___content' |
-  'parent___parent___internal___contentDigest' |
-  'parent___parent___internal___description' |
-  'parent___parent___internal___fieldOwners' |
-  'parent___parent___internal___ignoreType' |
-  'parent___parent___internal___mediaType' |
-  'parent___parent___internal___owner' |
-  'parent___parent___internal___type' |
-  'parent___children' |
-  'parent___children___id' |
-  'parent___children___parent___id' |
-  'parent___children___parent___children' |
-  'parent___children___children' |
-  'parent___children___children___id' |
-  'parent___children___children___children' |
-  'parent___children___internal___content' |
-  'parent___children___internal___contentDigest' |
-  'parent___children___internal___description' |
-  'parent___children___internal___fieldOwners' |
-  'parent___children___internal___ignoreType' |
-  'parent___children___internal___mediaType' |
-  'parent___children___internal___owner' |
-  'parent___children___internal___type' |
-  'parent___internal___content' |
-  'parent___internal___contentDigest' |
-  'parent___internal___description' |
-  'parent___internal___fieldOwners' |
-  'parent___internal___ignoreType' |
-  'parent___internal___mediaType' |
-  'parent___internal___owner' |
-  'parent___internal___type' |
-  'children' |
-  'children___id' |
-  'children___parent___id' |
-  'children___parent___parent___id' |
-  'children___parent___parent___children' |
-  'children___parent___children' |
-  'children___parent___children___id' |
-  'children___parent___children___children' |
-  'children___parent___internal___content' |
-  'children___parent___internal___contentDigest' |
-  'children___parent___internal___description' |
-  'children___parent___internal___fieldOwners' |
-  'children___parent___internal___ignoreType' |
-  'children___parent___internal___mediaType' |
-  'children___parent___internal___owner' |
-  'children___parent___internal___type' |
-  'children___children' |
-  'children___children___id' |
-  'children___children___parent___id' |
-  'children___children___parent___children' |
-  'children___children___children' |
-  'children___children___children___id' |
-  'children___children___children___children' |
-  'children___children___internal___content' |
-  'children___children___internal___contentDigest' |
-  'children___children___internal___description' |
-  'children___children___internal___fieldOwners' |
-  'children___children___internal___ignoreType' |
-  'children___children___internal___mediaType' |
-  'children___children___internal___owner' |
-  'children___children___internal___type' |
-  'children___internal___content' |
-  'children___internal___contentDigest' |
-  'children___internal___description' |
-  'children___internal___fieldOwners' |
-  'children___internal___ignoreType' |
-  'children___internal___mediaType' |
-  'children___internal___owner' |
-  'children___internal___type' |
-  'internal___content' |
-  'internal___contentDigest' |
-  'internal___description' |
-  'internal___fieldOwners' |
-  'internal___ignoreType' |
-  'internal___mediaType' |
-  'internal___owner' |
-  'internal___type' |
-  'projectId' |
-  'title' |
-  'type' |
-  'imageDesktop' |
-  'imageMobile' |
-  'description' |
-  'disabled' |
-  'techList' |
-  'url' |
-  'content' |
-  'content___type' |
-  'content___imgFile' |
-  'content___caption' |
-  'content___p1' |
-  'content___p2' |
-  'content___videoFile' |
-  'content___text';
-
-export type ProjectsFilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  parent?: Maybe<NodeFilterInput>,
-  children?: Maybe<NodeFilterListInput>,
-  internal?: Maybe<InternalFilterInput>,
-  projectId?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<ProjectsContentFilterListInput>,
-};
-
-export type ProjectsGroupConnection = {
-  totalCount: Scalars['Int'],
-  edges: Array<ProjectsEdge>,
-  nodes: Array<Projects>,
-  pageInfo: PageInfo,
-  field: Scalars['String'],
-  fieldValue?: Maybe<Scalars['String']>,
-};
-
-export type ProjectsSortInput = {
-  fields?: Maybe<Array<Maybe<ProjectsFieldsEnum>>>,
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>,
-};
-
 export type Query = {
   file?: Maybe<File>,
   allFile: FileConnection,
@@ -4348,10 +4213,6 @@ export type Query = {
   allSitePage: SitePageConnection,
   imageSharp?: Maybe<ImageSharp>,
   allImageSharp: ImageSharpConnection,
-  skills?: Maybe<Skills>,
-  allSkills: SkillsConnection,
-  projects?: Maybe<Projects>,
-  allProjects: ProjectsConnection,
   configs?: Maybe<Configs>,
   allConfigs: ConfigsConnection,
   graphQlSource?: Maybe<GraphQlSource>,
@@ -4506,50 +4367,6 @@ export type QueryImageSharpArgs = {
 export type QueryAllImageSharpArgs = {
   filter?: Maybe<ImageSharpFilterInput>,
   sort?: Maybe<ImageSharpSortInput>,
-  skip?: Maybe<Scalars['Int']>,
-  limit?: Maybe<Scalars['Int']>
-};
-
-
-export type QuerySkillsArgs = {
-  id?: Maybe<StringQueryOperatorInput>,
-  parent?: Maybe<NodeFilterInput>,
-  children?: Maybe<NodeFilterListInput>,
-  internal?: Maybe<InternalFilterInput>,
-  mobile?: Maybe<SkillsMobileFilterListInput>,
-  desktop?: Maybe<SkillsDesktopFilterListInput>
-};
-
-
-export type QueryAllSkillsArgs = {
-  filter?: Maybe<SkillsFilterInput>,
-  sort?: Maybe<SkillsSortInput>,
-  skip?: Maybe<Scalars['Int']>,
-  limit?: Maybe<Scalars['Int']>
-};
-
-
-export type QueryProjectsArgs = {
-  id?: Maybe<StringQueryOperatorInput>,
-  parent?: Maybe<NodeFilterInput>,
-  children?: Maybe<NodeFilterListInput>,
-  internal?: Maybe<InternalFilterInput>,
-  projectId?: Maybe<StringQueryOperatorInput>,
-  title?: Maybe<StringQueryOperatorInput>,
-  type?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<StringQueryOperatorInput>,
-  imageMobile?: Maybe<StringQueryOperatorInput>,
-  description?: Maybe<StringQueryOperatorInput>,
-  disabled?: Maybe<BooleanQueryOperatorInput>,
-  techList?: Maybe<StringQueryOperatorInput>,
-  url?: Maybe<StringQueryOperatorInput>,
-  content?: Maybe<ProjectsContentFilterListInput>
-};
-
-
-export type QueryAllProjectsArgs = {
-  filter?: Maybe<ProjectsFilterInput>,
-  sort?: Maybe<ProjectsSortInput>,
   skip?: Maybe<Scalars['Int']>,
   limit?: Maybe<Scalars['Int']>
 };
@@ -5399,193 +5216,6 @@ export type SiteSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>,
 };
 
-export type Skills = Node & {
-  id: Scalars['ID'],
-  parent?: Maybe<Node>,
-  children: Array<Node>,
-  internal: Internal,
-  mobile?: Maybe<Array<Maybe<SkillsMobile>>>,
-  desktop?: Maybe<Array<Maybe<SkillsDesktop>>>,
-};
-
-export type SkillsConnection = {
-  totalCount: Scalars['Int'],
-  edges: Array<SkillsEdge>,
-  nodes: Array<Skills>,
-  pageInfo: PageInfo,
-  distinct: Array<Scalars['String']>,
-  group: Array<SkillsGroupConnection>,
-};
-
-
-export type SkillsConnectionDistinctArgs = {
-  field: SkillsFieldsEnum
-};
-
-
-export type SkillsConnectionGroupArgs = {
-  skip?: Maybe<Scalars['Int']>,
-  limit?: Maybe<Scalars['Int']>,
-  field: SkillsFieldsEnum
-};
-
-export type SkillsDesktop = {
-  text?: Maybe<Scalars['String']>,
-  position?: Maybe<Array<Maybe<Scalars['Int']>>>,
-  direction?: Maybe<Scalars['String']>,
-};
-
-export type SkillsDesktopFilterInput = {
-  text?: Maybe<StringQueryOperatorInput>,
-  position?: Maybe<IntQueryOperatorInput>,
-  direction?: Maybe<StringQueryOperatorInput>,
-};
-
-export type SkillsDesktopFilterListInput = {
-  elemMatch?: Maybe<SkillsDesktopFilterInput>,
-};
-
-export type SkillsEdge = {
-  next?: Maybe<Skills>,
-  node: Skills,
-  previous?: Maybe<Skills>,
-};
-
-export type SkillsFieldsEnum = 
-  'id' |
-  'parent___id' |
-  'parent___parent___id' |
-  'parent___parent___parent___id' |
-  'parent___parent___parent___children' |
-  'parent___parent___children' |
-  'parent___parent___children___id' |
-  'parent___parent___children___children' |
-  'parent___parent___internal___content' |
-  'parent___parent___internal___contentDigest' |
-  'parent___parent___internal___description' |
-  'parent___parent___internal___fieldOwners' |
-  'parent___parent___internal___ignoreType' |
-  'parent___parent___internal___mediaType' |
-  'parent___parent___internal___owner' |
-  'parent___parent___internal___type' |
-  'parent___children' |
-  'parent___children___id' |
-  'parent___children___parent___id' |
-  'parent___children___parent___children' |
-  'parent___children___children' |
-  'parent___children___children___id' |
-  'parent___children___children___children' |
-  'parent___children___internal___content' |
-  'parent___children___internal___contentDigest' |
-  'parent___children___internal___description' |
-  'parent___children___internal___fieldOwners' |
-  'parent___children___internal___ignoreType' |
-  'parent___children___internal___mediaType' |
-  'parent___children___internal___owner' |
-  'parent___children___internal___type' |
-  'parent___internal___content' |
-  'parent___internal___contentDigest' |
-  'parent___internal___description' |
-  'parent___internal___fieldOwners' |
-  'parent___internal___ignoreType' |
-  'parent___internal___mediaType' |
-  'parent___internal___owner' |
-  'parent___internal___type' |
-  'children' |
-  'children___id' |
-  'children___parent___id' |
-  'children___parent___parent___id' |
-  'children___parent___parent___children' |
-  'children___parent___children' |
-  'children___parent___children___id' |
-  'children___parent___children___children' |
-  'children___parent___internal___content' |
-  'children___parent___internal___contentDigest' |
-  'children___parent___internal___description' |
-  'children___parent___internal___fieldOwners' |
-  'children___parent___internal___ignoreType' |
-  'children___parent___internal___mediaType' |
-  'children___parent___internal___owner' |
-  'children___parent___internal___type' |
-  'children___children' |
-  'children___children___id' |
-  'children___children___parent___id' |
-  'children___children___parent___children' |
-  'children___children___children' |
-  'children___children___children___id' |
-  'children___children___children___children' |
-  'children___children___internal___content' |
-  'children___children___internal___contentDigest' |
-  'children___children___internal___description' |
-  'children___children___internal___fieldOwners' |
-  'children___children___internal___ignoreType' |
-  'children___children___internal___mediaType' |
-  'children___children___internal___owner' |
-  'children___children___internal___type' |
-  'children___internal___content' |
-  'children___internal___contentDigest' |
-  'children___internal___description' |
-  'children___internal___fieldOwners' |
-  'children___internal___ignoreType' |
-  'children___internal___mediaType' |
-  'children___internal___owner' |
-  'children___internal___type' |
-  'internal___content' |
-  'internal___contentDigest' |
-  'internal___description' |
-  'internal___fieldOwners' |
-  'internal___ignoreType' |
-  'internal___mediaType' |
-  'internal___owner' |
-  'internal___type' |
-  'mobile' |
-  'mobile___text' |
-  'mobile___position' |
-  'mobile___direction' |
-  'desktop' |
-  'desktop___text' |
-  'desktop___position' |
-  'desktop___direction';
-
-export type SkillsFilterInput = {
-  id?: Maybe<StringQueryOperatorInput>,
-  parent?: Maybe<NodeFilterInput>,
-  children?: Maybe<NodeFilterListInput>,
-  internal?: Maybe<InternalFilterInput>,
-  mobile?: Maybe<SkillsMobileFilterListInput>,
-  desktop?: Maybe<SkillsDesktopFilterListInput>,
-};
-
-export type SkillsGroupConnection = {
-  totalCount: Scalars['Int'],
-  edges: Array<SkillsEdge>,
-  nodes: Array<Skills>,
-  pageInfo: PageInfo,
-  field: Scalars['String'],
-  fieldValue?: Maybe<Scalars['String']>,
-};
-
-export type SkillsMobile = {
-  text?: Maybe<Scalars['String']>,
-  position?: Maybe<Array<Maybe<Scalars['Int']>>>,
-  direction?: Maybe<Scalars['String']>,
-};
-
-export type SkillsMobileFilterInput = {
-  text?: Maybe<StringQueryOperatorInput>,
-  position?: Maybe<IntQueryOperatorInput>,
-  direction?: Maybe<StringQueryOperatorInput>,
-};
-
-export type SkillsMobileFilterListInput = {
-  elemMatch?: Maybe<SkillsMobileFilterInput>,
-};
-
-export type SkillsSortInput = {
-  fields?: Maybe<Array<Maybe<SkillsFieldsEnum>>>,
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>,
-};
-
 export type SortOrderEnum = 
   'ASC' |
   'DESC';
@@ -5612,50 +5242,58 @@ export type Unnamed_2_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteM
 export type Unnamed_3_QueryVariables = {};
 
 
-export type Unnamed_3_Query = { configs: Maybe<{ recentWork: Maybe<{ workItemPlx: Maybe<{ image: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxImage, 'startValue'>>>>, info: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxInfo, 'startValue'>>>>, mobileInfo: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxMobileInfo, 'startValue'>>>> }> }> }> };
+export type Unnamed_3_Query = { gcms: { socialLinks: Array<Maybe<Pick<Gcms_SocialLink, 'id' | 'label' | 'url'>>> } };
 
 export type Unnamed_4_QueryVariables = {};
 
 
-export type Unnamed_4_Query = { configs: Maybe<{ content: Maybe<{ home: Maybe<{ sections: Maybe<{ aboutMe: Maybe<Pick<ConfigsContentHomeSectionsAboutMe, 'heading' | 'body'>> }> }> }> }> };
+export type Unnamed_4_Query = { configs: Maybe<{ recentWork: Maybe<{ workItemPlx: Maybe<{ image: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxImage, 'startValue'>>>>, info: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxInfo, 'startValue'>>>>, mobileInfo: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxMobileInfo, 'startValue'>>>> }> }> }> };
 
 export type Unnamed_5_QueryVariables = {};
 
 
-export type Unnamed_5_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'homeBottom'>> }> };
+export type Unnamed_5_Query = { gcms: { section: Maybe<(
+      Pick<Gcms_Section, 'heading'>
+      & { body: Maybe<Pick<Gcms_RichText, 'html'>> }
+    )> } };
 
 export type Unnamed_6_QueryVariables = {};
 
 
-export type Unnamed_6_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'name' | 'role'>>, headerConfig: Maybe<{ triangles: Maybe<Array<Maybe<Pick<ConfigsHeaderConfigTriangles, 'id' | 'color' | 'size' | 'plx' | 'start' | 'end'>>>> }>, config: Maybe<Pick<ConfigsConfig, 'gridLines'>> }> };
+export type Unnamed_6_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'homeBottom'>> }> };
 
 export type Unnamed_7_QueryVariables = {};
 
 
-export type Unnamed_7_Query = { configs: Maybe<{ recentWork: Maybe<{ particleData: Maybe<Array<Maybe<Pick<ConfigsRecentWorkParticleData, 'name' | 'type' | 'color' | 'size' | 'plx'>>>> }>, config: Maybe<Pick<ConfigsConfig, 'gridLines'>> }> };
+export type Unnamed_7_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'name' | 'role'>>, headerConfig: Maybe<{ triangles: Maybe<Array<Maybe<Pick<ConfigsHeaderConfigTriangles, 'id' | 'color' | 'size' | 'plx' | 'start' | 'end'>>>> }>, config: Maybe<Pick<ConfigsConfig, 'gridLines'>> }> };
 
 export type Unnamed_8_QueryVariables = {};
 
 
-export type Unnamed_8_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'workItemsAmount'>>, content: Maybe<{ home: Maybe<{ sections: Maybe<{ recentWork: Maybe<Pick<ConfigsContentHomeSectionsRecentWork, 'heading'>> }> }> }> }>, gcms: { projects: Array<Maybe<(
-      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl'>
-      & { imageDesktop: Maybe<Pick<Gcms_Asset, 'url'>> }
-    )>> } };
+export type Unnamed_8_Query = { configs: Maybe<{ recentWork: Maybe<{ particleData: Maybe<Array<Maybe<Pick<ConfigsRecentWorkParticleData, 'name' | 'type' | 'color' | 'size' | 'plx'>>>> }>, config: Maybe<Pick<ConfigsConfig, 'gridLines'>> }> };
 
 export type Unnamed_9_QueryVariables = {};
 
 
-export type Unnamed_9_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'email'>>, config: Maybe<Pick<ConfigsConfig, 'skillsTop'>> }>, skills: Maybe<{ mobile: Maybe<Array<Maybe<Pick<SkillsMobile, 'text' | 'position' | 'direction'>>>>, desktop: Maybe<Array<Maybe<Pick<SkillsDesktop, 'text' | 'position' | 'direction'>>>> }> };
+export type Unnamed_9_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'workItemsAmount'>> }>, gcms: { section: Maybe<Pick<Gcms_Section, 'heading'>>, projects: Array<Maybe<(
+      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl'>
+      & { imageDesktop: Maybe<Pick<Gcms_Asset, 'url'>> }
+    )>> } };
 
 export type Unnamed_10_QueryVariables = {};
 
 
-export type Unnamed_10_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'splashScreenDebug'>> }> };
+export type Unnamed_10_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'email'>>, config: Maybe<Pick<ConfigsConfig, 'skillsTop'>> }>, gcms: { skills: Array<Maybe<Pick<Gcms_Skill, 'xAxisDesktop' | 'xAxisMobile' | 'yAxisDesktop' | 'yAxisMobile' | 'directionDesktop' | 'directionMobile' | 'id' | 'label'>>> } };
 
 export type Unnamed_11_QueryVariables = {};
 
 
-export type Unnamed_11_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
+export type Unnamed_11_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'splashScreenDebug'>> }> };
+
+export type Unnamed_12_QueryVariables = {};
+
+
+export type Unnamed_12_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

@@ -34,14 +34,13 @@ export const ContentBox = styled.div`
   ${media.tablet`
     padding: 2em 4em;
   `}
-`;
-
-export const ContentText = styled.p`
-  line-height: 1.65;
-  font-size: 1rem;
-  color: ${({ theme }) => hexRgb(theme.palette.white, 0.67)};
-  ${media.tablet`
-    font-size: 1.2rem;
-    line-height: 1.87;
-  `}
+  > p {
+    line-height: 1.65;
+    font-size: 1rem;
+    color: ${({ theme }) => hexRgb(theme.palette.white, 0.67)};
+    ${media.tablet`
+      font-size: 1.2rem;
+      line-height: 1.87;
+    `}
+  }
 `;

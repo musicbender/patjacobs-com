@@ -1,13 +1,26 @@
 import React from 'react';
-import socials from './config.json';
+import { useStaticQuery, graphql } from 'gatsby';
 import { SocialWrapper, InnerWrapper, LinkText } from './styles';
+import { Gcms_SocialLink } from '../../../../types';
 
 const Social = () => {
+  const { gcms } = useStaticQuery(graphql`
+    query {
+      gcms {
+        socialLinks {
+          id
+          label
+          url
+        }
+      }
+    }
+  `);
+
   return (
     <SocialWrapper>
       <InnerWrapper>
         {
-          socials.map((item: any, i: number) => (
+          gcms.socialLinks.map((item: Gcms_SocialLink, i: number) => (
             <LinkText
               href={item.url}
               target="_blank"

@@ -36,6 +36,12 @@ export type ButtonTypes = 'line' | 'ridicularge-XL';
 
 export type Axis = 'x' | 'y';
 
+export type Skill = {
+  text: string
+  position: number[]
+  direction: string
+}
+
 //enums
 export type CoreColors = 
   'aqua' |

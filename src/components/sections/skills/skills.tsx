@@ -6,11 +6,12 @@ import { setSkillsTop } from '../../../actions/home';
 import { hasWindow, throttle, minMax } from '../../../util/util';
 import { SkillsWrapper, DotWrapper, StyledDotFormation } from './styles';
 import { StaticQuery, graphql } from 'gatsby';
-import { Configs, Skills, Skill, Query } from '../../../../types';
+import { Configs, Gcms_Skill, Query } from '../../../../types';
+import { compileSkillsData } from '../../../util/data';
 
 type Props = {
   configs: Configs,
-  skills: Skills,
+  skills: Gcms_Skill[],
   atBottom?: boolean,
 }
 
@@ -103,8 +104,6 @@ class SkillsSection extends PureComponent<Props & ReduxProps, State> {
   }
 
   render() {
-    console.log('props skills', this.props, this.props.atBottom);
-    
     return (
       <SkillsWrapper>
         <Heading text="tech_i_know" />
@@ -115,7 +114,7 @@ class SkillsSection extends PureComponent<Props & ReduxProps, State> {
             active={this.props.atBottom}
             hideArray={this.hideArray}
             color={this.state.color}
-            textConfig={this.props.skills.desktop as Skill[]}
+            textConfig={compileSkillsData('desktop', this.props.skills)}
           />
           <StyledDotFormation
             breakpoint="mobile"
@@ -123,7 +122,7 @@ class SkillsSection extends PureComponent<Props & ReduxProps, State> {
             rows={20}
             active={true}
             color={this.state.color}
-            textConfig={this.props.skills.mobile as Skill[]}
+            textConfig={compileSkillsData('mobile', this.props.skills)}
           />
         </DotWrapper>
       </SkillsWrapper>
@@ -145,16 +144,16 @@ export default (props: Omit<Props, 'configs' | 'skills'>) => (
             skillsTop
           }
         }
-        skills {
-          mobile {
-            text
-            position
-            direction
-          }
-          desktop {
-            text
-            position
-            direction
+        gcms {
+          skills {
+            xAxisDesktop
+            xAxisMobile
+            yAxisDesktop
+            yAxisMobile
+            directionDesktop
+            directionMobile
+            id
+            label
           }
         }
       }
@@ -162,7 +161,7 @@ export default (props: Omit<Props, 'configs' | 'skills'>) => (
     render={(data: Query) => (
       <ConnectedSkills
         configs={data.configs}
-        skills={data.skills}
+        skills={data.gcms.skills}
         {...props}
       />
     )}

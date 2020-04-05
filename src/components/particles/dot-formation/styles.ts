@@ -58,15 +58,15 @@ export const TextEmbedWrapper = styled('div')<TextEmbedProps>`
   position: absolute;
   height: 1.5em;
   overflow: hidden;
-  ${props => props.direction === 'right' && css`
+  ${props => props.direction === 'Right' && css`
     transform-origin: center left;
     transform: rotate(0deg);
   `}
-  ${props => props.direction === 'up' && css`
+  ${props => props.direction === 'Up' && css`
     transform-origin: calc(-1.5% + 6px) calc(37% + 1px);
     transform: rotate(-90deg);
   `}
-  ${props => props.direction === 'down' && css`
+  ${props => props.direction === 'Down' && css`
     transform-origin: 0.175em 0.9em;
     transform: rotate(90deg);
   `}

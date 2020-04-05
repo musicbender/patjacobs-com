@@ -9,10 +9,12 @@ import WorkItem from '../../global/work-item/work-item';
 import { throttle } from '../../../util/util';
 import { setRecentWorkTop } from '../../../actions/global';
 import { RecentWorkWrapper, ParentWrapper, WorkItemsWrapper } from './styles';
+import { Gcms_Section, Gcms_Project, Configs } from '../../../../types';
 
 type Props = {
-  configs?: any, 
-  projects?: any,
+  configs?: Configs, 
+  section?: Gcms_Section,
+  projects?: Gcms_Project[],
 }
 
 type ReduxProps = {
@@ -124,7 +126,7 @@ class RecentWork extends PureComponent<Props & ReduxProps, State> {
   render() {
     return (
       <RecentWorkWrapper id="recent-work-section">
-        <Heading text={this.props.configs.content.home.sections.recentWork.heading} />
+        <Heading text={this.props.section.heading} />
         <ParentWrapper>
           <WorkItemsWrapper>
             {this.renderWorkItems()}
@@ -146,17 +148,11 @@ export default (props: Omit<Props, 'configs'>) => (
           config {
             workItemsAmount
           }
-          content {
-            home {
-              sections {
-                recentWork {
-                  heading
-                }
-              }
-            }
-          }
         }
         gcms {
+          section(where:{sectionId: "recent-work"}) {
+            heading
+          }
           projects(first: 5, where: {projectType: Work, disabled: false}) {
             id
             projectType
@@ -174,6 +170,7 @@ export default (props: Omit<Props, 'configs'>) => (
     render={data => (
       <ConnectedRecentWork 
         configs={data.configs} 
+        section={data.gcms.section}
         projects={data.gcms.projects}
         {...props} 
       />

@@ -4,7 +4,7 @@ import Plx from 'react-plx';
 import { hasWindow, countLongestArray } from '../../../util/util';
 import { startSequence } from '../../../util/animation';
 import { dotGridA } from './dots';
-import { StyledHeading, StyledDotGrid, ContentBox, ContentText, AboutMeSection } from './styles';
+import { StyledHeading, StyledDotGrid, ContentBox, AboutMeSection } from './styles';
 
 type Props = {
   atAbout: boolean,
@@ -17,17 +17,13 @@ const AboutMe = ({
   setAboutTop,
   isMobile
 }: Props) => {
-  const { configs } = useStaticQuery(graphql`
+  const { gcms } = useStaticQuery(graphql`
     query {
-      configs {
-        content {
-          home {
-            sections {
-              aboutMe {
-                heading
-                body
-              }
-            }
+      gcms {
+        section(where: {sectionId: "about-me"}) {
+          heading
+          body {
+            html
           }
         }
       }
@@ -65,7 +61,7 @@ const AboutMe = ({
 
   return (
     <AboutMeSection id="about-section">
-      <StyledHeading text={configs.content.home.sections.aboutMe.heading} />
+      <StyledHeading text={gcms.section.heading} />
       <StyledDotGrid
         sequence={dotGridA}
         index={dotGridIndex}
@@ -86,13 +82,7 @@ const AboutMe = ({
           ]
         }]}
       >
-        <ContentBox>
-          { 
-            configs.content.home.sections.aboutMe.body.map((t, i) => (
-              <ContentText key={'about-p-' + i}>{t}</ContentText>
-            )) 
-          }
-        </ContentBox>
+        <ContentBox dangerouslySetInnerHTML={{ __html: gcms.section.body.html }} />
       </Plx>
     </AboutMeSection>
   );

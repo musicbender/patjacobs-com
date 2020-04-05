@@ -11,6 +11,7 @@
     "lint": "tslint 'src/**/*.{ts,tsx}'",
     "start": "yarn dev",
     "serve": "gatsby serve",
+    "clean": "gatsby clean",
     "test": "jest"
   },
   "dependencies": {

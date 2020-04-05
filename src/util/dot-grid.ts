@@ -1,4 +1,5 @@
-import { Skill } from '../../types/static-data';
+import { Skill } from "../../types";
+
 
 export const getTextWidth = (text: string = '', spacing: number, offset: number = 0): string => {
   if (!spacing || !text || typeof text !== 'string' || typeof spacing !== 'number') {

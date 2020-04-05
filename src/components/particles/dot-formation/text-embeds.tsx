@@ -22,18 +22,18 @@ const TextEmbeds = ({
   rowMajority
 }: Props) => {
   const getTextOffset = (item: Skill): number => {
-    return item.direction === 'right'
+    return item.direction === 'Right'
       ? getDotOffset(item.position[0], 'x')
       : getDotOffset(item.position[1], 'y')
   }
 
   const getTextSpacing = (direction: DotFormationTextEmbedDirection): number => {
     switch(direction) {
-      case 'up':
+      case 'Up':
         return rowMajority 
           ? spacing[0]
           : spacing[1] / 2;
-      case 'down':
+      case 'Down':
         return rowMajority 
           ? (spacing[0]) - 0.25
           : (spacing[1] / 2) - 0.25;
@@ -45,7 +45,7 @@ const TextEmbeds = ({
   return (
     <TextEmbedsWrapper>
       {
-        textConfig.map((item, i) => (
+        textConfig.map((item: Skill, i: number) => (
           <TextEmbed
             data={item}
             spacing={spacing}

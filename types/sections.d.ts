@@ -1,4 +1,4 @@
-export type DotFormationTextEmbedDirection = 'up' | 'down' | 'right';
+export type DotFormationTextEmbedDirection = 'Up' | 'Down' | 'Right';
 
 export type DorFormationTextEmbedOffsets = {
   x: number,
