@@ -36,7 +36,7 @@ type ReduxProps = {
 type Props = {
   children?: any
   location?: {
-    pathname: string
+    pathname?: string
   }
   configs: Configs,
 }
@@ -105,7 +105,7 @@ export class Layout extends PureComponent<Props & ReduxProps> {
           splashOpen={this.props.splashOpen}
         >
             <GlobalStyles />
-            <Head pathname={location.pathname} />
+            <Head pathname={this.props.location && this.props.location.pathname || null} />
             <OutterWrapper>
               <GridLines gridLines={this.props.configs.settings.gridLines} />
               <Toolbar />

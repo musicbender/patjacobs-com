@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "gatsby build",
-    "build:local": "sh scripts/build-prod-local",
+    "build:local": "sh scripts/build-prod-local.sh",
     "dev": "sh scripts/start-dev.sh",
     "format": "prettier --write src/**/*.{ts,tsx}",
     "lint": "tslint 'src/**/*.{ts,tsx}'",

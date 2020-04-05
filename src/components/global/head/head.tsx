@@ -40,14 +40,14 @@ const Head: React.FunctionComponent<IProps> = ({
   );
 
   const seo: ISeo = {
-    title: title || site.title,
-    description: description || site.description,
-    image: image || `${site.siteUrl}/assets/thumbnail.png`,
-    url: `${site.siteUrl}${pathname}`,
-    twitter: site.twitter,
-    site: site.site,
-    color: site.color,
-    language: site.language
+    title: title || site.siteMetadata.title,
+    description: description || site.siteMetadata.description,
+    image: image || `${site.siteMetadata.siteUrl}/assets/thumbnail.png`,
+    url: `${site.siteMetadata.siteUrl}${pathname}`,
+    twitter: site.siteMetadata.twitter,
+    site: site.siteMetadata.site,
+    color: site.siteMetadata.color,
+    language: site.siteMetadata.language
   };
 
   return (

@@ -10,7 +10,7 @@ interface IProps {
 
 const Index: React.FunctionComponent<IProps> = ({ location }: IProps) => {
   return (
-    <Layout location={location}>
+    <Layout location={location || null}>
       <Home />
     </Layout>
   );
