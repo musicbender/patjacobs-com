@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { clearRequestTimeout, requestTimeout } from '../../../util/shims';
 import { CurtainWrapper, Block, InnerBlock } from './styles';
-import { ECurtainTypes, ECurtainColorLayouts, ECurtainTransition } from '../../../../types/global';
-import { ConfigsConfig } from '../../../../types/graphql-types';
+import { ECurtainTypes, ECurtainColorLayouts, ECurtainTransition, ConfigsSettings } from '../../../../types';
 
 type Props = {
   duration: number
@@ -15,7 +14,7 @@ type Props = {
 }
 
 type QueryProps = {
-  config?: ConfigsConfig
+  settings?: ConfigsSettings
 }
 
 type State = {
@@ -63,14 +62,14 @@ class Curtain extends PureComponent<Props & QueryProps, State> {
     switch (true) {
       case exiting && exit === 'blocks':
       case !exiting && entrance === 'blocks':
-        const max = (this.props.config.gridLines.length * this.blockNum * this.baseDelay) / 2;
+        const max = (this.props.settings.gridLines.length * this.blockNum * this.baseDelay) / 2;
         return max - (this.baseDelay * ((i + 1) / 2) * (j + 1));
       case exiting && exit === 'reverse-blocks':
       case !exiting && entrance === 'reverse-blocks':
         return this.baseDelay * i;
       case exiting && exit === 'rows':
       case !exiting && entrance === 'rows':
-        return this.baseDelay * ((this.props.config.gridLines.length - 1) - j);
+        return this.baseDelay * ((this.props.settings.gridLines.length - 1) - j);
       default:
         return this.baseDelay;
     }
@@ -99,7 +98,7 @@ class Curtain extends PureComponent<Props & QueryProps, State> {
   }
 
   renderBlocks() {
-    const lines = this.props.config.gridLines;
+    const lines = this.props.settings.gridLines;
     return lines.map((g: number, i: number) => {
       let blocks: any[] = [];
 
@@ -125,14 +124,14 @@ export default (props: Props) => (
     query={graphql`
       query {
         configs {
-          config {
+          settings {
             gridLines
           }
         }
       }
     `}
     render={data => (
-      <Curtain config={data.configs.config} {...props} />
+      <Curtain settings={data.configs.settings} {...props} />
     )}
   />
 );

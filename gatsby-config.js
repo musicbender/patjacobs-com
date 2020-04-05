@@ -18,6 +18,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-web-font-loader`,
+      options: {
+        families: ['Futura', 'Inconsolata'],
+        urls: ['fonts.css'],
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Pat Jacobs | Web Engineer`,

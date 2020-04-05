@@ -27,7 +27,7 @@ const Particles = ({
             plx
           }
         }
-        config {
+        settings {
           gridLines
         }
       }
@@ -66,7 +66,7 @@ const Particles = ({
           return (
             <RecentWorkParticle
               particleID={p.name}
-              gridLines={configs.config.gridLines}
+              gridLines={configs.settings.gridLines}
               key={'work-particle' + i + p.name}
             >
               <Plx

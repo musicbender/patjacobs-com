@@ -69,7 +69,7 @@ class SkillsSection extends PureComponent<Props & ReduxProps, State> {
 
     window.addEventListener('resize', this.handleResize);
     this.setState({ dotsWidth: rect.width, dotsHeight: rect.height });
-    this.setTop(false, this.props.configs.config.skillsTop);
+    this.setTop(false, this.props.configs.settings.skillsTop);
   }
 
   componentDidUpdate(prevProps: Props & ReduxProps): void {
@@ -140,7 +140,7 @@ export default (props: Omit<Props, 'configs' | 'skills'>) => (
           meta {
             email
           }
-          config {
+          settings {
             skillsTop
           }
         }

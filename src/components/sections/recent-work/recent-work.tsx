@@ -109,7 +109,7 @@ class RecentWork extends PureComponent<Props & ReduxProps, State> {
 
   renderWorkItems() {
     return this.props.projects.map((item, i: number) => {
-      return i < this.props.configs.config.workItemsAmount && (
+      return i < this.props.configs.settings.workItemsAmount && (
         <WorkItem
           item={item}
           index={i}
@@ -145,7 +145,7 @@ export default (props: Omit<Props, 'configs'>) => (
     query={graphql`
       query {
         configs {
-          config {
+          settings {
             workItemsAmount
           }
         }

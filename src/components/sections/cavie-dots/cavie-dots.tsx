@@ -19,7 +19,7 @@ const CavieDots = ({
   const { configs } = useStaticQuery(graphql`
     query {
       configs {
-        config {
+        settings {
           homeBottom
         }
       }
@@ -28,7 +28,7 @@ const CavieDots = ({
 
   const dotAmount: number = 25;
   const accumulator: number = 100;
-  const bottomLoc: number = bottom || configs.config.homeBottom;
+  const bottomLoc: number = bottom || configs.settings.homeBottom;
 
   const getPlxData = (i: number) => {
     const start = i === 0 ? 0 : baseStart + (i * accumulator);

@@ -38,7 +38,6 @@ type Props = {
   location?: {
     pathname: string
   }
-  config?: any,
   configs: Configs,
 }
 
@@ -66,9 +65,9 @@ export class Layout extends PureComponent<Props & ReduxProps> {
 
   componentDidMount() {
     this.props.setIsMobile();
-    const splashTimeout = this.props.configs.config.splashScreenDebug 
+    const splashTimeout = this.props.configs.settings.splashScreenDebug 
       ? 6000000 
-      : this.props.configs.config.splashScreenTimeout;
+      : this.props.configs.settings.splashScreenTimeout;
 
     requestTimeout(() => {
       this.props.changeSplash(false);
@@ -82,18 +81,18 @@ export class Layout extends PureComponent<Props & ReduxProps> {
   }
   
   handleToTop = () => {
-    this.props.changeTransport(true, this.props.configs.config.transportDuration);
+    this.props.changeTransport(true, this.props.configs.settings.transportDuration);
     requestTimeout(() => {
       window.scrollTo(0, 0);
-    }, this.props.configs.config.transportDuration / 2);
+    }, this.props.configs.settings.transportDuration / 2);
   }
 
   handleResize = () => {
-    if (this.props.isMobile && window.innerWidth > this.props.configs.config.mobileBreakpoint) {
+    if (this.props.isMobile && window.innerWidth > this.props.configs.settings.mobileBreakpoint) {
       this.props.setIsMobile();
     }
 
-    if (!this.props.isMobile && window.innerWidth < this.props.configs.config.mobileBreakpoint) {
+    if (!this.props.isMobile && window.innerWidth < this.props.configs.settings.mobileBreakpoint) {
       this.props.setIsMobile();
     }
   }
@@ -108,7 +107,7 @@ export class Layout extends PureComponent<Props & ReduxProps> {
             <GlobalStyles />
             <Head pathname={location.pathname} />
             <OutterWrapper>
-              <GridLines gridLines={this.props.configs.config.gridLines} />
+              <GridLines gridLines={this.props.configs.settings.gridLines} />
               <Toolbar />
               {
                 this.props.splashOpen &&
@@ -143,7 +142,7 @@ export default (props: Omit<Props, 'configs'>) => (
           }
         }
         configs {
-          config {
+          settings {
             gridLines
             transportDuration
             mobileBreakpoint

@@ -7,7 +7,7 @@ const SplashScreen: React.SFC = () => {
   const data = useStaticQuery(graphql`
     query {
       configs {
-        config {
+        settings {
           splashScreenDebug
         }
       }
@@ -16,9 +16,9 @@ const SplashScreen: React.SFC = () => {
 
   return (
     <SplashScreenWrapper>
-      <Curtain duration={data.configs.config.splashScreenDebug ? 3000000 : 3000} />
+      <Curtain duration={data.configs.settings.splashScreenDebug ? 3000000 : 3000} />
       <LogoOutterWrapper>
-        <StyledLogo color="aqua" debug={data.configs.config.splashScreenDebug } />
+        <StyledLogo color="aqua" debug={data.configs.settings.splashScreenDebug } />
       </LogoOutterWrapper>
     </SplashScreenWrapper>
   );

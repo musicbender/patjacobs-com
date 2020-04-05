@@ -47,40 +47,11 @@ export type Configs = Node & {
   parent?: Maybe<Node>,
   children: Array<Node>,
   internal: Internal,
-  config?: Maybe<ConfigsConfig>,
+  settings?: Maybe<ConfigsSettings>,
   meta?: Maybe<ConfigsMeta>,
-  headerConfig?: Maybe<ConfigsHeaderConfig>,
+  header?: Maybe<ConfigsHeader>,
   recentWork?: Maybe<ConfigsRecentWork>,
-  content?: Maybe<ConfigsContent>,
   data?: Maybe<ConfigsData>,
-};
-
-export type ConfigsConfig = {
-  gridLines?: Maybe<Array<Maybe<Scalars['Int']>>>,
-  pageLoadTimeout?: Maybe<Scalars['Int']>,
-  splashScreenDebug?: Maybe<Scalars['Boolean']>,
-  splashScreenTimeout?: Maybe<Scalars['Int']>,
-  transportDuration?: Maybe<Scalars['Int']>,
-  workItemsAmount?: Maybe<Scalars['Int']>,
-  homeBottom?: Maybe<Scalars['Int']>,
-  skillsTop?: Maybe<Scalars['Int']>,
-  mobileBreakpoint?: Maybe<Scalars['Int']>,
-  windowHeightConstant?: Maybe<Scalars['Int']>,
-  scrollDebug?: Maybe<Scalars['Boolean']>,
-};
-
-export type ConfigsConfigFilterInput = {
-  gridLines?: Maybe<IntQueryOperatorInput>,
-  pageLoadTimeout?: Maybe<IntQueryOperatorInput>,
-  splashScreenDebug?: Maybe<BooleanQueryOperatorInput>,
-  splashScreenTimeout?: Maybe<IntQueryOperatorInput>,
-  transportDuration?: Maybe<IntQueryOperatorInput>,
-  workItemsAmount?: Maybe<IntQueryOperatorInput>,
-  homeBottom?: Maybe<IntQueryOperatorInput>,
-  skillsTop?: Maybe<IntQueryOperatorInput>,
-  mobileBreakpoint?: Maybe<IntQueryOperatorInput>,
-  windowHeightConstant?: Maybe<IntQueryOperatorInput>,
-  scrollDebug?: Maybe<BooleanQueryOperatorInput>,
 };
 
 export type ConfigsConnection = {
@@ -104,147 +75,29 @@ export type ConfigsConnectionGroupArgs = {
   field: ConfigsFieldsEnum
 };
 
-export type ConfigsContent = {
-  home?: Maybe<ConfigsContentHome>,
-};
-
-export type ConfigsContentFilterInput = {
-  home?: Maybe<ConfigsContentHomeFilterInput>,
-};
-
-export type ConfigsContentHome = {
-  sections?: Maybe<ConfigsContentHomeSections>,
-};
-
-export type ConfigsContentHomeFilterInput = {
-  sections?: Maybe<ConfigsContentHomeSectionsFilterInput>,
-};
-
-export type ConfigsContentHomeSections = {
-  aboutMe?: Maybe<ConfigsContentHomeSectionsAboutMe>,
-  recentWork?: Maybe<ConfigsContentHomeSectionsRecentWork>,
-};
-
-export type ConfigsContentHomeSectionsAboutMe = {
-  heading?: Maybe<Scalars['String']>,
-  body?: Maybe<Array<Maybe<Scalars['String']>>>,
-};
-
-export type ConfigsContentHomeSectionsAboutMeFilterInput = {
-  heading?: Maybe<StringQueryOperatorInput>,
-  body?: Maybe<StringQueryOperatorInput>,
-};
-
-export type ConfigsContentHomeSectionsFilterInput = {
-  aboutMe?: Maybe<ConfigsContentHomeSectionsAboutMeFilterInput>,
-  recentWork?: Maybe<ConfigsContentHomeSectionsRecentWorkFilterInput>,
-};
-
-export type ConfigsContentHomeSectionsRecentWork = {
-  heading?: Maybe<Scalars['String']>,
-};
-
-export type ConfigsContentHomeSectionsRecentWorkFilterInput = {
-  heading?: Maybe<StringQueryOperatorInput>,
-};
-
 export type ConfigsData = {
-  config?: Maybe<ConfigsDataConfig>,
+  settings?: Maybe<ConfigsDataSettings>,
   meta?: Maybe<ConfigsDataMeta>,
-  headerConfig?: Maybe<ConfigsDataHeaderConfig>,
+  header?: Maybe<ConfigsDataHeader>,
   recentWork?: Maybe<ConfigsDataRecentWork>,
-  content?: Maybe<ConfigsDataContent>,
-};
-
-export type ConfigsDataConfig = {
-  gridLines?: Maybe<Array<Maybe<Scalars['Int']>>>,
-  pageLoadTimeout?: Maybe<Scalars['Int']>,
-  splashScreenDebug?: Maybe<Scalars['Boolean']>,
-  splashScreenTimeout?: Maybe<Scalars['Int']>,
-  transportDuration?: Maybe<Scalars['Int']>,
-  workItemsAmount?: Maybe<Scalars['Int']>,
-  homeBottom?: Maybe<Scalars['Int']>,
-  skillsTop?: Maybe<Scalars['Int']>,
-  mobileBreakpoint?: Maybe<Scalars['Int']>,
-  windowHeightConstant?: Maybe<Scalars['Int']>,
-  scrollDebug?: Maybe<Scalars['Boolean']>,
-};
-
-export type ConfigsDataConfigFilterInput = {
-  gridLines?: Maybe<IntQueryOperatorInput>,
-  pageLoadTimeout?: Maybe<IntQueryOperatorInput>,
-  splashScreenDebug?: Maybe<BooleanQueryOperatorInput>,
-  splashScreenTimeout?: Maybe<IntQueryOperatorInput>,
-  transportDuration?: Maybe<IntQueryOperatorInput>,
-  workItemsAmount?: Maybe<IntQueryOperatorInput>,
-  homeBottom?: Maybe<IntQueryOperatorInput>,
-  skillsTop?: Maybe<IntQueryOperatorInput>,
-  mobileBreakpoint?: Maybe<IntQueryOperatorInput>,
-  windowHeightConstant?: Maybe<IntQueryOperatorInput>,
-  scrollDebug?: Maybe<BooleanQueryOperatorInput>,
-};
-
-export type ConfigsDataContent = {
-  home?: Maybe<ConfigsDataContentHome>,
-};
-
-export type ConfigsDataContentFilterInput = {
-  home?: Maybe<ConfigsDataContentHomeFilterInput>,
-};
-
-export type ConfigsDataContentHome = {
-  sections?: Maybe<ConfigsDataContentHomeSections>,
-};
-
-export type ConfigsDataContentHomeFilterInput = {
-  sections?: Maybe<ConfigsDataContentHomeSectionsFilterInput>,
-};
-
-export type ConfigsDataContentHomeSections = {
-  aboutMe?: Maybe<ConfigsDataContentHomeSectionsAboutMe>,
-  recentWork?: Maybe<ConfigsDataContentHomeSectionsRecentWork>,
-};
-
-export type ConfigsDataContentHomeSectionsAboutMe = {
-  heading?: Maybe<Scalars['String']>,
-  body?: Maybe<Array<Maybe<Scalars['String']>>>,
-};
-
-export type ConfigsDataContentHomeSectionsAboutMeFilterInput = {
-  heading?: Maybe<StringQueryOperatorInput>,
-  body?: Maybe<StringQueryOperatorInput>,
-};
-
-export type ConfigsDataContentHomeSectionsFilterInput = {
-  aboutMe?: Maybe<ConfigsDataContentHomeSectionsAboutMeFilterInput>,
-  recentWork?: Maybe<ConfigsDataContentHomeSectionsRecentWorkFilterInput>,
-};
-
-export type ConfigsDataContentHomeSectionsRecentWork = {
-  heading?: Maybe<Scalars['String']>,
-};
-
-export type ConfigsDataContentHomeSectionsRecentWorkFilterInput = {
-  heading?: Maybe<StringQueryOperatorInput>,
 };
 
 export type ConfigsDataFilterInput = {
-  config?: Maybe<ConfigsDataConfigFilterInput>,
+  settings?: Maybe<ConfigsDataSettingsFilterInput>,
   meta?: Maybe<ConfigsDataMetaFilterInput>,
-  headerConfig?: Maybe<ConfigsDataHeaderConfigFilterInput>,
+  header?: Maybe<ConfigsDataHeaderFilterInput>,
   recentWork?: Maybe<ConfigsDataRecentWorkFilterInput>,
-  content?: Maybe<ConfigsDataContentFilterInput>,
 };
 
-export type ConfigsDataHeaderConfig = {
-  triangles?: Maybe<Array<Maybe<ConfigsDataHeaderConfigTriangles>>>,
+export type ConfigsDataHeader = {
+  triangles?: Maybe<Array<Maybe<ConfigsDataHeaderTriangles>>>,
 };
 
-export type ConfigsDataHeaderConfigFilterInput = {
-  triangles?: Maybe<ConfigsDataHeaderConfigTrianglesFilterListInput>,
+export type ConfigsDataHeaderFilterInput = {
+  triangles?: Maybe<ConfigsDataHeaderTrianglesFilterListInput>,
 };
 
-export type ConfigsDataHeaderConfigTriangles = {
+export type ConfigsDataHeaderTriangles = {
   id?: Maybe<Scalars['String']>,
   color?: Maybe<Scalars['String']>,
   size?: Maybe<Scalars['String']>,
@@ -253,7 +106,7 @@ export type ConfigsDataHeaderConfigTriangles = {
   end?: Maybe<Scalars['Int']>,
 };
 
-export type ConfigsDataHeaderConfigTrianglesFilterInput = {
+export type ConfigsDataHeaderTrianglesFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
   color?: Maybe<StringQueryOperatorInput>,
   size?: Maybe<StringQueryOperatorInput>,
@@ -262,8 +115,8 @@ export type ConfigsDataHeaderConfigTrianglesFilterInput = {
   end?: Maybe<IntQueryOperatorInput>,
 };
 
-export type ConfigsDataHeaderConfigTrianglesFilterListInput = {
-  elemMatch?: Maybe<ConfigsDataHeaderConfigTrianglesFilterInput>,
+export type ConfigsDataHeaderTrianglesFilterListInput = {
+  elemMatch?: Maybe<ConfigsDataHeaderTrianglesFilterInput>,
 };
 
 export type ConfigsDataMeta = {
@@ -354,6 +207,34 @@ export type ConfigsDataRecentWorkWorkItemPlxMobileInfoFilterInput = {
 
 export type ConfigsDataRecentWorkWorkItemPlxMobileInfoFilterListInput = {
   elemMatch?: Maybe<ConfigsDataRecentWorkWorkItemPlxMobileInfoFilterInput>,
+};
+
+export type ConfigsDataSettings = {
+  gridLines?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  pageLoadTimeout?: Maybe<Scalars['Int']>,
+  splashScreenDebug?: Maybe<Scalars['Boolean']>,
+  splashScreenTimeout?: Maybe<Scalars['Int']>,
+  transportDuration?: Maybe<Scalars['Int']>,
+  workItemsAmount?: Maybe<Scalars['Int']>,
+  homeBottom?: Maybe<Scalars['Int']>,
+  skillsTop?: Maybe<Scalars['Int']>,
+  mobileBreakpoint?: Maybe<Scalars['Int']>,
+  windowHeightConstant?: Maybe<Scalars['Int']>,
+  scrollDebug?: Maybe<Scalars['Boolean']>,
+};
+
+export type ConfigsDataSettingsFilterInput = {
+  gridLines?: Maybe<IntQueryOperatorInput>,
+  pageLoadTimeout?: Maybe<IntQueryOperatorInput>,
+  splashScreenDebug?: Maybe<BooleanQueryOperatorInput>,
+  splashScreenTimeout?: Maybe<IntQueryOperatorInput>,
+  transportDuration?: Maybe<IntQueryOperatorInput>,
+  workItemsAmount?: Maybe<IntQueryOperatorInput>,
+  homeBottom?: Maybe<IntQueryOperatorInput>,
+  skillsTop?: Maybe<IntQueryOperatorInput>,
+  mobileBreakpoint?: Maybe<IntQueryOperatorInput>,
+  windowHeightConstant?: Maybe<IntQueryOperatorInput>,
+  scrollDebug?: Maybe<BooleanQueryOperatorInput>,
 };
 
 export type ConfigsEdge = {
@@ -449,27 +330,27 @@ export type ConfigsFieldsEnum =
   'internal___mediaType' |
   'internal___owner' |
   'internal___type' |
-  'config___gridLines' |
-  'config___pageLoadTimeout' |
-  'config___splashScreenDebug' |
-  'config___splashScreenTimeout' |
-  'config___transportDuration' |
-  'config___workItemsAmount' |
-  'config___homeBottom' |
-  'config___skillsTop' |
-  'config___mobileBreakpoint' |
-  'config___windowHeightConstant' |
-  'config___scrollDebug' |
+  'settings___gridLines' |
+  'settings___pageLoadTimeout' |
+  'settings___splashScreenDebug' |
+  'settings___splashScreenTimeout' |
+  'settings___transportDuration' |
+  'settings___workItemsAmount' |
+  'settings___homeBottom' |
+  'settings___skillsTop' |
+  'settings___mobileBreakpoint' |
+  'settings___windowHeightConstant' |
+  'settings___scrollDebug' |
   'meta___role' |
   'meta___name' |
   'meta___email' |
-  'headerConfig___triangles' |
-  'headerConfig___triangles___id' |
-  'headerConfig___triangles___color' |
-  'headerConfig___triangles___size' |
-  'headerConfig___triangles___plx' |
-  'headerConfig___triangles___start' |
-  'headerConfig___triangles___end' |
+  'header___triangles' |
+  'header___triangles___id' |
+  'header___triangles___color' |
+  'header___triangles___size' |
+  'header___triangles___plx' |
+  'header___triangles___start' |
+  'header___triangles___end' |
   'recentWork___workItemPlx___image' |
   'recentWork___workItemPlx___image___startValue' |
   'recentWork___workItemPlx___info' |
@@ -482,27 +363,27 @@ export type ConfigsFieldsEnum =
   'recentWork___particleData___color' |
   'recentWork___particleData___size' |
   'recentWork___particleData___plx' |
-  'data___config___gridLines' |
-  'data___config___pageLoadTimeout' |
-  'data___config___splashScreenDebug' |
-  'data___config___splashScreenTimeout' |
-  'data___config___transportDuration' |
-  'data___config___workItemsAmount' |
-  'data___config___homeBottom' |
-  'data___config___skillsTop' |
-  'data___config___mobileBreakpoint' |
-  'data___config___windowHeightConstant' |
-  'data___config___scrollDebug' |
+  'data___settings___gridLines' |
+  'data___settings___pageLoadTimeout' |
+  'data___settings___splashScreenDebug' |
+  'data___settings___splashScreenTimeout' |
+  'data___settings___transportDuration' |
+  'data___settings___workItemsAmount' |
+  'data___settings___homeBottom' |
+  'data___settings___skillsTop' |
+  'data___settings___mobileBreakpoint' |
+  'data___settings___windowHeightConstant' |
+  'data___settings___scrollDebug' |
   'data___meta___role' |
   'data___meta___name' |
   'data___meta___email' |
-  'data___headerConfig___triangles' |
-  'data___headerConfig___triangles___id' |
-  'data___headerConfig___triangles___color' |
-  'data___headerConfig___triangles___size' |
-  'data___headerConfig___triangles___plx' |
-  'data___headerConfig___triangles___start' |
-  'data___headerConfig___triangles___end' |
+  'data___header___triangles' |
+  'data___header___triangles___id' |
+  'data___header___triangles___color' |
+  'data___header___triangles___size' |
+  'data___header___triangles___plx' |
+  'data___header___triangles___start' |
+  'data___header___triangles___end' |
   'data___recentWork___workItemPlx___image' |
   'data___recentWork___workItemPlx___info' |
   'data___recentWork___workItemPlx___mobileInfo' |
@@ -518,11 +399,10 @@ export type ConfigsFilterInput = {
   parent?: Maybe<NodeFilterInput>,
   children?: Maybe<NodeFilterListInput>,
   internal?: Maybe<InternalFilterInput>,
-  config?: Maybe<ConfigsConfigFilterInput>,
+  settings?: Maybe<ConfigsSettingsFilterInput>,
   meta?: Maybe<ConfigsMetaFilterInput>,
-  headerConfig?: Maybe<ConfigsHeaderConfigFilterInput>,
+  header?: Maybe<ConfigsHeaderFilterInput>,
   recentWork?: Maybe<ConfigsRecentWorkFilterInput>,
-  content?: Maybe<ConfigsContentFilterInput>,
   data?: Maybe<ConfigsDataFilterInput>,
 };
 
@@ -535,15 +415,15 @@ export type ConfigsGroupConnection = {
   fieldValue?: Maybe<Scalars['String']>,
 };
 
-export type ConfigsHeaderConfig = {
-  triangles?: Maybe<Array<Maybe<ConfigsHeaderConfigTriangles>>>,
+export type ConfigsHeader = {
+  triangles?: Maybe<Array<Maybe<ConfigsHeaderTriangles>>>,
 };
 
-export type ConfigsHeaderConfigFilterInput = {
-  triangles?: Maybe<ConfigsHeaderConfigTrianglesFilterListInput>,
+export type ConfigsHeaderFilterInput = {
+  triangles?: Maybe<ConfigsHeaderTrianglesFilterListInput>,
 };
 
-export type ConfigsHeaderConfigTriangles = {
+export type ConfigsHeaderTriangles = {
   id?: Maybe<Scalars['String']>,
   color?: Maybe<Scalars['String']>,
   size?: Maybe<Scalars['String']>,
@@ -552,7 +432,7 @@ export type ConfigsHeaderConfigTriangles = {
   end?: Maybe<Scalars['Int']>,
 };
 
-export type ConfigsHeaderConfigTrianglesFilterInput = {
+export type ConfigsHeaderTrianglesFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
   color?: Maybe<StringQueryOperatorInput>,
   size?: Maybe<StringQueryOperatorInput>,
@@ -561,8 +441,8 @@ export type ConfigsHeaderConfigTrianglesFilterInput = {
   end?: Maybe<IntQueryOperatorInput>,
 };
 
-export type ConfigsHeaderConfigTrianglesFilterListInput = {
-  elemMatch?: Maybe<ConfigsHeaderConfigTrianglesFilterInput>,
+export type ConfigsHeaderTrianglesFilterListInput = {
+  elemMatch?: Maybe<ConfigsHeaderTrianglesFilterInput>,
 };
 
 export type ConfigsMeta = {
@@ -653,6 +533,34 @@ export type ConfigsRecentWorkWorkItemPlxMobileInfoFilterInput = {
 
 export type ConfigsRecentWorkWorkItemPlxMobileInfoFilterListInput = {
   elemMatch?: Maybe<ConfigsRecentWorkWorkItemPlxMobileInfoFilterInput>,
+};
+
+export type ConfigsSettings = {
+  gridLines?: Maybe<Array<Maybe<Scalars['Int']>>>,
+  pageLoadTimeout?: Maybe<Scalars['Int']>,
+  splashScreenDebug?: Maybe<Scalars['Boolean']>,
+  splashScreenTimeout?: Maybe<Scalars['Int']>,
+  transportDuration?: Maybe<Scalars['Int']>,
+  workItemsAmount?: Maybe<Scalars['Int']>,
+  homeBottom?: Maybe<Scalars['Int']>,
+  skillsTop?: Maybe<Scalars['Int']>,
+  mobileBreakpoint?: Maybe<Scalars['Int']>,
+  windowHeightConstant?: Maybe<Scalars['Int']>,
+  scrollDebug?: Maybe<Scalars['Boolean']>,
+};
+
+export type ConfigsSettingsFilterInput = {
+  gridLines?: Maybe<IntQueryOperatorInput>,
+  pageLoadTimeout?: Maybe<IntQueryOperatorInput>,
+  splashScreenDebug?: Maybe<BooleanQueryOperatorInput>,
+  splashScreenTimeout?: Maybe<IntQueryOperatorInput>,
+  transportDuration?: Maybe<IntQueryOperatorInput>,
+  workItemsAmount?: Maybe<IntQueryOperatorInput>,
+  homeBottom?: Maybe<IntQueryOperatorInput>,
+  skillsTop?: Maybe<IntQueryOperatorInput>,
+  mobileBreakpoint?: Maybe<IntQueryOperatorInput>,
+  windowHeightConstant?: Maybe<IntQueryOperatorInput>,
+  scrollDebug?: Maybe<BooleanQueryOperatorInput>,
 };
 
 export type ConfigsSortInput = {
@@ -4377,11 +4285,10 @@ export type QueryConfigsArgs = {
   parent?: Maybe<NodeFilterInput>,
   children?: Maybe<NodeFilterListInput>,
   internal?: Maybe<InternalFilterInput>,
-  config?: Maybe<ConfigsConfigFilterInput>,
+  settings?: Maybe<ConfigsSettingsFilterInput>,
   meta?: Maybe<ConfigsMetaFilterInput>,
-  headerConfig?: Maybe<ConfigsHeaderConfigFilterInput>,
+  header?: Maybe<ConfigsHeaderFilterInput>,
   recentWork?: Maybe<ConfigsRecentWorkFilterInput>,
-  content?: Maybe<ConfigsContentFilterInput>,
   data?: Maybe<ConfigsDataFilterInput>
 };
 
@@ -4808,6 +4715,8 @@ export type SitePageFieldsEnum =
   'pluginCreator___version' |
   'pluginCreator___pluginOptions___name' |
   'pluginCreator___pluginOptions___path' |
+  'pluginCreator___pluginOptions___families' |
+  'pluginCreator___pluginOptions___urls' |
   'pluginCreator___pluginOptions___short_name' |
   'pluginCreator___pluginOptions___start_url' |
   'pluginCreator___pluginOptions___background_color' |
@@ -5010,6 +4919,8 @@ export type SitePluginFieldsEnum =
   'version' |
   'pluginOptions___name' |
   'pluginOptions___path' |
+  'pluginOptions___families' |
+  'pluginOptions___urls' |
   'pluginOptions___short_name' |
   'pluginOptions___start_url' |
   'pluginOptions___background_color' |
@@ -5141,6 +5052,8 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 export type SitePluginPluginOptions = {
   name?: Maybe<Scalars['String']>,
   path?: Maybe<Scalars['String']>,
+  families?: Maybe<Array<Maybe<Scalars['String']>>>,
+  urls?: Maybe<Array<Maybe<Scalars['String']>>>,
   short_name?: Maybe<Scalars['String']>,
   start_url?: Maybe<Scalars['String']>,
   background_color?: Maybe<Scalars['String']>,
@@ -5160,6 +5073,8 @@ export type SitePluginPluginOptions = {
 export type SitePluginPluginOptionsFilterInput = {
   name?: Maybe<StringQueryOperatorInput>,
   path?: Maybe<StringQueryOperatorInput>,
+  families?: Maybe<StringQueryOperatorInput>,
+  urls?: Maybe<StringQueryOperatorInput>,
   short_name?: Maybe<StringQueryOperatorInput>,
   start_url?: Maybe<StringQueryOperatorInput>,
   background_color?: Maybe<StringQueryOperatorInput>,
@@ -5232,7 +5147,7 @@ export type StringQueryOperatorInput = {
 export type Unnamed_1_QueryVariables = {};
 
 
-export type Unnamed_1_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'gridLines'>> }> };
+export type Unnamed_1_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'gridLines'>> }> };
 
 export type Unnamed_2_QueryVariables = {};
 
@@ -5260,22 +5175,22 @@ export type Unnamed_5_Query = { gcms: { section: Maybe<(
 export type Unnamed_6_QueryVariables = {};
 
 
-export type Unnamed_6_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'homeBottom'>> }> };
+export type Unnamed_6_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'homeBottom'>> }> };
 
 export type Unnamed_7_QueryVariables = {};
 
 
-export type Unnamed_7_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'name' | 'role'>>, headerConfig: Maybe<{ triangles: Maybe<Array<Maybe<Pick<ConfigsHeaderConfigTriangles, 'id' | 'color' | 'size' | 'plx' | 'start' | 'end'>>>> }>, config: Maybe<Pick<ConfigsConfig, 'gridLines'>> }> };
+export type Unnamed_7_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'name' | 'role'>>, header: Maybe<{ triangles: Maybe<Array<Maybe<Pick<ConfigsHeaderTriangles, 'id' | 'color' | 'size' | 'plx' | 'start' | 'end'>>>> }>, settings: Maybe<Pick<ConfigsSettings, 'gridLines'>> }> };
 
 export type Unnamed_8_QueryVariables = {};
 
 
-export type Unnamed_8_Query = { configs: Maybe<{ recentWork: Maybe<{ particleData: Maybe<Array<Maybe<Pick<ConfigsRecentWorkParticleData, 'name' | 'type' | 'color' | 'size' | 'plx'>>>> }>, config: Maybe<Pick<ConfigsConfig, 'gridLines'>> }> };
+export type Unnamed_8_Query = { configs: Maybe<{ recentWork: Maybe<{ particleData: Maybe<Array<Maybe<Pick<ConfigsRecentWorkParticleData, 'name' | 'type' | 'color' | 'size' | 'plx'>>>> }>, settings: Maybe<Pick<ConfigsSettings, 'gridLines'>> }> };
 
 export type Unnamed_9_QueryVariables = {};
 
 
-export type Unnamed_9_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'workItemsAmount'>> }>, gcms: { section: Maybe<Pick<Gcms_Section, 'heading'>>, projects: Array<Maybe<(
+export type Unnamed_9_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'workItemsAmount'>> }>, gcms: { section: Maybe<Pick<Gcms_Section, 'heading'>>, projects: Array<Maybe<(
       Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl'>
       & { imageDesktop: Maybe<Pick<Gcms_Asset, 'url'>> }
     )>> } };
@@ -5283,17 +5198,17 @@ export type Unnamed_9_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfi
 export type Unnamed_10_QueryVariables = {};
 
 
-export type Unnamed_10_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'email'>>, config: Maybe<Pick<ConfigsConfig, 'skillsTop'>> }>, gcms: { skills: Array<Maybe<Pick<Gcms_Skill, 'xAxisDesktop' | 'xAxisMobile' | 'yAxisDesktop' | 'yAxisMobile' | 'directionDesktop' | 'directionMobile' | 'id' | 'label'>>> } };
+export type Unnamed_10_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'email'>>, settings: Maybe<Pick<ConfigsSettings, 'skillsTop'>> }>, gcms: { skills: Array<Maybe<Pick<Gcms_Skill, 'xAxisDesktop' | 'xAxisMobile' | 'yAxisDesktop' | 'yAxisMobile' | 'directionDesktop' | 'directionMobile' | 'id' | 'label'>>> } };
 
 export type Unnamed_11_QueryVariables = {};
 
 
-export type Unnamed_11_Query = { configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'splashScreenDebug'>> }> };
+export type Unnamed_11_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'splashScreenDebug'>> }> };
 
 export type Unnamed_12_QueryVariables = {};
 
 
-export type Unnamed_12_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ config: Maybe<Pick<ConfigsConfig, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
+export type Unnamed_12_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

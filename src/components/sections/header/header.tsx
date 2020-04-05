@@ -7,7 +7,7 @@ import Triangle, { Props as TriangleProps } from '../../particles/triangle';
 import { dotGridA, dotGridB, dotGridC, dotGridD } from './dots';
 import { countLongestArray, hasWindow } from '../../../util/util';
 import { startSequence } from '../../../util/animation';
-import { Modes, TriangleSizes, ParticleColors, Configs, ConfigsHeaderConfigTriangles } from '../../../../types';
+import { Modes, TriangleSizes, ParticleColors, Configs, ConfigsHeaderTriangles } from '../../../../types';
 import {
   HomeHeader,
   DotGridWrapper,
@@ -78,7 +78,7 @@ class Header extends PureComponent<Props & ReduxProps, State> {
     this.setState(newState);
   }
 
-  getPlxData({ plx, start, end }: ConfigsHeaderConfigTriangles) {
+  getPlxData({ plx, start, end }: ConfigsHeaderTriangles) {
     return [
       {
         start,
@@ -96,13 +96,13 @@ class Header extends PureComponent<Props & ReduxProps, State> {
   }
 
   renderTriangles() {
-    const { triangles } = this.props.configs.headerConfig;
+    const { triangles } = this.props.configs.header;
     return triangles.map((tri, i: number) => (
       <TriangleParallax
         color={tri.color}
         size={tri.size}
         id={tri.id}
-        gridLines={this.props.configs.config.gridLines}
+        gridLines={this.props.configs.settings.gridLines}
         key={i + tri.id}
       >
         <Plx
@@ -151,7 +151,7 @@ export default (props: Omit<Props, 'configs'>) => (
             name
             role
           }
-          headerConfig {
+          header {
             triangles {
               id
               color
@@ -161,7 +161,7 @@ export default (props: Omit<Props, 'configs'>) => (
               end
             }
           }
-          config {
+          settings {
             gridLines
           }
         }

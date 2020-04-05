@@ -1,13 +1,11 @@
-const config = require('./config.json');
+const settings = require('./settings.json');
 const meta = require('./meta.json');
-const headerConfig = require('./header-config');
-const recentWork = require('./recent-work');
-const content = require('./content');
+const header = require('./header.json');
+const recentWork = require('./recent-work.json');
 
 module.exports = {
-  config,
+  settings,
   meta,
-  headerConfig,
+  header,
   recentWork,
-  content,
 }
