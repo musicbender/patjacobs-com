@@ -16,7 +16,7 @@ export const getTextWidth = (text: string = '', spacing: number, offset: number 
   return `calc(${limitedSum}% - ${offset / 2}px)`;
 }
 
-export const dotsFromCoords = (position: number[] = [0, 0], text: string = '', direction: string = 'right', columns: number = 15): number[] => {
+export const dotsFromCoords = (position: number[] = [0, 0], text: string = '', direction: string = 'Right', columns: number = 15): number[] => {
   let coords: number[] = position;
   let output: number[] = [];
 
@@ -46,11 +46,11 @@ export const dotsFromCoords = (position: number[] = [0, 0], text: string = '', d
   for (let i = 0; i < dotsAmount; i++) {
     let dot;
     switch(direction) {
-      case 'up': {
+      case 'Up': {
         dot = baseDot - (columns * i);
         break;
       }
-      case 'down': {
+      case 'Down': {
         dot = baseDot + (columns * i);
         break;
       }
