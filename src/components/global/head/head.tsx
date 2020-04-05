@@ -14,11 +14,11 @@ interface IProps {
 }
 
 const Head: React.FunctionComponent<IProps> = ({
-  pathname,
+  pathname = '/',
   description,
   title,
   image,
-  article,
+  article = false,
 }: IProps) => {
   const { site } = useStaticQuery(
     graphql`
@@ -53,7 +53,6 @@ const Head: React.FunctionComponent<IProps> = ({
   return (
     <Helmet
       title={title || site.siteMetadata.title}
-      titleTemplate={site.siteMetadata.titleTemplate}
     >
       <html lang={seo.language} />
       <meta name="description" content={seo.description} />
@@ -77,12 +76,6 @@ const Head: React.FunctionComponent<IProps> = ({
       <meta name="twitter:url" content={seo.url} />
     </Helmet>
   );
-}
-
-Head.defaultProps = {
-  pathname: '/',
-  description: '',
-  article: false,
 }
 
 export default Head;
