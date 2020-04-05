@@ -60,13 +60,17 @@ type StyledButtonProps = {
   isParallax: boolean,
   stopped: boolean,
 }
- const btnColor = theme.corePalette.purple;
+
+const btnColor = theme.corePalette.purple;
 
 export const StyledButton = styled(Button)<StyledButtonProps>`
   ${InnerWrapper} {
     color: ${btnColor};
     ${Line} {
       background-color: ${btnColor};
+    }
+    ${ButtonText} {
+      color: ${btnColor};
     }
   }
   ${props => !props.isParallax && props.stopped && css`
