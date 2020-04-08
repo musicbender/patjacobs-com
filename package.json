@@ -84,6 +84,17 @@
     "react-test-renderer": "^16.12.0",
     "redux-devtools-extension": "^2.13.8"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts}": [
+      "npm run lint:fix",
+      "git add"
+    ]
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
