@@ -66,6 +66,11 @@ module.exports = {
             resolve: 'gatsby-plugin-rollbar',
             options: {
                 accessToken: process.env.ROLLBAR_CLIENT_TOKEN,
+                captureUncaught: true,
+                captureUnhandledRejections: true,
+                payload: {
+                    environment: 'production',
+                },
             },
         },
         'gatsby-plugin-typescript',
