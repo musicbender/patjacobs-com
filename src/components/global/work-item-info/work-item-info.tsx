@@ -1,7 +1,7 @@
 import React from 'react';
 import { ItemInfoWrapper, Title, Description, StyledButton } from './styles';
 
-export interface Props {
+interface Props {
     title?: string;
     description?: string;
     isStopped?: boolean;
@@ -21,7 +21,7 @@ const ItemInfo = ({
     buttonUrl,
     buttonText = 'view project',
     className = '',
-}) => {
+}: Props) => {
     const handleParentClick = () => {
         // TODO: change to js routing link when case study pages are built
         window.href = buttonUrl;

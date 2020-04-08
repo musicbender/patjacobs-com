@@ -1,1 +1,1 @@
-export { Props, default } from './triangle';
+export { default } from './triangle';

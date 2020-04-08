@@ -53,6 +53,7 @@ const mapStateToProps = ({ global }) => ({
 class Header extends PureComponent<Props & ReduxProps, State> {
     interval: number;
     delay: number;
+
     constructor(props) {
         super(props);
         this.handleSequence = this.handleSequence.bind(this);

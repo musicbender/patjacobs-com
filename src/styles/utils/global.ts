@@ -44,7 +44,7 @@ export const gridPosition = (config: IGridPositionParams) => {
     });
 
     return css`
-        ${prop}: ${percent} ${unit};
+        ${`${prop}: ${`${percent}${unit}`}`};
         ${attach === 'right' && 'transform: translateX(-100%)'};
     `;
 };
