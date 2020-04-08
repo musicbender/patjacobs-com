@@ -56,6 +56,18 @@ module.exports = {
         codegen: true
       }
     },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingID: process.env.GA_TRACKING_ID
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-rollbar',
+      options: {
+        accessToken: process.env.ROLLBAR_CLIENT_TOKEN
+      }
+    }
     `gatsby-plugin-typescript`,
     `gatsby-plugin-styled-components`,
     `gatsby-transformer-sharp`,
@@ -63,5 +75,6 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-netlify`,
+    `gatsby-plugin-robots-txt`,
   ],
 }
