@@ -67,7 +67,7 @@ module.exports = {
       options: {
         accessToken: process.env.ROLLBAR_CLIENT_TOKEN
       }
-    }
+    },
     `gatsby-plugin-typescript`,
     `gatsby-plugin-styled-components`,
     `gatsby-transformer-sharp`,
