@@ -10,7 +10,7 @@ import {
 } from '../../../../types';
 
 interface Props {
-    duration: number;
+    duration?: number;
     entrance?: keyof typeof ECurtainTypes;
     exit?: keyof typeof ECurtainTypes;
     colorLayout?: keyof typeof ECurtainColorLayouts;

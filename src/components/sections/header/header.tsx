@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import { connect } from 'react-redux';
 import Plx from 'react-plx';
 import ColorDotRow from '../../particles/color-dot-row';
-import Triangle, { Props as TriangleProps } from '../../particles/triangle';
+import Triangle from '../../particles/triangle';
 import { dotGridA, dotGridB, dotGridC, dotGridD } from './dots';
 import { countLongestArray, hasWindow } from '../../../util/util';
 import { startSequence } from '../../../util/animation';

@@ -8,7 +8,7 @@ interface Props {
     splashOpen: boolean;
 }
 
-const ColorDots = ({ forMobile = false, splashOpen }: Props) => {
+const ColorDots = ({ forMobile = false }: Props) => {
     const [mounted, setMounted] = useState(false);
     const [entering, setEntering] = useState(false);
     const [finishedEntering, setFinishedEntering] = useState(false);

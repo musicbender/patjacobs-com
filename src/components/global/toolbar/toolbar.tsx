@@ -1,25 +1,24 @@
 import React from 'react';
 import Logo from '../logo';
-import { Modes } from '../../../../types/state';
-import { ToolBarWrapper, InnerWrapper, Hamburger, HamburbarBar } from './styles';
+import { ToolBarWrapper, InnerWrapper } from './styles';
 
-interface Props {
-    pageLoaded?: boolean;
-    mode?: Modes;
-    menuOpen?: boolean;
-    handleMode?: any;
-    handleMenu?: any;
-}
+// interface Props {
+//     pageLoaded?: boolean;
+//     mode?: Modes;
+//     menuOpen?: boolean;
+//     handleMode?: any;
+//     handleMenu?: any;
+// }
 
-const Toolbar = ({ pageLoaded, mode, menuOpen, handleMode, handleMenu }: Props) => {
-    const renderHamburger = () => {
-        return (
-            <Hamburger>
-                <HamburbarBar barNum={0} />
-                <HamburbarBar barNum={1} />
-            </Hamburger>
-        );
-    };
+const Toolbar = () => {
+    // const renderHamburger = () => {
+    //     return (
+    //         <Hamburger>
+    //             <HamburbarBar barNum={0} />
+    //             <HamburbarBar barNum={1} />
+    //         </Hamburger>
+    //     );
+    // };
 
     return (
         <ToolBarWrapper>

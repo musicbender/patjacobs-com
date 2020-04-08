@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { media } from '../../../styles/breakpoints';
 import Heading from '../../global/heading';
 import DotGrid from '../../particles/dot-grid';

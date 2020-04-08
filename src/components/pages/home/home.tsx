@@ -64,7 +64,7 @@ class Home extends PureComponent<ReduxProps, State> {
         window.removeEventListener('scroll', this.handleScroll);
     }
 
-    handleScroll(e: Event): void {
+    handleScroll(): void {
         const scrollY = window.scrollY;
 
         if (scrollY >= this.props.aboutTop) {

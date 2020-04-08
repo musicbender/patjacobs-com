@@ -48,6 +48,8 @@ module.exports = {
         '@typescript-eslint/no-var-requires': 'off',
         camelcase: 'off',
         '@typescript-eslint/camelcase': 'off',
+        'react/display-name': 'off',
+        'react/prop-types': 'off',
         complexity: 'off',
         'constructor-super': 'error',
         'prefer-const': 'error',

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import rgbHex from 'hex-to-rgba';
 import { shade } from 'polished';
-import theme from '../../../styles/theme';
+import siteTheme from '../../../styles/theme';
 import { media } from '../../../styles/breakpoints';
 import Button from '../button';
 import { InnerWrapper, Line, Text as ButtonText } from '../button/styles';
@@ -29,14 +29,14 @@ export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
   ${props =>
       !props.stopped &&
       css`
-          color: ${props => rgbHex(props.theme.palette.white, 0.4)};
-          border-color: ${props => shade(0.6, props.theme.corePalette.purple)};
+          color: ${rgbHex(props.theme.palette.white, 0.4)};
+          border-color: ${shade(0.6, props.theme.corePalette.purple)};
       `}
   ${props =>
       props.stopped &&
       css`
-          color: ${props => rgbHex(props.theme.palette.white, 0.87)};
-          border-color: ${props => shade(0.4, props.theme.corePalette.purple)};
+          color: ${rgbHex(props.theme.palette.white, 0.87)};
+          border-color: ${shade(0.4, props.theme.corePalette.purple)};
       `}
 `;
 
@@ -65,7 +65,7 @@ interface StyledButtonProps {
     stopped: boolean;
 }
 
-const btnColor = theme.corePalette.purple;
+const btnColor = siteTheme.corePalette.purple;
 
 export const StyledButton = styled(Button)<StyledButtonProps>`
   ${InnerWrapper} {

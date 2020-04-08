@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Heading from '../../global/heading';
 import { setSkillsTop } from '../../../actions/home';
-import { hasWindow, throttle, minMax } from '../../../util/util';
+import { hasWindow, throttle } from '../../../util/util';
 import { SkillsWrapper, DotWrapper, StyledDotFormation } from './styles';
 import { StaticQuery, graphql } from 'gatsby';
 import { Configs, Gcms_Skill, Query } from '../../../../types';
@@ -26,7 +26,7 @@ interface State {
     color: string;
 }
 
-const mapStateToProps = ({ global, home }) => {
+const mapStateToProps = ({ home }) => {
     return {
         skillsTop: home.skillsTop,
     };

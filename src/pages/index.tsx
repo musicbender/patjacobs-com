@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import Layout from '../layout';
 import Home from '../components/pages/home';
 

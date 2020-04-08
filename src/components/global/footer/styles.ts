@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { media, sizes } from '../../../styles/breakpoints';
 import Social from '../social';
 

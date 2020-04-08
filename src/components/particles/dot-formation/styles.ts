@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { media } from '../../../styles/breakpoints';
 import { DotFormationTextEmbedDirection } from '../../../../types/sections';
 
 interface DotProps {

@@ -42,7 +42,11 @@ export const requestTimeout = function(fn: any, delay: number): any {
         const current = new Date().getTime();
         const delta = current - start;
 
-        delta >= delay ? fn.call() : (handle.value = requestAnimFrame(loop));
+        if (delta >= delay) {
+            fn.call();
+        } else {
+            handle.value = requestAnimFrame(loop);
+        }
     }
 
     handle.value = requestAnimFrame(loop);
@@ -50,9 +54,11 @@ export const requestTimeout = function(fn: any, delay: number): any {
 };
 
 export const clearRequestTimeout = function(handle: any): void {
-    hasWindow() && window.cancelAnimationFrame
-        ? window.cancelAnimationFrame(handle.value)
-        : hasWindow() && window.webkitCancelAnimationFrame
-        ? window.webkitCancelAnimationFrame(handle.value)
-        : clearTimeout(handle);
+    if (hasWindow() && window.cancelAnimationFrame) {
+        window.cancelAnimationFrame(handle.value);
+    } else if (hasWindow() && window.webkitCancelAnimationFrame) {
+        window.webkitCancelAnimationFrame(handle.value);
+    } else {
+        clearTimeout(handle);
+    }
 };

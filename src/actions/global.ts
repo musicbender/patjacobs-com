@@ -3,7 +3,6 @@ import {
     SPLASH_CHANGED,
     TRANSPORT_CHANGED,
     MENU_CHANGED,
-    MODE_CHANGED,
     RECENT_WORK_TOP_SET,
     IS_MOBILE_SET,
 } from '../constants/constants';

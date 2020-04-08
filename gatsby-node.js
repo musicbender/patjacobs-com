@@ -4,7 +4,7 @@ const path = require('path');
 // --//--//--// GATSBY NODE CONFIG //--//--//--//
 //* *******************************************//
 exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
         const { createNode } = actions;
 
         // --//--//--// Create Configs Data Nodes //--//--//--//

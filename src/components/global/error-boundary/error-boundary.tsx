@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ErrorBoundaryWrapper, ErrorIcon, ErrorText } from './styles';
+import { ErrorBoundaryWrapper, ErrorText } from './styles';
 
 interface State {
     error: Error;
@@ -32,8 +32,8 @@ class ErrorBoundary extends Component<any, State> {
     }
 }
 
-export default (Component: React.ComponentType) => (props: any) => (
+export default (ChildComponent: React.ComponentType) => (props: any) => (
     <ErrorBoundary>
-        <Component {...props} />
+        <ChildComponent {...props} />
     </ErrorBoundary>
 );

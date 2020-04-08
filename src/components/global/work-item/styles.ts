@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import WorkItemInfo, { WorkItemInfoProps } from '../work-item-info';
+import WorkItemInfo from '../work-item-info';
 import { media } from '../../../styles/breakpoints';
 
 interface WorkItemWrapperProps {

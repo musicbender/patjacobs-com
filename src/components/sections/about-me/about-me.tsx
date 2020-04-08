@@ -12,7 +12,7 @@ interface Props {
     isMobile: boolean;
 }
 
-const AboutMe = ({ atAbout = false, setAboutTop, isMobile }: Props) => {
+const AboutMe = ({ atAbout = false, isMobile }: Props) => {
     const { gcms } = useStaticQuery(graphql`
         query {
             gcms {
@@ -32,8 +32,8 @@ const AboutMe = ({ atAbout = false, setAboutTop, isMobile }: Props) => {
 
     // on mount
     useEffect(() => {
-        const section = document.getElementById('about-section');
-        const rect = section.getBoundingClientRect();
+        // const section = document.getElementById('about-section');
+        // const rect = section.getBoundingClientRect();
         // TODO: set top here
     }, []);
 
