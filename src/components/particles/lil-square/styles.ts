@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { ParticleColors } from '../../../../types/global';
 
-type LilSquareWrapperProps = {
-  color: keyof typeof ParticleColors,
-  opacity: number
+interface LilSquareWrapperProps {
+    color: keyof typeof ParticleColors;
+    opacity: number;
 }
 
-const size: string = '1.25em';
+const size = '1.25em';
 
 export const LilSquareWrapper = styled('div')<LilSquareWrapperProps>`
   width: ${size};

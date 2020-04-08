@@ -10,9 +10,11 @@
     "build:serve": "yarn build:local && gatsby serve",
     "dev": "sh scripts/start-dev.sh",
     "format": "prettier --write src/**/*.{ts,tsx}",
-    "lint": "tslint 'src/**/*.{ts,tsx}'",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" \"types/**/*.{ts,tsx}\"",
+    "lint:fix": "yarn lint -- --fix",
     "start": "yarn dev",
-    "test": "jest"
+    "test": "jest",
+    "tdd": "jest --watch"
   },
   "dependencies": {
     "@babel/core": "^7.7.2",
@@ -66,17 +68,21 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
     "babel-jest": "^24.9.0",
     "babel-preset-gatsby": "^0.2.22",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
     "gatsby-plugin-graphql-codegen": "^2.0.1",
+    "husky": "^4.2.3",
     "jest": "^24.9.0",
+    "lint-staged": "^10.1.2",
     "prettier": "^1.16.4",
     "react-test-renderer": "^16.12.0",
-    "redux-devtools-extension": "^2.13.8",
-    "tslint": "^5.14.0",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-react": "^3.6.0"
+    "redux-devtools-extension": "^2.13.8"
   },
   "browserslist": [
     ">0.2%",

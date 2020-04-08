@@ -1,19 +1,19 @@
-type CavieDotConfig = {
-  index: number,
-  dotSize: number,
-  y: number,
-  x: number,
-  xOffset?: number,
-  yOffset?: number,
+interface CavieDotConfig {
+    index: number;
+    dotSize: number;
+    y: number;
+    x: number;
+    xOffset?: number;
+    yOffset?: number;
 }
 
-type DotFormationConfig = {
-  i: number,
-  y: number,
-  x: number,
-  row: number,
-  column: number,
-  hide: boolean,
-  xOffset?: number,
-  yOffset?: number,
+interface DotFormationConfig {
+    i: number;
+    y: number;
+    x: number;
+    row: number;
+    column: number;
+    hide: boolean;
+    xOffset?: number;
+    yOffset?: number;
 }

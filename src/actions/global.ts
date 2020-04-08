@@ -1,53 +1,53 @@
 import {
-  PAGE_LOADED,
-  SPLASH_CHANGED,
-  TRANSPORT_CHANGED,
-  MENU_CHANGED,
-  MODE_CHANGED,
-  RECENT_WORK_TOP_SET,
-  IS_MOBILE_SET
+    PAGE_LOADED,
+    SPLASH_CHANGED,
+    TRANSPORT_CHANGED,
+    MENU_CHANGED,
+    MODE_CHANGED,
+    RECENT_WORK_TOP_SET,
+    IS_MOBILE_SET,
 } from '../constants/constants';
 import { AnyAction } from 'redux';
 
 export function loadPage() {
-  return {
-    type: PAGE_LOADED
-  }
+    return {
+        type: PAGE_LOADED,
+    };
 }
 
 export function changeTransport(open: boolean, transportDuration?: number): AnyAction {
-  return {
-    type: TRANSPORT_CHANGED,
-    payload: {
-      open,
-      transportDuration
-    }
-  }
+    return {
+        type: TRANSPORT_CHANGED,
+        payload: {
+            open,
+            transportDuration,
+        },
+    };
 }
 
 export function changeSplash(open: boolean): AnyAction {
-  return {
-    type: SPLASH_CHANGED,
-    payload: open
-  }
+    return {
+        type: SPLASH_CHANGED,
+        payload: open,
+    };
 }
 
 export function changeMenu(open: boolean): AnyAction {
-  return {
-    type: MENU_CHANGED,
-    payload: open
-  }
+    return {
+        type: MENU_CHANGED,
+        payload: open,
+    };
 }
 
 export function setRecentWorkTop(value: number): AnyAction {
-  return {
-    type: RECENT_WORK_TOP_SET,
-    payload: value
-  }
+    return {
+        type: RECENT_WORK_TOP_SET,
+        payload: value,
+    };
 }
 
 export function setIsMobile(): AnyAction {
-  return {
-    type: IS_MOBILE_SET
-  }
+    return {
+        type: IS_MOBILE_SET,
+    };
 }

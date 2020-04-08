@@ -15,155 +15,141 @@ import Curtain from '../components/global/curtain';
 import Footer from '../components/global/footer';
 import Modal from '../components/global/modal';
 import SplashScreen from '../components/sections/splash-screen';
-import { 
-  AppWrapper, 
-  OutterWrapper,
-  InnerWrapper,
-} from './styles';
+import { AppWrapper, OutterWrapper, InnerWrapper } from './styles';
 import { Configs, IStore } from '../../types';
 
-type ReduxProps = {
-  splashOpen?: boolean,
-  transportOpen?: boolean,
-  isMobile?: boolean,
-  skillsTop?: number,
-  changeTransport?: any,
-  setIsMobile?: any
-  changeSplash?: any,
-  mode?: string,
+interface ReduxProps {
+    splashOpen?: boolean;
+    transportOpen?: boolean;
+    isMobile?: boolean;
+    skillsTop?: number;
+    changeTransport?: any;
+    setIsMobile?: any;
+    changeSplash?: any;
+    mode?: string;
 }
 
-type Props = {
-  children?: any
-  location?: {
-    pathname?: string
-  }
-  configs: Configs,
+interface Props {
+    children?: any;
+    location?: {
+        pathname?: string;
+    };
+    configs: Configs;
 }
 
 const mapStateToProps = ({ global, home }: IStore) => ({
-  splashOpen: global.splashOpen,
-  transportOpen: global.transportOpen,
-  isMobile: global.isMobile,
-  skillsTop: home.skillsTop,
-  mode: global.mode
-})
+    splashOpen: global.splashOpen,
+    transportOpen: global.transportOpen,
+    isMobile: global.isMobile,
+    skillsTop: home.skillsTop,
+    mode: global.mode,
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
-  return bindActionCreators({
-    changeSplash,
-    changeTransport,
-    setIsMobile,
-  }, dispatch);
-}
+    return bindActionCreators(
+        {
+            changeSplash,
+            changeTransport,
+            setIsMobile,
+        },
+        dispatch
+    );
+};
 
 export class Layout extends PureComponent<Props & ReduxProps> {
-  constructor(props: Props) {
-    super(props);
-    this.handleResize = throttle(this.handleResize, 100);
-  }
-
-  componentDidMount() {
-    this.props.setIsMobile();
-    const splashTimeout = this.props.configs.settings.splashScreenDebug 
-      ? 6000000 
-      : this.props.configs.settings.splashScreenTimeout;
-
-    requestTimeout(() => {
-      this.props.changeSplash(false);
-    }, splashTimeout);
-
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
-  
-  handleToTop = () => {
-    this.props.changeTransport(true, this.props.configs.settings.transportDuration);
-    requestTimeout(() => {
-      window.scrollTo(0, 0);
-    }, this.props.configs.settings.transportDuration / 2);
-  }
-
-  handleResize = () => {
-    if (this.props.isMobile && window.innerWidth > this.props.configs.settings.mobileBreakpoint) {
-      this.props.setIsMobile();
+    constructor(props: Props) {
+        super(props);
+        this.handleResize = throttle(this.handleResize, 100);
     }
 
-    if (!this.props.isMobile && window.innerWidth < this.props.configs.settings.mobileBreakpoint) {
-      this.props.setIsMobile();
-    }
-  }
+    componentDidMount() {
+        this.props.setIsMobile();
+        const splashTimeout = this.props.configs.settings.splashScreenDebug
+            ? 6000000
+            : this.props.configs.settings.splashScreenTimeout;
 
-  render() {  
-    return (
-      <ThemeProvider theme={theme}>
-        <AppWrapper
-          mode={this.props.mode} 
-          splashOpen={this.props.splashOpen}
-        >
-            <GlobalStyles />
-            <Head pathname={this.props.location && this.props.location.pathname || null} />
-            <OutterWrapper>
-              <GridLines gridLines={this.props.configs.settings.gridLines} />
-              <Toolbar />
-              {
-                this.props.splashOpen &&
-                <SplashScreen />
-              }
-              <InnerWrapper>
-                {this.props.children}
-              </InnerWrapper> 
-            </OutterWrapper>
-            <Footer handleToTop={this.handleToTop} />
-            {
-              this.props.transportOpen &&
-              <Modal>
-                <Curtain entrance="full" exit="full" duration={1275} />
-              </Modal>
-            }
-        </AppWrapper>
-      </ThemeProvider>
-    );
-  }
+        requestTimeout(() => {
+            this.props.changeSplash(false);
+        }, splashTimeout);
+
+        window.addEventListener('resize', this.handleResize);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize);
+    }
+
+    handleToTop = () => {
+        this.props.changeTransport(true, this.props.configs.settings.transportDuration);
+        requestTimeout(() => {
+            window.scrollTo(0, 0);
+        }, this.props.configs.settings.transportDuration / 2);
+    };
+
+    handleResize = () => {
+        if (
+            this.props.isMobile &&
+            window.innerWidth > this.props.configs.settings.mobileBreakpoint
+        ) {
+            this.props.setIsMobile();
+        }
+
+        if (
+            !this.props.isMobile &&
+            window.innerWidth < this.props.configs.settings.mobileBreakpoint
+        ) {
+            this.props.setIsMobile();
+        }
+    };
+
+    render() {
+        return (
+            <ThemeProvider theme={theme}>
+                <AppWrapper mode={this.props.mode} splashOpen={this.props.splashOpen}>
+                    <GlobalStyles />
+                    <Head
+                        pathname={(this.props.location && this.props.location.pathname) || null}
+                    />
+                    <OutterWrapper>
+                        <GridLines gridLines={this.props.configs.settings.gridLines} />
+                        <Toolbar />
+                        {this.props.splashOpen && <SplashScreen />}
+                        <InnerWrapper>{this.props.children}</InnerWrapper>
+                    </OutterWrapper>
+                    <Footer handleToTop={this.handleToTop} />
+                    {this.props.transportOpen && (
+                        <Modal>
+                            <Curtain entrance="full" exit="full" duration={1275} />
+                        </Modal>
+                    )}
+                </AppWrapper>
+            </ThemeProvider>
+        );
+    }
 }
 
 const ConnectedLayout = connect(mapStateToProps, mapDispatchToProps)(Layout);
 
 export default (props: Omit<Props, 'configs'>) => (
-  <StaticQuery 
-    query={graphql`
-      query {
-        site {
-          siteMetadata {
-            site
-          }
-        }
-        configs {
-          settings {
-            gridLines
-            transportDuration
-            mobileBreakpoint
-            splashScreenDebug
-            splashScreenTimeout
-          }
-        }
-      }
-    `}
-    render={data => (
-      <ConnectedLayout 
-        configs={data.configs}
-        {...props} 
-      />
-    )}
-  />
+    <StaticQuery
+        query={graphql`
+            query {
+                site {
+                    siteMetadata {
+                        site
+                    }
+                }
+                configs {
+                    settings {
+                        gridLines
+                        transportDuration
+                        mobileBreakpoint
+                        splashScreenDebug
+                        splashScreenTimeout
+                    }
+                }
+            }
+        `}
+        render={data => <ConnectedLayout configs={data.configs} {...props} />}
+    />
 );
-
-
-
-
-
-
-

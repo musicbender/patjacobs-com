@@ -5,16 +5,10 @@ import Logo from './logo';
 
 const description = 'Logo component';
 
-//stories
+// stories
 storiesOf('Logo', module)
-  .add('default', () => (
-    <Logo />
-  ), {
-    info: { text: description }
-  })
-  .add('orange', () => (
-    <Logo color='orange' />
-  ))
-  .add('aqua', () => (
-    <Logo color='aqua' />
-  ))
+    .add('default', () => <Logo />, {
+        info: { text: description },
+    })
+    .add('orange', () => <Logo color="orange" />)
+    .add('aqua', () => <Logo color="aqua" />);

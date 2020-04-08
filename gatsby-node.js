@@ -1,37 +1,36 @@
 const path = require('path');
-const fs = require('fs');
 
-//********************************************//
-//--//--//--// GATSBY NODE CONFIG //--//--//--//
-//********************************************//
+//* *******************************************//
+// --//--//--// GATSBY NODE CONFIG //--//--//--//
+//* *******************************************//
 exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
-  return new Promise((resolve, reject) => {
-    const { createNode } = actions;
+    return new Promise((resolve, reject) => {
+        const { createNode } = actions;
 
-    //--//--//--// Create Configs Data Nodes //--//--//--//
-    (function() {
-      const data = require(path.resolve(__dirname, './data/configs'));
-      const id = 'configs';
+        // --//--//--// Create Configs Data Nodes //--//--//--//
+        (function() {
+            const data = require(path.resolve(__dirname, './data/configs'));
+            const id = 'configs';
 
-      const nodeMeta = {
-        id: createNodeId(id),
-        parent: null,
-        children: [],
-        internal: {
-          type: id,
-          content: JSON.stringify(data),
-          contentDigest: createContentDigest(data)
-        },
-        data
-      }
+            const nodeMeta = {
+                id: createNodeId(id),
+                parent: null,
+                children: [],
+                internal: {
+                    type: id,
+                    content: JSON.stringify(data),
+                    contentDigest: createContentDigest(data),
+                },
+                data,
+            };
 
-      const node = Object.assign({}, data, nodeMeta);
-      createNode(node);
-    })();
+            const node = Object.assign({}, data, nodeMeta);
+            createNode(node);
+        })();
 
-    resolve();
-  });
-}
+        resolve();
+    });
+};
 
 // exports.createPages = ({ graphql, actions }) => {
 //   return new Promise((resolve, reject) => {

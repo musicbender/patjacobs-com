@@ -6,8 +6,8 @@ import { media } from '../../../styles/breakpoints';
 import Button from '../button';
 import { InnerWrapper, Line, Text as ButtonText } from '../button/styles';
 
-type ItemInfoProps = {
-  stopped?: boolean,
+interface ItemInfoProps {
+    stopped?: boolean;
 }
 
 export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
@@ -26,39 +26,43 @@ export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
     margin-left: 0;
     border-width: 0.45em;
   `}
-  ${props => !props.stopped && css`
-    color: ${props => rgbHex(props.theme.palette.white, 0.4)};
-    border-color: ${props => shade(0.6, props.theme.corePalette.purple)};
-  `}
-  ${props => props.stopped && css`
-    color: ${props => rgbHex(props.theme.palette.white, 0.87)};
-    border-color: ${props => shade(0.4, props.theme.corePalette.purple)};
-  `}
+  ${props =>
+      !props.stopped &&
+      css`
+          color: ${props => rgbHex(props.theme.palette.white, 0.4)};
+          border-color: ${props => shade(0.6, props.theme.corePalette.purple)};
+      `}
+  ${props =>
+      props.stopped &&
+      css`
+          color: ${props => rgbHex(props.theme.palette.white, 0.87)};
+          border-color: ${props => shade(0.4, props.theme.corePalette.purple)};
+      `}
 `;
 
 export const Title = styled.h5`
-  margin: 0 0 1em;
-  font-family: ${props => props.theme.fonts.futura};
-  font-size: 1rem;
-  font-weight: 200;
-  text-transform: uppercase;
-  color: inherit;
-  ${media.tablet`
+    margin: 0 0 1em;
+    font-family: ${props => props.theme.fonts.futura};
+    font-size: 1rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    color: inherit;
+    ${media.tablet`
     font-size: 1.5rem;
   `}
 `;
 
 export const Description = styled.p`
-  margin: 0 0 1.5em;
-  font-family: ${props => props.theme.fonts.inconsolata};
-  font-size: 1rem;
-  color: inherit;
-  opacity: 0.6;
+    margin: 0 0 1.5em;
+    font-family: ${props => props.theme.fonts.inconsolata};
+    font-size: 1rem;
+    color: inherit;
+    opacity: 0.6;
 `;
 
-type StyledButtonProps = {
-  isParallax: boolean,
-  stopped: boolean,
+interface StyledButtonProps {
+    isParallax: boolean;
+    stopped: boolean;
 }
 
 const btnColor = theme.corePalette.purple;
@@ -73,7 +77,10 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
       color: ${btnColor};
     }
   }
-  ${props => !props.isParallax && props.stopped && css`
+  ${props =>
+      !props.isParallax &&
+      props.stopped &&
+      css`
     ${InnerWrapper} {
         transition: transform 1s ease-in-out ${props.theme.animate.fast};
         ${ButtonText} {
@@ -97,16 +104,25 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
         }
       }
   `}
-  ${props => !props.isParallax && !props.stopped && css`
-    ${InnerWrapper} {
-      transform: translate3d(50%, 0, 0);
-    }
-  `}
-  ${props => props.isParallax && props.stopped && css`
-    opacity: 1;
-  `}
-  ${props => props.isParallax && !props.stopped && css`
-    opacity: 0;
-    transition: opacity ${props.theme.animate.fast} ${props.theme.animate.easeIn};
-  `}
+  ${props =>
+      !props.isParallax &&
+      !props.stopped &&
+      css`
+          ${InnerWrapper} {
+              transform: translate3d(50%, 0, 0);
+          }
+      `}
+  ${props =>
+      props.isParallax &&
+      props.stopped &&
+      css`
+          opacity: 1;
+      `}
+  ${props =>
+      props.isParallax &&
+      !props.stopped &&
+      css`
+          opacity: 0;
+          transition: opacity ${props.theme.animate.fast} ${props.theme.animate.easeIn};
+      `}
 `;

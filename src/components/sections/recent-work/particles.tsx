@@ -8,79 +8,72 @@ import { RecentWorkParticle } from './styles';
 import { Query } from '../../../../types';
 import { useStaticQuery, graphql } from 'gatsby';
 
-type Props = {
-  isMobile?: boolean,
+interface Props {
+    isMobile?: boolean;
 }
 
-const Particles = ({ 
-  isMobile = false,
-}: Props) => {
-  const { configs }: Query = useStaticQuery(graphql`
-    query {
-      configs {
-        recentWork {
-          particleData {
-            name
-            type
-            color
-            size
-            plx
-          }
+const Particles = ({ isMobile = false }: Props) => {
+    const { configs }: Query = useStaticQuery(graphql`
+        query {
+            configs {
+                recentWork {
+                    particleData {
+                        name
+                        type
+                        color
+                        size
+                        plx
+                    }
+                }
+                settings {
+                    gridLines
+                }
+            }
         }
-        settings {
-          gridLines
-        }
-      }
-    }
-  `);
+    `);
 
-  const getPlxData = (values) => [
-    {
-      start: 'self',
-      duration: '100vh',
-      properties: [
+    const getPlxData = values => [
         {
-          startValue: values[0],
-          endValue: values[1],
-          unit: 'em',
-          property: 'translateY'
+            start: 'self',
+            duration: '100vh',
+            properties: [
+                {
+                    startValue: values[0],
+                    endValue: values[1],
+                    unit: 'em',
+                    property: 'translateY',
+                },
+            ],
+        },
+    ];
+
+    const getParticle = p => {
+        const { name, type, ...params } = p;
+        switch (type) {
+            case 'triangle':
+                return <Triangle {...params} />;
+            case 'dots':
+                return <DotGrid sequence={dotGrids[name]} />;
         }
-      ]
-    }
-  ];
+    };
 
-  const getParticle = (p) => {
-    const { name, type, ...params } = p;
-    switch (type) {
-      case 'triangle':
-        return <Triangle {...params} />;
-      case 'dots':
-        return <DotGrid sequence={dotGrids[name]} />;
-    }
-  }
-
-  return (
-    <>
-      {
-        configs.recentWork.particleData.map((p, i) => {
-          return (
-            <RecentWorkParticle
-              particleID={p.name}
-              gridLines={configs.settings.gridLines}
-              key={'work-particle' + i + p.name}
-            >
-              <Plx
-                parallaxData={getPlxData(p.plx)}
-                disabled={!hasWindow() || isMobile}
-              >
-                {getParticle(p)}
-              </Plx>
-            </RecentWorkParticle>
-          );
-        })
-      }
-    </>
-  )
-}
+    return (
+        <>
+            {configs.recentWork.particleData.map((p, i) => {
+                return (
+                    <RecentWorkParticle
+                        particleID={p.name}
+                        gridLines={configs.settings.gridLines}
+                        key={'work-particle' + i + p.name}
+                    >
+                        <Plx parallaxData={getPlxData(p.plx)} disabled={!hasWindow() || isMobile}>
+                            {getParticle(p)}
+                        </Plx>
+                    </RecentWorkParticle>
+                );
+            })}
+        </>
+    );
+};
 
 export default Particles;

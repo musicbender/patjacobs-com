@@ -1,15 +1,9 @@
 import styled, { css } from 'styled-components';
 import { media } from '../../../styles/breakpoints';
 import { CoreColors } from '../../../../types';
-import { 
-  mobileDot,
-  yellowDot,
-  purpleDot,
-  orangeDot,
-  aquaDot 
-} from './keyframes';
+import { mobileDot, yellowDot, purpleDot, orangeDot, aquaDot } from './keyframes';
 
-const diameter: string = '0.7em';
+const diameter = '0.7em';
 
 export const ColorDotsRow = styled.div`
     width: 100%;
@@ -24,31 +18,31 @@ export const ColorDotsRow = styled.div`
 `;
 
 export const DesktopWrapper = styled.div`
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  ${media.tablet`
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    ${media.tablet`
     display: block;
   `}
 `;
 
 export const MobileWrapper = styled.div`
-  display: block;
-  width: 100%;
-  margin-top: 2.75em;
-  ${media.tablet`
+    display: block;
+    width: 100%;
+    margin-top: 2.75em;
+    ${media.tablet`
     display: block;
   `}
 `;
 
-type DotProps = {
-  color: CoreColors,
-  forMobile?: boolean,
-  entering?: boolean,
-  finished?: boolean,
+interface DotProps {
+    color: CoreColors;
+    forMobile?: boolean;
+    entering?: boolean;
+    finished?: boolean;
 }
 
 export const Dot = styled('div')<DotProps>`
@@ -56,63 +50,96 @@ export const Dot = styled('div')<DotProps>`
   height: ${diameter};
   border-radius: ${diameter};
   background-color: ${props => props.theme.palette[props.color]};
-  ${props => props.entering && !props.forMobile && css`
-    animation-duration: $header-duration;
-    animation-delay: $header-delay;
-    animation-timing-function: steps(1);
-    animation-fill-mode: forwards;
+  ${props =>
+      props.entering &&
+      !props.forMobile &&
+      css`
+          animation-duration: $header-duration;
+          animation-delay: $header-delay;
+          animation-timing-function: steps(1);
+          animation-fill-mode: forwards;
+      `}
+  ${props =>
+      !props.forMobile &&
+      css`
+      ${props.color === 'yellow' &&
+          css`
+              transform: translate3d(10vw, 5em, 0);
+              animation-name: ${yellowDot};
+          `} 
+      ${props.color === 'purple' &&
+          css`
+              transform: translate3d(34vw, 0em, 0);
+              animation-name: ${purpleDot};
+          `} 
+      ${props.color === 'orange' &&
+          css`
+              transform: translate3d(86vw, 13em, 0);
+              animation-name: ${orangeDot};
+          `} 
+      ${props.color === 'aqua' &&
+          css`
+              transform: translate3d(86vw, 13em, 0);
+              animation-name: ${aquaDot};
+          `} 
   `}
-  ${props => !props.forMobile && css`
-      ${props.color === 'yellow' && css`
-        transform: translate3d(10vw, 5em, 0);
-        animation-name: ${yellowDot};
-      `} 
-      ${props.color === 'purple' && css`
-        transform: translate3d(34vw, 0em, 0);
-        animation-name: ${purpleDot};
-      `} 
-      ${props.color === 'orange' && css`
-        transform: translate3d(86vw, 13em, 0);
-        animation-name: ${orangeDot};
-      `} 
-      ${props.color === 'aqua' && css`
-        transform: translate3d(86vw, 13em, 0);
-        animation-name: ${aquaDot};
-      `} 
-  `}
-  ${props => props.finished && !props.forMobile && css`
+  ${props =>
+      props.finished &&
+      !props.forMobile &&
+      css`
     animation: none;
     opacity: 1;
-    ${props.color === 'purple' && `
+    ${props.color === 'purple' &&
+        `
       transform: translate3d(8vw, 24em, 0);
     `}
-    ${props.color === 'purple' && `
+    ${props.color === 'purple' &&
+        `
       transform: translate3d(8vw, 28em, 0) scale(1);
     `}
-    ${props.color === 'purple' && `
+    ${props.color === 'purple' &&
+        `
       transform: translate3d(8vw, 32em, 0) scale(1);
     `}
-    ${props.color === 'purple' && `
+    ${props.color === 'purple' &&
+        `
       transform: translate3d(8vw, 36em, 0) scale(1);
     `}
   `}
-  ${props => props.forMobile && css`
-    display: inline-block;
-    float: left;
-    margin-right: calc(${diameter} * 2);
-    opacity: 0;
-    transform: translate3d(0, 2em, 0);
-  `}
-  ${props => props.forMobile && props.entering && css`
-    animation: ${mobileDot} ${props.theme.animate.slow} ${props.theme.animate.easeInOut} forwards;
-    &:nth-child(1) { animation-delay: 1000ms}
-    &:nth-child(2) { animation-delay: 1500ms}
-    &:nth-child(3) { animation-delay: 2000ms}
-    &:nth-child(4) { animation-delay: 2500ms}
-  `}
-  ${props => props.forMobile && props.finished && css`
-    animation: none;
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  `}
+  ${props =>
+      props.forMobile &&
+      css`
+          display: inline-block;
+          float: left;
+          margin-right: calc(${diameter} * 2);
+          opacity: 0;
+          transform: translate3d(0, 2em, 0);
+      `}
+  ${props =>
+      props.forMobile &&
+      props.entering &&
+      css`
+          animation: ${mobileDot} ${props.theme.animate.slow} ${props.theme.animate.easeInOut}
+              forwards;
+          &:nth-child(1) {
+              animation-delay: 1000ms;
+          }
+          &:nth-child(2) {
+              animation-delay: 1500ms;
+          }
+          &:nth-child(3) {
+              animation-delay: 2000ms;
+          }
+          &:nth-child(4) {
+              animation-delay: 2500ms;
+          }
+      `}
+  ${props =>
+      props.forMobile &&
+      props.finished &&
+      css`
+          animation: none;
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+      `}
 `;
