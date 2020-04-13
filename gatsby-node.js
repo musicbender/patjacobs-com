@@ -32,25 +32,60 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
     });
 };
 
-// exports.createPages = ({ graphql, actions }) => {
-//   return new Promise((resolve, reject) => {
-//     const { createPage, createRedirect } = actions;
-//     graphql(
-//       `
-//         query {
-//           configs {
+exports.createPages = async ({ graphql, actions }) => {
+    const { createPage, createRedirect } = actions;
+    let query;
 
-//           }
-//         }
-//       `
-//     )
-//     .then((result) => {
-//       if (result.errors) {
-//         reject(result.errors);
-//       }
-//       // created pages here
-//       resolve();
-//     })
-//     .catch(reject);
-//   });
-// }
+    // Create Case study pages
+    try {
+        query = await graphql(`
+            query {
+                gcms {
+                    projects(where: { disabled: false, status: PUBLISHED, linkType: Case_Study }) {
+                        updatedAt
+                        createdAt
+                        id
+                        projectId
+                        title
+                        projectType
+                        imageDesktop {
+                            fileName
+                            height
+                            width
+                        }
+                        description
+                        techList
+                        externalUrl
+                        body {
+                            html
+                        }
+                    }
+                }
+            }
+        `);
+    } catch (err) {
+        throw new Error(err);
+    }
+
+    // create case study pages
+    query.data.gcms.projects.forEach(project => {
+        createPage({
+            path: `/case-studies/${project.projectId}`,
+            component: path.resolve('./src/components/templates/case-study.tsx'),
+            context: {
+                project,
+                allProjects: query.data.gcms.projects,
+            },
+        });
+    });
+
+    // redirect for /case-studies/
+    createRedirect({
+        fromPath: '/case-studies/',
+        toPath: query.data.gcms.projects
+            ? `/case-studies/${query.data.gcms.projects[0].projectId}`
+            : '/',
+        redirectInBrowser: true,
+        isPermanent: true,
+    });
+};

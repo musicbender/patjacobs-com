@@ -42,6 +42,22 @@ export interface Skill {
     direction: string;
 }
 
+export interface GatsbyLocation {
+    pathname?: string;
+    search?: string;
+    hash?: string;
+    href?: string;
+    origin?: string;
+    protocol?: string;
+    host?: string;
+    hostname?: string;
+    port?: string;
+    state?: {
+        key?: string;
+    };
+    key?: string;
+}
+
 // enums
 export type CoreColors = 'aqua' | 'purple' | 'yellow' | 'orange';
 

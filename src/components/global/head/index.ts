@@ -1,1 +1,1 @@
-export { default } from './head';
+export { default, Props } from './head';

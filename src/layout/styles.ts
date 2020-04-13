@@ -46,9 +46,10 @@ export const OutterWrapper = styled.div`
 `;
 
 export const InnerWrapper = styled.div`
+    position: relative;
     padding: 0;
     height: auto;
     ${media.tablet`
-    padding-top: ${props => props.theme.sizes.toolbarHeight};
-  `}
+        padding-top: ${props => props.theme.sizes.toolbarHeight};
+    `}
 `;

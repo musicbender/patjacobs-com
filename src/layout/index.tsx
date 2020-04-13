@@ -16,6 +16,7 @@ import Footer from '../components/global/footer';
 import Modal from '../components/global/modal';
 import SplashScreen from '../components/sections/splash-screen';
 import { AppWrapper, OutterWrapper, InnerWrapper } from './styles';
+import { Props as HeadProps } from '../components/global/head';
 import { Configs, IStore } from '../../types';
 
 interface ReduxProps {
@@ -31,6 +32,7 @@ interface ReduxProps {
 
 interface Props {
     children?: any;
+    headProps?: HeadProps;
     location?: {
         pathname?: string;
     };
@@ -57,6 +59,10 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
 };
 
 export class Layout extends PureComponent<Props & ReduxProps> {
+    static defaultProps = {
+        headProps: {},
+    };
+
     constructor(props: Props) {
         super(props);
         this.handleResize = throttle(this.handleResize, 100);
@@ -87,17 +93,12 @@ export class Layout extends PureComponent<Props & ReduxProps> {
     };
 
     handleResize = () => {
-        if (
-            this.props.isMobile &&
-            window.innerWidth > this.props.configs.settings.mobileBreakpoint
-        ) {
+        const { isMobile, configs } = this.props;
+        if (isMobile && window.innerWidth > configs.settings.mobileBreakpoint) {
             this.props.setIsMobile();
         }
 
-        if (
-            !this.props.isMobile &&
-            window.innerWidth < this.props.configs.settings.mobileBreakpoint
-        ) {
+        if (!isMobile && window.innerWidth < configs.settings.mobileBreakpoint) {
             this.props.setIsMobile();
         }
     };
@@ -109,6 +110,7 @@ export class Layout extends PureComponent<Props & ReduxProps> {
                     <GlobalStyles />
                     <Head
                         pathname={(this.props.location && this.props.location.pathname) || null}
+                        {...this.props.headProps}
                     />
                     <OutterWrapper>
                         <GridLines gridLines={this.props.configs.settings.gridLines} />

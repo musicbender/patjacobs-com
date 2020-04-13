@@ -3,23 +3,23 @@ import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 import { ISeo } from '../../../../types/global';
 
-interface IProps {
-    pathname: string;
+export interface Props {
+    pathname?: string;
     description?: string;
     meta?: string[];
     keywords?: string[];
-    title?: string;
+    titlePrefix?: string;
     image?: string;
     article?: boolean;
 }
 
-const Head: React.FunctionComponent<IProps> = ({
+const Head: React.FunctionComponent<Props> = ({
     pathname = '/',
     description,
-    title,
+    titlePrefix,
     image,
     article = false,
-}: IProps) => {
+}: Props) => {
     const { site } = useStaticQuery(
         graphql`
             query {
@@ -38,6 +38,10 @@ const Head: React.FunctionComponent<IProps> = ({
             }
         `
     );
+
+    const title = titlePrefix
+        ? `${titlePrefix} | ${site.siteMetadata.title}`
+        : site.siteMetadata.title;
 
     const seo: ISeo = {
         title: title || site.siteMetadata.title,
