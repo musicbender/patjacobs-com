@@ -48,3 +48,17 @@ export const gridPosition = (config: IGridPositionParams) => {
         ${attach === 'right' && 'transform: translateX(-100%)'};
     `;
 };
+
+export const getGridWidth = (start: number, end: number, gridLines: number[] = []): number => {
+    if (!gridLines[start] || !gridLines[end]) throw new Error('grid index does not exist');
+    if (!gridLines) throw new Error('gridlines are required to get grid width');
+    if (start > end) return 0;
+
+    let output = start;
+
+    for (let i = 1; i < end - start; i++) {
+        output += gridLines[start + i];
+    }
+
+    return output;
+};

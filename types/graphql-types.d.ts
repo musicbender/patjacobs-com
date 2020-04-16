@@ -5353,58 +5353,63 @@ export type Unnamed_2_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteM
 export type Unnamed_3_QueryVariables = {};
 
 
-export type Unnamed_3_Query = { gcms: { socialLinks: Array<Maybe<Pick<Gcms_SocialLink, 'id' | 'label' | 'url'>>> } };
+export type Unnamed_3_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'gridLines'>> }> };
 
 export type Unnamed_4_QueryVariables = {};
 
 
-export type Unnamed_4_Query = { configs: Maybe<{ recentWork: Maybe<{ workItemPlx: Maybe<{ image: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxImage, 'startValue'>>>>, info: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxInfo, 'startValue'>>>>, mobileInfo: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxMobileInfo, 'startValue'>>>> }> }> }> };
+export type Unnamed_4_Query = { gcms: { socialLinks: Array<Maybe<Pick<Gcms_SocialLink, 'id' | 'label' | 'url'>>> } };
 
 export type Unnamed_5_QueryVariables = {};
 
 
-export type Unnamed_5_Query = { gcms: { section: Maybe<(
-      Pick<Gcms_Section, 'heading'>
-      & { body: Maybe<Pick<Gcms_RichText, 'html'>> }
-    )> } };
+export type Unnamed_5_Query = { configs: Maybe<{ recentWork: Maybe<{ workItemPlx: Maybe<{ image: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxImage, 'startValue'>>>>, info: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxInfo, 'startValue'>>>>, mobileInfo: Maybe<Array<Maybe<Pick<ConfigsRecentWorkWorkItemPlxMobileInfo, 'startValue'>>>> }> }> }> };
 
 export type Unnamed_6_QueryVariables = {};
 
 
-export type Unnamed_6_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'homeBottom'>> }> };
+export type Unnamed_6_Query = { gcms: { section: Maybe<(
+      Pick<Gcms_Section, 'heading'>
+      & { body: Maybe<Pick<Gcms_RichText, 'html'>> }
+    )> } };
 
 export type Unnamed_7_QueryVariables = {};
 
 
-export type Unnamed_7_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'name' | 'role'>>, header: Maybe<{ triangles: Maybe<Array<Maybe<Pick<ConfigsHeaderTriangles, 'id' | 'color' | 'size' | 'plx' | 'start' | 'end'>>>> }>, settings: Maybe<Pick<ConfigsSettings, 'gridLines'>> }> };
+export type Unnamed_7_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'homeBottom'>> }> };
 
 export type Unnamed_8_QueryVariables = {};
 
 
-export type Unnamed_8_Query = { configs: Maybe<{ recentWork: Maybe<{ particleData: Maybe<Array<Maybe<Pick<ConfigsRecentWorkParticleData, 'name' | 'type' | 'color' | 'size' | 'plx'>>>> }>, settings: Maybe<Pick<ConfigsSettings, 'gridLines'>> }> };
+export type Unnamed_8_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'name' | 'role'>>, header: Maybe<{ triangles: Maybe<Array<Maybe<Pick<ConfigsHeaderTriangles, 'id' | 'color' | 'size' | 'plx' | 'start' | 'end'>>>> }>, settings: Maybe<Pick<ConfigsSettings, 'gridLines'>> }> };
 
 export type Unnamed_9_QueryVariables = {};
 
 
-export type Unnamed_9_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'workItemsAmount'>> }>, gcms: { section: Maybe<Pick<Gcms_Section, 'heading'>>, projects: Array<Maybe<(
-      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl'>
-      & { imageDesktop: Maybe<Pick<Gcms_Asset, 'url'>> }
-    )>> } };
+export type Unnamed_9_Query = { configs: Maybe<{ recentWork: Maybe<{ particleData: Maybe<Array<Maybe<Pick<ConfigsRecentWorkParticleData, 'name' | 'type' | 'color' | 'size' | 'plx'>>>> }>, settings: Maybe<Pick<ConfigsSettings, 'gridLines'>> }> };
 
 export type Unnamed_10_QueryVariables = {};
 
 
-export type Unnamed_10_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'email'>>, settings: Maybe<Pick<ConfigsSettings, 'skillsTop'>> }>, gcms: { skills: Array<Maybe<Pick<Gcms_Skill, 'xAxisDesktop' | 'xAxisMobile' | 'yAxisDesktop' | 'yAxisMobile' | 'directionDesktop' | 'directionMobile' | 'id' | 'label'>>> } };
+export type Unnamed_10_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'workItemsAmount'>> }>, gcms: { section: Maybe<Pick<Gcms_Section, 'heading'>>, projects: Array<Maybe<(
+      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl'>
+      & { imageDesktop: Maybe<Pick<Gcms_Asset, 'url'>> }
+    )>> } };
 
 export type Unnamed_11_QueryVariables = {};
 
 
-export type Unnamed_11_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'splashScreenDebug'>> }> };
+export type Unnamed_11_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'email'>>, settings: Maybe<Pick<ConfigsSettings, 'skillsTop'>> }>, gcms: { skills: Array<Maybe<Pick<Gcms_Skill, 'xAxisDesktop' | 'xAxisMobile' | 'yAxisDesktop' | 'yAxisMobile' | 'directionDesktop' | 'directionMobile' | 'id' | 'label'>>> } };
 
 export type Unnamed_12_QueryVariables = {};
 
 
-export type Unnamed_12_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
+export type Unnamed_12_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'splashScreenDebug'>> }> };
+
+export type Unnamed_13_QueryVariables = {};
+
+
+export type Unnamed_13_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
