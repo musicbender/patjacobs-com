@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import DotGrid from './dot-grid';
-import sequences from '../../../../../test/mocks/dot-grid.json';
+const sequences = require('../../../../test/mocks/dot-grid.json');
 
 const description = 'Dot grid matrix animation component';
 
-class DotGridContainer extends Component {
+interface Props {
+    sequence: number[][][];
+    index?: number;
+    started?: boolean;
+    spacing?: number;
+    interval?: number;
+    delay?: number;
+    className?: string;
+}
+
+interface State {
+    dotGridIndex?: number;
+    dotGridStarted?: boolean;
+}
+
+class DotGridContainer extends Component<Props, State> {
     constructor(props) {
         super(props);
         this.handleSequence = this.handleSequence.bind(this);
@@ -15,7 +30,7 @@ class DotGridContainer extends Component {
         };
     }
 
-    handleSequence(index) {
+    handleSequence(index: number): void {
         this.setState({
             dotGridIndex: index,
             dotGridStarted: true,

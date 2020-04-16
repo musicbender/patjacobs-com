@@ -26,7 +26,7 @@ interface State {
     exiting: boolean;
 }
 
-class Curtain extends PureComponent<Props & QueryProps, State> {
+export class Curtain extends PureComponent<Props & QueryProps, State> {
     blockNum: number;
     baseDelay: number;
     timeout: any;

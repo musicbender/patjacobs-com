@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Curtain from './curtain';
+import { Curtain } from './curtain';
 
 const description = 'A curtain transition effect component';
 

@@ -6,7 +6,7 @@ export interface Props {
     sequence: number[][][];
     index?: number;
     started?: boolean;
-    handleSequence?: () => any;
+    handleSequence?: any;
     spacing?: number;
     interval?: number;
     delay?: number;
