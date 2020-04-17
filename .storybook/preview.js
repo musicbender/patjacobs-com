@@ -1,6 +1,10 @@
-import { configure, addParameters } from "@storybook/react"
+import React from 'react';
+import { configure, addParameters, addDecorator } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
 import { themes } from '@storybook/theming';
+import GlobalStyle from '../src/styles/global-styles';
+import { ThemeProvider } from 'styled-components';
+import theme from '../src/styles/theme';
 
 addParameters({
   options: {
@@ -8,8 +12,6 @@ addParameters({
     theme: themes.dark
   }
 });
-
-configure(require.context("../src", true, /\.stories\.js$/), module);
 
 // Gatsby's Link overrides:
 // Gatsby defines a global called ___loader to prevent its method calls from creating console errors you override it here
@@ -25,3 +27,12 @@ global.__PATH_PREFIX__ = ""
 window.___navigate = pathname => {
   action("NavigateTo:")(pathname)
 }
+
+addDecorator(story => (
+  <>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      {story()}
+    </ThemeProvider>
+  </>
+));
