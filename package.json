@@ -94,6 +94,17 @@
     "redux-devtools-extension": "^2.13.8",
     "ts-loader": "^7.0.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc --noEmit && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts}": [
+      "npm run lint:fix",
+      "git add"
+    ]
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
