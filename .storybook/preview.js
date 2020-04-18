@@ -3,8 +3,11 @@ import { configure, addParameters, addDecorator } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
 import { themes } from '@storybook/theming';
 import GlobalStyle from '../src/styles/global-styles';
+import { AppWrapper } from '../src/layout/styles';
+import GridLines from '../src/components/global/grid-lines';
 import { ThemeProvider } from 'styled-components';
 import theme from '../src/styles/theme';
+import { OutterWrapper, InnerWrapper } from './styles';
 
 addParameters({
   options: {
@@ -29,10 +32,15 @@ window.___navigate = pathname => {
 }
 
 addDecorator(story => (
-  <>
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      {story()}
+      <AppWrapper mode="dark">
+        <GlobalStyle />
+        <OutterWrapper>
+          <GridLines gridLines={[8, 17, 8, 17, 34, 8, 8]} />
+          <InnerWrapper>
+            {story()}
+          </InnerWrapper>
+        </OutterWrapper>
+      </AppWrapper>
     </ThemeProvider>
-  </>
 ));

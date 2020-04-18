@@ -37,6 +37,7 @@ export const CurtainWrapper = styled.div`
     grid-template-rows: repeat(7, 1fr);
     width: 100%;
     height: 100%;
+    min-height: 100vh;
 `;
 
 export const Block = styled.div`

@@ -41,8 +41,8 @@ export const OutterWrapper = styled.div`
     z-index: 1;
     margin-bottom: ${props => props.theme.sizes.footerHeightM};
     ${media.tablet`
-    margin-bottom: ${props => props.theme.sizes.footerHeightD};
-  `}
+        margin-bottom: ${props => props.theme.sizes.footerHeightD};
+    `}
 `;
 
 export const InnerWrapper = styled.div`
