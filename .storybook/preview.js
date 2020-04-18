@@ -1,5 +1,5 @@
 import React from 'react';
-import { configure, addParameters, addDecorator } from "@storybook/react"
+import { addParameters, addDecorator } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
 import { themes } from '@storybook/theming';
 import GlobalStyle from '../src/styles/global-styles';
@@ -8,6 +8,7 @@ import GridLines from '../src/components/global/grid-lines';
 import { ThemeProvider } from 'styled-components';
 import theme from '../src/styles/theme';
 import { OutterWrapper, InnerWrapper } from './styles';
+import settings from '../data/configs/settings.json';
 
 addParameters({
   options: {
@@ -36,7 +37,7 @@ addDecorator(story => (
       <AppWrapper mode="dark">
         <GlobalStyle />
         <OutterWrapper>
-          <GridLines gridLines={[8, 17, 8, 17, 34, 8, 8]} />
+          <GridLines gridLines={settings.gridLines} />
           <InnerWrapper>
             {story()}
           </InnerWrapper>

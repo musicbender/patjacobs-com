@@ -10,14 +10,16 @@ interface Props {
     active?: boolean;
     children?: any;
     contentType?: RevealBlockContentType;
+    gridLines?: number[];
 }
 
 const revealBlock = ({
     startGrid = 1,
-    endGrid = 3,
+    endGrid = 4,
     contentType = 'text',
     active = false,
     children,
+    gridLines,
 }: Props) => {
     const { configs } = useStaticQuery(graphql`
         query {
@@ -29,10 +31,10 @@ const revealBlock = ({
         }
     `);
 
+    const gLines = gridLines || configs.settings.gridLines;
+
     return (
-        <RevealBlockWrapper
-            blockWidth={getGridWidth(startGrid, endGrid, configs.settings.gridLines)}
-        >
+        <RevealBlockWrapper blockWidth={getGridWidth(startGrid, endGrid, gLines)}>
             <OutterWrapper active={active}>
                 <InnerWrapper active={active}>
                     <ContentWrapper contentType={contentType}>
