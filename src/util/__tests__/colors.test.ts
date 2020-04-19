@@ -1,5 +1,5 @@
-import theme from '../styles/theme';
-import { getRandomColor } from './colors';
+import theme from '../../styles/theme';
+import { getRandomColor } from '../colors';
 
 describe('util/colors.js', function () {
   describe('getRandomColor()', function () {

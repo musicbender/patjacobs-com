@@ -1,7 +1,7 @@
-import { getBlockAnimation } from './animate';
+import { getBlockAnimation } from '../animate';
 import { css } from 'styled-components';
-import { mockKeyframes } from '../../../test/mocks/styled';
-import theme from '../theme';
+import { mockKeyframes } from '../../../../test/mocks/styled';
+import theme from '../../theme';
 
 describe('styles/utils/animate.ts', () => {
   describe('getBlockAnimation()', () => {

@@ -1,5 +1,5 @@
-import { getIndexOrLast, countLongestArray } from './util';
-import { TestItem } from '../../types/global';
+import { getIndexOrLast, countLongestArray } from '../util';
+import { TestItem } from '../../../types/global';
 
 describe('util.js', function () {
   describe('getIndexOrLast()', function () {
