@@ -23,6 +23,13 @@ export const countLongestArray = (arrays: any[] = []): number | boolean => {
     return output;
 };
 
+export const reduceSegment = (start: number, end: number, numArray: number[] = []): number => {
+    if (!numArray[start] || end > numArray.length) throw new Error('array index does not exist');
+    if (numArray === null) throw new Error('an array input is required');
+    if (start >= end) return 0;
+    return numArray.slice(start, end).reduce((acc, value) => acc + value);
+};
+
 export const throttle = (func: any, wait: number): any => {
     let time = Date.now();
     return function(e: any) {

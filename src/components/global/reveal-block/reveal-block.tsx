@@ -1,6 +1,6 @@
 import React from 'react';
 import { RevealBlockWrapper, OutterWrapper, InnerWrapper, ContentWrapper, Content } from './styles';
-import { getGridWidth } from '../../../styles/utils/global';
+import { reduceSegment } from '../../../util/util';
 import { useStaticQuery, graphql } from 'gatsby';
 import { RevealBlockContentType } from '../../../../types';
 
@@ -34,7 +34,7 @@ const revealBlock = ({
     const gLines = gridLines || configs.settings.gridLines;
 
     return (
-        <RevealBlockWrapper blockWidth={getGridWidth(startGrid, endGrid, gLines)}>
+        <RevealBlockWrapper blockWidth={reduceSegment(startGrid, endGrid, gLines)}>
             <OutterWrapper active={active}>
                 <InnerWrapper active={active}>
                     <ContentWrapper contentType={contentType}>

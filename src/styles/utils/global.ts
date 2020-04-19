@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 import { IGridPositionParams } from '../../../types/styles';
 import theme from '../theme';
 
-export const px2rem = (px: number) => `${px / 16}rem`;
+export const px2rem = (px: number): string => `${px / 16}rem`;
 
 export const superCenter = (left = '50%', top = '50%', x = '-50%', y = '-50%') => {
     return css`
@@ -47,18 +47,4 @@ export const gridPosition = (config: IGridPositionParams) => {
         ${`${prop}: ${`${percent}${unit}`}`};
         ${attach === 'right' && 'transform: translateX(-100%)'};
     `;
-};
-
-export const getGridWidth = (start: number, end: number, gridLines: number[] = []): number => {
-    if (!gridLines[start] || !gridLines[end]) throw new Error('grid index does not exist');
-    if (!gridLines) throw new Error('gridlines are required to get grid width');
-    if (start > end) return 0;
-
-    let output = start;
-
-    for (let i = 1; i < end - start; i++) {
-        output += gridLines[start + i];
-    }
-
-    return output;
 };

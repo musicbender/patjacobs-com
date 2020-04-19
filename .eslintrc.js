@@ -16,10 +16,9 @@ module.exports = {
         sourceType: 'module',
         exmaVersion: 2018,
     },
-    "ignorePatterns": [
+    ignorePatterns: [
         "node_modules/",
         "test",
-        "**/*.test.ts"
     ],
     plugins: [
         '@typescript-eslint', 
