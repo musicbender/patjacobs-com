@@ -6,8 +6,8 @@ import { RevealBlockContentType } from '../../../../types';
 
 const conf = {
     description: 'A hide and reveal animation content blocks',
-    revealTimeout: 2000,
-    mockImg: 'https://media.graphcms.com/YdEAENhXQJ6corR8eBrK',
+    revealTimeout: 1000,
+    mockImg: 'https://media.graphcms.com/9ihx2FVQxKbFMypUajB5',
     mockVideo: 'https://media.graphcms.com/nOZsc1RSYyKT11fg7M9l',
     mockText:
         "They're using our own satellites against us. And the clock is ticking. Remind me to thank John for a lovely weekend. God help us, we're in the hands of engineers. They're using our own satellites against us. And the clock is ticking. Checkmate... Jaguar shark! So tell me - does it really exist?",
@@ -49,7 +49,7 @@ class RevealBlockContainer extends PureComponent<Props, State> {
 }
 
 // stories
-storiesOf('ReavelBlock', module)
+storiesOf('Reveal Block', module)
     .add(
         'default',
         () => (
@@ -103,11 +103,11 @@ storiesOf('ReavelBlock', module)
     ))
     .add('Video from grid 2 to 5', () => (
         <RevealBlockContainer startGrid={2} endGrid={5} contentType={'video'}>
-            <video src={conf.mockVideo} controls />
+            <video src={conf.mockVideo} playsinline loop autoPlay />
         </RevealBlockContainer>
     ))
     .add('Video from grid 3 to 6', () => (
         <RevealBlockContainer startGrid={3} endGrid={6} contentType={'video'}>
-            <video src={conf.mockVideo} controls />
+            <video src={conf.mockVideo} playsinline loop autoPlay />
         </RevealBlockContainer>
     ));

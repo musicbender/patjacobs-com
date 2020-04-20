@@ -1,7 +1,7 @@
 import React from 'react';
-import { RevealBlockWrapper, OutterWrapper, InnerWrapper, ContentWrapper, Content } from './styles';
-import { reduceSegment } from '../../../util/util';
 import { useStaticQuery, graphql } from 'gatsby';
+import { reduceSegment } from '../../../util/util';
+import { RevealBlockWrapper, OutterWrapper, InnerWrapper, ContentWrapper, Content } from './styles';
 import { RevealBlockContentType } from '../../../../types';
 
 interface Props {
@@ -32,9 +32,11 @@ const revealBlock = ({
     `);
 
     const gLines = gridLines || configs.settings.gridLines;
+    const width = reduceSegment(startGrid, endGrid, gLines);
+    const position = reduceSegment(0, startGrid, gLines);
 
     return (
-        <RevealBlockWrapper blockWidth={reduceSegment(startGrid, endGrid, gLines)}>
+        <RevealBlockWrapper gridWidth={width} position={position}>
             <OutterWrapper active={active}>
                 <InnerWrapper active={active}>
                     <ContentWrapper contentType={contentType}>
