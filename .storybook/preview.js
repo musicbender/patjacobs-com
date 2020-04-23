@@ -7,6 +7,7 @@ import { AppWrapper } from '../src/layout/styles';
 import GridLines from '../src/components/global/grid-lines';
 import { ThemeProvider } from 'styled-components';
 import theme from '../src/styles/theme';
+import '../static/fonts/fonts.css';
 import { OutterWrapper, InnerWrapper } from './styles';
 import settings from '../data/configs/settings.json';
 

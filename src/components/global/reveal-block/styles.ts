@@ -62,6 +62,16 @@ export const ContentWrapper = styled('div')<ContentWrapperProps>`
 
 export const Content = styled('div')<ContentWrapperProps>`
     ${props =>
+        props.contentType === 'generic' &&
+        `
+            > * {
+                position: relative;
+                width: 100%;
+                min-height: 1.5em;
+                padding: 1.5em;
+            }
+        `};
+    ${props =>
         props.contentType === 'text' &&
         `
             font-size: 16px;

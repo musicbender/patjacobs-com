@@ -61,7 +61,7 @@ export interface GatsbyLocation {
 // enums
 export type CoreColors = 'aqua' | 'purple' | 'yellow' | 'orange';
 
-export type RevealBlockContentType = 'text' | 'img' | 'video';
+export type RevealBlockContentType = 'generic' | 'text' | 'img' | 'video';
 
 export enum ECurtainTypes {
     'none',

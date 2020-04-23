@@ -16,7 +16,7 @@ interface Props {
 const revealBlock = ({
     startGrid = 1,
     endGrid = 4,
-    contentType = 'text',
+    contentType = 'generic',
     active = false,
     children,
     gridLines,
