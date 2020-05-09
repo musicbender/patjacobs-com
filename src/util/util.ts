@@ -51,3 +51,19 @@ export const isMobileSize = (): boolean => {
 export const capitalizeFirstLetter = (str: string): string => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 };
+
+export const moveAllInArray = (arr: any[], distance = 1): any[] => {
+    const output: any[] = [];
+
+    arr.forEach((item: any, i: number): void => {
+        const sum: number = i + distance;
+        let newIndex = sum;
+
+        if (sum >= arr.length || sum < 0)
+            newIndex = sum - arr.length * Math.floor(sum / arr.length);
+
+        output[newIndex] = item;
+    });
+
+    return output;
+};

@@ -1,4 +1,4 @@
-import { getIndexOrLast, countLongestArray, reduceSegment } from '../util';
+import { getIndexOrLast, countLongestArray, reduceSegment, moveAllInArray } from '../util';
 const settings = require('../../../data/configs/settings.json');
 import { TestItem } from '../../../types/global';
 
@@ -229,6 +229,77 @@ describe('util.js', () => {
         tests.forEach(({ assert, expected }: TestItem) => {
             it(`From ${assert[0]} to ${assert[1]} in ${assert[2]} should output ${expected}`, () => {
                 expect(reduceSegment(assert[0], assert[1], assert[2])).toEqual(expected);
+            });
+        });
+    });
+
+    describe('moveAllInArray()', () => {
+        const tests: TestItem[] = [
+            {
+                assert: [[0, 1, 2, 3], 1],
+                expected: [3, 0, 1, 2],
+            },
+            {
+                assert: [[0, 1, 2, 3]],
+                expected: [3, 0, 1, 2],
+            },
+            {
+                assert: [[0, 1, 2, 3], 2],
+                expected: [2, 3, 0, 1],
+            },
+            {
+                assert: [[0, 1, 2, 3], 3],
+                expected: [1, 2, 3, 0],
+            },
+            {
+                assert: [[0, 1, 2, 3], 4],
+                expected: [0, 1, 2, 3],
+            },
+            {
+                assert: [[0, 1, 2, 3], 5],
+                expected: [3, 0, 1, 2],
+            },
+            {
+                assert: [[0, 1, 2, 3], 6],
+                expected: [2, 3, 0, 1],
+            },
+            {
+                assert: [[0, 1, 2, 3], 0],
+                expected: [0, 1, 2, 3],
+            },
+            {
+                assert: [[0, 1, 2, 3], -1],
+                expected: [1, 2, 3, 0],
+            },
+            {
+                assert: [[0, 1, 2, 3], 50],
+                expected: [2, 3, 0, 1],
+            },
+            {
+                assert: [[0, 1, 2, 3], -42],
+                expected: [2, 3, 0, 1],
+            },
+            {
+                assert: [[0, 1], 2],
+                expected: [0, 1],
+            },
+            {
+                assert: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], -6],
+                expected: [6, 7, 8, 9, 0, 1, 2, 3, 4, 5],
+            },
+            {
+                assert: [[0], 5],
+                expected: [0],
+            },
+            {
+                assert: [[], 1],
+                expected: [],
+            },
+        ];
+
+        tests.forEach(({ assert, expected }) => {
+            it(`Array of ${assert[0]}, move by ${assert[1]} will be ${expected}`, () => {
+                expect(moveAllInArray(assert[0], assert[1])).toEqual(expected);
             });
         });
     });

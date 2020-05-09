@@ -2016,6 +2016,12 @@ export type Gcms_Project = Gcms_Node & {
   externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Gcms_RichText>,
   linkType?: Maybe<Gcms_ProjectLinkType>,
+  githubRepoUrl?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>,
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>,
+  team: Array<Scalars['String']>,
+  storybookUrl?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
 };
 
 /** A connection to a list of items. */
@@ -2037,13 +2043,23 @@ export type Gcms_ProjectCreateInput = {
   externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   linkType?: Maybe<Gcms_ProjectLinkType>,
+  githubRepoUrl?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>,
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>,
+  storybookUrl?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
   techList?: Maybe<Gcms_ProjectCreatetechListInput>,
+  team?: Maybe<Gcms_ProjectCreateteamInput>,
   imageDesktop?: Maybe<Gcms_AssetCreateOneWithoutImageDesktopProjectInput>,
 };
 
 export type Gcms_ProjectCreateManyWithoutImageDesktopInput = {
   create?: Maybe<Array<Gcms_ProjectCreateWithoutImageDesktopInput>>,
   connect?: Maybe<Array<Gcms_ProjectWhereUniqueInput>>,
+};
+
+export type Gcms_ProjectCreateteamInput = {
+  set?: Maybe<Array<Scalars['String']>>,
 };
 
 export type Gcms_ProjectCreatetechListInput = {
@@ -2060,7 +2076,13 @@ export type Gcms_ProjectCreateWithoutImageDesktopInput = {
   externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   linkType?: Maybe<Gcms_ProjectLinkType>,
+  githubRepoUrl?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>,
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>,
+  storybookUrl?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
   techList?: Maybe<Gcms_ProjectCreatetechListInput>,
+  team?: Maybe<Gcms_ProjectCreateteamInput>,
 };
 
 /** An edge in a connection. */
@@ -2099,7 +2121,17 @@ export type Gcms_ProjectOrderByInput =
   'body_ASC' |
   'body_DESC' |
   'linkType_ASC' |
-  'linkType_DESC';
+  'linkType_DESC' |
+  'githubRepoUrl_ASC' |
+  'githubRepoUrl_DESC' |
+  'projectPublishDate_ASC' |
+  'projectPublishDate_DESC' |
+  'lastDeployedOn_ASC' |
+  'lastDeployedOn_DESC' |
+  'storybookUrl_ASC' |
+  'storybookUrl_DESC' |
+  'overview_ASC' |
+  'overview_DESC';
 
 export type Gcms_ProjectPreviousValues = {
   status: Gcms_Status,
@@ -2115,6 +2147,12 @@ export type Gcms_ProjectPreviousValues = {
   externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Gcms_RichText>,
   linkType?: Maybe<Gcms_ProjectLinkType>,
+  githubRepoUrl?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>,
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>,
+  team: Array<Scalars['String']>,
+  storybookUrl?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
 };
 
 export type Gcms_ProjectScalarWhereInput = {
@@ -2314,6 +2352,117 @@ export type Gcms_ProjectScalarWhereInput = {
   linkType_in?: Maybe<Array<Gcms_ProjectLinkType>>,
   /** All values that are not contained in given list. */
   linkType_not_in?: Maybe<Array<Gcms_ProjectLinkType>>,
+  githubRepoUrl?: Maybe<Scalars['String']>,
+  /** All values that are not equal to given value. */
+  githubRepoUrl_not?: Maybe<Scalars['String']>,
+  /** All values that are contained in given list. */
+  githubRepoUrl_in?: Maybe<Array<Scalars['String']>>,
+  /** All values that are not contained in given list. */
+  githubRepoUrl_not_in?: Maybe<Array<Scalars['String']>>,
+  /** All values less than the given value. */
+  githubRepoUrl_lt?: Maybe<Scalars['String']>,
+  /** All values less than or equal the given value. */
+  githubRepoUrl_lte?: Maybe<Scalars['String']>,
+  /** All values greater than the given value. */
+  githubRepoUrl_gt?: Maybe<Scalars['String']>,
+  /** All values greater than or equal the given value. */
+  githubRepoUrl_gte?: Maybe<Scalars['String']>,
+  /** All values containing the given string. */
+  githubRepoUrl_contains?: Maybe<Scalars['String']>,
+  /** All values not containing the given string. */
+  githubRepoUrl_not_contains?: Maybe<Scalars['String']>,
+  /** All values starting with the given string. */
+  githubRepoUrl_starts_with?: Maybe<Scalars['String']>,
+  /** All values not starting with the given string. */
+  githubRepoUrl_not_starts_with?: Maybe<Scalars['String']>,
+  /** All values ending with the given string. */
+  githubRepoUrl_ends_with?: Maybe<Scalars['String']>,
+  /** All values not ending with the given string. */
+  githubRepoUrl_not_ends_with?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are not equal to given value. */
+  projectPublishDate_not?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are contained in given list. */
+  projectPublishDate_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values that are not contained in given list. */
+  projectPublishDate_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values less than the given value. */
+  projectPublishDate_lt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values less than or equal the given value. */
+  projectPublishDate_lte?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than the given value. */
+  projectPublishDate_gt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than or equal the given value. */
+  projectPublishDate_gte?: Maybe<Scalars['GCMS_DateTime']>,
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are not equal to given value. */
+  lastDeployedOn_not?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are contained in given list. */
+  lastDeployedOn_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values that are not contained in given list. */
+  lastDeployedOn_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values less than the given value. */
+  lastDeployedOn_lt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values less than or equal the given value. */
+  lastDeployedOn_lte?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than the given value. */
+  lastDeployedOn_gt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than or equal the given value. */
+  lastDeployedOn_gte?: Maybe<Scalars['GCMS_DateTime']>,
+  storybookUrl?: Maybe<Scalars['String']>,
+  /** All values that are not equal to given value. */
+  storybookUrl_not?: Maybe<Scalars['String']>,
+  /** All values that are contained in given list. */
+  storybookUrl_in?: Maybe<Array<Scalars['String']>>,
+  /** All values that are not contained in given list. */
+  storybookUrl_not_in?: Maybe<Array<Scalars['String']>>,
+  /** All values less than the given value. */
+  storybookUrl_lt?: Maybe<Scalars['String']>,
+  /** All values less than or equal the given value. */
+  storybookUrl_lte?: Maybe<Scalars['String']>,
+  /** All values greater than the given value. */
+  storybookUrl_gt?: Maybe<Scalars['String']>,
+  /** All values greater than or equal the given value. */
+  storybookUrl_gte?: Maybe<Scalars['String']>,
+  /** All values containing the given string. */
+  storybookUrl_contains?: Maybe<Scalars['String']>,
+  /** All values not containing the given string. */
+  storybookUrl_not_contains?: Maybe<Scalars['String']>,
+  /** All values starting with the given string. */
+  storybookUrl_starts_with?: Maybe<Scalars['String']>,
+  /** All values not starting with the given string. */
+  storybookUrl_not_starts_with?: Maybe<Scalars['String']>,
+  /** All values ending with the given string. */
+  storybookUrl_ends_with?: Maybe<Scalars['String']>,
+  /** All values not ending with the given string. */
+  storybookUrl_not_ends_with?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
+  /** All values that are not equal to given value. */
+  overview_not?: Maybe<Scalars['String']>,
+  /** All values that are contained in given list. */
+  overview_in?: Maybe<Array<Scalars['String']>>,
+  /** All values that are not contained in given list. */
+  overview_not_in?: Maybe<Array<Scalars['String']>>,
+  /** All values less than the given value. */
+  overview_lt?: Maybe<Scalars['String']>,
+  /** All values less than or equal the given value. */
+  overview_lte?: Maybe<Scalars['String']>,
+  /** All values greater than the given value. */
+  overview_gt?: Maybe<Scalars['String']>,
+  /** All values greater than or equal the given value. */
+  overview_gte?: Maybe<Scalars['String']>,
+  /** All values containing the given string. */
+  overview_contains?: Maybe<Scalars['String']>,
+  /** All values not containing the given string. */
+  overview_not_contains?: Maybe<Scalars['String']>,
+  /** All values starting with the given string. */
+  overview_starts_with?: Maybe<Scalars['String']>,
+  /** All values not starting with the given string. */
+  overview_not_starts_with?: Maybe<Scalars['String']>,
+  /** All values ending with the given string. */
+  overview_ends_with?: Maybe<Scalars['String']>,
+  /** All values not ending with the given string. */
+  overview_not_ends_with?: Maybe<Scalars['String']>,
 };
 
 export type Gcms_ProjectSubscriptionPayload = {
@@ -2355,7 +2504,13 @@ export type Gcms_ProjectUpdateInput = {
   externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   linkType?: Maybe<Gcms_ProjectLinkType>,
+  githubRepoUrl?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>,
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>,
+  storybookUrl?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
   techList?: Maybe<Gcms_ProjectUpdatetechListInput>,
+  team?: Maybe<Gcms_ProjectUpdateteamInput>,
   imageDesktop?: Maybe<Gcms_AssetUpdateOneWithoutImageDesktopProjectInput>,
 };
 
@@ -2369,7 +2524,13 @@ export type Gcms_ProjectUpdateManyDataInput = {
   externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   linkType?: Maybe<Gcms_ProjectLinkType>,
+  githubRepoUrl?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>,
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>,
+  storybookUrl?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
   techList?: Maybe<Gcms_ProjectUpdatetechListInput>,
+  team?: Maybe<Gcms_ProjectUpdateteamInput>,
 };
 
 export type Gcms_ProjectUpdateManyMutationInput = {
@@ -2382,7 +2543,13 @@ export type Gcms_ProjectUpdateManyMutationInput = {
   externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   linkType?: Maybe<Gcms_ProjectLinkType>,
+  githubRepoUrl?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>,
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>,
+  storybookUrl?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
   techList?: Maybe<Gcms_ProjectUpdatetechListInput>,
+  team?: Maybe<Gcms_ProjectUpdateteamInput>,
 };
 
 export type Gcms_ProjectUpdateManyWithoutImageDesktopInput = {
@@ -2402,6 +2569,10 @@ export type Gcms_ProjectUpdateManyWithWhereNestedInput = {
   data: Gcms_ProjectUpdateManyDataInput,
 };
 
+export type Gcms_ProjectUpdateteamInput = {
+  set?: Maybe<Array<Scalars['String']>>,
+};
+
 export type Gcms_ProjectUpdatetechListInput = {
   set?: Maybe<Array<Scalars['String']>>,
 };
@@ -2416,7 +2587,13 @@ export type Gcms_ProjectUpdateWithoutImageDesktopDataInput = {
   externalUrl?: Maybe<Scalars['String']>,
   body?: Maybe<Scalars['GCMS_RichTextAST']>,
   linkType?: Maybe<Gcms_ProjectLinkType>,
+  githubRepoUrl?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>,
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>,
+  storybookUrl?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
   techList?: Maybe<Gcms_ProjectUpdatetechListInput>,
+  team?: Maybe<Gcms_ProjectUpdateteamInput>,
 };
 
 export type Gcms_ProjectUpdateWithWhereUniqueWithoutImageDesktopInput = {
@@ -2627,6 +2804,117 @@ export type Gcms_ProjectWhereInput = {
   linkType_in?: Maybe<Array<Gcms_ProjectLinkType>>,
   /** All values that are not contained in given list. */
   linkType_not_in?: Maybe<Array<Gcms_ProjectLinkType>>,
+  githubRepoUrl?: Maybe<Scalars['String']>,
+  /** All values that are not equal to given value. */
+  githubRepoUrl_not?: Maybe<Scalars['String']>,
+  /** All values that are contained in given list. */
+  githubRepoUrl_in?: Maybe<Array<Scalars['String']>>,
+  /** All values that are not contained in given list. */
+  githubRepoUrl_not_in?: Maybe<Array<Scalars['String']>>,
+  /** All values less than the given value. */
+  githubRepoUrl_lt?: Maybe<Scalars['String']>,
+  /** All values less than or equal the given value. */
+  githubRepoUrl_lte?: Maybe<Scalars['String']>,
+  /** All values greater than the given value. */
+  githubRepoUrl_gt?: Maybe<Scalars['String']>,
+  /** All values greater than or equal the given value. */
+  githubRepoUrl_gte?: Maybe<Scalars['String']>,
+  /** All values containing the given string. */
+  githubRepoUrl_contains?: Maybe<Scalars['String']>,
+  /** All values not containing the given string. */
+  githubRepoUrl_not_contains?: Maybe<Scalars['String']>,
+  /** All values starting with the given string. */
+  githubRepoUrl_starts_with?: Maybe<Scalars['String']>,
+  /** All values not starting with the given string. */
+  githubRepoUrl_not_starts_with?: Maybe<Scalars['String']>,
+  /** All values ending with the given string. */
+  githubRepoUrl_ends_with?: Maybe<Scalars['String']>,
+  /** All values not ending with the given string. */
+  githubRepoUrl_not_ends_with?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are not equal to given value. */
+  projectPublishDate_not?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are contained in given list. */
+  projectPublishDate_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values that are not contained in given list. */
+  projectPublishDate_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values less than the given value. */
+  projectPublishDate_lt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values less than or equal the given value. */
+  projectPublishDate_lte?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than the given value. */
+  projectPublishDate_gt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than or equal the given value. */
+  projectPublishDate_gte?: Maybe<Scalars['GCMS_DateTime']>,
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are not equal to given value. */
+  lastDeployedOn_not?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values that are contained in given list. */
+  lastDeployedOn_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values that are not contained in given list. */
+  lastDeployedOn_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>,
+  /** All values less than the given value. */
+  lastDeployedOn_lt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values less than or equal the given value. */
+  lastDeployedOn_lte?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than the given value. */
+  lastDeployedOn_gt?: Maybe<Scalars['GCMS_DateTime']>,
+  /** All values greater than or equal the given value. */
+  lastDeployedOn_gte?: Maybe<Scalars['GCMS_DateTime']>,
+  storybookUrl?: Maybe<Scalars['String']>,
+  /** All values that are not equal to given value. */
+  storybookUrl_not?: Maybe<Scalars['String']>,
+  /** All values that are contained in given list. */
+  storybookUrl_in?: Maybe<Array<Scalars['String']>>,
+  /** All values that are not contained in given list. */
+  storybookUrl_not_in?: Maybe<Array<Scalars['String']>>,
+  /** All values less than the given value. */
+  storybookUrl_lt?: Maybe<Scalars['String']>,
+  /** All values less than or equal the given value. */
+  storybookUrl_lte?: Maybe<Scalars['String']>,
+  /** All values greater than the given value. */
+  storybookUrl_gt?: Maybe<Scalars['String']>,
+  /** All values greater than or equal the given value. */
+  storybookUrl_gte?: Maybe<Scalars['String']>,
+  /** All values containing the given string. */
+  storybookUrl_contains?: Maybe<Scalars['String']>,
+  /** All values not containing the given string. */
+  storybookUrl_not_contains?: Maybe<Scalars['String']>,
+  /** All values starting with the given string. */
+  storybookUrl_starts_with?: Maybe<Scalars['String']>,
+  /** All values not starting with the given string. */
+  storybookUrl_not_starts_with?: Maybe<Scalars['String']>,
+  /** All values ending with the given string. */
+  storybookUrl_ends_with?: Maybe<Scalars['String']>,
+  /** All values not ending with the given string. */
+  storybookUrl_not_ends_with?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
+  /** All values that are not equal to given value. */
+  overview_not?: Maybe<Scalars['String']>,
+  /** All values that are contained in given list. */
+  overview_in?: Maybe<Array<Scalars['String']>>,
+  /** All values that are not contained in given list. */
+  overview_not_in?: Maybe<Array<Scalars['String']>>,
+  /** All values less than the given value. */
+  overview_lt?: Maybe<Scalars['String']>,
+  /** All values less than or equal the given value. */
+  overview_lte?: Maybe<Scalars['String']>,
+  /** All values greater than the given value. */
+  overview_gt?: Maybe<Scalars['String']>,
+  /** All values greater than or equal the given value. */
+  overview_gte?: Maybe<Scalars['String']>,
+  /** All values containing the given string. */
+  overview_contains?: Maybe<Scalars['String']>,
+  /** All values not containing the given string. */
+  overview_not_contains?: Maybe<Scalars['String']>,
+  /** All values starting with the given string. */
+  overview_starts_with?: Maybe<Scalars['String']>,
+  /** All values not starting with the given string. */
+  overview_not_starts_with?: Maybe<Scalars['String']>,
+  /** All values ending with the given string. */
+  overview_ends_with?: Maybe<Scalars['String']>,
+  /** All values not ending with the given string. */
+  overview_not_ends_with?: Maybe<Scalars['String']>,
   imageDesktop?: Maybe<Gcms_AssetWhereInput>,
 };
 
