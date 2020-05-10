@@ -9,6 +9,7 @@ interface RevealBlockWrapperProps {
 
 interface WrapperProps {
     active?: boolean;
+    delay?: number;
 }
 
 interface ContentWrapperProps {
@@ -26,8 +27,8 @@ export const RevealBlockWrapper = styled('div')<RevealBlockWrapperProps>`
 const Wrapper = styled('div')<WrapperProps>`
     will-change: transform;
     visibility: hidden;
-    transition: ${({ theme }) =>
-        `transform ${theme.animate.superSlow} ${theme.animate.superEaseOut}, visibility ${theme.animate.superSlow};`};
+    transition: ${({ delay, theme }) =>
+        `transform ${theme.animate.superSlow} ${theme.animate.superEaseOut} ${delay}ms, visibility ${theme.animate.superSlow} ${theme.animate.superEaseOut} ${delay}ms;`};
 `;
 
 export const OutterWrapper = styled(Wrapper)`

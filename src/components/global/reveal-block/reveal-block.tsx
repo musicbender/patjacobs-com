@@ -8,9 +8,11 @@ interface Props {
     startGrid?: number;
     endGrid?: number;
     active?: boolean;
+    delay?: number;
     children?: any;
     contentType?: RevealBlockContentType;
     gridLines?: number[];
+    className?: string;
 }
 
 const revealBlock = ({
@@ -18,8 +20,10 @@ const revealBlock = ({
     endGrid = 4,
     contentType = 'generic',
     active = false,
+    delay = 0,
     children,
     gridLines,
+    className,
 }: Props) => {
     const { configs } = useStaticQuery(graphql`
         query {
@@ -36,9 +40,9 @@ const revealBlock = ({
     const position = reduceSegment(0, startGrid, gLines);
 
     return (
-        <RevealBlockWrapper gridWidth={width} position={position}>
-            <OutterWrapper active={active}>
-                <InnerWrapper active={active}>
+        <RevealBlockWrapper gridWidth={width} position={position} className={className}>
+            <OutterWrapper active={active} delay={delay}>
+                <InnerWrapper active={active} delay={delay}>
                     <ContentWrapper contentType={contentType}>
                         <Content contentType={contentType}>{children}</Content>
                     </ContentWrapper>
