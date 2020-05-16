@@ -23,8 +23,7 @@ export const InnerWrapper = styled.div`
     width: 100%;
     height: 100%;
     svg {
-        ${superCenter('auto', '0', '-50%', '0')}
-        right: ${gridS};
+        ${superCenter('96%', '0', '-50%', '0')}
         display: inline-block;
         width: 1.85em;
         fill: ${props => props.theme.palette.white};

@@ -6,12 +6,10 @@ import hexRgb from 'hex-to-rgba';
 
 export const AboutMeSection = styled.div`
     position: relative;
-    width: 84%;
-    height: auto;
     margin: 0 auto 10em;
     overflow: hidden;
     ${media.tablet`
-    width: 50%;
+    width: 42%;
     height: 52em;
     margin: 0 0 0 50%;
     overflow: visible;
