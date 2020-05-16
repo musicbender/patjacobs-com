@@ -51,7 +51,30 @@ export type Configs = Node & {
   meta?: Maybe<ConfigsMeta>,
   header?: Maybe<ConfigsHeader>,
   recentWork?: Maybe<ConfigsRecentWork>,
+  caseStudy?: Maybe<ConfigsCaseStudy>,
   data?: Maybe<ConfigsData>,
+};
+
+export type ConfigsCaseStudy = {
+  projectMeta?: Maybe<ConfigsCaseStudyProjectMeta>,
+};
+
+export type ConfigsCaseStudyFilterInput = {
+  projectMeta?: Maybe<ConfigsCaseStudyProjectMetaFilterInput>,
+};
+
+export type ConfigsCaseStudyProjectMeta = {
+  datePublished?: Maybe<Scalars['String']>,
+  lastDeployment?: Maybe<Scalars['String']>,
+  siteUrl?: Maybe<Scalars['String']>,
+  projectType?: Maybe<Scalars['String']>,
+};
+
+export type ConfigsCaseStudyProjectMetaFilterInput = {
+  datePublished?: Maybe<StringQueryOperatorInput>,
+  lastDeployment?: Maybe<StringQueryOperatorInput>,
+  siteUrl?: Maybe<StringQueryOperatorInput>,
+  projectType?: Maybe<StringQueryOperatorInput>,
 };
 
 export type ConfigsConnection = {
@@ -80,6 +103,29 @@ export type ConfigsData = {
   meta?: Maybe<ConfigsDataMeta>,
   header?: Maybe<ConfigsDataHeader>,
   recentWork?: Maybe<ConfigsDataRecentWork>,
+  caseStudy?: Maybe<ConfigsDataCaseStudy>,
+};
+
+export type ConfigsDataCaseStudy = {
+  projectMeta?: Maybe<ConfigsDataCaseStudyProjectMeta>,
+};
+
+export type ConfigsDataCaseStudyFilterInput = {
+  projectMeta?: Maybe<ConfigsDataCaseStudyProjectMetaFilterInput>,
+};
+
+export type ConfigsDataCaseStudyProjectMeta = {
+  datePublished?: Maybe<Scalars['String']>,
+  lastDeployment?: Maybe<Scalars['String']>,
+  siteUrl?: Maybe<Scalars['String']>,
+  projectType?: Maybe<Scalars['String']>,
+};
+
+export type ConfigsDataCaseStudyProjectMetaFilterInput = {
+  datePublished?: Maybe<StringQueryOperatorInput>,
+  lastDeployment?: Maybe<StringQueryOperatorInput>,
+  siteUrl?: Maybe<StringQueryOperatorInput>,
+  projectType?: Maybe<StringQueryOperatorInput>,
 };
 
 export type ConfigsDataFilterInput = {
@@ -87,6 +133,7 @@ export type ConfigsDataFilterInput = {
   meta?: Maybe<ConfigsDataMetaFilterInput>,
   header?: Maybe<ConfigsDataHeaderFilterInput>,
   recentWork?: Maybe<ConfigsDataRecentWorkFilterInput>,
+  caseStudy?: Maybe<ConfigsDataCaseStudyFilterInput>,
 };
 
 export type ConfigsDataHeader = {
@@ -363,6 +410,10 @@ export type ConfigsFieldsEnum =
   'recentWork___particleData___color' |
   'recentWork___particleData___size' |
   'recentWork___particleData___plx' |
+  'caseStudy___projectMeta___datePublished' |
+  'caseStudy___projectMeta___lastDeployment' |
+  'caseStudy___projectMeta___siteUrl' |
+  'caseStudy___projectMeta___projectType' |
   'data___settings___gridLines' |
   'data___settings___pageLoadTimeout' |
   'data___settings___splashScreenDebug' |
@@ -392,7 +443,11 @@ export type ConfigsFieldsEnum =
   'data___recentWork___particleData___type' |
   'data___recentWork___particleData___color' |
   'data___recentWork___particleData___size' |
-  'data___recentWork___particleData___plx';
+  'data___recentWork___particleData___plx' |
+  'data___caseStudy___projectMeta___datePublished' |
+  'data___caseStudy___projectMeta___lastDeployment' |
+  'data___caseStudy___projectMeta___siteUrl' |
+  'data___caseStudy___projectMeta___projectType';
 
 export type ConfigsFilterInput = {
   id?: Maybe<StringQueryOperatorInput>,
@@ -403,6 +458,7 @@ export type ConfigsFilterInput = {
   meta?: Maybe<ConfigsMetaFilterInput>,
   header?: Maybe<ConfigsHeaderFilterInput>,
   recentWork?: Maybe<ConfigsRecentWorkFilterInput>,
+  caseStudy?: Maybe<ConfigsCaseStudyFilterInput>,
   data?: Maybe<ConfigsDataFilterInput>,
 };
 
@@ -4606,6 +4662,7 @@ export type QueryConfigsArgs = {
   meta?: Maybe<ConfigsMetaFilterInput>,
   header?: Maybe<ConfigsHeaderFilterInput>,
   recentWork?: Maybe<ConfigsRecentWorkFilterInput>,
+  caseStudy?: Maybe<ConfigsCaseStudyFilterInput>,
   data?: Maybe<ConfigsDataFilterInput>
 };
 
@@ -5674,30 +5731,35 @@ export type Unnamed_8_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, '
 export type Unnamed_9_QueryVariables = {};
 
 
-export type Unnamed_9_Query = { configs: Maybe<{ recentWork: Maybe<{ particleData: Maybe<Array<Maybe<Pick<ConfigsRecentWorkParticleData, 'name' | 'type' | 'color' | 'size' | 'plx'>>>> }>, settings: Maybe<Pick<ConfigsSettings, 'gridLines'>> }> };
+export type Unnamed_9_Query = { configs: Maybe<{ caseStudy: Maybe<{ projectMeta: Maybe<Pick<ConfigsCaseStudyProjectMeta, 'datePublished' | 'lastDeployment' | 'siteUrl' | 'projectType'>> }> }> };
 
 export type Unnamed_10_QueryVariables = {};
 
 
-export type Unnamed_10_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'workItemsAmount'>> }>, gcms: { section: Maybe<Pick<Gcms_Section, 'heading'>>, projects: Array<Maybe<(
-      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl'>
-      & { imageDesktop: Maybe<Pick<Gcms_Asset, 'url'>> }
-    )>> } };
+export type Unnamed_10_Query = { configs: Maybe<{ recentWork: Maybe<{ particleData: Maybe<Array<Maybe<Pick<ConfigsRecentWorkParticleData, 'name' | 'type' | 'color' | 'size' | 'plx'>>>> }>, settings: Maybe<Pick<ConfigsSettings, 'gridLines'>> }> };
 
 export type Unnamed_11_QueryVariables = {};
 
 
-export type Unnamed_11_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'email'>>, settings: Maybe<Pick<ConfigsSettings, 'skillsTop'>> }>, gcms: { skills: Array<Maybe<Pick<Gcms_Skill, 'xAxisDesktop' | 'xAxisMobile' | 'yAxisDesktop' | 'yAxisMobile' | 'directionDesktop' | 'directionMobile' | 'id' | 'label'>>> } };
+export type Unnamed_11_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'workItemsAmount'>> }>, gcms: { section: Maybe<Pick<Gcms_Section, 'heading'>>, projects: Array<Maybe<(
+      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl'>
+      & { imageDesktop: Maybe<Pick<Gcms_Asset, 'url'>> }
+    )>> } };
 
 export type Unnamed_12_QueryVariables = {};
 
 
-export type Unnamed_12_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'splashScreenDebug'>> }> };
+export type Unnamed_12_Query = { configs: Maybe<{ meta: Maybe<Pick<ConfigsMeta, 'email'>>, settings: Maybe<Pick<ConfigsSettings, 'skillsTop'>> }>, gcms: { skills: Array<Maybe<Pick<Gcms_Skill, 'xAxisDesktop' | 'xAxisMobile' | 'yAxisDesktop' | 'yAxisMobile' | 'directionDesktop' | 'directionMobile' | 'id' | 'label'>>> } };
 
 export type Unnamed_13_QueryVariables = {};
 
 
-export type Unnamed_13_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
+export type Unnamed_13_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'splashScreenDebug'>> }> };
+
+export type Unnamed_14_QueryVariables = {};
+
+
+export type Unnamed_14_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

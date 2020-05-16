@@ -24,6 +24,7 @@
     "src", 
     "gatsby-browser.js", 
     "types", 
+    "data",
     "gatsby-config.js", 
     "gatsby-ssr.js",
     "gatsby-node.js",

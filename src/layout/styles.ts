@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import hexRgb from 'hex-to-rgba';
 import { media, sizes } from '../styles/breakpoints';
 
 interface AppWrapperProps {
@@ -15,23 +14,9 @@ export const AppWrapper = styled('div')<AppWrapperProps>`
     max-width: ${sizes.desktopXXL}px;
     ${props => props.splashOpen && 'overflow: hidden;'}
     ${props => {
-        const { bg, text } = props.theme.modes[props.mode];
+        const { bg } = props.theme.modes[props.mode];
         return css`
             background-color: ${bg};
-            p,
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6,
-            div,
-            input,
-            form,
-            span,
-            div {
-                color: ${hexRgb(text, 0.87)};
-            }
         `;
     }}
 `;
