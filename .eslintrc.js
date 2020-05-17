@@ -9,6 +9,7 @@ module.exports = {
         'prettier/@typescript-eslint',
         'plugin:react/recommended',
         'plugin:prettier/recommended',
+        'prettier/react'
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -22,10 +23,14 @@ module.exports = {
     ],
     plugins: [
         '@typescript-eslint', 
-        'prettier'
+        'prettier',
     ],
     rules: {
         'prettier/prettier': 'error',
+        'react/jsx-curly-newline': [
+            "error", 
+            "consistent"
+        ],
         '@typescript-eslint/array-type': 'error',
         '@typescript-eslint/consistent-type-definitions': 'error',
         '@typescript-eslint/no-explicit-any': 'off',

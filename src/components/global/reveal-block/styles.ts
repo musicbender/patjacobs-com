@@ -73,6 +73,14 @@ export const Content = styled('div')<ContentWrapperProps>`
             }
         `};
     ${props =>
+        props.contentType === 'line' &&
+        `
+        > * {
+            position: relative;
+            width: 100%;
+        }
+    `};
+    ${props =>
         props.contentType === 'text' &&
         `
             font-size: 16px;

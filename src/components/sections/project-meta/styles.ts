@@ -14,9 +14,13 @@ export const ProjectMetaWrapper = styled.div`
     overflow: hidden;
 `;
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled('div')<ContentProps>`
     width: 100%;
     margin: ${`${conf.desktopMargin} auto`};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: ${props => props.theme.corePalette[props.color]};
 `;
 
 const content = css`
@@ -24,6 +28,9 @@ const content = css`
     font-weight: 200;
     font-size: 0.9rem;
     letter-spacing: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 
 export const Label = styled.p`
@@ -33,12 +40,12 @@ export const Label = styled.p`
 
 export const ContentValue = styled('p')<ContentProps>`
     ${content}
-    color: ${props => props.theme.corePalette[props.color]};
+    color: inherit;
 `;
 
 export const ContentValueLink = styled('a')<ContentProps>`
     ${content}
-    color: ${props => props.theme.corePalette[props.color]};
+    color: inherit;
     text-decoration: none;
     &:focus,
     &:hover {

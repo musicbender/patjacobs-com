@@ -16,6 +16,7 @@ const CaseStudyTemplate = (props: Props) => (
         <CaseStudy
             project={props.pageContext.project}
             allProjects={props.pageContext.allProjects}
+            sections={props.pageContext.sections}
             location={props.location}
         />
     </Layout>

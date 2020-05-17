@@ -52,8 +52,18 @@ class RevealBlockContainer extends PureComponent<Props, State> {
 }
 
 // styled components
+interface LineContentProps {
+    height?: string;
+    lineColor?: string;
+}
+
 const GenericWrapper = styled.div`
     background-color: black;
+`;
+
+const LineContent = styled('div')<LineContentProps>`
+    height: ${props => props.height};
+    background-color: ${props => props.lineColor};
 `;
 
 const GenericComponent = ({ text = conf.mockText }) => (
@@ -143,5 +153,15 @@ storiesOf('Reveal Block', module)
     .add('Video from grid 3 to 6', () => (
         <RevealBlockContainer startGrid={3} endGrid={6} contentType={'video'}>
             <video src={conf.mockVideo} playsinline loop autoPlay />
+        </RevealBlockContainer>
+    ))
+    .add('Line content type', () => (
+        <RevealBlockContainer contentType="line">
+            <LineContent height="3px" lineColor="#fff" />
+        </RevealBlockContainer>
+    ))
+    .add('Line content thicker', () => (
+        <RevealBlockContainer contentType="line">
+            <LineContent height="3em" lineColor="#fff" />
         </RevealBlockContainer>
     ));

@@ -67,3 +67,14 @@ export const moveAllInArray = (arr: any[], distance = 1): any[] => {
 
     return output;
 };
+
+export const pruneUrl = (url: string): string => {
+    let output = url;
+    const removeArr = ['http://', 'https://', 'www.'];
+
+    removeArr.forEach((badString: string): void => {
+        output = output.replace(badString, '');
+    });
+
+    return output;
+};

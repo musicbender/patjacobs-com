@@ -11,6 +11,7 @@ import {
 } from './styles';
 import { Gcms_Project } from '../../../../types';
 import { useStaticQuery, graphql } from 'gatsby';
+import { pruneUrl } from '../../../util/util';
 
 interface Props {
     project?: Gcms_Project;
@@ -54,27 +55,27 @@ const ProjectMeta = ({ project }: Props) => {
         project && (
             <ProjectMetaWrapper>
                 {project.projectPublishDate && (
-                    <ContentWrapper>
+                    <ContentWrapper color="aqua">
                         <Label>{content.datePublished}</Label>
-                        <ContentValue color="aqua">{project.projectPublishDate}</ContentValue>
+                        <ContentValue>{project.projectPublishDate}</ContentValue>
                     </ContentWrapper>
                 )}
                 {project.externalUrl && (
-                    <ContentWrapper>
+                    <ContentWrapper color="orange">
                         <Label>{content.siteUrl}</Label>
-                        <ContentValueLink href={content.siteUrl} color="orange" target="_blank">
-                            {project.externalUrl}
+                        <ContentValueLink href={content.siteUrl} target="_blank">
+                            {pruneUrl(project.externalUrl)}
                         </ContentValueLink>
                     </ContentWrapper>
                 )}
                 {project.lastDeployedOn && (
-                    <ContentWrapper>
+                    <ContentWrapper color="purple">
                         <Label>{content.lastDeployment}</Label>
-                        <ContentValue color="purple">{project.lastDeployedOn}</ContentValue>
+                        <ContentValue>{project.lastDeployedOn}</ContentValue>
                     </ContentWrapper>
                 )}
                 {project.projectPublishDate && (
-                    <ContentWrapper>
+                    <ContentWrapper color="yellow">
                         <Label>{content.projectType}</Label>
                         <ContentValue color="yellow">
                             {project.projectType.toLowerCase()}

@@ -4951,6 +4951,7 @@ export type SitePageConnectionGroupArgs = {
 export type SitePageContext = {
   project?: Maybe<SitePageContextProject>,
   allProjects?: Maybe<Array<Maybe<SitePageContextAllProjects>>>,
+  sections?: Maybe<Array<Maybe<SitePageContextSections>>>,
 };
 
 export type SitePageContextAllProjects = {
@@ -5008,6 +5009,7 @@ export type SitePageContextAllProjectsImageDesktopFilterInput = {
 export type SitePageContextFilterInput = {
   project?: Maybe<SitePageContextProjectFilterInput>,
   allProjects?: Maybe<SitePageContextAllProjectsFilterListInput>,
+  sections?: Maybe<SitePageContextSectionsFilterListInput>,
 };
 
 export type SitePageContextProject = {
@@ -5056,6 +5058,20 @@ export type SitePageContextProjectImageDesktopFilterInput = {
   fileName?: Maybe<StringQueryOperatorInput>,
   height?: Maybe<IntQueryOperatorInput>,
   width?: Maybe<IntQueryOperatorInput>,
+};
+
+export type SitePageContextSections = {
+  sectionId?: Maybe<Scalars['String']>,
+  heading?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextSectionsFilterInput = {
+  sectionId?: Maybe<StringQueryOperatorInput>,
+  heading?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextSectionsFilterListInput = {
+  elemMatch?: Maybe<SitePageContextSectionsFilterInput>,
 };
 
 export type SitePageEdge = {
@@ -5184,6 +5200,9 @@ export type SitePageFieldsEnum =
   'context___allProjects___techList' |
   'context___allProjects___externalUrl' |
   'context___allProjects___body___html' |
+  'context___sections' |
+  'context___sections___sectionId' |
+  'context___sections___heading' |
   'pluginCreator___id' |
   'pluginCreator___parent___id' |
   'pluginCreator___parent___parent___id' |

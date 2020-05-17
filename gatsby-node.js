@@ -1,8 +1,5 @@
 const path = require('path');
 
-//* *******************************************//
-// --//--//--// GATSBY NODE CONFIG //--//--//--//
-//* *******************************************//
 exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
     return new Promise(resolve => {
         const { createNode } = actions;
@@ -41,6 +38,10 @@ exports.createPages = async ({ graphql, actions }) => {
         query = await graphql(`
             query {
                 gcms {
+                    sections(where: { sectionId_contains: "case-study-" }) {
+                        sectionId
+                        heading
+                    }
                     projects(where: { disabled: false, status: PUBLISHED, linkType: Case_Study }) {
                         updatedAt
                         createdAt
@@ -75,6 +76,7 @@ exports.createPages = async ({ graphql, actions }) => {
             context: {
                 project,
                 allProjects: query.data.gcms.projects,
+                sections: query.data.gcms.sections,
             },
         });
     });
