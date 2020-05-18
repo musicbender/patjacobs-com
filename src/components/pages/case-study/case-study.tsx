@@ -86,7 +86,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                 {this.props.project && (
                     <Main>
                         <Top>
-                            <ScrollLineWrapper>
+                            <ScrollLineWrapper atTop={this.state.atTop}>
                                 <StyledRevealBlock
                                     contentType="line"
                                     active={
@@ -94,7 +94,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                                         !this.props.splashOpen &&
                                         !this.props.transportOpen
                                     }
-                                    delay={1000}
+                                    endGrid={3}
                                 >
                                     <ScrollLine />
                                 </StyledRevealBlock>

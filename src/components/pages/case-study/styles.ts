@@ -1,8 +1,9 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { media } from '../../../styles/breakpoints';
 import RevealBlock from '../../global/reveal-block';
 import { superCenter } from '../../../styles/utils/global';
 
+// types
 interface TitleProps {
     isBig?: boolean;
 }
@@ -11,6 +12,14 @@ interface ScrollLineWrapperProps {
     atTop?: boolean;
 }
 
+// keyframes
+const scrollLineLoop = keyframes`
+    0%, 80% { transform: translate(-50%, 0); }
+    90% { transform: translate(-50%, 2em); }
+    100% { transform: translate(-50%, 0); }
+`;
+
+// styled components
 export const CaseStudyPage = styled.div`
     position: relative;
 `;
@@ -60,11 +69,19 @@ export const ScrollLineWrapper = styled('div')<ScrollLineWrapperProps>`
     height: 20em;
     width: 5em;
     overflow: hidden;
+    animation: none;
+    ${props =>
+        props.atTop &&
+        css`
+            animation: ${css`
+                ${scrollLineLoop} 3000ms infinite
+            `};
+        `};
 `;
 
 export const StyledRevealBlock = styled(RevealBlock)`
     transform: rotate(90deg);
-    transform-origin: 7.7% 0%;
+    transform-origin: 2.5% 1.8em;
 `;
 
 export const ScrollLine = styled.div`
