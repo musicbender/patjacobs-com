@@ -49,16 +49,24 @@ exports.createPages = async ({ graphql, actions }) => {
                         projectId
                         title
                         projectType
+                        description
+                        techList
+                        externalUrl
+                        overview
+                        lastDeployedOn
+                        projectPublishDate
+                        status
+                        storybookUrl
+                        githubRepoUrl
+                        team
                         imageDesktop {
                             fileName
                             height
                             width
                         }
-                        description
-                        techList
-                        externalUrl
                         body {
                             html
+                            raw
                         }
                     }
                 }
@@ -68,6 +76,19 @@ exports.createPages = async ({ graphql, actions }) => {
         throw new Error(err);
     }
 
+    const processSections = sections => {
+        let output = {};
+
+        sections.forEach(section => {
+            output = {
+                ...output,
+                [section.sectionId]: section,
+            };
+        });
+
+        return output;
+    };
+
     // create case study pages
     query.data.gcms.projects.forEach(project => {
         createPage({
@@ -76,7 +97,7 @@ exports.createPages = async ({ graphql, actions }) => {
             context: {
                 project,
                 allProjects: query.data.gcms.projects,
-                sections: query.data.gcms.sections,
+                sections: processSections(query.data.gcms.sections),
             },
         });
     });

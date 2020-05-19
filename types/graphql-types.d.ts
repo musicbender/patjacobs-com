@@ -4951,7 +4951,7 @@ export type SitePageConnectionGroupArgs = {
 export type SitePageContext = {
   project?: Maybe<SitePageContextProject>,
   allProjects?: Maybe<Array<Maybe<SitePageContextAllProjects>>>,
-  sections?: Maybe<Array<Maybe<SitePageContextSections>>>,
+  sections?: Maybe<SitePageContextSections>,
 };
 
 export type SitePageContextAllProjects = {
@@ -4961,19 +4961,165 @@ export type SitePageContextAllProjects = {
   projectId?: Maybe<Scalars['String']>,
   title?: Maybe<Scalars['String']>,
   projectType?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<SitePageContextAllProjectsImageDesktop>,
   description?: Maybe<Scalars['String']>,
   techList?: Maybe<Array<Maybe<Scalars['String']>>>,
   externalUrl?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['Date']>,
+  status?: Maybe<Scalars['String']>,
+  team?: Maybe<Array<Maybe<Scalars['String']>>>,
+  imageDesktop?: Maybe<SitePageContextAllProjectsImageDesktop>,
   body?: Maybe<SitePageContextAllProjectsBody>,
 };
 
 export type SitePageContextAllProjectsBody = {
   html?: Maybe<Scalars['String']>,
+  raw?: Maybe<SitePageContextAllProjectsBodyRaw>,
 };
 
 export type SitePageContextAllProjectsBodyFilterInput = {
   html?: Maybe<StringQueryOperatorInput>,
+  raw?: Maybe<SitePageContextAllProjectsBodyRawFilterInput>,
+};
+
+export type SitePageContextAllProjectsBodyRaw = {
+  object?: Maybe<Scalars['String']>,
+  document?: Maybe<SitePageContextAllProjectsBodyRawDocument>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocument = {
+  object?: Maybe<Scalars['String']>,
+  nodes?: Maybe<Array<Maybe<SitePageContextAllProjectsBodyRawDocumentNodes>>>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  nodes?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesFilterListInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodes = {
+  object?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  data?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesData>,
+  nodes?: Maybe<Array<Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodes>>>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesData = {
+  className?: Maybe<Scalars['String']>,
+  src?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  mimeType?: Maybe<Scalars['String']>,
+  width?: Maybe<Scalars['Int']>,
+  height?: Maybe<Scalars['Int']>,
+  handle?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesDataFilterInput = {
+  className?: Maybe<StringQueryOperatorInput>,
+  src?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  mimeType?: Maybe<StringQueryOperatorInput>,
+  width?: Maybe<IntQueryOperatorInput>,
+  height?: Maybe<IntQueryOperatorInput>,
+  handle?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  data?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesDataFilterInput>,
+  nodes?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesFilterListInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesFilterListInput = {
+  elemMatch?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesFilterInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodes = {
+  object?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  data?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesData>,
+  nodes?: Maybe<Array<Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesNodes>>>,
+  leaves?: Maybe<Array<Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesLeaves>>>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesData = {
+  src?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  mimeType?: Maybe<Scalars['String']>,
+  width?: Maybe<Scalars['Int']>,
+  height?: Maybe<Scalars['Int']>,
+  handle?: Maybe<Scalars['String']>,
+  altText?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesDataFilterInput = {
+  src?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  mimeType?: Maybe<StringQueryOperatorInput>,
+  width?: Maybe<IntQueryOperatorInput>,
+  height?: Maybe<IntQueryOperatorInput>,
+  handle?: Maybe<StringQueryOperatorInput>,
+  altText?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  data?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesDataFilterInput>,
+  nodes?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesNodesFilterListInput>,
+  leaves?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesLeavesFilterListInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesFilterListInput = {
+  elemMatch?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesFilterInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesLeaves = {
+  object?: Maybe<Scalars['String']>,
+  text?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesLeavesFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  text?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesLeavesFilterListInput = {
+  elemMatch?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesLeavesFilterInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesNodes = {
+  object?: Maybe<Scalars['String']>,
+  leaves?: Maybe<Array<Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesNodesLeaves>>>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesNodesFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  leaves?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesNodesLeavesFilterListInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesNodesFilterListInput = {
+  elemMatch?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesNodesFilterInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesNodesLeaves = {
+  object?: Maybe<Scalars['String']>,
+  text?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesNodesLeavesFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  text?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawDocumentNodesNodesNodesLeavesFilterListInput = {
+  elemMatch?: Maybe<SitePageContextAllProjectsBodyRawDocumentNodesNodesNodesLeavesFilterInput>,
+};
+
+export type SitePageContextAllProjectsBodyRawFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  document?: Maybe<SitePageContextAllProjectsBodyRawDocumentFilterInput>,
 };
 
 export type SitePageContextAllProjectsFilterInput = {
@@ -4983,10 +5129,14 @@ export type SitePageContextAllProjectsFilterInput = {
   projectId?: Maybe<StringQueryOperatorInput>,
   title?: Maybe<StringQueryOperatorInput>,
   projectType?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<SitePageContextAllProjectsImageDesktopFilterInput>,
   description?: Maybe<StringQueryOperatorInput>,
   techList?: Maybe<StringQueryOperatorInput>,
   externalUrl?: Maybe<StringQueryOperatorInput>,
+  overview?: Maybe<StringQueryOperatorInput>,
+  projectPublishDate?: Maybe<DateQueryOperatorInput>,
+  status?: Maybe<StringQueryOperatorInput>,
+  team?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<SitePageContextAllProjectsImageDesktopFilterInput>,
   body?: Maybe<SitePageContextAllProjectsBodyFilterInput>,
 };
 
@@ -5009,7 +5159,7 @@ export type SitePageContextAllProjectsImageDesktopFilterInput = {
 export type SitePageContextFilterInput = {
   project?: Maybe<SitePageContextProjectFilterInput>,
   allProjects?: Maybe<SitePageContextAllProjectsFilterListInput>,
-  sections?: Maybe<SitePageContextSectionsFilterListInput>,
+  sections?: Maybe<SitePageContextSectionsFilterInput>,
 };
 
 export type SitePageContextProject = {
@@ -5019,19 +5169,165 @@ export type SitePageContextProject = {
   projectId?: Maybe<Scalars['String']>,
   title?: Maybe<Scalars['String']>,
   projectType?: Maybe<Scalars['String']>,
-  imageDesktop?: Maybe<SitePageContextProjectImageDesktop>,
   description?: Maybe<Scalars['String']>,
   techList?: Maybe<Array<Maybe<Scalars['String']>>>,
   externalUrl?: Maybe<Scalars['String']>,
+  overview?: Maybe<Scalars['String']>,
+  projectPublishDate?: Maybe<Scalars['Date']>,
+  status?: Maybe<Scalars['String']>,
+  team?: Maybe<Array<Maybe<Scalars['String']>>>,
+  imageDesktop?: Maybe<SitePageContextProjectImageDesktop>,
   body?: Maybe<SitePageContextProjectBody>,
 };
 
 export type SitePageContextProjectBody = {
   html?: Maybe<Scalars['String']>,
+  raw?: Maybe<SitePageContextProjectBodyRaw>,
 };
 
 export type SitePageContextProjectBodyFilterInput = {
   html?: Maybe<StringQueryOperatorInput>,
+  raw?: Maybe<SitePageContextProjectBodyRawFilterInput>,
+};
+
+export type SitePageContextProjectBodyRaw = {
+  object?: Maybe<Scalars['String']>,
+  document?: Maybe<SitePageContextProjectBodyRawDocument>,
+};
+
+export type SitePageContextProjectBodyRawDocument = {
+  object?: Maybe<Scalars['String']>,
+  nodes?: Maybe<Array<Maybe<SitePageContextProjectBodyRawDocumentNodes>>>,
+};
+
+export type SitePageContextProjectBodyRawDocumentFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  nodes?: Maybe<SitePageContextProjectBodyRawDocumentNodesFilterListInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodes = {
+  object?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  data?: Maybe<SitePageContextProjectBodyRawDocumentNodesData>,
+  nodes?: Maybe<Array<Maybe<SitePageContextProjectBodyRawDocumentNodesNodes>>>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesData = {
+  className?: Maybe<Scalars['String']>,
+  src?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  mimeType?: Maybe<Scalars['String']>,
+  width?: Maybe<Scalars['Int']>,
+  height?: Maybe<Scalars['Int']>,
+  handle?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesDataFilterInput = {
+  className?: Maybe<StringQueryOperatorInput>,
+  src?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  mimeType?: Maybe<StringQueryOperatorInput>,
+  width?: Maybe<IntQueryOperatorInput>,
+  height?: Maybe<IntQueryOperatorInput>,
+  handle?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  data?: Maybe<SitePageContextProjectBodyRawDocumentNodesDataFilterInput>,
+  nodes?: Maybe<SitePageContextProjectBodyRawDocumentNodesNodesFilterListInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesFilterListInput = {
+  elemMatch?: Maybe<SitePageContextProjectBodyRawDocumentNodesFilterInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodes = {
+  object?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  data?: Maybe<SitePageContextProjectBodyRawDocumentNodesNodesData>,
+  nodes?: Maybe<Array<Maybe<SitePageContextProjectBodyRawDocumentNodesNodesNodes>>>,
+  leaves?: Maybe<Array<Maybe<SitePageContextProjectBodyRawDocumentNodesNodesLeaves>>>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesData = {
+  src?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  mimeType?: Maybe<Scalars['String']>,
+  width?: Maybe<Scalars['Int']>,
+  height?: Maybe<Scalars['Int']>,
+  handle?: Maybe<Scalars['String']>,
+  altText?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesDataFilterInput = {
+  src?: Maybe<StringQueryOperatorInput>,
+  title?: Maybe<StringQueryOperatorInput>,
+  mimeType?: Maybe<StringQueryOperatorInput>,
+  width?: Maybe<IntQueryOperatorInput>,
+  height?: Maybe<IntQueryOperatorInput>,
+  handle?: Maybe<StringQueryOperatorInput>,
+  altText?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  type?: Maybe<StringQueryOperatorInput>,
+  data?: Maybe<SitePageContextProjectBodyRawDocumentNodesNodesDataFilterInput>,
+  nodes?: Maybe<SitePageContextProjectBodyRawDocumentNodesNodesNodesFilterListInput>,
+  leaves?: Maybe<SitePageContextProjectBodyRawDocumentNodesNodesLeavesFilterListInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesFilterListInput = {
+  elemMatch?: Maybe<SitePageContextProjectBodyRawDocumentNodesNodesFilterInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesLeaves = {
+  object?: Maybe<Scalars['String']>,
+  text?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesLeavesFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  text?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesLeavesFilterListInput = {
+  elemMatch?: Maybe<SitePageContextProjectBodyRawDocumentNodesNodesLeavesFilterInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesNodes = {
+  object?: Maybe<Scalars['String']>,
+  leaves?: Maybe<Array<Maybe<SitePageContextProjectBodyRawDocumentNodesNodesNodesLeaves>>>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesNodesFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  leaves?: Maybe<SitePageContextProjectBodyRawDocumentNodesNodesNodesLeavesFilterListInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesNodesFilterListInput = {
+  elemMatch?: Maybe<SitePageContextProjectBodyRawDocumentNodesNodesNodesFilterInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesNodesLeaves = {
+  object?: Maybe<Scalars['String']>,
+  text?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesNodesLeavesFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  text?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextProjectBodyRawDocumentNodesNodesNodesLeavesFilterListInput = {
+  elemMatch?: Maybe<SitePageContextProjectBodyRawDocumentNodesNodesNodesLeavesFilterInput>,
+};
+
+export type SitePageContextProjectBodyRawFilterInput = {
+  object?: Maybe<StringQueryOperatorInput>,
+  document?: Maybe<SitePageContextProjectBodyRawDocumentFilterInput>,
 };
 
 export type SitePageContextProjectFilterInput = {
@@ -5041,10 +5337,14 @@ export type SitePageContextProjectFilterInput = {
   projectId?: Maybe<StringQueryOperatorInput>,
   title?: Maybe<StringQueryOperatorInput>,
   projectType?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<SitePageContextProjectImageDesktopFilterInput>,
   description?: Maybe<StringQueryOperatorInput>,
   techList?: Maybe<StringQueryOperatorInput>,
   externalUrl?: Maybe<StringQueryOperatorInput>,
+  overview?: Maybe<StringQueryOperatorInput>,
+  projectPublishDate?: Maybe<DateQueryOperatorInput>,
+  status?: Maybe<StringQueryOperatorInput>,
+  team?: Maybe<StringQueryOperatorInput>,
+  imageDesktop?: Maybe<SitePageContextProjectImageDesktopFilterInput>,
   body?: Maybe<SitePageContextProjectBodyFilterInput>,
 };
 
@@ -5061,17 +5361,57 @@ export type SitePageContextProjectImageDesktopFilterInput = {
 };
 
 export type SitePageContextSections = {
+  case_study_overview?: Maybe<SitePageContextSectionsCase_Study_Overview>,
+  case_study_tech_used?: Maybe<SitePageContextSectionsCase_Study_Tech_Used>,
+  case_study_more_details?: Maybe<SitePageContextSectionsCase_Study_More_Details>,
+  case_study_team?: Maybe<SitePageContextSectionsCase_Study_Team>,
+};
+
+export type SitePageContextSectionsCase_Study_More_Details = {
   sectionId?: Maybe<Scalars['String']>,
   heading?: Maybe<Scalars['String']>,
 };
 
-export type SitePageContextSectionsFilterInput = {
+export type SitePageContextSectionsCase_Study_More_DetailsFilterInput = {
   sectionId?: Maybe<StringQueryOperatorInput>,
   heading?: Maybe<StringQueryOperatorInput>,
 };
 
-export type SitePageContextSectionsFilterListInput = {
-  elemMatch?: Maybe<SitePageContextSectionsFilterInput>,
+export type SitePageContextSectionsCase_Study_Overview = {
+  sectionId?: Maybe<Scalars['String']>,
+  heading?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextSectionsCase_Study_OverviewFilterInput = {
+  sectionId?: Maybe<StringQueryOperatorInput>,
+  heading?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextSectionsCase_Study_Team = {
+  sectionId?: Maybe<Scalars['String']>,
+  heading?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextSectionsCase_Study_TeamFilterInput = {
+  sectionId?: Maybe<StringQueryOperatorInput>,
+  heading?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextSectionsCase_Study_Tech_Used = {
+  sectionId?: Maybe<Scalars['String']>,
+  heading?: Maybe<Scalars['String']>,
+};
+
+export type SitePageContextSectionsCase_Study_Tech_UsedFilterInput = {
+  sectionId?: Maybe<StringQueryOperatorInput>,
+  heading?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePageContextSectionsFilterInput = {
+  case_study_overview?: Maybe<SitePageContextSectionsCase_Study_OverviewFilterInput>,
+  case_study_tech_used?: Maybe<SitePageContextSectionsCase_Study_Tech_UsedFilterInput>,
+  case_study_more_details?: Maybe<SitePageContextSectionsCase_Study_More_DetailsFilterInput>,
+  case_study_team?: Maybe<SitePageContextSectionsCase_Study_TeamFilterInput>,
 };
 
 export type SitePageEdge = {
@@ -5179,12 +5519,16 @@ export type SitePageFieldsEnum =
   'context___project___projectId' |
   'context___project___title' |
   'context___project___projectType' |
-  'context___project___imageDesktop___fileName' |
-  'context___project___imageDesktop___height' |
-  'context___project___imageDesktop___width' |
   'context___project___description' |
   'context___project___techList' |
   'context___project___externalUrl' |
+  'context___project___overview' |
+  'context___project___projectPublishDate' |
+  'context___project___status' |
+  'context___project___team' |
+  'context___project___imageDesktop___fileName' |
+  'context___project___imageDesktop___height' |
+  'context___project___imageDesktop___width' |
   'context___project___body___html' |
   'context___allProjects' |
   'context___allProjects___updatedAt' |
@@ -5193,16 +5537,25 @@ export type SitePageFieldsEnum =
   'context___allProjects___projectId' |
   'context___allProjects___title' |
   'context___allProjects___projectType' |
-  'context___allProjects___imageDesktop___fileName' |
-  'context___allProjects___imageDesktop___height' |
-  'context___allProjects___imageDesktop___width' |
   'context___allProjects___description' |
   'context___allProjects___techList' |
   'context___allProjects___externalUrl' |
+  'context___allProjects___overview' |
+  'context___allProjects___projectPublishDate' |
+  'context___allProjects___status' |
+  'context___allProjects___team' |
+  'context___allProjects___imageDesktop___fileName' |
+  'context___allProjects___imageDesktop___height' |
+  'context___allProjects___imageDesktop___width' |
   'context___allProjects___body___html' |
-  'context___sections' |
-  'context___sections___sectionId' |
-  'context___sections___heading' |
+  'context___sections___case_study_overview___sectionId' |
+  'context___sections___case_study_overview___heading' |
+  'context___sections___case_study_tech_used___sectionId' |
+  'context___sections___case_study_tech_used___heading' |
+  'context___sections___case_study_more_details___sectionId' |
+  'context___sections___case_study_more_details___heading' |
+  'context___sections___case_study_team___sectionId' |
+  'context___sections___case_study_team___heading' |
   'pluginCreator___id' |
   'pluginCreator___parent___id' |
   'pluginCreator___parent___parent___id' |

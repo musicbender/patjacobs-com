@@ -1,7 +1,8 @@
 import styled, { css, keyframes } from 'styled-components';
-import { media } from '../../../styles/breakpoints';
+// import { media } from '../../../styles/breakpoints';
 import RevealBlock from '../../global/reveal-block';
 import { superCenter } from '../../../styles/utils/global';
+import Heading from '../../global/heading';
 
 // types
 interface TitleProps {
@@ -22,6 +23,7 @@ const scrollLineLoop = keyframes`
 // styled components
 export const CaseStudyPage = styled.div`
     position: relative;
+    min-height: 600vh;
 `;
 
 export const InfoWrapper = styled.div`
@@ -35,7 +37,7 @@ export const Title = styled('h1')<TitleProps>`
     ${props =>
         props.isBig &&
         css`
-            font-size: 6rem;
+            font-size: 5rem;
         `};
     ${props =>
         !props.isBig &&
@@ -87,4 +89,14 @@ export const StyledRevealBlock = styled(RevealBlock)`
 export const ScrollLine = styled.div`
     height: 3px;
     background-color: ${({ theme }) => theme.palette.white};
+`;
+
+export const Section = styled.div`
+    margin: 2em auto;
+`;
+
+export const StyledHeading = styled(Heading)``;
+
+export const Paragraph = styled.p`
+    font-size: 1em;
 `;

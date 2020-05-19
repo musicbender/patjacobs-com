@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'gatsby';
-import { Gcms_Project, GatsbyLocation, Gcms_Section } from '../../../../types';
+// import { Link } from 'gatsby';
+import Plx from 'react-plx';
+import { connect } from 'react-redux';
 import { throttle } from '../../../util/util';
+import ProjectMeta from '../../sections/project-meta';
+import RevealBlock from '../../global/reveal-block';
 import {
     CaseStudyPage,
     InfoWrapper,
@@ -12,14 +15,21 @@ import {
     Main,
     Top,
     ScrollLine,
+    Section,
+    StyledHeading,
+    Paragraph,
 } from './styles';
-import ProjectMeta from '../../sections/project-meta';
-import { connect } from 'react-redux';
+import {
+    Gcms_Project,
+    GatsbyLocation,
+    Sections,
+    CaseStudyBaseRevealProps,
+} from '../../../../types';
 
 interface Props {
     project: Gcms_Project;
     allProjects: Gcms_Project[];
-    sections: Gcms_Section[];
+    sections: Sections;
     location: GatsbyLocation;
 }
 
@@ -30,6 +40,7 @@ interface ReduxProps {
 
 interface State {
     atTop: boolean;
+    revealedElements: string[];
 }
 
 const mapStateToProps = ({ global }) => {
@@ -40,11 +51,29 @@ const mapStateToProps = ({ global }) => {
 };
 
 class CaseStudy extends PureComponent<Props & ReduxProps, State> {
+    baseRevealProps: CaseStudyBaseRevealProps;
+    plxData: any[];
+
     constructor(props: Props) {
         super(props);
         this.handleScroll = throttle(this.handleScroll.bind(this), 5);
+
+        this.baseRevealProps = {
+            startGrid: 3,
+            endGrid: 5,
+        };
+
+        this.plxData = [
+            {
+                start: 'self',
+                duration: 10,
+                properties: [],
+            },
+        ];
+
         this.state = {
             atTop: true,
+            revealedElements: [],
         };
     }
 
@@ -66,6 +95,34 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
         if (this.state.atTop && scrollY > 0) {
             this.setState({ atTop: false });
         }
+    }
+
+    addRevealed = (elm: string): void => {
+        this.setState({ revealedElements: [...this.state.revealedElements, elm] });
+    };
+
+    isRevealed = (elm: string): boolean => {
+        return this.state.revealedElements.indexOf(elm) > -1;
+    };
+
+    renderOverview() {
+        const isActive = this.isRevealed('case-study-overview');
+        return (
+            <Section>
+                <StyledHeading text={this.props.sections['case-study-overview'].heading} />
+                <Plx
+                    parallaxData={this.plxData}
+                    onPlxStart={() => console.log('start')}
+                    onPlxEnd={() => console.log('end')}
+                    // onPlxEnd={this.addRevealed('case-study-overview')}
+                    freeze={isActive}
+                >
+                    <RevealBlock {...this.baseRevealProps} contentType="text" active={isActive}>
+                        <Paragraph>{this.props.project.overview}</Paragraph>
+                    </RevealBlock>
+                </Plx>
+            </Section>
+        );
     }
 
     render() {
@@ -100,6 +157,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                                 </StyledRevealBlock>
                             </ScrollLineWrapper>
                         </Top>
+                        <Main>{this.props.project.overview && this.renderOverview()}</Main>
                     </Main>
                 )}
             </CaseStudyPage>
