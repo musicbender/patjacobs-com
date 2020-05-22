@@ -24,6 +24,7 @@ import {
     GatsbyLocation,
     Sections,
     CaseStudyBaseRevealProps,
+    RevealBlockContentType,
 } from '../../../../types';
 
 interface Props {
@@ -66,7 +67,6 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
         this.plxData = [
             {
                 start: 'self',
-                startOffset: '1000px',
                 duration: 100,
                 properties: [
                     {
@@ -104,14 +104,28 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
         }
     }
 
-    addRevealed = (elm: string): void => {
-        console.log('add revealed');
+    getRevealProps = (elm: string, contentType: RevealBlockContentType = 'generic') => {
+        const isActive: boolean = this.isRevealed(elm);
+        return {
+            ...this.baseRevealProps,
+            active: isActive,
+            contentType,
+            plxProps: {
+                parallaxData: this.plxData,
+                onPlxEnd: hasWindow() ? this.addRevealed(elm) : null,
+            },
+        };
+    };
 
-        if (!this.isRevealed(elm)) {
-            console.log('adding...');
+    addRevealed = (elm: string): (() => void) => {
+        return (): void => {
+            console.log('add revealed');
 
-            this.setState({ revealedElements: [...this.state.revealedElements, elm] });
-        }
+            if (!this.isRevealed(elm)) {
+                console.log('adding...');
+                this.setState({ revealedElements: [...this.state.revealedElements, elm] });
+            }
+        };
     };
 
     isRevealed = (elm: string): boolean => {
@@ -119,22 +133,12 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
     };
 
     renderOverview() {
-        const isActive = this.isRevealed('case-study-overview');
         return (
             <Section>
                 <StyledHeading text={this.props.sections['case-study-overview'].heading} />
-                <Plx
-                    parallaxData={this.plxData}
-                    // onPlxStart={() => console.log('start')}
-                    // onPlxEnd={() => console.log('end')}
-                    onPlxStart={hasWindow() ? this.addRevealed('case-study-overview') : null}
-                    freeze={isActive}
-                    disabled={!hasWindow()}
-                >
-                    <RevealBlock {...this.baseRevealProps} contentType="text" active={isActive}>
-                        <Paragraph>{this.props.project.overview}</Paragraph>
-                    </RevealBlock>
-                </Plx>
+                <RevealBlock {...this.getRevealProps('case-study-overview', 'text')}>
+                    <Paragraph>{this.props.project.overview}</Paragraph>
+                </RevealBlock>
             </Section>
         );
     }

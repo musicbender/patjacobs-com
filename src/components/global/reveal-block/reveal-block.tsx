@@ -1,6 +1,7 @@
 import React from 'react';
+import Plx from 'react-plx';
 import { useStaticQuery, graphql } from 'gatsby';
-import { reduceSegment } from '../../../util/util';
+import { reduceSegment, hasWindow } from '../../../util/util';
 import { RevealBlockWrapper, OutterWrapper, InnerWrapper, ContentWrapper, Content } from './styles';
 import { RevealBlockContentType } from '../../../../types';
 
@@ -12,6 +13,7 @@ interface Props {
     children?: any;
     contentType?: RevealBlockContentType;
     gridLines?: number[];
+    plxProps?: any;
     className?: string;
 }
 
@@ -23,6 +25,7 @@ const revealBlock = ({
     delay = 0,
     children,
     gridLines,
+    plxProps,
     className,
 }: Props) => {
     const { configs } = useStaticQuery(graphql`
@@ -39,7 +42,7 @@ const revealBlock = ({
     const width = reduceSegment(startGrid, endGrid, gLines);
     const position = reduceSegment(0, startGrid, gLines);
 
-    return (
+    const regularRevealBlock = (
         <RevealBlockWrapper gridWidth={width} position={position} className={className}>
             <OutterWrapper active={active} delay={delay}>
                 <InnerWrapper active={active} delay={delay}>
@@ -50,6 +53,14 @@ const revealBlock = ({
             </OutterWrapper>
         </RevealBlockWrapper>
     );
+
+    const plxRevealBlock = (
+        <Plx freeze={active} disabled={!hasWindow()} {...plxProps}>
+            {regularRevealBlock}
+        </Plx>
+    );
+
+    return plxProps && plxProps.parallaxData ? plxRevealBlock : regularRevealBlock;
 };
 
 export default revealBlock;

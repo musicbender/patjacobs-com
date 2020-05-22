@@ -58,13 +58,13 @@ export const MetaOutterWrapper = styled.div`
 
 export const Main = styled.main`
     position: relative;
-    padding-top: 10em;
 `;
 
 export const Top = styled.div`
     position: relative;
+    padding-top: 10em;
     height: ${({ theme }) => `calc(100vh - ${theme.sizes.toolbarHeight})`};
-    height: 600vh;
+    /* height: 600vh; */
 `;
 
 export const ScrollLineWrapper = styled('div')<ScrollLineWrapperProps>`
