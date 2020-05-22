@@ -58,11 +58,13 @@ export const MetaOutterWrapper = styled.div`
 
 export const Main = styled.main`
     position: relative;
+    padding-top: 10em;
 `;
 
 export const Top = styled.div`
     position: relative;
     height: ${({ theme }) => `calc(100vh - ${theme.sizes.toolbarHeight})`};
+    height: 600vh;
 `;
 
 export const ScrollLineWrapper = styled('div')<ScrollLineWrapperProps>`
@@ -81,7 +83,7 @@ export const ScrollLineWrapper = styled('div')<ScrollLineWrapperProps>`
         `};
 `;
 
-export const StyledRevealBlock = styled(RevealBlock)`
+export const ScrollLineRevealBlock = styled(RevealBlock)`
     transform: rotate(90deg);
     transform-origin: 2.5% 1.8em;
 `;

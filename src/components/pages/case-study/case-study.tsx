@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 // import { Link } from 'gatsby';
 import Plx from 'react-plx';
 import { connect } from 'react-redux';
-import { throttle } from '../../../util/util';
+import { throttle, hasWindow } from '../../../util/util';
 import ProjectMeta from '../../sections/project-meta';
 import RevealBlock from '../../global/reveal-block';
 import {
@@ -11,7 +11,7 @@ import {
     Title,
     MetaOutterWrapper,
     ScrollLineWrapper,
-    StyledRevealBlock,
+    ScrollLineRevealBlock,
     Main,
     Top,
     ScrollLine,
@@ -66,8 +66,15 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
         this.plxData = [
             {
                 start: 'self',
-                duration: 10,
-                properties: [],
+                startOffset: '1000px',
+                duration: 100,
+                properties: [
+                    {
+                        startValue: 1,
+                        endValue: 1,
+                        property: 'opacity',
+                    },
+                ],
             },
         ];
 
@@ -98,7 +105,13 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
     }
 
     addRevealed = (elm: string): void => {
-        this.setState({ revealedElements: [...this.state.revealedElements, elm] });
+        console.log('add revealed');
+
+        if (!this.isRevealed(elm)) {
+            console.log('adding...');
+
+            this.setState({ revealedElements: [...this.state.revealedElements, elm] });
+        }
     };
 
     isRevealed = (elm: string): boolean => {
@@ -112,10 +125,11 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                 <StyledHeading text={this.props.sections['case-study-overview'].heading} />
                 <Plx
                     parallaxData={this.plxData}
-                    onPlxStart={() => console.log('start')}
-                    onPlxEnd={() => console.log('end')}
-                    // onPlxEnd={this.addRevealed('case-study-overview')}
+                    // onPlxStart={() => console.log('start')}
+                    // onPlxEnd={() => console.log('end')}
+                    onPlxStart={hasWindow() ? this.addRevealed('case-study-overview') : null}
                     freeze={isActive}
+                    disabled={!hasWindow()}
                 >
                     <RevealBlock {...this.baseRevealProps} contentType="text" active={isActive}>
                         <Paragraph>{this.props.project.overview}</Paragraph>
@@ -144,7 +158,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                     <Main>
                         <Top>
                             <ScrollLineWrapper atTop={this.state.atTop}>
-                                <StyledRevealBlock
+                                <ScrollLineRevealBlock
                                     contentType="line"
                                     active={
                                         this.state.atTop &&
@@ -154,7 +168,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                                     endGrid={3}
                                 >
                                     <ScrollLine />
-                                </StyledRevealBlock>
+                                </ScrollLineRevealBlock>
                             </ScrollLineWrapper>
                         </Top>
                         <Main>{this.props.project.overview && this.renderOverview()}</Main>
