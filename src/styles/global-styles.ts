@@ -38,4 +38,9 @@ export default createGlobalStyle<GlobalStyles>`
     font-family: "Inconsolata", "serif";
     color: rgba(255, 255, 255, 0.87);
   }
+  p {
+    font-size: 1rem;
+    line-height: 2.5;
+    letter-spacing: 2px;
+  }
 `;

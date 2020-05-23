@@ -97,7 +97,10 @@ export const Section = styled.div`
     margin: 2em auto;
 `;
 
-export const StyledHeading = styled(Heading)``;
+export const StyledHeading = styled(Heading)`
+    margin: 0;
+    font-weight: bold;
+`;
 
 export const Paragraph = styled.p`
     font-size: 1em;
