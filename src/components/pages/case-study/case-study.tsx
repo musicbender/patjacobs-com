@@ -119,12 +119,8 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
 
     addRevealed = (elm: string): (() => void) => {
         return (): void => {
-            console.log('add revealed');
-
-            if (!this.isRevealed(elm)) {
-                console.log('adding...');
-                this.setState({ revealedElements: [...this.state.revealedElements, elm] });
-            }
+            if (this.isRevealed(elm)) return;
+            this.setState({ revealedElements: [...this.state.revealedElements, elm] });
         };
     };
 
@@ -135,8 +131,10 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
     renderOverview() {
         return (
             <Section>
-                <StyledHeading text={this.props.sections['case-study-overview'].heading} />
-                <RevealBlock {...this.getRevealProps('case-study-overview', 'text')}>
+                <RevealBlock {...this.getRevealProps('heading-overview', 'text')}>
+                    <StyledHeading text={this.props.sections['case-study-overview'].heading} />
+                </RevealBlock>
+                <RevealBlock {...this.getRevealProps('overview', 'text')}>
                     <Paragraph>{this.props.project.overview}</Paragraph>
                 </RevealBlock>
             </Section>

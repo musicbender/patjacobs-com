@@ -18,8 +18,7 @@ interface ContentWrapperProps {
 }
 
 export const RevealBlockWrapper = styled('div')<RevealBlockWrapperProps>`
-    position: absolute;
-    left: ${props => `${props.position || 0}%;`};
+    margin-left: ${props => `${props.position || 0}%;`};
     width: ${props => `${props.gridWidth || 0}vw`};
     overflow: hidden;
 `;
