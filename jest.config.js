@@ -1,5 +1,5 @@
 module.exports = {
-    roots: ['<rootDir>/src'],
+    roots: ['<rootDir>/src', '<rootDir>/scripts'],
     testPathIgnorePatterns: [
         '/node_modules/',
         '/build/',

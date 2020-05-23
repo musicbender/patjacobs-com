@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 // import { Link } from 'gatsby';
-import Plx from 'react-plx';
 import { connect } from 'react-redux';
 import { throttle, hasWindow } from '../../../util/util';
 import ProjectMeta from '../../sections/project-meta';
@@ -61,7 +60,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
 
         this.baseRevealProps = {
             startGrid: 3,
-            endGrid: 5,
+            endGrid: 6,
         };
 
         this.plxData = [

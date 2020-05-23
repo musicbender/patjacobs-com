@@ -31,6 +31,7 @@ export const InfoWrapper = styled.div`
     top: 5em;
     left: ${({ theme }) => `${theme.gridSizes.s}%`};
     width: ${({ theme }) => `${theme.gridSizes.m + theme.gridSizes.s}%`};
+    z-index: 2;
 `;
 
 export const Title = styled('h1')<TitleProps>`

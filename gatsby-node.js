@@ -65,7 +65,6 @@ exports.createPages = async ({ graphql, actions }) => {
                             width
                         }
                         body {
-                            html
                             raw
                         }
                     }

@@ -1,0 +1,407 @@
+{
+  "assert": {
+    "object": "value",
+    "document": {
+      "object": "document",
+      "data": {},
+      "nodes": [
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "paragraph"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "paragraph",
+              "data": {},
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "This is our new marketing site for one of NCSOFT's most popular titles, Lineage 2. About half of the content on the site is managed through our custom headless CMS that my team built. This data is fetched by the site and populates what you see in a way that is performant and as dynamic as possible.",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "image"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "image",
+              "data": {
+                "src": "https://media.graphcms.com/output=format:jpg/resize=height:720,width:1280/mvx36xdxTjGLLNFGk8rQ",
+                "title": "lineage2-1.jpg",
+                "mimeType": "image/jpeg",
+                "width": 1280,
+                "height": 720,
+                "handle": "mvx36xdxTjGLLNFGk8rQ",
+                "altText": "lineage2-1.jpg"
+              },
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "caption"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "paragraph",
+              "data": {
+                "src": "https://media.graphcms.com/output=format:jpg/resize=height:720,width:1280/mvx36xdxTjGLLNFGk8rQ",
+                "title": "lineage2-1.jpg",
+                "mimeType": "image/jpeg",
+                "width": 1280,
+                "height": 720,
+                "handle": "mvx36xdxTjGLLNFGk8rQ",
+                "altText": "lineage2-1.jpg"
+              },
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "The highly dynamic header on the front page of Lineage 2",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "paragraph"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "paragraph",
+              "data": {},
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "The site includes game information about the possible races and classes a player could choose. There was a large amount of data that had to be visualized in a way that made sense. This included detailed stats on each player class. Here I used animated SVG for the stat circle bars.",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "image"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "image",
+              "data": {
+                "src": "https://media.graphcms.com/w4FuPtu7SWqRrdKgGVL9",
+                "title": "lineage2-2.jpg",
+                "mimeType": "image/jpeg",
+                "width": 1280,
+                "height": 720,
+                "handle": "w4FuPtu7SWqRrdKgGVL9"
+              },
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "caption"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "paragraph",
+              "data": {},
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "Animating SVG circle bars for class stats",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "image",
+          "data": {
+            "className": "image",
+            "src": "https://media.graphcms.com/ZdYfB3TwKlYoClbNtSaw",
+            "title": "lineage2-3.jpg",
+            "mimeType": "image/jpeg",
+            "width": 1280,
+            "height": 720,
+            "handle": "ZdYfB3TwKlYoClbNtSaw"
+          },
+          "nodes": [
+            {
+              "object": "text",
+              "leaves": [
+                {
+                  "object": "leaf",
+                  "text": "",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "caption"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "paragraph",
+              "data": {},
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "High-impact imagery for the race page",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "paragraph"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "paragraph",
+              "data": {},
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "There were several other pages including a shop where players could buy in-game currency, prestige packs, and server transfers. There was also CMS-generated news articles that could by organized by tags and categories.",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "image"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "image",
+              "data": {
+                "src": "https://media.graphcms.com/paFKU8iQ52FQj9vFflw3",
+                "title": "lineage2-4.jpg",
+                "mimeType": "image/jpeg",
+                "width": 1280,
+                "height": 720,
+                "handle": "paFKU8iQ52FQj9vFflw3"
+              },
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "caption"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "paragraph",
+              "data": {},
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "Custom shop using in-game currency",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "image"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "image",
+              "data": {
+                "src": "https://media.graphcms.com/BVEsZeSrTM2M1ktnLjQ7",
+                "title": "lineage2-5.jpg",
+                "mimeType": "image/jpeg",
+                "width": 1280,
+                "height": 720,
+                "handle": "BVEsZeSrTM2M1ktnLjQ7"
+              },
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "class",
+          "data": {
+            "className": "caption"
+          },
+          "nodes": [
+            {
+              "object": "block",
+              "type": "paragraph",
+              "data": {},
+              "nodes": [
+                {
+                  "object": "text",
+                  "leaves": [
+                    {
+                      "object": "leaf",
+                      "text": "Dynamic news articles from custom CMS with tagging system",
+                      "marks": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "object": "block",
+          "type": "paragraph",
+          "data": {
+            "className": "image"
+          },
+          "nodes": [
+            {
+              "object": "text",
+              "leaves": [
+                {
+                  "object": "leaf",
+                  "text": "",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "expected": [
+
+  ]
+}
