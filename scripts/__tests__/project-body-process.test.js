@@ -11,7 +11,7 @@ describe('scripts/project-body-process.js', () => {
 
     tests.forEach(({assert, expected}, i) => {
       it(`Mock raw body #${i + 1} should output correctly`, () => {
-        console.log('output', processRawBody(assert));
+        console.log(JSON.stringify(processRawBody(assert)));
         expect(processRawBody(assert)).toEqual(expected);
       });
     })

@@ -1,7 +1,14 @@
 // privite
 const getNodeType = (node, parentType) => {
-  return parentType || node.type || 'paragraph';
+  return parentType || node.type || null;
 };
+
+const getMediaText = (node) => {
+  if (node.data.altText) return node.data.altText;
+  if (node.nodes && node.nodes.length > 0 && node.nodes[0].object === "text") {
+    return node.nodes[0].leaves[0].text || null;
+  }
+}
 
 const processParagraph = (node) => {
   return node.nodes
@@ -10,27 +17,30 @@ const processParagraph = (node) => {
       const leavesArr = subNode.leaves
         .filter(leaf => leaf.object === "leaf")
         .reduce((leafOutput, leaf) => {
+
           if (!leaf.text) return leafOutput;
 
           return [
             ...leafOutput,
-            {
-              text: leaf.text,
-              marks: leaf.marks
-            }
+            { leaf: leaf.text, marks: leaf.marks }
           ]
         }, []);
-        
+
       if (!leavesArr || leavesArr.length < 1) return output;
 
       return [
         ...output,
-        {
-          contentType: "paragraph",
-          text: leavesArr,
-        }
+        { contentType: "paragraph", text: leavesArr }
       ]
     }, []);
+}
+
+const processMedia = (node, contentType) => {
+  return {
+    contentType: contentType || node.type,
+    text: getMediaText(node),
+    data: node.data,
+  }
 }
 
 // public
@@ -39,16 +49,16 @@ export const processRawBody = (input, accumulator = [], parentType) => {
 
   return nodes.reduce((output, node, i) => {
       const type = getNodeType(node, parentType);
-      let baseOutput = parentType ? [] : output;
-      if (!parentType)  console.log('NODE', i, output.length, type);
-      if (parentType)  console.log('RECURSIVE', i, output.length, type, parentType, accumulator.length);
+      const baseOutput = parentType ? [] : output;
       
       switch (type) {
           case 'class':
             return [...baseOutput, ...processRawBody(node, output, node.data.className)]
           case 'paragraph':
-            // console.log('paragraph process', node.nodes.length, i);
             return [...baseOutput, ...processParagraph(node)];
+          case 'image':
+          case 'video':
+            return [...baseOutput, processMedia(node, type)]
           default:            
             return baseOutput;
       }
