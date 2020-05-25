@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { throttle, hasWindow } from '../../../util/util';
 import ProjectMeta from '../../sections/project-meta';
+import ProjectBody from '../../sections/project-body';
 import RevealBlock from '../../global/reveal-block';
 import {
     CaseStudyPage,
@@ -13,6 +14,7 @@ import {
     ScrollLineRevealBlock,
     Main,
     Top,
+    Middle,
     ScrollLine,
     Section,
     StyledHeading,
@@ -24,6 +26,7 @@ import {
     Sections,
     CaseStudyBaseRevealProps,
     RevealBlockContentType,
+    SitePageContextAllProjectsBody,
 } from '../../../../types';
 
 interface Props {
@@ -92,13 +95,11 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
     }
 
     handleScroll(): void {
-        const scrollY = window.scrollY;
-
-        if (scrollY === 0 && !this.state.atTop) {
+        if (window.scrollY === 0 && !this.state.atTop) {
             this.setState({ atTop: true });
         }
 
-        if (this.state.atTop && scrollY > 0) {
+        if (this.state.atTop && window.scrollY > 0) {
             this.setState({ atTop: false });
         }
     }
@@ -140,6 +141,20 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
         );
     }
 
+    renderBody() {
+        return (
+            <Section>
+                <RevealBlock {...this.getRevealProps('heading-body', 'text')}>
+                    <StyledHeading text={this.props.sections['case-study-more-details'].heading} />
+                </RevealBlock>
+                <ProjectBody
+                    body={this.props.project.body as SitePageContextAllProjectsBody[]}
+                    getRevealProps={this.getRevealProps}
+                />
+            </Section>
+        );
+    }
+
     render() {
         return (
             <CaseStudyPage>
@@ -172,7 +187,10 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                                 </ScrollLineRevealBlock>
                             </ScrollLineWrapper>
                         </Top>
-                        <Main>{this.props.project.overview && this.renderOverview()}</Main>
+                        <Middle>
+                            {this.props.project.overview && this.renderOverview()}
+                            {this.props.project.body && this.renderBody()}
+                        </Middle>
                     </Main>
                 )}
             </CaseStudyPage>

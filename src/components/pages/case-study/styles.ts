@@ -68,6 +68,8 @@ export const Top = styled.div`
     /* height: 600vh; */
 `;
 
+export const Middle = styled.div``;
+
 export const ScrollLineWrapper = styled('div')<ScrollLineWrapperProps>`
     ${superCenter('50%', 'auto', '-50%', '0')}
     bottom: 0;
@@ -95,14 +97,15 @@ export const ScrollLine = styled.div`
 `;
 
 export const Section = styled.div`
-    margin: 2em auto;
+    margin: 10em auto;
 `;
 
 export const StyledHeading = styled(Heading)`
-    margin: 0;
+    margin: 0 0 4em 0;
     font-weight: bold;
 `;
 
 export const Paragraph = styled.p`
     font-size: 1em;
+    margin: 0 auto 8em !important;
 `;

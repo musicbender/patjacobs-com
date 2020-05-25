@@ -1,0 +1,180 @@
+{
+  "assert": {
+    "object": "value",
+    "document": {
+      "object": "document",
+      "data": {},
+      "nodes": [{
+          "object": "block",
+          "type": "paragraph",
+          "data": {},
+          "nodes": [{
+            "object": "text",
+            "leaves": [{
+              "object": "leaf",
+              "text": "Landing page banner populated by a custom CMS",
+              "marks": []
+            }]
+          }]
+        },
+        {
+          "object": "block",
+          "type": "image",
+          "data": {
+            "src": "https://media.graphcms.com/output=format:jpg/resize=height:720,width:1280/LRjlJhD1RLCVCSP0EYDe",
+            "title": "bns-1.jpg",
+            "mimeType": "image/jpeg",
+            "width": 1280,
+            "height": 720,
+            "handle": "LRjlJhD1RLCVCSP0EYDe",
+            "altText": "Landing page banner populated by a custom CMS"
+          },
+          "nodes": [{
+            "object": "text",
+            "leaves": [{
+              "object": "leaf",
+              "text": "",
+              "marks": []
+            }]
+          }]
+        },
+        {
+          "object": "block",
+          "type": "paragraph",
+          "data": {},
+          "nodes": [{
+            "object": "text",
+            "leaves": [{
+              "object": "leaf",
+              "text": "Blade and Soul is a popular AAA Massively Multiplayer Online game. The website serves as a marketing site, game news resource, and online store for in-game items.",
+              "marks": []
+            }]
+          }]
+        },
+        {
+          "object": "block",
+          "type": "image",
+          "data": {
+            "src": "https://media.graphcms.com/output=format:jpg/resize=height:720,width:1280/KGHSNvJeRl6ZiIPQLL5x",
+            "title": "bns-2.jpg",
+            "mimeType": "image/jpeg",
+            "width": 1280,
+            "height": 720,
+            "handle": "KGHSNvJeRl6ZiIPQLL5x",
+            "altText": "Event page for the Celestial Dawn update"
+          },
+          "nodes": [{
+            "object": "text",
+            "leaves": [{
+              "object": "leaf",
+              "text": "",
+              "marks": []
+            }]
+          }]
+        },
+        {
+          "object": "block",
+          "type": "paragraph",
+          "data": {},
+          "nodes": [{
+            "object": "text",
+            "leaves": [{
+              "object": "leaf",
+              "text": "Much of the content on this site is managed through a custom headless CMS (built with Node and MongoDB) that I help build upon and maintain.",
+              "marks": []
+            }]
+          }]
+        },
+        {
+          "object": "block",
+          "type": "image",
+          "data": {
+            "src": "https://media.graphcms.com/output=format:jpg/resize=height:720,width:1280/ZgOXwCaRLOeeWvpV3lpQ",
+            "title": "bns-3.jpg",
+            "mimeType": "image/jpeg",
+            "width": 1280,
+            "height": 720,
+            "handle": "ZgOXwCaRLOeeWvpV3lpQ",
+            "altText": "Previous updates page listing all game content releases"
+          },
+          "nodes": [{
+            "object": "text",
+            "leaves": [{
+              "object": "leaf",
+              "text": "",
+              "marks": []
+            }]
+          }]
+        },
+        {
+          "object": "block",
+          "type": "paragraph",
+          "data": {},
+          "nodes": [{
+            "object": "text",
+            "leaves": [{
+              "object": "leaf",
+              "text": "",
+              "marks": []
+            }]
+          }]
+        }
+      ]
+    }
+  },
+  "expected": [{
+    "contentType": "paragraph",
+    "text": [{
+      "leaf": "Landing page banner populated by a custom CMS",
+      "marks": []
+    }]
+  }, {
+    "contentType": "image",
+    "text": "Landing page banner populated by a custom CMS",
+    "data": {
+      "src": "https://media.graphcms.com/output=format:jpg/resize=height:720,width:1280/LRjlJhD1RLCVCSP0EYDe",
+      "title": "bns-1.jpg",
+      "mimeType": "image/jpeg",
+      "width": 1280,
+      "height": 720,
+      "handle": "LRjlJhD1RLCVCSP0EYDe",
+      "altText": "Landing page banner populated by a custom CMS"
+    }
+  }, {
+    "contentType": "paragraph",
+    "text": [{
+      "leaf": "Blade and Soul is a popular AAA Massively Multiplayer Online game. The website serves as a marketing site, game news resource, and online store for in-game items.",
+      "marks": []
+    }]
+  }, {
+    "contentType": "image",
+    "text": "Event page for the Celestial Dawn update",
+    "data": {
+      "src": "https://media.graphcms.com/output=format:jpg/resize=height:720,width:1280/KGHSNvJeRl6ZiIPQLL5x",
+      "title": "bns-2.jpg",
+      "mimeType": "image/jpeg",
+      "width": 1280,
+      "height": 720,
+      "handle": "KGHSNvJeRl6ZiIPQLL5x",
+      "altText": "Event page for the Celestial Dawn update"
+    }
+  }, {
+    "contentType": "paragraph",
+    "text": [{
+      "leaf": "Much of the content on this site is managed through a custom headless CMS (built with Node and MongoDB) that I help build upon and maintain.",
+      "marks": []
+    }]
+  }, {
+    "contentType": "image",
+    "text": "Previous updates page listing all game content releases",
+    "data": {
+      "src": "https://media.graphcms.com/output=format:jpg/resize=height:720,width:1280/ZgOXwCaRLOeeWvpV3lpQ",
+      "title": "bns-3.jpg",
+      "mimeType": "image/jpeg",
+      "width": 1280,
+      "height": 720,
+      "handle": "ZgOXwCaRLOeeWvpV3lpQ",
+      "altText": "Previous updates page listing all game content releases"
+    }
+  }]
+}

@@ -1,4 +1,5 @@
 const path = require('path');
+const { processRawBody } = require('./scripts/project-body-process');
 
 exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
     return new Promise(resolve => {
@@ -88,14 +89,22 @@ exports.createPages = async ({ graphql, actions }) => {
         return output;
     };
 
+    // process projects
+    const processedProjects = query.data.gcms.projects.map(project => {
+        return {
+            ...project,
+            body: processRawBody(project.body.raw),
+        };
+    });
+
     // create case study pages
-    query.data.gcms.projects.forEach(project => {
+    processedProjects.forEach(project => {
         createPage({
             path: `/case-studies/${project.projectId}`,
             component: path.resolve('./src/components/templates/case-study.tsx'),
             context: {
                 project,
-                allProjects: query.data.gcms.projects,
+                allProjects: processedProjects,
                 sections: processSections(query.data.gcms.sections),
             },
         });

@@ -4,10 +4,18 @@ const getNodeType = (node, parentType) => {
 };
 
 const getMediaText = (node) => {
-  if (node.data.altText) return node.data.altText;
-  if (node.nodes && node.nodes.length > 0 && node.nodes[0].object === "text") {
-    return node.nodes[0].leaves[0].text || null;
-  }
+  let output = null;
+
+  if (node.data.altText) {
+    output = node.data.altText;
+  } else if (node.nodes && node.nodes.length > 0 && node.nodes[0].object === "text") {
+    output = node.nodes[0].leaves[0].text || null;
+  } 
+  
+  return [{
+    leaf: output,
+    marks: [],
+  }]
 }
 
 const processParagraph = (node) => {
@@ -44,10 +52,10 @@ const processMedia = (node, contentType) => {
 }
 
 // public
-export const processRawBody = (input, accumulator = [], parentType) => {
+const processRawBody = (input, accumulator = [], parentType) => {
+  if (!input) return;
   const nodes = input.object === 'value' ? input.document.nodes : input.nodes;
-
-  return nodes.reduce((output, node, i) => {
+  return nodes.reduce((output, node) => {
       const type = getNodeType(node, parentType);
       const baseOutput = parentType ? [] : output;
       
@@ -64,3 +72,7 @@ export const processRawBody = (input, accumulator = [], parentType) => {
       }
   }, accumulator);
 };
+
+module.exports = {
+  processRawBody
+}

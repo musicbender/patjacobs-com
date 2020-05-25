@@ -87,10 +87,6 @@ export const Content = styled('div')<ContentWrapperProps>`
             ${media.tablet`
               font-size: calc(.55556vw + 12px);
             `}
-            > p {
-                margin-top: 1em;
-                margin-bottom: 1em;
-            }
         `};
     ${props =>
         (props.contentType === 'video' || props.contentType === 'img') &&
