@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 // import { Link } from 'gatsby';
+import Plx from 'react-plx';
 import { connect } from 'react-redux';
 import { throttle, hasWindow } from '../../../util/util';
 import ProjectMeta from '../../sections/project-meta';
@@ -28,6 +29,7 @@ import {
     RevealBlockContentType,
     SitePageContextAllProjectsBody,
 } from '../../../../types';
+import BarList from '../../global/bar-list';
 
 interface Props {
     project: Gcms_Project;
@@ -141,6 +143,25 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
         );
     }
 
+    renderBarList(key: string, items: string[] = []) {
+        const active: boolean = this.isRevealed(key);
+        return (
+            <Section>
+                <RevealBlock {...this.getRevealProps(`heading${key}`, 'text')}>
+                    <StyledHeading text={this.props.sections[`case-study-${key}`].heading} />
+                </RevealBlock>
+                <Plx
+                    freeze={active}
+                    disabled={!hasWindow()}
+                    parallaxData={this.plxData}
+                    onPlxEnd={hasWindow() ? this.addRevealed(key) : null}
+                >
+                    <BarList items={items} active={active} />
+                </Plx>
+            </Section>
+        );
+    }
+
     renderBody() {
         return (
             <Section>
@@ -189,7 +210,13 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                         </Top>
                         <Middle>
                             {this.props.project.overview && this.renderOverview()}
+                            {this.props.project.techList &&
+                                this.props.project.techList.length > 0 &&
+                                this.renderBarList('tech-used', this.props.project.techList)}
                             {this.props.project.body && this.renderBody()}
+                            {this.props.project.team &&
+                                this.props.project.team.length > 0 &&
+                                this.renderBarList('team', this.props.project.team)}
                         </Middle>
                     </Main>
                 )}

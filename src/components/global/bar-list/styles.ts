@@ -15,6 +15,7 @@ export const BarListWrapper = styled.ul`
     position: relative;
     width: 100%;
     min-width: 100vw;
+    padding: 0;
 `;
 
 export const StyledRevealBlock = styled(RevealBlock)<StyledRevealBlockProps>`
