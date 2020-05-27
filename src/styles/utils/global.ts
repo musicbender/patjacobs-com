@@ -48,3 +48,7 @@ export const gridPosition = (config: IGridPositionParams) => {
         ${attach === 'right' && 'transform: translateX(-100%)'};
     `;
 };
+
+export const getGridWidth = (gridColumns: number[], gridLines: number[] = []) => {
+    return gridColumns.reduce((output, columnIndex) => output + gridLines[columnIndex], 0);
+};
