@@ -4,12 +4,13 @@ import { UpNextWrapper, NextText, LinkWrapper, StyledLink, Line } from './styles
 interface Props {
     label?: string;
     path?: string;
+    className?: string;
 }
 
-const upNext = ({ label = 'Next Page', path = '/' }: Props) => {
+const upNext = ({ label = 'Next Page', path = '/', className }: Props) => {
     const [hovered, setHovered] = useState(false);
     return (
-        <UpNextWrapper>
+        <UpNextWrapper className={className}>
             <NextText>NEXT:</NextText>
             <LinkWrapper>
                 <StyledLink

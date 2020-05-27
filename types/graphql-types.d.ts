@@ -4950,11 +4950,35 @@ export type SitePageConnectionGroupArgs = {
 
 export type SitePageContext = {
   project?: Maybe<SitePageContextProject>,
-  allProjects?: Maybe<Array<Maybe<SitePageContextAllProjects>>>,
+  nextProject?: Maybe<SitePageContextNextProject>,
   sections?: Maybe<SitePageContextSections>,
+  configs?: Maybe<SitePageContextConfigs>,
 };
 
-export type SitePageContextAllProjects = {
+export type SitePageContextConfigs = {
+  settings?: Maybe<SitePageContextConfigsSettings>,
+};
+
+export type SitePageContextConfigsFilterInput = {
+  settings?: Maybe<SitePageContextConfigsSettingsFilterInput>,
+};
+
+export type SitePageContextConfigsSettings = {
+  gridLines?: Maybe<Array<Maybe<Scalars['Int']>>>,
+};
+
+export type SitePageContextConfigsSettingsFilterInput = {
+  gridLines?: Maybe<IntQueryOperatorInput>,
+};
+
+export type SitePageContextFilterInput = {
+  project?: Maybe<SitePageContextProjectFilterInput>,
+  nextProject?: Maybe<SitePageContextNextProjectFilterInput>,
+  sections?: Maybe<SitePageContextSectionsFilterInput>,
+  configs?: Maybe<SitePageContextConfigsFilterInput>,
+};
+
+export type SitePageContextNextProject = {
   updatedAt?: Maybe<Scalars['Date']>,
   createdAt?: Maybe<Scalars['Date']>,
   id?: Maybe<Scalars['String']>,
@@ -4968,17 +4992,17 @@ export type SitePageContextAllProjects = {
   projectPublishDate?: Maybe<Scalars['Date']>,
   status?: Maybe<Scalars['String']>,
   team?: Maybe<Array<Maybe<Scalars['String']>>>,
-  imageDesktop?: Maybe<SitePageContextAllProjectsImageDesktop>,
-  body?: Maybe<Array<Maybe<SitePageContextAllProjectsBody>>>,
+  imageDesktop?: Maybe<SitePageContextNextProjectImageDesktop>,
+  body?: Maybe<Array<Maybe<SitePageContextNextProjectBody>>>,
 };
 
-export type SitePageContextAllProjectsBody = {
+export type SitePageContextNextProjectBody = {
   contentType?: Maybe<Scalars['String']>,
-  text?: Maybe<Array<Maybe<SitePageContextAllProjectsBodyText>>>,
-  data?: Maybe<SitePageContextAllProjectsBodyData>,
+  text?: Maybe<Array<Maybe<SitePageContextNextProjectBodyText>>>,
+  data?: Maybe<SitePageContextNextProjectBodyData>,
 };
 
-export type SitePageContextAllProjectsBodyData = {
+export type SitePageContextNextProjectBodyData = {
   src?: Maybe<Scalars['String']>,
   title?: Maybe<Scalars['String']>,
   mimeType?: Maybe<Scalars['String']>,
@@ -4989,7 +5013,7 @@ export type SitePageContextAllProjectsBodyData = {
   className?: Maybe<Scalars['String']>,
 };
 
-export type SitePageContextAllProjectsBodyDataFilterInput = {
+export type SitePageContextNextProjectBodyDataFilterInput = {
   src?: Maybe<StringQueryOperatorInput>,
   title?: Maybe<StringQueryOperatorInput>,
   mimeType?: Maybe<StringQueryOperatorInput>,
@@ -5000,29 +5024,29 @@ export type SitePageContextAllProjectsBodyDataFilterInput = {
   className?: Maybe<StringQueryOperatorInput>,
 };
 
-export type SitePageContextAllProjectsBodyFilterInput = {
+export type SitePageContextNextProjectBodyFilterInput = {
   contentType?: Maybe<StringQueryOperatorInput>,
-  text?: Maybe<SitePageContextAllProjectsBodyTextFilterListInput>,
-  data?: Maybe<SitePageContextAllProjectsBodyDataFilterInput>,
+  text?: Maybe<SitePageContextNextProjectBodyTextFilterListInput>,
+  data?: Maybe<SitePageContextNextProjectBodyDataFilterInput>,
 };
 
-export type SitePageContextAllProjectsBodyFilterListInput = {
-  elemMatch?: Maybe<SitePageContextAllProjectsBodyFilterInput>,
+export type SitePageContextNextProjectBodyFilterListInput = {
+  elemMatch?: Maybe<SitePageContextNextProjectBodyFilterInput>,
 };
 
-export type SitePageContextAllProjectsBodyText = {
+export type SitePageContextNextProjectBodyText = {
   leaf?: Maybe<Scalars['String']>,
 };
 
-export type SitePageContextAllProjectsBodyTextFilterInput = {
+export type SitePageContextNextProjectBodyTextFilterInput = {
   leaf?: Maybe<StringQueryOperatorInput>,
 };
 
-export type SitePageContextAllProjectsBodyTextFilterListInput = {
-  elemMatch?: Maybe<SitePageContextAllProjectsBodyTextFilterInput>,
+export type SitePageContextNextProjectBodyTextFilterListInput = {
+  elemMatch?: Maybe<SitePageContextNextProjectBodyTextFilterInput>,
 };
 
-export type SitePageContextAllProjectsFilterInput = {
+export type SitePageContextNextProjectFilterInput = {
   updatedAt?: Maybe<DateQueryOperatorInput>,
   createdAt?: Maybe<DateQueryOperatorInput>,
   id?: Maybe<StringQueryOperatorInput>,
@@ -5036,30 +5060,20 @@ export type SitePageContextAllProjectsFilterInput = {
   projectPublishDate?: Maybe<DateQueryOperatorInput>,
   status?: Maybe<StringQueryOperatorInput>,
   team?: Maybe<StringQueryOperatorInput>,
-  imageDesktop?: Maybe<SitePageContextAllProjectsImageDesktopFilterInput>,
-  body?: Maybe<SitePageContextAllProjectsBodyFilterListInput>,
+  imageDesktop?: Maybe<SitePageContextNextProjectImageDesktopFilterInput>,
+  body?: Maybe<SitePageContextNextProjectBodyFilterListInput>,
 };
 
-export type SitePageContextAllProjectsFilterListInput = {
-  elemMatch?: Maybe<SitePageContextAllProjectsFilterInput>,
-};
-
-export type SitePageContextAllProjectsImageDesktop = {
+export type SitePageContextNextProjectImageDesktop = {
   fileName?: Maybe<Scalars['String']>,
   height?: Maybe<Scalars['Int']>,
   width?: Maybe<Scalars['Int']>,
 };
 
-export type SitePageContextAllProjectsImageDesktopFilterInput = {
+export type SitePageContextNextProjectImageDesktopFilterInput = {
   fileName?: Maybe<StringQueryOperatorInput>,
   height?: Maybe<IntQueryOperatorInput>,
   width?: Maybe<IntQueryOperatorInput>,
-};
-
-export type SitePageContextFilterInput = {
-  project?: Maybe<SitePageContextProjectFilterInput>,
-  allProjects?: Maybe<SitePageContextAllProjectsFilterListInput>,
-  sections?: Maybe<SitePageContextSectionsFilterInput>,
 };
 
 export type SitePageContextProject = {
@@ -5332,26 +5346,25 @@ export type SitePageFieldsEnum =
   'context___project___body' |
   'context___project___body___contentType' |
   'context___project___body___text' |
-  'context___allProjects' |
-  'context___allProjects___updatedAt' |
-  'context___allProjects___createdAt' |
-  'context___allProjects___id' |
-  'context___allProjects___projectId' |
-  'context___allProjects___title' |
-  'context___allProjects___projectType' |
-  'context___allProjects___description' |
-  'context___allProjects___techList' |
-  'context___allProjects___externalUrl' |
-  'context___allProjects___overview' |
-  'context___allProjects___projectPublishDate' |
-  'context___allProjects___status' |
-  'context___allProjects___team' |
-  'context___allProjects___imageDesktop___fileName' |
-  'context___allProjects___imageDesktop___height' |
-  'context___allProjects___imageDesktop___width' |
-  'context___allProjects___body' |
-  'context___allProjects___body___contentType' |
-  'context___allProjects___body___text' |
+  'context___nextProject___updatedAt' |
+  'context___nextProject___createdAt' |
+  'context___nextProject___id' |
+  'context___nextProject___projectId' |
+  'context___nextProject___title' |
+  'context___nextProject___projectType' |
+  'context___nextProject___description' |
+  'context___nextProject___techList' |
+  'context___nextProject___externalUrl' |
+  'context___nextProject___overview' |
+  'context___nextProject___projectPublishDate' |
+  'context___nextProject___status' |
+  'context___nextProject___team' |
+  'context___nextProject___imageDesktop___fileName' |
+  'context___nextProject___imageDesktop___height' |
+  'context___nextProject___imageDesktop___width' |
+  'context___nextProject___body' |
+  'context___nextProject___body___contentType' |
+  'context___nextProject___body___text' |
   'context___sections___case_study_overview___sectionId' |
   'context___sections___case_study_overview___heading' |
   'context___sections___case_study_tech_used___sectionId' |
@@ -5360,6 +5373,7 @@ export type SitePageFieldsEnum =
   'context___sections___case_study_more_details___heading' |
   'context___sections___case_study_team___sectionId' |
   'context___sections___case_study_team___heading' |
+  'context___configs___settings___gridLines' |
   'pluginCreator___id' |
   'pluginCreator___parent___id' |
   'pluginCreator___parent___parent___id' |

@@ -1,8 +1,9 @@
 import styled, { css, keyframes } from 'styled-components';
 // import { media } from '../../../styles/breakpoints';
 import RevealBlock from '../../global/reveal-block';
-import { superCenter } from '../../../styles/utils/global';
+import { superCenter, gridPosition } from '../../../styles/utils/global';
 import Heading from '../../global/heading';
+import UpNext from '../../global/up-next';
 
 // types
 interface TitleProps {
@@ -11,6 +12,10 @@ interface TitleProps {
 
 interface ScrollLineWrapperProps {
     atTop?: boolean;
+}
+
+interface UpNextProps {
+    gridLines: number[];
 }
 
 // keyframes
@@ -59,13 +64,13 @@ export const MetaOutterWrapper = styled.div`
 
 export const Main = styled.main`
     position: relative;
+    padding-bottom: 10em;
 `;
 
 export const Top = styled.div`
     position: relative;
     padding-top: 10em;
     height: ${({ theme }) => `calc(100vh - ${theme.sizes.toolbarHeight})`};
-    /* height: 600vh; */
 `;
 
 export const Middle = styled.div``;
@@ -108,4 +113,12 @@ export const StyledHeading = styled(Heading)`
 export const Paragraph = styled.p`
     font-size: 1em;
     margin: 0 auto 8em !important;
+`;
+
+export const StyledUpNext = styled(UpNext)<UpNextProps>`
+    ${props =>
+        gridPosition({
+            gridLines: props.gridLines,
+            index: 3,
+        })};
 `;

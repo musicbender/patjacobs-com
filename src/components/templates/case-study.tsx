@@ -15,8 +15,9 @@ const CaseStudyTemplate = (props: Props) => (
     >
         <CaseStudy
             project={props.pageContext.project}
-            allProjects={props.pageContext.allProjects}
+            nextProject={props.pageContext.nextProject}
             sections={props.pageContext.sections}
+            configs={props.pageContext.configs}
             location={props.location}
         />
     </Layout>

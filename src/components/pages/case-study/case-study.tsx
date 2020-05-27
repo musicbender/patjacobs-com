@@ -6,6 +6,7 @@ import { throttle, hasWindow } from '../../../util/util';
 import ProjectMeta from '../../sections/project-meta';
 import ProjectBody from '../../sections/project-body';
 import RevealBlock from '../../global/reveal-block';
+import BarList from '../../global/bar-list';
 import {
     CaseStudyPage,
     InfoWrapper,
@@ -20,6 +21,7 @@ import {
     Section,
     StyledHeading,
     Paragraph,
+    StyledUpNext,
 } from './styles';
 import {
     Gcms_Project,
@@ -27,14 +29,15 @@ import {
     Sections,
     CaseStudyBaseRevealProps,
     RevealBlockContentType,
-    SitePageContextAllProjectsBody,
+    Configs,
+    SitePageContextProjectBody,
 } from '../../../../types';
-import BarList from '../../global/bar-list';
 
 interface Props {
     project: Gcms_Project;
-    allProjects: Gcms_Project[];
+    nextProject: Gcms_Project;
     sections: Sections;
+    configs: Configs;
     location: GatsbyLocation;
 }
 
@@ -169,7 +172,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                     <StyledHeading text={this.props.sections['case-study-more-details'].heading} />
                 </RevealBlock>
                 <ProjectBody
-                    body={this.props.project.body as SitePageContextAllProjectsBody[]}
+                    body={this.props.project.body as SitePageContextProjectBody[]}
                     getRevealProps={this.getRevealProps}
                 />
             </Section>
@@ -217,6 +220,13 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                             {this.props.project.team &&
                                 this.props.project.team.length > 0 &&
                                 this.renderBarList('team', this.props.project.team)}
+                            {this.props.nextProject && (
+                                <StyledUpNext
+                                    label={this.props.nextProject.title}
+                                    path={`/case-studies/${this.props.nextProject.projectId}`}
+                                    gridLines={this.props.configs.settings.gridLines}
+                                />
+                            )}
                         </Middle>
                     </Main>
                 )}

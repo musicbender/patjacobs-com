@@ -32,6 +32,6 @@ export default {
 // stories
 export const Default = () => <UpNext />;
 
-export const ExplicitLabelAndPath = () => <UpNext label={tests[0].label} path={tests[0].label} />;
+export const ExplicitLabelAndPath = () => <UpNext label={tests[0].label} path={tests[0].path} />;
 
-export const LongLabel = () => <UpNext label={tests[1].label} path={tests[1].label} />;
+export const LongLabel = () => <UpNext label={tests[1].label} path={tests[1].path} />;

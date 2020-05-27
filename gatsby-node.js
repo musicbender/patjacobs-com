@@ -1,4 +1,5 @@
 const path = require('path');
+const { getRelatedProjects, getNextProject } = require('./scripts/gatsby-node-utils');
 const { processRawBody } = require('./scripts/project-body-process');
 
 exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
@@ -34,10 +35,15 @@ exports.createPages = async ({ graphql, actions }) => {
     const { createPage, createRedirect } = actions;
     let query;
 
-    // Create Case study pages
+    // create case study pages
     try {
         query = await graphql(`
             query {
+                configs {
+                    settings {
+                        gridLines
+                    }
+                }
                 gcms {
                     sections(where: { sectionId_contains: "case-study-" }) {
                         sectionId
@@ -76,6 +82,7 @@ exports.createPages = async ({ graphql, actions }) => {
         throw new Error(err);
     }
 
+    // process sections data
     const processSections = sections => {
         let output = {};
 
@@ -89,7 +96,7 @@ exports.createPages = async ({ graphql, actions }) => {
         return output;
     };
 
-    // process projects
+    // process projects data
     const processedProjects = query.data.gcms.projects.map(project => {
         return {
             ...project,
@@ -97,15 +104,22 @@ exports.createPages = async ({ graphql, actions }) => {
         };
     });
 
+    const relatedProjectCache = {};
+
     // create case study pages
     processedProjects.forEach(project => {
+        const type = project.projectType;
+        const relatedProjects =
+            relatedProjectCache[type] || getRelatedProjects(type, processedProjects);
+
         createPage({
             path: `/case-studies/${project.projectId}`,
             component: path.resolve('./src/components/templates/case-study.tsx'),
             context: {
                 project,
-                allProjects: processedProjects,
+                nextProject: getNextProject(project.id, relatedProjects),
                 sections: processSections(query.data.gcms.sections),
+                configs: query.data.configs,
             },
         });
     });

@@ -2,17 +2,17 @@ import React from 'react';
 import RevealBlock from '../../global/reveal-block';
 import { ProjectBodyWrapper, BodyParagraph, BodyImage, BodyVideo, Caption } from './styles';
 import {
-    SitePageContextAllProjectsBody,
+    SitePageContextProjectBody,
     ProjectBodyParagraphText,
     RevealBlockContentType,
 } from '../../../../types';
 
 interface Props {
-    body: SitePageContextAllProjectsBody[];
+    body: SitePageContextProjectBody[];
     getRevealProps(elm: string, contentType: RevealBlockContentType): any;
 }
 
-type BodyItem = SitePageContextAllProjectsBody;
+type BodyItem = SitePageContextProjectBody;
 
 const projectBody = ({ body, getRevealProps }: Props) => {
     const renderParagraph = (item: BodyItem, i: number) => {
