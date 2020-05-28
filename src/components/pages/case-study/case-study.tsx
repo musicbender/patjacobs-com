@@ -146,21 +146,27 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
         );
     }
 
+    activeIsEqual = (prev: any, next: any): boolean => {
+        return prev.active === next.active;
+    };
+
     renderBarList(key: string, items: string[] = []) {
         const active: boolean = this.isRevealed(key);
+        const MemoizedBarList = React.memo(BarList);
+        const MemoizedPlx = React.memo(Plx);
         return (
             <Section>
                 <RevealBlock {...this.getRevealProps(`heading${key}`, 'text')}>
                     <StyledHeading text={this.props.sections[`case-study-${key}`].heading} />
                 </RevealBlock>
-                <Plx
+                <MemoizedPlx
                     freeze={active}
                     disabled={!hasWindow()}
                     parallaxData={this.plxData}
                     onPlxEnd={hasWindow() ? this.addRevealed(key) : null}
                 >
                     <BarList items={items} active={active} />
-                </Plx>
+                </MemoizedPlx>
             </Section>
         );
     }

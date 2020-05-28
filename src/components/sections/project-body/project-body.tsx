@@ -31,16 +31,16 @@ const projectBody = ({ body, getRevealProps }: Props) => {
         if (!item.data.src) return;
         const key = `image-${i}-${item.data.handle}`;
         return (
-            <>
-                <RevealBlock {...getRevealProps(key, 'img')}>
+            <React.Fragment key={key + '-fragment'}>
+                <RevealBlock {...getRevealProps(key, 'img')} key={key}>
                     <BodyImage src={item.data.src} alt={item.data.altText || item.data.title} />
                 </RevealBlock>
                 {item.text && item.text[0] && item.text[0].leaf && (
-                    <RevealBlock {...getRevealProps(key, 'text')} key={key}>
+                    <RevealBlock {...getRevealProps(key, 'text')} key={key + '-caption'}>
                         <Caption>[{item.text[0].leaf}]</Caption>
                     </RevealBlock>
                 )}
-            </>
+            </React.Fragment>
         );
     };
 
@@ -48,16 +48,16 @@ const projectBody = ({ body, getRevealProps }: Props) => {
         if (!item.data.src) return;
         const key = `video-${i}-${item.data.handle}`;
         return (
-            <>
-                <RevealBlock {...getRevealProps(key, 'video')}>
+            <React.Fragment key={key + '-fragment'}>
+                <RevealBlock {...getRevealProps(key, 'video')} key={key}>
                     <BodyVideo src={item.data.src} />
                 </RevealBlock>
                 {item.text && item.text[0] && item.text[0].leaf && (
-                    <RevealBlock {...getRevealProps(key, 'text')} key={key}>
+                    <RevealBlock {...getRevealProps(key, 'text')} key={key + '-caption'}>
                         <Caption>[{item.text[0].leaf}]</Caption>
                     </RevealBlock>
                 )}
-            </>
+            </React.Fragment>
         );
     };
 

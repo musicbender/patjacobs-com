@@ -14,6 +14,7 @@ const BarList = ({ items = [], active = false, color, colorPattern = 'multi' }: 
     const singleColor: CoreColors =
         colorPattern === 'single' ? color || (getRandomColor('name') as CoreColors) : null;
     const colors: CoreColors[] = colorPattern === 'multi' && getRandomColorSequence();
+    console.log('barlist render', items[0], active);
 
     return (
         <BarListWrapper>

@@ -28,7 +28,7 @@ const scrollLineLoop = keyframes`
 // styled components
 export const CaseStudyPage = styled.div`
     position: relative;
-    min-height: 600vh;
+    min-height: 150vh;
 `;
 
 export const InfoWrapper = styled.div`
