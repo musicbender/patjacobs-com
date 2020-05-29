@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BarListWrapper, StyledRevealBlock, ListItem } from './styles';
 import { CoreColors } from '../../../../types';
 import { getRandomColor, getRandomColorSequence } from '../../../util/colors';
@@ -11,17 +11,32 @@ interface Props {
 }
 
 const BarList = ({ items = [], active = false, color, colorPattern = 'multi' }: Props) => {
-    const singleColor: CoreColors =
-        colorPattern === 'single' ? color || (getRandomColor('name') as CoreColors) : null;
-    const colors: CoreColors[] = colorPattern === 'multi' && getRandomColorSequence();
-    console.log('barlist render', items[0], active);
+    const [singleColor, setSingleColor] = useState(null);
+    const [colors, setColors] = useState(null);
+
+    useEffect(() => {
+        getColors();
+    }, [active]);
+
+    const getColors = () => {
+        switch (colorPattern) {
+            case 'single':
+                setSingleColor(color || (getRandomColor('name') as CoreColors));
+                break;
+            case 'multi':
+                setColors(getRandomColorSequence());
+                break;
+            default:
+                return;
+        }
+    };
 
     return (
         <BarListWrapper>
             {items.map((item: string, i: number) => {
                 const itemColor: CoreColors =
                     singleColor ||
-                    colors[i - colors.length * Math.floor(i / colors.length)] ||
+                    (colors && colors[i - colors.length * Math.floor(i / colors.length)]) ||
                     'aqua';
 
                 return (
@@ -29,7 +44,7 @@ const BarList = ({ items = [], active = false, color, colorPattern = 'multi' }: 
                         active={active}
                         delay={i * 200}
                         startGrid={4}
-                        endGrid={6}
+                        endGrid={5}
                         index={i}
                         key={'barlist' + i + item.substring(0, 3)}
                     >

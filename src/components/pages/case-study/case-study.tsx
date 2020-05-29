@@ -31,6 +31,7 @@ import {
     RevealBlockContentType,
     Configs,
     SitePageContextProjectBody,
+    RevealedElementsState,
 } from '../../../../types';
 
 interface Props {
@@ -48,7 +49,7 @@ interface ReduxProps {
 
 interface State {
     atTop: boolean;
-    revealedElements: string[];
+    revealedElements: RevealedElementsState;
 }
 
 const mapStateToProps = ({ global }) => {
@@ -87,7 +88,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
 
         this.state = {
             atTop: true,
-            revealedElements: [],
+            revealedElements: {},
         };
     }
 
@@ -125,12 +126,17 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
     addRevealed = (elm: string): (() => void) => {
         return (): void => {
             if (this.isRevealed(elm)) return;
-            this.setState({ revealedElements: [...this.state.revealedElements, elm] });
+            this.setState({
+                revealedElements: {
+                    ...this.state.revealedElements,
+                    [elm]: true,
+                },
+            });
         };
     };
 
     isRevealed = (elm: string): boolean => {
-        return this.state.revealedElements.indexOf(elm) > -1;
+        return !!this.state.revealedElements[elm];
     };
 
     renderOverview() {
@@ -146,27 +152,25 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
         );
     }
 
-    activeIsEqual = (prev: any, next: any): boolean => {
-        return prev.active === next.active;
+    propIsEqual = (targetProp: any) => (prev: any, next: any): boolean => {
+        return prev[targetProp] === next[targetProp];
     };
 
     renderBarList(key: string, items: string[] = []) {
         const active: boolean = this.isRevealed(key);
-        const MemoizedBarList = React.memo(BarList);
-        const MemoizedPlx = React.memo(Plx);
         return (
             <Section>
                 <RevealBlock {...this.getRevealProps(`heading${key}`, 'text')}>
                     <StyledHeading text={this.props.sections[`case-study-${key}`].heading} />
                 </RevealBlock>
-                <MemoizedPlx
+                <Plx
                     freeze={active}
                     disabled={!hasWindow()}
                     parallaxData={this.plxData}
                     onPlxEnd={hasWindow() ? this.addRevealed(key) : null}
                 >
                     <BarList items={items} active={active} />
-                </MemoizedPlx>
+                </Plx>
             </Section>
         );
     }

@@ -65,6 +65,7 @@ export const MetaOutterWrapper = styled.div`
 export const Main = styled.main`
     position: relative;
     padding-bottom: 10em;
+    overflow: hidden;
 `;
 
 export const Top = styled.div`
@@ -77,7 +78,7 @@ export const Middle = styled.div``;
 
 export const ScrollLineWrapper = styled('div')<ScrollLineWrapperProps>`
     ${superCenter('50%', 'auto', '-50%', '0')}
-    bottom: 0;
+    bottom: 2em;
     height: 20em;
     width: 5em;
     overflow: hidden;
@@ -119,6 +120,6 @@ export const StyledUpNext = styled(UpNext)<UpNextProps>`
     ${props =>
         gridPosition({
             gridLines: props.gridLines,
-            index: 3,
+            index: 2,
         })};
 `;

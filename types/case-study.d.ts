@@ -30,3 +30,7 @@ export interface ProjectBodyMedia {
     text?: string;
     data: ProjectBodyMediaData;
 }
+
+export interface RevealedElementsState {
+    [key: string]: boolean;
+}
