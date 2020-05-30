@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-// import { media } from '../../../styles/breakpoints';
+import { media } from '../../../styles/breakpoints';
 import RevealBlock from '../../global/reveal-block';
 import { superCenter, gridPosition } from '../../../styles/utils/global';
 import Heading from '../../global/heading';
@@ -29,37 +29,53 @@ const scrollLineLoop = keyframes`
 export const CaseStudyPage = styled.div`
     position: relative;
     min-height: 150vh;
+    padding: ${({ theme }) => `0 ${theme.gridSizes.s}vw`};
+    ${media.tablet`
+        padding: 0;
+    `}
 `;
 
 export const InfoWrapper = styled.div`
-    position: fixed;
-    top: 5em;
-    left: ${({ theme }) => `${theme.gridSizes.s}%`};
-    width: ${({ theme }) => `${theme.gridSizes.m + theme.gridSizes.s}%`};
-    z-index: 2;
+    ${media.tablet`
+        position: fixed;
+        top: 5em;
+        left: ${({ theme }) => `${theme.gridSizes.s}%`};
+        width: ${({ theme }) => `${theme.gridSizes.m + theme.gridSizes.s}%`};
+        z-index: 2;
+    `}
 `;
 
 export const Title = styled('h1')<TitleProps>`
     ${props =>
         props.isBig &&
         css`
-            font-size: 5rem;
+            ${media.tablet`
+                 font-size: 5rem;
+            `}
         `};
     ${props =>
         !props.isBig &&
         css`
-            font-size: 1.75rem;
+            ${media.tablet`
+                font-size: 1.75rem;
+            `}
         `};
-    margin: 0;
+    margin: 0 0 2em 0;
     white-space: nowrap;
     color: ${({ theme }) => theme.palette.white};
     font-family: ${({ theme }) => theme.fonts.futura};
     will-change: font-size;
     transition: ${({ theme }) => `font-size ${theme.animate.slow}`};
+    ${media.tablet`
+        margin: 0;
+    `}
 `;
 
 export const MetaOutterWrapper = styled.div`
-    width: ${({ theme }) => `${theme.gridSizes.m}vw`};
+    width: 100%;
+    ${media.tablet`
+        width: ${({ theme }) => `${theme.gridSizes.m}vw`};
+    `}
 `;
 
 export const Main = styled.main`
@@ -69,9 +85,13 @@ export const Main = styled.main`
 `;
 
 export const Top = styled.div`
+    display: none;
     position: relative;
     padding-top: 10em;
     height: ${({ theme }) => `calc(100vh - ${theme.sizes.toolbarHeight})`};
+    ${media.tablet`
+      display: block;
+    `}
 `;
 
 export const Middle = styled.div``;
@@ -103,7 +123,10 @@ export const ScrollLine = styled.div`
 `;
 
 export const Section = styled.div`
-    margin: 10em auto;
+    margin: 4em auto;
+    ${media.tablet`
+        margin: 10em auto;
+    `}
 `;
 
 export const StyledHeading = styled(Heading)`

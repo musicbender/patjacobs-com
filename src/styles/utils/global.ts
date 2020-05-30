@@ -1,6 +1,7 @@
 import { css } from 'styled-components';
 import { IGridPositionParams } from '../../../types/styles';
 import theme from '../theme';
+import { sizes } from '../breakpoints';
 
 export const px2rem = (px: number): string => `${px / 16}rem`;
 
@@ -12,6 +13,8 @@ export const superCenter = (left = '50%', top = '50%', x = '-50%', y = '-50%') =
         transform: translate(${x}, ${y});
     `;
 };
+
+console.log('theme', theme);
 
 export const gridSizes: { [key: string]: number } = theme.gridSizes;
 

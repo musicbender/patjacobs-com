@@ -42,6 +42,10 @@ const ProjectMeta = ({ project }: Props) => {
         </IconWrapper>
     );
 
+    const hasIcons = () => {
+        return !!project.githubRepoUrl || !!project.storybookUrl;
+    };
+
     const getStorybookIcon = (url: string) => (
         <IconWrapper href={url} target="_blank">
             <Icon role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -82,10 +86,12 @@ const ProjectMeta = ({ project }: Props) => {
                         </ContentValue>
                     </ContentWrapper>
                 )}
-                <IconsWrapper>
-                    {project.githubRepoUrl && getGithubIcon(project.githubRepoUrl)}
-                    {project.storybookUrl && getStorybookIcon(project.storybookUrl)}
-                </IconsWrapper>
+                {hasIcons() && (
+                    <IconsWrapper>
+                        {project.githubRepoUrl && getGithubIcon(project.githubRepoUrl)}
+                        {project.storybookUrl && getStorybookIcon(project.storybookUrl)}
+                    </IconsWrapper>
+                )}
             </ProjectMetaWrapper>
         )
     );

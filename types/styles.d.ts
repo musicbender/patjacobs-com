@@ -23,5 +23,3 @@ export interface IGridPositionParams {
     unit?: string = '%';
     attach?: string = 'left';
 }
-
-// enums

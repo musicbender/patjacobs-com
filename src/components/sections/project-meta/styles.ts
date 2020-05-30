@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { media } from '../../../styles/breakpoints';
 import { getRandomColor } from '../../../util/colors';
 import { CoreColors } from '../../../../types';
 
@@ -8,6 +9,7 @@ interface ContentProps {
 
 const conf = {
     desktopMargin: '3em',
+    mobileMargin: '1.75em',
 };
 
 export const ProjectMetaWrapper = styled.div`
@@ -16,21 +18,27 @@ export const ProjectMetaWrapper = styled.div`
 
 export const ContentWrapper = styled('div')<ContentProps>`
     width: 100%;
-    margin: ${`${conf.desktopMargin} auto`};
+    margin: ${`${conf.mobileMargin} auto`};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: ${props => props.theme.corePalette[props.color]};
+    ${media.tablet`
+        margin: ${`${conf.desktopMargin} auto`};
+    `}
 `;
 
 const content = css`
-    margin: 0.65em 0;
+    margin: 0;
     font-weight: 200;
     font-size: 0.9rem;
     letter-spacing: 4px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    ${media.tablet`
+        margin: 0.65em 0;
+    `}
 `;
 
 export const Label = styled.p`

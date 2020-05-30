@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
 import { RevealBlockContentType } from '../../../../types';
-import { media } from '../../../styles/breakpoints';
+import { media, sizes } from '../../../styles/breakpoints';
 
 interface RevealBlockWrapperProps {
     gridWidth: number;
     position?: number;
+    mobileIgnoreGrid?: boolean;
 }
 
 interface WrapperProps {
@@ -18,9 +19,17 @@ interface ContentWrapperProps {
 }
 
 export const RevealBlockWrapper = styled('div')<RevealBlockWrapperProps>`
-    margin-left: ${props => `${props.position || 0}%;`};
     width: ${props => `${props.gridWidth || 0}vw`};
+    margin-left: ${props => `${props.position || 0}%;`};
     overflow: hidden;
+    ${`@media screen and (max-width: ${sizes.tablet}px)`} {
+        ${props =>
+            props.mobileIgnoreGrid &&
+            css`
+                width: 100%;
+                margin-left: 0;
+            `}
+    }
 `;
 
 const Wrapper = styled('div')<WrapperProps>`

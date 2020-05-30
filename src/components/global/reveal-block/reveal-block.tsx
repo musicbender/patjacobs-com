@@ -14,6 +14,7 @@ interface Props {
     contentType?: RevealBlockContentType;
     gridLines?: number[];
     plxProps?: any;
+    mobileIgnoreGrid?: boolean;
     className?: string;
 }
 
@@ -26,6 +27,7 @@ const revealBlock = ({
     children,
     gridLines,
     plxProps,
+    mobileIgnoreGrid = true,
     className,
 }: Props) => {
     const { configs } = useStaticQuery(graphql`
@@ -43,7 +45,12 @@ const revealBlock = ({
     const position = reduceSegment(0, startGrid, gLines);
 
     const regularRevealBlock = (
-        <RevealBlockWrapper gridWidth={width} position={position} className={className}>
+        <RevealBlockWrapper
+            gridWidth={width}
+            position={position}
+            className={className}
+            mobileIgnoreGrid={mobileIgnoreGrid}
+        >
             <OutterWrapper active={active} delay={delay}>
                 <InnerWrapper active={active} delay={delay}>
                     <ContentWrapper contentType={contentType}>
