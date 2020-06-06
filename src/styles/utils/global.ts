@@ -38,9 +38,9 @@ export const gridPosition = (config: IGridPositionParams) => {
         unit = validUnits[0];
     }
 
-    for (let i = 0; i <= index; i++) {
-        percent += gridLines[i];
-    }
+    // for (let i = 0; i <= index; i++) {
+    //     percent += gridLines[i];
+    // }
 
     percent = gridLines.reduce((total, cur, i) => {
         return i <= index ? total + cur : total;

@@ -29,7 +29,7 @@ export const InnerWrapper = styled.div`
         fill: ${props => props.theme.palette.white};
         opacity: ${iconOpacity};
         ${media.tablet`
-          right: ${`calc(${gridS} / 2)`};
+          left: 96%;
         `}
     }
 `;

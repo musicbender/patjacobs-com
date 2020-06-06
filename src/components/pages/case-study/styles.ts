@@ -29,7 +29,7 @@ const scrollLineLoop = keyframes`
 export const CaseStudyPage = styled.div`
     position: relative;
     min-height: 150vh;
-    padding: ${({ theme }) => `0 ${theme.gridSizes.s}vw`};
+    padding: ${({ theme }) => `5em ${theme.gridSizes.s}vw 0`};
     ${media.tablet`
         padding: 0;
     `}
@@ -60,7 +60,7 @@ export const Title = styled('h1')<TitleProps>`
                 font-size: 1.75rem;
             `}
         `};
-    margin: 0 0 2em 0;
+    margin: 0 0 1em 0;
     white-space: nowrap;
     color: ${({ theme }) => theme.palette.white};
     font-family: ${({ theme }) => theme.fonts.futura};
@@ -123,15 +123,18 @@ export const ScrollLine = styled.div`
 `;
 
 export const Section = styled.div`
-    margin: 4em auto;
+    margin: 3em auto;
     ${media.tablet`
         margin: 10em auto;
     `}
 `;
 
 export const StyledHeading = styled(Heading)`
-    margin: 0 0 4em 0;
+    margin: 0 0 1em 0;
     font-weight: bold;
+    ${media.tablet`
+        margin: 0 0 4em 0;
+    `}
 `;
 
 export const Paragraph = styled.p`
@@ -141,8 +144,14 @@ export const Paragraph = styled.p`
 
 export const StyledUpNext = styled(UpNext)<UpNextProps>`
     ${props =>
-        gridPosition({
-            gridLines: props.gridLines,
-            index: 2,
-        })};
+        css`
+            left: 0;
+            ${media.tablet`
+                ${gridPosition({
+                    gridLines: props.gridLines,
+                    index: 2,
+                    unit: 'vw',
+                })}
+            `}
+        `};
 `;
