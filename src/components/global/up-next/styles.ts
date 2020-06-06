@@ -52,13 +52,14 @@ export const StyledLink = styled(GatsbyLink)`
 export const Line = styled('div')<LineProps>`
     position: absolute;
     left: 0;
-    bottom: 1em;
+    bottom: 0;
     height: 0.37em;
     width: 100%;
     background-color: ${({ theme }) => theme.corePalette.aqua};
     transform: translateX(0%);
     transition: ${({ theme }) => `transform ${theme.animate.moderate} ${theme.animate.easeInOut}`};
     ${media.tablet`
+        bottom: 1em;
         transform: translateX(-75%);
     `}
     ${props =>
