@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { ThemeProvider } from 'styled-components';
+import { TransitionState } from 'gatsby-plugin-transition-link';
 import theme from '../styles/theme';
 import { bindActionCreators, Dispatch, AnyAction } from 'redux';
 import { connect } from 'react-redux';

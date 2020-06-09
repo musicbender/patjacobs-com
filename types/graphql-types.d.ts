@@ -5437,6 +5437,7 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___captureUncaught' |
   'pluginCreator___pluginOptions___captureUnhandledRejections' |
   'pluginCreator___pluginOptions___payload___environment' |
+  'pluginCreator___pluginOptions___layout' |
   'pluginCreator___pluginOptions___pathCheck' |
   'pluginCreator___nodeAPIs' |
   'pluginCreator___browserAPIs' |
@@ -5647,6 +5648,7 @@ export type SitePluginFieldsEnum =
   'pluginOptions___captureUncaught' |
   'pluginOptions___captureUnhandledRejections' |
   'pluginOptions___payload___environment' |
+  'pluginOptions___layout' |
   'pluginOptions___pathCheck' |
   'nodeAPIs' |
   'browserAPIs' |
@@ -5785,6 +5787,7 @@ export type SitePluginPluginOptions = {
   captureUncaught?: Maybe<Scalars['Boolean']>,
   captureUnhandledRejections?: Maybe<Scalars['Boolean']>,
   payload?: Maybe<SitePluginPluginOptionsPayload>,
+  layout?: Maybe<Scalars['String']>,
   pathCheck?: Maybe<Scalars['Boolean']>,
 };
 
@@ -5811,6 +5814,7 @@ export type SitePluginPluginOptionsFilterInput = {
   captureUncaught?: Maybe<BooleanQueryOperatorInput>,
   captureUnhandledRejections?: Maybe<BooleanQueryOperatorInput>,
   payload?: Maybe<SitePluginPluginOptionsPayloadFilterInput>,
+  layout?: Maybe<StringQueryOperatorInput>,
   pathCheck?: Maybe<BooleanQueryOperatorInput>,
 };
 

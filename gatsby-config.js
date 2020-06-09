@@ -81,5 +81,11 @@ module.exports = {
         'gatsby-plugin-offline',
         'gatsby-plugin-netlify',
         'gatsby-plugin-robots-txt',
+        {
+            resolve: 'gatsby-plugin-transition-link',
+            options: {
+                layout: require.resolve('./src/layout/index.tsx'),
+            },
+        },
     ],
 };

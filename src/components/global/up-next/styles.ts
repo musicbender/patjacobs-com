@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { media } from '../../../styles/breakpoints';
-import { Link as GatsbyLink } from 'gatsby';
+// import { Link as GatsbyLink } from 'gatsby';
+import TransitionLink from 'gatsby-plugin-transition-link';
 
 interface LineProps {
     active?: boolean;
@@ -36,7 +37,7 @@ export const LinkWrapper = styled.div`
     overflow: hidden;
 `;
 
-export const StyledLink = styled(GatsbyLink)`
+export const StyledLink = styled(TransitionLink)`
     font-size: 1.75rem;
     color: ${({ theme }) => theme.palette.white};
     text-decoration: none;

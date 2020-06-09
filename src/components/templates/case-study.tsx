@@ -1,18 +1,27 @@
 import React from 'react';
-import Layout from '../../layout';
+import { TransitionPortal } from 'gatsby-plugin-transition-link';
 import CaseStudy from '../pages/case-study';
 import { GatsbyLocation } from '../../../types';
+import Modal from '../global/modal';
+import Curtain from '../global/curtain/curtain';
 
 interface Props {
     pageContext: any;
     location: GatsbyLocation;
+    mount?: boolean;
+    entry?: any;
+    exit?: any;
 }
 
 const CaseStudyTemplate = (props: Props) => (
-    <Layout
-        location={props.location}
-        headProps={{ titlePrefix: `Project: ${props.pageContext.project.title}` }}
-    >
+    <>
+        {props.entry.state.enabled && (
+            <TransitionPortal>
+                <Modal>
+                    <Curtain entrance="full" exit="full" duration={1275} />
+                </Modal>
+            </TransitionPortal>
+        )}
         <CaseStudy
             project={props.pageContext.project}
             nextProject={props.pageContext.nextProject}
@@ -20,7 +29,7 @@ const CaseStudyTemplate = (props: Props) => (
             configs={props.pageContext.configs}
             location={props.location}
         />
-    </Layout>
+    </>
 );
 
 export default CaseStudyTemplate;

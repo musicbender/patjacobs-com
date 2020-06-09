@@ -1,0 +1,11 @@
+{
+  "main": {
+    "exit": {
+      "length": 1
+    },
+    "entry":{
+        "appearAfter": 1,
+        "length": 1
+    }
+  }
+}
