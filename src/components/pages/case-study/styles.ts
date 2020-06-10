@@ -61,7 +61,7 @@ export const Title = styled('h1')<MetaProps>`
             `}
         `};
     margin: 0 0 1em 0;
-    width: ${({ theme }) => `${theme.gridSizes.m + theme.gridSizes.s - 3}vw`};
+    width: 100%;
     color: ${({ theme }) => theme.palette.white};
     font-size: 1.35rem;
     font-family: ${({ theme }) => theme.fonts.futura};
@@ -69,6 +69,7 @@ export const Title = styled('h1')<MetaProps>`
     transition: ${({ theme }) => `transform ${theme.animate.slow} 50ms`};
     transform-origin: top left;
     ${media.tablet`
+        width: ${({ theme }) => `${theme.gridSizes.m + theme.gridSizes.s - 3}vw`};
         margin-bottom: 0.5em;
     `}
 `;
