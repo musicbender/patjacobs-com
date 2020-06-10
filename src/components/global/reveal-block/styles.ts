@@ -11,6 +11,7 @@ interface RevealBlockWrapperProps {
 interface WrapperProps {
     active?: boolean;
     delay?: number;
+    disableMobile?: boolean;
 }
 
 interface ContentWrapperProps {
@@ -37,6 +38,15 @@ const Wrapper = styled('div')<WrapperProps>`
     visibility: hidden;
     transition: ${({ delay, theme }) =>
         `transform ${theme.animate.superSlow} ${theme.animate.superEaseOut} ${delay}ms, visibility ${theme.animate.superSlow} ${theme.animate.superEaseOut} ${delay}ms;`};
+    ${`@media screen and (max-width: ${sizes.tablet}px)`} {
+        ${props =>
+            props.disableMobile &&
+            css`
+                transition: none;
+                transform: none;
+                visibility: visible;
+            `};
+    }
 `;
 
 export const OutterWrapper = styled(Wrapper)`
