@@ -39,7 +39,7 @@ export const LinkWrapper = styled.div`
 `;
 
 export const StyledLink = styled(TransitionLink)`
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: ${({ theme }) => theme.palette.white};
     text-decoration: none;
     transition: ${({ theme }) => `color ${theme.animate.moderate} ${theme.animate.easeInOut}`};
