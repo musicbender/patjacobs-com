@@ -8,8 +8,8 @@ interface ContentProps {
 }
 
 const conf = {
-    desktopMargin: '3em',
-    mobileMargin: '1.75em',
+    desktopMargin: 2.25,
+    mobileMargin: 2.25,
 };
 
 export const ProjectMetaWrapper = styled.div`
@@ -18,27 +18,25 @@ export const ProjectMetaWrapper = styled.div`
 
 export const ContentWrapper = styled('div')<ContentProps>`
     width: 100%;
-    margin: ${`${conf.mobileMargin} auto`};
+    margin: ${`${conf.mobileMargin}em auto 0`};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: ${props => props.theme.corePalette[props.color]};
     ${media.tablet`
-        margin: ${`${conf.desktopMargin} auto`};
+        margin: ${`${conf.desktopMargin}em auto 0`};
     `}
 `;
 
 const content = css`
-    margin: 0;
+    margin: 0.2em 0;
     font-weight: 200;
     font-size: 0.9rem;
     letter-spacing: 4px;
     white-space: nowrap;
+    line-height: 2.05;
     overflow: hidden;
     text-overflow: ellipsis;
-    ${media.tablet`
-        margin: 0.65em 0;
-    `}
 `;
 
 export const Label = styled.p`

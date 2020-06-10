@@ -267,6 +267,7 @@ export type ConfigsDataSettings = {
   skillsTop?: Maybe<Scalars['Int']>,
   mobileBreakpoint?: Maybe<Scalars['Int']>,
   windowHeightConstant?: Maybe<Scalars['Int']>,
+  curtainDuration?: Maybe<Scalars['Int']>,
   scrollDebug?: Maybe<Scalars['Boolean']>,
 };
 
@@ -281,6 +282,7 @@ export type ConfigsDataSettingsFilterInput = {
   skillsTop?: Maybe<IntQueryOperatorInput>,
   mobileBreakpoint?: Maybe<IntQueryOperatorInput>,
   windowHeightConstant?: Maybe<IntQueryOperatorInput>,
+  curtainDuration?: Maybe<IntQueryOperatorInput>,
   scrollDebug?: Maybe<BooleanQueryOperatorInput>,
 };
 
@@ -387,6 +389,7 @@ export type ConfigsFieldsEnum =
   'settings___skillsTop' |
   'settings___mobileBreakpoint' |
   'settings___windowHeightConstant' |
+  'settings___curtainDuration' |
   'settings___scrollDebug' |
   'meta___role' |
   'meta___name' |
@@ -424,6 +427,7 @@ export type ConfigsFieldsEnum =
   'data___settings___skillsTop' |
   'data___settings___mobileBreakpoint' |
   'data___settings___windowHeightConstant' |
+  'data___settings___curtainDuration' |
   'data___settings___scrollDebug' |
   'data___meta___role' |
   'data___meta___name' |
@@ -602,6 +606,7 @@ export type ConfigsSettings = {
   skillsTop?: Maybe<Scalars['Int']>,
   mobileBreakpoint?: Maybe<Scalars['Int']>,
   windowHeightConstant?: Maybe<Scalars['Int']>,
+  curtainDuration?: Maybe<Scalars['Int']>,
   scrollDebug?: Maybe<Scalars['Boolean']>,
 };
 
@@ -616,6 +621,7 @@ export type ConfigsSettingsFilterInput = {
   skillsTop?: Maybe<IntQueryOperatorInput>,
   mobileBreakpoint?: Maybe<IntQueryOperatorInput>,
   windowHeightConstant?: Maybe<IntQueryOperatorInput>,
+  curtainDuration?: Maybe<IntQueryOperatorInput>,
   scrollDebug?: Maybe<BooleanQueryOperatorInput>,
 };
 
@@ -5953,7 +5959,7 @@ export type Unnamed_13_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSe
 export type Unnamed_14_QueryVariables = {};
 
 
-export type Unnamed_14_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout'>> }> };
+export type Unnamed_14_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'site'>> }>, configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'gridLines' | 'transportDuration' | 'mobileBreakpoint' | 'splashScreenDebug' | 'splashScreenTimeout' | 'curtainDuration'>> }> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

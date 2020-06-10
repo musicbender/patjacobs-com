@@ -6,8 +6,8 @@ import Heading from '../../global/heading';
 import UpNext from '../../global/up-next';
 
 // types
-interface TitleProps {
-    isBig?: boolean;
+interface MetaProps {
+    atTop?: boolean;
 }
 
 interface ScrollLineWrapperProps {
@@ -38,44 +38,61 @@ export const CaseStudyPage = styled.div`
 export const InfoWrapper = styled.div`
     ${media.tablet`
         position: fixed;
-        top: 5em;
+        top: 7em;
         left: ${({ theme }) => `${theme.gridSizes.s}%`};
         width: ${({ theme }) => `${theme.gridSizes.m + theme.gridSizes.s}%`};
         z-index: 2;
     `}
 `;
 
-export const Title = styled('h1')<TitleProps>`
+export const Title = styled('h1')<MetaProps>`
     ${props =>
-        props.isBig &&
+        props.atTop &&
         css`
             ${media.tablet`
-                 font-size: 5rem;
+                 transform: scale(3);
             `}
         `};
     ${props =>
-        !props.isBig &&
+        !props.atTop &&
         css`
             ${media.tablet`
-                font-size: 1.75rem;
+                transform: scale(1);
             `}
         `};
     margin: 0 0 1em 0;
-    white-space: nowrap;
+    width: ${({ theme }) => `${theme.gridSizes.m + theme.gridSizes.s - 3}vw`};
     color: ${({ theme }) => theme.palette.white};
+    font-size: 1.35rem;
     font-family: ${({ theme }) => theme.fonts.futura};
-    will-change: font-size;
-    transition: ${({ theme }) => `font-size ${theme.animate.slow}`};
+    will-change: transform;
+    transition: ${({ theme }) => `transform ${theme.animate.slow} 50ms`};
+    transform-origin: top left;
     ${media.tablet`
-        margin: 0;
+        margin-bottom: 0.5em;
     `}
 `;
 
-export const MetaOutterWrapper = styled.div`
+export const MetaOutterWrapper = styled('div')<MetaProps>`
     width: 100%;
+    transition: ${({ theme }) => `transform ${theme.animate.slow} 50ms`};
     ${media.tablet`
         width: ${({ theme }) => `${theme.gridSizes.m}vw`};
     `}
+    ${props =>
+        props.atTop &&
+        css`
+            ${media.tablet`
+                 transform: translate3d(0,5em,0);
+            `}
+        `};
+    ${props =>
+        !props.atTop &&
+        css`
+            ${media.tablet`
+                transform: translate3d(0,0,0);
+            `}
+        `};
 `;
 
 export const Main = styled.main`

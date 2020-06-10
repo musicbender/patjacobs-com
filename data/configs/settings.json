@@ -9,6 +9,6 @@
   "skillsTop": 5540, 
   "mobileBreakpoint": 768,
   "windowHeightConstant": 939,
-  "baseCutainDuration": 1275,
+  "curtainDuration": 1275,
   "scrollDebug": false
 }

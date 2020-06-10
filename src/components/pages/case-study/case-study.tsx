@@ -194,12 +194,12 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
             <CaseStudyPage>
                 {this.props.project && (
                     <InfoWrapper>
-                        <Title isBig={this.state.atTop}>
+                        <Title atTop={this.state.atTop}>
                             {this.props.project.title ||
                                 this.props.project.projectId ||
                                 'Case Study'}
                         </Title>
-                        <MetaOutterWrapper>
+                        <MetaOutterWrapper atTop={this.state.atTop}>
                             <ProjectMeta project={this.props.project} />
                         </MetaOutterWrapper>
                     </InfoWrapper>

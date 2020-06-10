@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { ThemeProvider } from 'styled-components';
-import { TransitionState } from 'gatsby-plugin-transition-link';
 import theme from '../styles/theme';
 import { bindActionCreators, Dispatch, AnyAction } from 'redux';
 import { connect } from 'react-redux';
@@ -122,7 +121,11 @@ export class Layout extends PureComponent<Props & ReduxProps> {
                     <Footer handleToTop={this.handleToTop} />
                     {this.props.transportOpen && (
                         <Modal>
-                            <Curtain entrance="full" exit="full" duration={1275} />
+                            <Curtain
+                                entrance="full"
+                                exit="full"
+                                duration={this.props.configs.settings.curtainDuration}
+                            />
                         </Modal>
                     )}
                 </AppWrapper>
@@ -149,6 +152,7 @@ export default (props: Omit<Props, 'configs'>) => (
                         mobileBreakpoint
                         splashScreenDebug
                         splashScreenTimeout
+                        curtainDuration
                     }
                 }
             }
