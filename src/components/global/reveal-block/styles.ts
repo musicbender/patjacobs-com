@@ -16,7 +16,6 @@ interface WrapperProps {
 
 interface ContentWrapperProps {
     contentType: RevealBlockContentType;
-    gridWidth?: number;
 }
 
 export const RevealBlockWrapper = styled('div')<RevealBlockWrapperProps>`
@@ -75,7 +74,6 @@ export const ContentWrapper = styled('div')<ContentWrapperProps>`
         props.contentType === 'text' &&
         css`
             margin-top: 2em;
-            max-width: ${`${props.gridWidth}vw`};
         `};
 `;
 

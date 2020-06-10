@@ -158,10 +158,17 @@ export const StyledHeading = styled(Heading)`
 
 export const Paragraph = styled.p`
     font-size: 1em;
-    margin: 0 auto 8em !important;
+    margin: 0 auto 4em !important;
+    ${media.tablet`
+        margin: 0 auto 8em !important;
+    `}
 `;
 
 export const StyledUpNext = styled(UpNext)<UpNextProps>`
+    margin-top: 8em;
+    ${media.tablet`
+        margin-top: 0;
+    `}
     ${props =>
         css`
             left: 0;
