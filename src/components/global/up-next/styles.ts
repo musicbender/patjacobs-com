@@ -33,12 +33,13 @@ export const NextText = styled.h6`
 
 export const LinkWrapper = styled.div`
     position: relative;
+    max-width: 59vw;
     padding-bottom: 0.85em;
     overflow: hidden;
 `;
 
 export const StyledLink = styled(TransitionLink)`
-    font-size: 1.75rem;
+    font-size: 2rem;
     color: ${({ theme }) => theme.palette.white};
     text-decoration: none;
     transition: ${({ theme }) => `color ${theme.animate.moderate} ${theme.animate.easeInOut}`};
@@ -46,6 +47,15 @@ export const StyledLink = styled(TransitionLink)`
         color: ${({ theme }) => theme.corePalette.aqua};
     }
     ${media.tablet`
+        font-size: 2rem;
+    `}
+    ${media.desktopM`
+        font-size: 3rem;
+    `}
+    ${media.desktopM`
+        font-size: 4rem;
+    `}
+    ${media.desktopXL`
         font-size: 5rem;
     `}
 `;
