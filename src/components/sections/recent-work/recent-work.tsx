@@ -162,6 +162,7 @@ export default (props: Omit<Props, 'configs'>) => (
                         description
                         projectId
                         externalUrl
+                        linkType
                         imageDesktop {
                             url
                         }

@@ -62,6 +62,18 @@ const WorkItem = ({
     const itemUrl: string = item.externalUrl || `/${item.projectId}`;
     const onClient: boolean = hasWindow();
 
+    const getItemUrl = () => {
+        console.log(item.projectId, item.linkType, item.linkType === 'Case_Study');
+
+        switch (item.linkType) {
+            case 'External':
+                return item.externalUrl;
+            case 'Case_Study':
+                console.log('yay');
+                return `/case-studies/${item.projectId}`;
+        }
+    };
+
     const getPlxData = (seg: ConfigsRecentWorkWorkItemPlxImage) => [
         {
             start: 'self',
@@ -117,7 +129,8 @@ const WorkItem = ({
                                 <StyledWorkItemInfo
                                     title={item.title}
                                     description={item.description}
-                                    buttonUrl={itemUrl}
+                                    buttonUrl={getItemUrl()}
+                                    linkType={item.listType}
                                     isStopped={isStopped}
                                     isMobile={isMobile}
                                     isParallax
@@ -140,7 +153,8 @@ const WorkItem = ({
                 <StyledWorkItemInfo
                     title={item.title}
                     description={item.description}
-                    buttonUrl={itemUrl}
+                    buttonUrl={getItemUrl()}
+                    linkType={item.listType}
                     isStopped={isStopped}
                 />
             </InfoOutterWrapper>

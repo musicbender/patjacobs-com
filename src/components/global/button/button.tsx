@@ -1,6 +1,7 @@
 import React from 'react';
 import { ButtonTypes } from '../../../../types';
 import { InnerWrapper, Line, Text, ButtonA, ButtonLink, ButtonDiv } from './styles';
+const tlConf = require('../../../constants/transition-link.json');
 
 interface Props {
     type?: ButtonTypes;
@@ -35,7 +36,13 @@ const Button = ({
             );
         case !!url:
             return (
-                <ButtonLink type={type} to={url} onClick={callback} className={className}>
+                <ButtonLink
+                    {...tlConf.main}
+                    to={url}
+                    type={type}
+                    onClick={callback}
+                    className={className}
+                >
                     {getInnerContent}
                 </ButtonLink>
             );

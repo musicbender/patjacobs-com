@@ -10,9 +10,9 @@ interface Props {
     };
 }
 const Toolbar = ({ location, handleToTop }: Props) => {
-    const handleLogoClick = (e: Event): void => {
-        e.preventDefault();
+    const handleLogoClick = (): void => {
         if (location.pathname !== '/') return;
+        if (window.scrollY < 100) return;
         handleToTop();
     };
 

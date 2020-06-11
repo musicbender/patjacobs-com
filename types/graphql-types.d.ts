@@ -5942,7 +5942,7 @@ export type Unnamed_11_QueryVariables = {};
 
 
 export type Unnamed_11_Query = { configs: Maybe<{ settings: Maybe<Pick<ConfigsSettings, 'workItemsAmount'>> }>, gcms: { section: Maybe<Pick<Gcms_Section, 'heading'>>, projects: Array<Maybe<(
-      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl'>
+      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl' | 'linkType'>
       & { imageDesktop: Maybe<Pick<Gcms_Asset, 'url'>> }
     )>> } };
 

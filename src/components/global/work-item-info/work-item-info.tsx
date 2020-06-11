@@ -1,5 +1,7 @@
 import React from 'react';
+import { useTriggerTransition } from 'gatsby-plugin-transition-link';
 import { ItemInfoWrapper, Title, Description, StyledButton } from './styles';
+const tlConf = require('../../../constants/transition-link.json');
 
 interface Props {
     title?: string;
@@ -9,6 +11,7 @@ interface Props {
     isMobile?: boolean;
     buttonUrl?: string;
     buttonText?: string;
+    linkType?: string;
     className?: string;
 }
 
@@ -20,17 +23,14 @@ const ItemInfo = ({
     isMobile = false,
     buttonUrl,
     buttonText = 'view project',
+    linkType = 'Case_Study',
     className = '',
 }: Props) => {
-    const handleParentClick = () => {
-        // TODO: change to js routing link when case study pages are built
-        window.href = buttonUrl;
-    };
-
+    const triggerTransition = useTriggerTransition(tlConf);
     return (
         <ItemInfoWrapper
             stopped={isStopped}
-            onClick={isMobile ? handleParentClick : null}
+            onClick={isMobile ? triggerTransition : null}
             className={className}
         >
             <Title>{title}</Title>
@@ -41,7 +41,7 @@ const ItemInfo = ({
                     stopped={isStopped}
                     text={buttonText}
                     url={buttonUrl}
-                    isExternal
+                    isExternal={linkType === 'External'}
                 />
             )}
         </ItemInfoWrapper>

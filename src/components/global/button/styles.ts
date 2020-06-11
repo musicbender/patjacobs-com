@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import rgbHex from 'hex-to-rgba';
-import { Link as GatsbyLink, GatsbyLinkProps } from 'gatsby';
+import TransitionLink from 'gatsby-plugin-transition-link';
 import { media } from '../../../styles/breakpoints';
 import { ButtonTypes, ITheme } from '../../../../types';
 
@@ -27,12 +27,12 @@ const buttonStyles = (props: ButtonProps & { theme: ITheme }) => css`
             width: 75%;
             overflow-x: hidden;
             ${media.tablet`
-      width: 100%;
-    `}
+                width: 100%;
+            `}
             ${media.desktopS`
-      width: 75%;
-    `}
-    &:hover {
+                width: 75%;
+            `}
+             &:hover {
                 ${Text} {
                     cursor: pointer;
                     transform: translate3d(1em, 0, 0);
@@ -66,7 +66,7 @@ export const ButtonA = styled('a')<ButtonProps>`
     ${props => buttonStyles(props)}
 `;
 
-export const ButtonLink = styled(GatsbyLink)<ButtonProps & GatsbyLinkProps<any>>`
+export const ButtonLink = styled(TransitionLink)<ButtonProps>`
     ${props => buttonStyles(props)}
 `;
 
