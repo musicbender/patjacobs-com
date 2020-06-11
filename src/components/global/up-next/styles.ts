@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-import { media } from '../../../styles/breakpoints';
-// import { Link as GatsbyLink } from 'gatsby';
 import TransitionLink from 'gatsby-plugin-transition-link';
+import { media } from '../../../styles/breakpoints';
 
 interface LineProps {
     active?: boolean;

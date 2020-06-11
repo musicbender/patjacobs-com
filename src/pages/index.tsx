@@ -2,7 +2,7 @@ import React from 'react';
 import { TransitionPortal } from 'gatsby-plugin-transition-link';
 import Home from '../components/pages/home';
 import Modal from '../components/global/modal';
-import { Curtain } from '../components/global/curtain/curtain';
+import Curtain from '../components/global/curtain/curtain';
 
 interface IProps {
     location: {

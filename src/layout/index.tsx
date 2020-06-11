@@ -114,7 +114,7 @@ export class Layout extends PureComponent<Props & ReduxProps> {
                     />
                     <OutterWrapper>
                         <GridLines gridLines={this.props.configs.settings.gridLines} />
-                        <Toolbar />
+                        <Toolbar location={this.props.location} handleToTop={this.handleToTop} />
                         {this.props.splashOpen && <SplashScreen />}
                         <InnerWrapper>{this.props.children}</InnerWrapper>
                     </OutterWrapper>

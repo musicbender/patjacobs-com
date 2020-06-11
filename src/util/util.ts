@@ -78,3 +78,5 @@ export const pruneUrl = (url: string): string => {
 
     return output;
 };
+
+export const getPathname = (): string => (hasWindow() ? window.location.pathname : null);
