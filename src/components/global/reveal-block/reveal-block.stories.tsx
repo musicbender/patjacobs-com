@@ -147,12 +147,12 @@ storiesOf('Reveal Block', module)
     ))
     .add('Video from grid 2 to 5', () => (
         <RevealBlockContainer startGrid={2} endGrid={5} contentType={'video'}>
-            <video src={conf.mockVideo} playsinline loop autoPlay />
+            <video src={conf.mockVideo} loop autoPlay />
         </RevealBlockContainer>
     ))
     .add('Video from grid 3 to 6', () => (
         <RevealBlockContainer startGrid={3} endGrid={6} contentType={'video'}>
-            <video src={conf.mockVideo} playsinline loop autoPlay />
+            <video src={conf.mockVideo} loop autoPlay />
         </RevealBlockContainer>
     ))
     .add('Line content type', () => (

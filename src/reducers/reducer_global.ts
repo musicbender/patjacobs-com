@@ -2,7 +2,8 @@ import initialState from '../store/initial-state';
 import { AnyAction } from 'redux';
 import {
     PAGE_LOADED,
-    SPLASH_CHANGED,
+    SPLASH_OPEN_CHANGED,
+    SPLASH_CLOSING_CHANGED,
     MODE_CHANGED,
     TRANSPORT_CHANGED,
     MENU_CHANGED,
@@ -14,7 +15,9 @@ export default function global(state = initialState.global, action: AnyAction) {
     switch (type) {
         case PAGE_LOADED:
             return { ...state, pageLoaded: true };
-        case SPLASH_CHANGED:
+        case SPLASH_CLOSING_CHANGED:
+            return { ...state, splashClosing: payload };
+        case SPLASH_OPEN_CHANGED:
             return { ...state, splashOpen: payload };
         case TRANSPORT_CHANGED:
             return { ...state, transportOpen: payload.open };

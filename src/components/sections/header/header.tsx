@@ -129,6 +129,8 @@ class Header extends PureComponent<Props & ReduxProps, State> {
     }
 
     render() {
+        console.log(this.props.splashOpen);
+
         return (
             <HomeHeader splashOpen={this.props.splashOpen}>
                 <ColorDotRow splashOpen={this.props.splashOpen} />

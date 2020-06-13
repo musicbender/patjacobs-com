@@ -59,17 +59,13 @@ const WorkItem = ({
 
     const baseEnd: number = isMobile ? baseTop - 200 : baseTop;
     const accumulator: number = isMobile ? 250 : 535;
-    const itemUrl: string = item.externalUrl || `/${item.projectId}`;
     const onClient: boolean = hasWindow();
 
     const getItemUrl = () => {
-        console.log(item.projectId, item.linkType, item.linkType === 'Case_Study');
-
         switch (item.linkType) {
             case 'External':
                 return item.externalUrl;
             case 'Case_Study':
-                console.log('yay');
                 return `/case-studies/${item.projectId}`;
         }
     };

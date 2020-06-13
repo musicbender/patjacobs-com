@@ -47,19 +47,20 @@ export const InnerWrapper = styled('div')<ButtonProps>`
     ${props =>
         props.type === 'line' &&
         css`
-     width: 250%;
-     transform: translate3d(-63%, 0, 0);
-     ${Text} {
-        display: inline-block;
-      }
-     ${Line} {
-        display: inline-block;
-        width: 70%;
-        height: 0.075em;
-        background-color: ${rgbHex(props.theme.palette.white, 0.87)}
-        transform: translate3d(0, 0.01em, 0);
-     }
-  `}
+            width: 250%;
+            white-space: nowrap;
+            transform: translate3d(-63%, 0, 0);
+            ${Text} {
+                display: inline-block;
+            }
+            ${Line} {
+                display: inline-block;
+                width: 70%;
+                height: 0.075em;
+                background-color: ${rgbHex(props.theme.palette.white, 0.87)};
+                transform: translate3d(0, 0.01em, 0);
+            }
+        `}
 `;
 
 export const ButtonA = styled('a')<ButtonProps>`

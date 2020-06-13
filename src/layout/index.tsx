@@ -6,7 +6,7 @@ import { bindActionCreators, Dispatch, AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { throttle } from '../util/util';
 import { requestTimeout } from '../util/shims';
-import { changeSplash, changeTransport, setIsMobile } from '../actions/global';
+import { changeSplashOpen, changeTransport, setIsMobile } from '../actions/global';
 import GlobalStyles from '../styles/global-styles';
 import Head from '../components/global/head';
 import GridLines from '../components/global/grid-lines';
@@ -26,7 +26,7 @@ interface ReduxProps {
     skillsTop?: number;
     changeTransport?: any;
     setIsMobile?: any;
-    changeSplash?: any;
+    changeSplashOpen?: any;
     mode?: string;
 }
 
@@ -50,7 +50,7 @@ const mapStateToProps = ({ global, home }: IStore) => ({
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
     return bindActionCreators(
         {
-            changeSplash,
+            changeSplashOpen,
             changeTransport,
             setIsMobile,
         },
@@ -75,7 +75,7 @@ export class Layout extends PureComponent<Props & ReduxProps> {
             : this.props.configs.settings.splashScreenTimeout;
 
         requestTimeout(() => {
-            this.props.changeSplash(false);
+            this.props.changeSplashOpen(false);
         }, splashTimeout);
 
         window.addEventListener('resize', this.handleResize);

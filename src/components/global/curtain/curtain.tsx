@@ -16,6 +16,7 @@ interface Props {
     colorLayout?: keyof typeof ECurtainColorLayouts;
     withLogo?: boolean;
     logoProps?: any;
+    onClosing?: any;
 }
 
 interface QueryProps {
@@ -38,6 +39,7 @@ export class Curtain extends PureComponent<Props & QueryProps, State> {
         colorLayout: 'full',
         withLogo: false,
         logoProps: {},
+        onClosing: () => null,
     };
 
     constructor(props: Props & QueryProps) {
@@ -52,7 +54,7 @@ export class Curtain extends PureComponent<Props & QueryProps, State> {
 
     componentDidMount() {
         this.timeout = requestTimeout(() => {
-            this.setState({ exiting: true });
+            this.setState({ exiting: true }, this.props.onClosing);
         }, this.props.duration);
     }
 

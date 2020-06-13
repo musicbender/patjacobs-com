@@ -1,6 +1,7 @@
 import {
     PAGE_LOADED,
-    SPLASH_CHANGED,
+    SPLASH_CLOSING_CHANGED,
+    SPLASH_OPEN_CHANGED,
     TRANSPORT_CHANGED,
     MENU_CHANGED,
     RECENT_WORK_TOP_SET,
@@ -24,9 +25,16 @@ export function changeTransport(open: boolean, transportDuration?: number): AnyA
     };
 }
 
-export function changeSplash(open: boolean): AnyAction {
+export function changeSplashClosing(closing: boolean): AnyAction {
     return {
-        type: SPLASH_CHANGED,
+        type: SPLASH_CLOSING_CHANGED,
+        payload: closing,
+    };
+}
+
+export function changeSplashOpen(open: boolean): AnyAction {
+    return {
+        type: SPLASH_OPEN_CHANGED,
         payload: open,
     };
 }
