@@ -23,14 +23,14 @@ const buttonStyles = (props: ButtonProps & { theme: ITheme }) => css`
         css`
             position: relative;
             display: inline-block;
-            max-width: 10em;
-            width: 75%;
+            max-width: 12em;
+            width: 80%;
             overflow-x: hidden;
             ${media.tablet`
                 width: 100%;
             `}
             ${media.desktopS`
-                width: 75%;
+                width: 80%;
             `}
              &:hover {
                 ${Text} {

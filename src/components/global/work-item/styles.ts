@@ -109,7 +109,7 @@ export const WorkImage = styled('div')<ImageProps>`
 
 export const ImageFilter = styled.div`
     background-color: ${({ theme }) => theme.corePalette.purple};
-    opacity: 0.15;
+    opacity: 0.1;
 `;
 
 export const ImageCover = styled('div')<ImageCoverProps>`

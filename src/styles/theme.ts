@@ -13,7 +13,7 @@ const theme = {
     },
     corePalette: {
         yellow: '#F9D413',
-        purple: '#5e3ce6',
+        purple: '#9335FC',
         orange: '#F98D51',
         aqua: '#32D2C9',
     },
