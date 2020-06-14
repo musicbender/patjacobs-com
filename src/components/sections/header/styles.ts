@@ -13,11 +13,16 @@ interface HomeHeaderProps {
     splashOpen: boolean;
 }
 
+interface TitleProps {
+    show: boolean;
+}
+
 interface TriangleParallaxProps {
     id: string;
     color: string;
     size: string;
     gridLines: number[];
+    show: boolean;
 }
 
 // styled components
@@ -51,7 +56,7 @@ export const TitleWrapper = styled.div`
   `}
 `;
 
-export const Title = styled.h1`
+export const Title = styled('h1')<TitleProps>`
     margin: 0 0 0.45em -0.08em;
     font-family: ${props => props.theme.fonts.futura};
     font-size: 5.5rem;
@@ -59,24 +64,32 @@ export const Title = styled.h1`
     line-height: 1.1;
     opacity: 0;
     transform: translate3d(0, -1em, 0);
-    animation: ${({ theme }) =>
-        css`${titleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate.headerDelay} forwards`};
+    ${props =>
+        props.show &&
+        css`
+            animation: ${({ theme }) =>
+                css`${titleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate.headerDelay} forwards`};
+        `};
     ${media.tablet`
-    margin-bottom: 0.15em;
-    font-size: 7.5rem;
-    line-height: normal;
-  `}
+        margin-bottom: 0.15em;
+        font-size: 7.5rem;
+        line-height: normal;
+    `}
 `;
 
-export const SubTitle = styled.h2`
+export const SubTitle = styled('h2')<TitleProps>`
     margin: 0;
     font-size: 1.25rem;
     font-weight: normal;
     letter-spacing: 0.67em;
     opacity: 0;
     transform: translate3d(0, 2em, 0);
-    animation: ${({ theme }) =>
-        css`${subtitleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate.headerDelay} forwards`};
+    ${props =>
+        props.show &&
+        css`
+            animation: ${({ theme }) =>
+                css`${subtitleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate.headerDelay} forwards`};
+        `};
     ${media.tablet`
     font-size: 1.5rem;
   `}
@@ -142,6 +155,11 @@ export const TriangleParallax = styled('div')<TriangleParallaxProps>`
           top: 75em;
           animation-delay: calc(${theme.animate.headerDelay} + 2400ms);
       `}
+  ${props =>
+      !props.show &&
+      css`
+          animation: none;
+      `};
 `;
 
 export const StyledLilSquare = styled(LilSquare)`
@@ -158,8 +176,8 @@ export const StyledDotGrid = styled(DotGrid)<DotGridProps>`
     display: none;
     position: absolute;
     ${media.tablet`
-    display: block;
-  `}
+        display: block;
+    `}
 `;
 
 export const DotGridA = styled(StyledDotGrid)`
@@ -171,8 +189,8 @@ export const DotGridB = styled(StyledDotGrid)`
     top: 32em;
     left: 2%;
     ${media.tablet`
-    top: 5em;
-  `}
+        top: 5em;
+    `}
 `;
 
 export const DotGridC = styled(StyledDotGrid)`
@@ -180,8 +198,8 @@ export const DotGridC = styled(StyledDotGrid)`
     left: 170%;
     transform: translateX(-100%);
     ${media.tablet`
-    left: 100%;
-  `}
+        left: 100%;
+    `}
 `;
 
 export const DotGridD = styled(StyledDotGrid)`

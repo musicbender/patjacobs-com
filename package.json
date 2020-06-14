@@ -48,7 +48,6 @@
     "gatsby-source-graphql": "^2.3.0",
     "gatsby-transformer-sharp": "^2.1.17",
     "graphcms-image": "^1.1.0-beta4",
-    "graphql": "^15.1.0",
     "hex-to-rgba": "^2.0.1",
     "immutability-helper": "^3.0.1",
     "polished": "^3.4.4",

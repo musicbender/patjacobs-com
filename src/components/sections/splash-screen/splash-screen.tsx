@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useStaticQuery, graphql } from 'gatsby';
 import Curtain from '../../global/curtain';
@@ -18,11 +18,17 @@ const SplashScreen: React.SFC = () => {
         }
     `);
 
+    useEffect(() => {
+        return () => {
+            dispatch(changeSplashClosing(false));
+        };
+    });
+
     return (
         <SplashScreenWrapper>
             <Curtain
                 duration={data.configs.settings.splashScreenDebug ? 3000000 : splashDuration}
-                onClosing={() => dispatch(changeSplashClosing(true))}
+                onClosing={useCallback(() => dispatch(changeSplashClosing(true)), [dispatch])}
             />
             <LogoOutterWrapper>
                 <StyledLogo color="aqua" debug={data.configs.settings.splashScreenDebug} />

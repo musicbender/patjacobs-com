@@ -2,6 +2,7 @@ export default {
     global: {
         pageLoaded: false,
         splashOpen: true,
+        splashClosing: false,
         transportOpen: false,
         menuOpen: false,
         mode: 'dark',

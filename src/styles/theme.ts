@@ -58,7 +58,7 @@ const theme = {
         moderate: '425ms',
         fast: '250ms',
         headerDuration: '4200ms',
-        headerDelay: '4000ms',
+        headerDelay: '500ms',
         skillsBaseDelay: '500ms',
         skillsRevealDuration: '2000ms',
     },

@@ -35,17 +35,20 @@ interface Props {
 interface ReduxProps {
     pageLoaded: boolean;
     splashOpen: boolean;
+    splashClosing: boolean;
     mode: Modes;
     isMobile: boolean;
 }
 
 interface State {
     dotGridIndex: number;
+    sequenceStarted: boolean;
 }
 
 const mapStateToProps = ({ global }) => ({
     pageLoaded: global.pageLoaded,
     splashOpen: global.splashOpen,
+    splashClosing: global.splashClosing,
     mode: global.mode,
     isMobile: global.isMobile,
 });
@@ -58,13 +61,25 @@ class Header extends PureComponent<Props & ReduxProps, State> {
         super(props);
         this.handleSequence = this.handleSequence.bind(this);
         this.interval = 180;
-        this.delay = 4000;
+        this.delay = 500;
         this.state = {
             dotGridIndex: 0,
+            sequenceStarted: false,
         };
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
+        if (!this.state.sequenceStarted && (this.props.splashClosing || !this.props.splashOpen)) {
+            this.setState({ sequenceStarted: true }, this.initSequence);
+        }
+    }
+
+    handleSequence(index: number): void {
+        const newState = { dotGridIndex: index || 0 };
+        this.setState(newState);
+    }
+
+    initSequence = () => {
         const dotGridLength: number | boolean = countLongestArray([
             dotGridA,
             dotGridB,
@@ -81,12 +96,7 @@ class Header extends PureComponent<Props & ReduxProps, State> {
             },
             this.handleSequence
         );
-    }
-
-    handleSequence(index: number): void {
-        const newState = { dotGridIndex: index || 0 };
-        this.setState(newState);
-    }
+    };
 
     getPlxData({ plx, start, end }: ConfigsHeaderTriangles) {
         return [
@@ -105,13 +115,14 @@ class Header extends PureComponent<Props & ReduxProps, State> {
         ];
     }
 
-    renderTriangles() {
+    renderTriangles(show: boolean) {
         const { triangles } = this.props.configs.header;
         return triangles.map((tri, i: number) => (
             <TriangleParallax
                 color={tri.color}
                 size={tri.size}
                 id={tri.id}
+                show={show}
                 gridLines={this.props.configs.settings.gridLines}
                 key={i + tri.id}
             >
@@ -130,12 +141,12 @@ class Header extends PureComponent<Props & ReduxProps, State> {
 
     render() {
         console.log(this.props.splashOpen);
-
+        const show: boolean = this.props.splashClosing || !this.props.splashOpen;
         return (
             <HomeHeader splashOpen={this.props.splashOpen}>
                 <ColorDotRow splashOpen={this.props.splashOpen} />
                 <StyledLilSquare />
-                {this.renderTriangles()}
+                {this.renderTriangles(show)}
                 <DotGridWrapper>
                     <DotGridA sequence={dotGridA} index={this.state.dotGridIndex} />
                     <DotGridB sequence={dotGridB} index={this.state.dotGridIndex} />
@@ -143,8 +154,8 @@ class Header extends PureComponent<Props & ReduxProps, State> {
                     <DotGridD sequence={dotGridD} index={this.state.dotGridIndex} />
                 </DotGridWrapper>
                 <TitleWrapper>
-                    <Title>{this.props.configs.meta.name}</Title>
-                    <SubTitle>{this.props.configs.meta.role}</SubTitle>
+                    <Title show={show}>{this.props.configs.meta.name}</Title>
+                    <SubTitle show={show}>{this.props.configs.meta.role}</SubTitle>
                     <ColorDotRow splashOpen={this.props.splashOpen} forMobile />
                 </TitleWrapper>
             </HomeHeader>
