@@ -52,6 +52,8 @@ export const InnerWrapper = styled('div')<ButtonProps>`
             transform: translate3d(-63%, 0, 0);
             ${Text} {
                 display: inline-block;
+                text-transform: uppercase;
+                font-weight: bold;
             }
             ${Line} {
                 display: inline-block;

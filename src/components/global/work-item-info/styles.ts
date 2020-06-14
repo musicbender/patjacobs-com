@@ -18,7 +18,7 @@ export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
   background-color: ${props => props.theme.palette.darkBlack};
   border-width: 0.6em;
   border-style: solid;
-  padding: 1em;
+  padding: 2.25em 1.75em 0.2em;
   transition: ${({ theme }) => `border-color ${theme.animate.fast} ${theme.animate.easeInOut},
     color ${theme.animate.fast} ${theme.animate.easeInOut}`};
   ${media.tablet`
@@ -56,6 +56,7 @@ export const Description = styled.p`
     margin: 0 0 1.5em;
     font-family: ${props => props.theme.fonts.inconsolata};
     font-size: 1rem;
+    line-height: 1.75;
     color: inherit;
     opacity: 0.6;
 `;

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 import WorkItemInfo from '../work-item-info';
 import { media } from '../../../styles/breakpoints';
 
@@ -25,9 +26,9 @@ export const WorkItemWrapper = styled('div')<WorkItemWrapperProps>`
     margin-bottom: 0;
     height: 15em;
     ${media.tablet`
-    height: 23.5em;
-    margin-bottom: 10em;
-  `}
+        height: 23.5em;
+        margin-bottom: 10em;
+    `}
 `;
 
 export const ImageOutterWrapper = styled('div')<ParallaxProps>`
@@ -36,8 +37,8 @@ export const ImageOutterWrapper = styled('div')<ParallaxProps>`
     width: 59.52%;
     height: 100%;
     ${media.tablet`
-    display: block;
-  `}
+        display: block;
+    `}
     > .parallax {
         position: absolute;
         height: 100%;
@@ -112,8 +113,8 @@ export const ImageFilter = styled.div`
 `;
 
 export const ImageCover = styled('div')<ImageCoverProps>`
-    background-color: ${({ theme }) => theme.palette.darkGrey};
-    opacity: 0.93;
+    background-color: ${({ theme }) => shade(0.6, theme.corePalette.purple)};
+    opacity: 0.53;
     transform: translate3d(0, 0, 0);
     transition: ${props => `transform 350ms ${props.theme.animate.easeIn}`};
     ${props =>
@@ -157,9 +158,9 @@ export const InfoOutterWrapper = styled('div')<ParallaxProps>`
     width: 100%;
     height: 100%;
     ${media.tablet`
-    top: 6em;
-    width: 59.52%;
-  `}
+        top: 6em;
+        width: 59.52%;
+    `}
     > .parallax {
         position: absolute;
         ${StyledWorkItemInfo} {
