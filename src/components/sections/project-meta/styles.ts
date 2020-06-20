@@ -29,6 +29,7 @@ export const ContentWrapper = styled('div')<ContentProps>`
 `;
 
 const content = css`
+    display: inline-block;
     margin: 0.2em 0;
     font-weight: 200;
     font-size: 0.9rem;
@@ -41,15 +42,25 @@ const content = css`
 
 export const Label = styled.p`
     ${content}
+    display: block;
     color: ${({ theme }) => theme.palette.white};
 `;
 
-export const ContentValue = styled('p')<ContentProps>`
+export const ContentValue = styled.p`
     ${content}
     color: inherit;
+    &:nth-child(3) {
+        margin-left: 0.75em;
+        ${media.tablet`
+                display: none;
+            `}
+        ${media.desktopM`
+                display: inline-block;
+            `}
+    }
 `;
 
-export const ContentValueLink = styled('a')<ContentProps>`
+export const ContentValueLink = styled.a`
     ${content}
     color: inherit;
     text-decoration: none;

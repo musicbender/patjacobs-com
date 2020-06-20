@@ -25,8 +25,8 @@ export const FooterWrapper = styled.div`
 export const StyledSocial = styled(Social)`
     width: 50%;
     ${media.tablet`
-    width: 75%;
-  `}
+      width: 75%;
+    `}
 `;
 
 export const TriangleWrapper = styled.div`
@@ -34,7 +34,7 @@ export const TriangleWrapper = styled.div`
     margin-right: 2.5em;
     float: right;
     transition: ${({ theme }) => `transform ${theme.animate.fast} ${theme.animate.easeInOut}`};
-    @media (max-width: ${sizes.tablet}) {
+    ${`@media screen and (max-width: ${sizes.tablet - 1}px)`} {
         margin-top: 4em;
     }
     @media (hover: hover) {

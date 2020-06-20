@@ -22,7 +22,7 @@ export const RevealBlockWrapper = styled('div')<RevealBlockWrapperProps>`
     width: ${props => `${props.gridWidth || 0}vw`};
     margin-left: ${props => `${props.position || 0}%;`};
     overflow: hidden;
-    ${`@media screen and (max-width: ${sizes.tablet}px)`} {
+    ${`@media screen and (max-width: ${sizes.tablet - 1}px)`} {
         ${props =>
             props.mobileIgnoreGrid &&
             css`
@@ -37,7 +37,7 @@ const Wrapper = styled('div')<WrapperProps>`
     visibility: hidden;
     transition: ${({ delay, theme }) =>
         `transform ${theme.animate.superSlow} ${theme.animate.superEaseOut} ${delay}ms, visibility ${theme.animate.superSlow} ${theme.animate.superEaseOut} ${delay}ms;`};
-    ${`@media screen and (max-width: ${sizes.tablet}px)`} {
+    ${`@media screen and (max-width: ${sizes.tablet - 1}px)`} {
         ${props =>
             props.disableMobile &&
             css`

@@ -39,9 +39,13 @@ export const InfoWrapper = styled.div`
     ${media.tablet`
         position: fixed;
         top: 7em;
+        left: ${({ theme }) => `${theme.gridSizes.s - 3}%`};
+        width: ${({ theme }) => `${theme.gridSizes.m + theme.gridSizes.s + 3}%`};
+        z-index: 2;
+    `}
+    ${media.desktopS`
         left: ${({ theme }) => `${theme.gridSizes.s}%`};
         width: ${({ theme }) => `${theme.gridSizes.m + theme.gridSizes.s}%`};
-        z-index: 2;
     `}
 `;
 

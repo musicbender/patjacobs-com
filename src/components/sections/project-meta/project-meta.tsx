@@ -1,4 +1,6 @@
 import React from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
+import { format, parseISO } from 'date-fns';
 import {
     ProjectMetaWrapper,
     ContentWrapper,
@@ -10,7 +12,6 @@ import {
     Icon,
 } from './styles';
 import { Gcms_Project } from '../../../../types';
-import { useStaticQuery, graphql } from 'gatsby';
 import { pruneUrl } from '../../../util/util';
 
 interface Props {
@@ -42,10 +43,6 @@ const ProjectMeta = ({ project }: Props) => {
         </IconWrapper>
     );
 
-    const hasIcons = () => {
-        return !!project.githubRepoUrl || !!project.storybookUrl;
-    };
-
     const getStorybookIcon = (url: string) => (
         <IconWrapper href={url} target="_blank">
             <Icon role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -55,13 +52,20 @@ const ProjectMeta = ({ project }: Props) => {
         </IconWrapper>
     );
 
+    const hasIcons = () => {
+        return !!project.githubRepoUrl || !!project.storybookUrl;
+    };
+
+    const publishDate: Date = parseISO(project.projectPublishDate);
+
     return (
         project && (
             <ProjectMetaWrapper>
                 {project.projectPublishDate && (
                     <ContentWrapper color="aqua">
                         <Label>{content.datePublished}</Label>
-                        <ContentValue>{project.projectPublishDate}</ContentValue>
+                        <ContentValue>{format(publishDate, 'P')}</ContentValue>
+                        <ContentValue>{format(publishDate, 'p')}</ContentValue>
                     </ContentWrapper>
                 )}
                 {project.externalUrl && (
