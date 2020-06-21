@@ -68,15 +68,22 @@ class Header extends PureComponent<Props & ReduxProps, State> {
         };
     }
 
-    componentDidUpdate() {
-        if (!this.state.sequenceStarted && (this.props.splashClosing || !this.props.splashOpen)) {
+    componentDidMount() {
+        console.log('mount', this.props);
+
+        if (!this.state.sequenceStarted && !this.props.splashClosing && !this.props.splashOpen) {
             this.setState({ sequenceStarted: true }, this.initSequence);
         }
     }
 
-    handleSequence(index: number): void {
-        const newState = { dotGridIndex: index || 0 };
-        this.setState(newState);
+    componentDidUpdate() {
+        if (!this.state.sequenceStarted && this.props.splashClosing && this.props.splashOpen) {
+            this.setState({ sequenceStarted: true }, this.initSequence);
+        }
+    }
+
+    handleSequence(index = 0): void {
+        this.setState({ dotGridIndex: index });
     }
 
     initSequence = () => {
@@ -140,7 +147,7 @@ class Header extends PureComponent<Props & ReduxProps, State> {
     }
 
     render() {
-        console.log(this.props.splashOpen);
+        console.log('home state:', this.state.sequenceStarted, this.state.dotGridIndex);
         const show: boolean = this.props.splashClosing || !this.props.splashOpen;
         return (
             <HomeHeader splashOpen={this.props.splashOpen}>
