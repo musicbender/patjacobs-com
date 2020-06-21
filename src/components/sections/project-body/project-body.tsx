@@ -37,7 +37,7 @@ const projectBody = ({ body, getRevealProps }: Props) => {
                 </RevealBlock>
                 {item.text && item.text[0] && item.text[0].leaf && (
                     <RevealBlock {...getRevealProps(key, 'text')} key={key + '-caption'}>
-                        <Caption>[{item.text[0].leaf}]</Caption>
+                        <Caption>[ {item.text[0].leaf} ]</Caption>
                     </RevealBlock>
                 )}
             </React.Fragment>
@@ -54,7 +54,7 @@ const projectBody = ({ body, getRevealProps }: Props) => {
                 </RevealBlock>
                 {item.text && item.text[0] && item.text[0].leaf && (
                     <RevealBlock {...getRevealProps(key, 'text')} key={key + '-caption'}>
-                        <Caption>[{item.text[0].leaf}]</Caption>
+                        <Caption>[ {item.text[0].leaf} ]</Caption>
                     </RevealBlock>
                 )}
             </React.Fragment>

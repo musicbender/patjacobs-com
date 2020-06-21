@@ -12,12 +12,9 @@ import {
     InfoWrapper,
     Title,
     MetaOutterWrapper,
-    ScrollLineWrapper,
-    ScrollLineRevealBlock,
     Main,
     Top,
     Middle,
-    ScrollLine,
     Section,
     StyledHeading,
     Paragraph,
@@ -33,6 +30,7 @@ import {
     SitePageContextProjectBody,
     RevealedElementsState,
 } from '../../../../types';
+import ScrollLine from '../../global/scroll-line';
 
 interface Props {
     project: Gcms_Project;
@@ -190,6 +188,8 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
     }
 
     render() {
+        const active: boolean =
+            this.state.atTop && !this.props.splashOpen && !this.props.transportOpen;
         return (
             <CaseStudyPage>
                 {this.props.project && (
@@ -207,19 +207,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                 {this.props.project && (
                     <Main>
                         <Top>
-                            <ScrollLineWrapper atTop={this.state.atTop}>
-                                <ScrollLineRevealBlock
-                                    contentType="line"
-                                    active={
-                                        this.state.atTop &&
-                                        !this.props.splashOpen &&
-                                        !this.props.transportOpen
-                                    }
-                                    endGrid={3}
-                                >
-                                    <ScrollLine />
-                                </ScrollLineRevealBlock>
-                            </ScrollLineWrapper>
+                            <ScrollLine atTop={this.state.atTop} active={active} />
                         </Top>
                         <Middle>
                             {this.props.project.overview && this.renderOverview()}

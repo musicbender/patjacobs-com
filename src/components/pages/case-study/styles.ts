@@ -1,7 +1,6 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { media } from '../../../styles/breakpoints';
-import RevealBlock from '../../global/reveal-block';
-import { superCenter, gridPosition } from '../../../styles/utils/global';
+import { gridPosition } from '../../../styles/utils/global';
 import Heading from '../../global/heading';
 import UpNext from '../../global/up-next';
 
@@ -10,20 +9,9 @@ interface MetaProps {
     atTop?: boolean;
 }
 
-interface ScrollLineWrapperProps {
-    atTop?: boolean;
-}
-
 interface UpNextProps {
     gridLines: number[];
 }
-
-// keyframes
-const scrollLineLoop = keyframes`
-    0%, 80% { transform: translate(-50%, 0); }
-    90% { transform: translate(-50%, 2em); }
-    100% { transform: translate(-50%, 0); }
-`;
 
 // styled components
 export const CaseStudyPage = styled.div`
@@ -118,32 +106,6 @@ export const Top = styled.div`
 `;
 
 export const Middle = styled.div``;
-
-export const ScrollLineWrapper = styled('div')<ScrollLineWrapperProps>`
-    ${superCenter('50%', 'auto', '-50%', '0')}
-    bottom: 2em;
-    height: 20em;
-    width: 5em;
-    overflow: hidden;
-    animation: none;
-    ${props =>
-        props.atTop &&
-        css`
-            animation: ${css`
-                ${scrollLineLoop} 3000ms infinite
-            `};
-        `};
-`;
-
-export const ScrollLineRevealBlock = styled(RevealBlock)`
-    transform: rotate(90deg);
-    transform-origin: 2.5% 1.8em;
-`;
-
-export const ScrollLine = styled.div`
-    height: 3px;
-    background-color: ${({ theme }) => theme.palette.white};
-`;
 
 export const Section = styled.div`
     margin: 3em auto;
