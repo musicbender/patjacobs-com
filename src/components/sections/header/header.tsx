@@ -69,8 +69,6 @@ class Header extends PureComponent<Props & ReduxProps, State> {
     }
 
     componentDidMount() {
-        console.log('mount', this.props);
-
         if (!this.state.sequenceStarted && !this.props.splashClosing && !this.props.splashOpen) {
             this.setState({ sequenceStarted: true }, this.initSequence);
         }
@@ -147,11 +145,10 @@ class Header extends PureComponent<Props & ReduxProps, State> {
     }
 
     render() {
-        console.log('home state:', this.state.sequenceStarted, this.state.dotGridIndex);
         const show: boolean = this.props.splashClosing || !this.props.splashOpen;
         return (
             <HomeHeader splashOpen={this.props.splashOpen}>
-                <ColorDotRow splashOpen={this.props.splashOpen} />
+                <ColorDotRow active={this.props.splashClosing} />
                 <StyledLilSquare />
                 {this.renderTriangles(show)}
                 <DotGridWrapper>
@@ -163,7 +160,7 @@ class Header extends PureComponent<Props & ReduxProps, State> {
                 <TitleWrapper>
                     <Title show={show}>{this.props.configs.meta.name}</Title>
                     <SubTitle show={show}>{this.props.configs.meta.role}</SubTitle>
-                    <ColorDotRow splashOpen={this.props.splashOpen} forMobile />
+                    <ColorDotRow active={this.props.splashClosing} forMobile />
                 </TitleWrapper>
             </HomeHeader>
         );

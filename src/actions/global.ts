@@ -1,13 +1,14 @@
 import {
     PAGE_LOADED,
-    SPLASH_CLOSING_CHANGED,
-    SPLASH_OPEN_CHANGED,
+    CURTAIN_STATE_CHANGED,
+    SPLASH_CHANGED,
     TRANSPORT_CHANGED,
     MENU_CHANGED,
     RECENT_WORK_TOP_SET,
     IS_MOBILE_SET,
 } from '../constants/constants';
 import { AnyAction } from 'redux';
+import { CurtainState } from '../../types';
 
 export function loadPage() {
     return {
@@ -25,17 +26,17 @@ export function changeTransport(open: boolean, transportDuration?: number): AnyA
     };
 }
 
-export function changeSplashClosing(closing: boolean): AnyAction {
+export function changeSplashOpen(open: boolean): AnyAction {
     return {
-        type: SPLASH_CLOSING_CHANGED,
-        payload: closing,
+        type: SPLASH_CHANGED,
+        payload: open,
     };
 }
 
-export function changeSplashOpen(open: boolean): AnyAction {
+export function changeCurtainState(curtainState: CurtainState = 'closed'): AnyAction {
     return {
-        type: SPLASH_OPEN_CHANGED,
-        payload: open,
+        type: CURTAIN_STATE_CHANGED,
+        payload: curtainState,
     };
 }
 

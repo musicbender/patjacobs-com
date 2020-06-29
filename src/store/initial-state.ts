@@ -1,8 +1,8 @@
 export default {
     global: {
         pageLoaded: false,
+        curtainState: 'closed',
         splashOpen: true,
-        splashClosing: false,
         transportOpen: false,
         menuOpen: false,
         mode: 'dark',

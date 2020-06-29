@@ -2,9 +2,9 @@ import initialState from '../store/initial-state';
 import { AnyAction } from 'redux';
 import {
     PAGE_LOADED,
-    SPLASH_OPEN_CHANGED,
-    SPLASH_CLOSING_CHANGED,
+    CURTAIN_STATE_CHANGED,
     MODE_CHANGED,
+    SPLASH_CHANGED,
     TRANSPORT_CHANGED,
     MENU_CHANGED,
     IS_MOBILE_SET,
@@ -15,9 +15,9 @@ export default function global(state = initialState.global, action: AnyAction) {
     switch (type) {
         case PAGE_LOADED:
             return { ...state, pageLoaded: true };
-        case SPLASH_CLOSING_CHANGED:
-            return { ...state, splashClosing: payload };
-        case SPLASH_OPEN_CHANGED:
+        case CURTAIN_STATE_CHANGED:
+            return { ...state, curtainState: payload };
+        case SPLASH_CHANGED:
             return { ...state, splashOpen: payload };
         case TRANSPORT_CHANGED:
             return { ...state, transportOpen: payload.open };

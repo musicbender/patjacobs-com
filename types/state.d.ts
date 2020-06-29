@@ -2,6 +2,7 @@
 export interface IStore {
     global: {
         pageLoaded: boolean;
+        curtainState: CurtainState;
         splashOpen: boolean;
         transportOpen: boolean;
         menuOpen: boolean;
@@ -14,6 +15,8 @@ export interface IStore {
         skillsTop: number;
     };
 }
+
+export type CurtainState = 'opening' | 'open' | 'closing' | 'closed';
 
 export interface IHomeActionPayload {
     didResize?: boolean;

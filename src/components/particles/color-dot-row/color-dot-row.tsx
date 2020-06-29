@@ -5,27 +5,36 @@ import { requestTimeout } from '../../../util/shims';
 
 interface Props {
     forMobile?: boolean;
-    splashOpen: boolean;
+    active?: boolean;
 }
 
-const ColorDots = ({ forMobile = false }: Props) => {
-    const [mounted, setMounted] = useState(false);
+const ColorDots = ({ forMobile = false, active = false }: Props) => {
     const [entering, setEntering] = useState(false);
     const [finishedEntering, setFinishedEntering] = useState(false);
     const dots: CoreColors[] = ['yellow', 'purple', 'orange', 'aqua'];
 
     useEffect(() => {
-        if (!entering && !mounted) {
-            setMounted(true);
+        console.log('update', active, entering);
+        if (active && !entering) {
+            console.log('boom');
 
             requestTimeout(() => {
                 setEntering(true);
-            }, 4000);
+            }, 1000);
 
             requestTimeout(() => {
                 setFinishedEntering(true);
-            }, 7000);
+            }, 14000);
         }
+    });
+
+    useEffect(() => {
+        return () => {
+            console.log('unmounting');
+
+            setEntering(false);
+            setFinishedEntering(false);
+        };
     }, []);
 
     const mapDots = () => {

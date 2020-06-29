@@ -1,5 +1,4 @@
 import styled, { css, keyframes } from 'styled-components';
-import { getBlockAnimation } from '../../../styles/utils/animate';
 import { ECurtainTransition } from '../../../../types/global';
 
 // types
@@ -8,6 +7,7 @@ interface InnerBlockProps {
     enterType?: string;
     exitType?: string;
     delay?: string;
+    duration?: string;
 }
 
 // keyframes
@@ -55,16 +55,21 @@ export const InnerBlock = styled('div')<InnerBlockProps>`
   background-color: ${props => props.theme.palette.matteBlack};
   transform: translate3d(-5%, 0, 0);
   animation-delay: 0ms;
+  animation-fill-mode: forwards;
+  animation-duration: ${props => props.duration || props.theme.animate.slow};
   ${props => props.transition === 'enter' && 'transform: translate3d(110%, 0, 0);'}
   ${props => props.transition === 'exit' && 'transform: translate3d(0, 0, 0);'}
-  ${props => css`
-      ${getBlockAnimation({
-          enterFrames: splashBlockEnter,
-          exitFrames: splashBlockExit,
-          transition: props.transition,
-          enterType: props.enterType,
-          exitType: props.exitType,
-      })}
-  `}
+  ${props =>
+      props.transition === 'enter' &&
+      css`
+          animation-name: ${splashBlockEnter};
+          animation-timing-function: ${props.enterType === 'full' ? 'ease-in-out' : 'ease-in'};
+      `}
+  ${props =>
+      props.transition === 'exit' &&
+      css`
+          animation-name: ${splashBlockExit};
+          animation-timing-function: ${props.exitType === 'full' ? 'ease-in-out' : 'ease-in'};
+      `}
   ${props => props.delay && `animation-delay: ${props.delay};`}
 `;
