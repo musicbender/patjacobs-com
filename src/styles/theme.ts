@@ -54,6 +54,7 @@ const theme = {
         logoIn: 'cubic-bezier(0.460, 0.000, 0.535, 1.000)',
         logoOut: 'cubic-bezier(0.155, 0.425, 0.000, 0.900)',
         superSlow: '1500ms',
+        verySlow: '1000ms',
         slow: '750ms',
         moderate: '425ms',
         fast: '250ms',

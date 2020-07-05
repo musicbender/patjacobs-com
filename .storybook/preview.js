@@ -10,6 +10,8 @@ import theme from '../src/styles/theme';
 import '../static/fonts/fonts.css';
 import { OutterWrapper, InnerWrapper } from './styles';
 import settings from '../data/configs/settings.json';
+import { Provider } from 'react-redux';
+import store from '../src/store';
 
 addParameters({
   options: {
@@ -34,6 +36,7 @@ window.___navigate = pathname => {
 }
 
 addDecorator(story => (
+  <Provider store={store}>
     <ThemeProvider theme={theme}>
       <AppWrapper mode="dark">
         <GlobalStyle />
@@ -45,4 +48,5 @@ addDecorator(story => (
         </OutterWrapper>
       </AppWrapper>
     </ThemeProvider>
+  </Provider>
 ));

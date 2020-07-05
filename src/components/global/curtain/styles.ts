@@ -63,13 +63,13 @@ export const InnerBlock = styled('div')<InnerBlockProps>`
       props.transition === 'enter' &&
       css`
           animation-name: ${splashBlockEnter};
-          animation-timing-function: ${props.enterType === 'full' ? 'ease-in-out' : 'ease-in'};
+          animation-timing-function: ${props.enterType === 'full' ? 'ease-in-out' : 'linear'};
       `}
   ${props =>
       props.transition === 'exit' &&
       css`
           animation-name: ${splashBlockExit};
-          animation-timing-function: ${props.exitType === 'full' ? 'ease-in-out' : 'ease-in'};
+          animation-timing-function: ${props.exitType === 'full' ? 'ease-in-out' : 'linear'};
       `}
   ${props => props.delay && `animation-delay: ${props.delay};`}
 `;

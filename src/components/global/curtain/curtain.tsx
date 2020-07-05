@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeCurtainState } from '../../../actions/global';
 import { clearRequestTimeout, requestTimeout } from '../../../util/shims';
 import { CurtainWrapper, Block, InnerBlock } from './styles';
@@ -18,8 +18,9 @@ const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props)
     const blockNum = 7;
     const baseDelay = 55;
     let openingDuration = 0;
-    let closingTimeout;
     let openTimeout;
+    let closingTimeout;
+    let closedTimeout;
 
     const [exiting, setExiting] = useState(false);
     const dispatch = useDispatch();
@@ -52,10 +53,15 @@ const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props)
             dispatch(changeCurtainState('closing'));
         }, duration);
 
+        closedTimeout = requestTimeout(() => {
+            dispatch(changeCurtainState('closed'));
+        }, duration + 2000);
+
         return () => {
             dispatch(changeCurtainState('closed'));
             clearRequestTimeout(openTimeout);
             clearRequestTimeout(closingTimeout);
+            clearRequestTimeout(closedTimeout);
         };
     }, []);
 
@@ -76,14 +82,14 @@ const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props)
         }
     };
 
-    const getBlockDuration = () => {
-        let blockDuration: number = +theme.animate.slow;
+    const getBlockDuration = (): string => {
+        let blockDuration: string = theme.animate.verySlow;
 
         if ((exiting && exit === 'full') || (!exiting && entrance === 'full')) {
-            blockDuration = 1000;
+            blockDuration = 1000 + 'ms';
         }
 
-        return blockDuration + 'ms';
+        return blockDuration;
     };
 
     const getTransitionState = (): keyof typeof ECurtainTransition | null => {
