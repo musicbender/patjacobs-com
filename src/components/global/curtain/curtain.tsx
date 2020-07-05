@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeCurtainState } from '../../../actions/global';
 import { clearRequestTimeout, requestTimeout } from '../../../util/shims';
 import { CurtainWrapper, Block, InnerBlock } from './styles';
-import { ECurtainTypes, ECurtainTransition, ConfigsSettings } from '../../../../types';
+import { ECurtainTypes, ECurtainTransition, ConfigsSettings, IStore } from '../../../../types';
 import theme from '../../../styles/theme';
 
 interface Props {
@@ -23,6 +23,7 @@ const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props)
     let closedTimeout;
 
     const [exiting, setExiting] = useState(false);
+    const curtainState: string = useSelector((state: IStore) => state.global.curtainState);
     const dispatch = useDispatch();
     const { settings } = useStaticQuery(graphql`
         query {
@@ -55,10 +56,10 @@ const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props)
 
         closedTimeout = requestTimeout(() => {
             dispatch(changeCurtainState('closed'));
-        }, duration + 2000);
+        }, duration * 2);
 
         return () => {
-            dispatch(changeCurtainState('closed'));
+            if (curtainState !== 'closed') dispatch(changeCurtainState('closed'));
             clearRequestTimeout(openTimeout);
             clearRequestTimeout(closingTimeout);
             clearRequestTimeout(closedTimeout);

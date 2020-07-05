@@ -1,15 +1,11 @@
 import { hasWindow } from './util';
 import { requestTimeout, requestInterval, clearRequestInterval } from './shims';
 import { StartSequenceOptions } from '../../types/global';
+import { CurtainState } from '../../types';
 
 export const startSequence = (options: StartSequenceOptions, func: any): void => {
-    if (!options.length && options.length < 1) {
-        return;
-    }
-
-    if (!hasWindow()) {
-        return;
-    }
+    if (!options.length && options.length < 1) return;
+    if (!hasWindow()) return;
 
     const conf = {
         length: options.length || 0,
@@ -29,4 +25,8 @@ export const startSequence = (options: StartSequenceOptions, func: any): void =>
             }
         }, conf.interval);
     }, conf.delay);
+};
+
+export const curtainInClose = (curtainState: CurtainState): boolean => {
+    return curtainState === 'closing' || curtainState === 'closed';
 };

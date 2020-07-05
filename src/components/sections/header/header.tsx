@@ -6,13 +6,14 @@ import ColorDotRow from '../../particles/color-dot-row';
 import Triangle from '../../particles/triangle';
 import { dotGridA, dotGridB, dotGridC, dotGridD } from './dots';
 import { countLongestArray, hasWindow } from '../../../util/util';
-import { startSequence } from '../../../util/animation';
+import { startSequence, curtainInClose } from '../../../util/animation';
 import {
     Modes,
     TriangleSizes,
     ParticleColors,
     Configs,
     ConfigsHeaderTriangles,
+    CurtainState,
 } from '../../../../types';
 import {
     HomeHeader,
@@ -35,7 +36,7 @@ interface Props {
 interface ReduxProps {
     pageLoaded: boolean;
     splashOpen: boolean;
-    splashClosing: boolean;
+    curtainState: CurtainState;
     mode: Modes;
     isMobile: boolean;
 }
@@ -43,12 +44,13 @@ interface ReduxProps {
 interface State {
     dotGridIndex: number;
     sequenceStarted: boolean;
+    active: boolean;
 }
 
 const mapStateToProps = ({ global }) => ({
     pageLoaded: global.pageLoaded,
     splashOpen: global.splashOpen,
-    splashClosing: global.splashClosing,
+    curtainState: global.curtainState,
     mode: global.mode,
     isMobile: global.isMobile,
 });
@@ -65,18 +67,30 @@ class Header extends PureComponent<Props & ReduxProps, State> {
         this.state = {
             dotGridIndex: 0,
             sequenceStarted: false,
+            active: false,
         };
     }
 
     componentDidMount() {
-        if (!this.state.sequenceStarted && !this.props.splashClosing && !this.props.splashOpen) {
-            this.setState({ sequenceStarted: true }, this.initSequence);
-        }
+        // if (!this.state.sequenceStarted && curtainInClose(this.props.curtainState)) {
+        //     this.setState({ sequenceStarted: true }, this.initSequence);
+        // }
     }
 
-    componentDidUpdate() {
-        if (!this.state.sequenceStarted && this.props.splashClosing && this.props.splashOpen) {
-            this.setState({ sequenceStarted: true }, this.initSequence);
+    componentDidUpdate(prevProps: Props & ReduxProps, prevState: State) {
+        if (!this.state.active && prevProps.curtainState !== this.props.curtainState) {
+            if (
+                !curtainInClose(prevProps.curtainState) &&
+                curtainInClose(this.props.curtainState)
+            ) {
+                this.setState({ active: true });
+            }
+        }
+
+        if (!this.state.sequenceStarted) {
+            if (!prevState.active && this.state.active) {
+                this.setState({ sequenceStarted: true }, this.initSequence);
+            }
         }
     }
 
@@ -145,12 +159,11 @@ class Header extends PureComponent<Props & ReduxProps, State> {
     }
 
     render() {
-        const show: boolean = this.props.splashClosing || !this.props.splashOpen;
         return (
             <HomeHeader splashOpen={this.props.splashOpen}>
-                <ColorDotRow active={this.props.splashClosing} />
+                <ColorDotRow active={this.state.active} />
                 <StyledLilSquare />
-                {this.renderTriangles(show)}
+                {this.renderTriangles(this.state.active)}
                 <DotGridWrapper>
                     <DotGridA sequence={dotGridA} index={this.state.dotGridIndex} />
                     <DotGridB sequence={dotGridB} index={this.state.dotGridIndex} />
@@ -158,9 +171,9 @@ class Header extends PureComponent<Props & ReduxProps, State> {
                     <DotGridD sequence={dotGridD} index={this.state.dotGridIndex} />
                 </DotGridWrapper>
                 <TitleWrapper>
-                    <Title show={show}>{this.props.configs.meta.name}</Title>
-                    <SubTitle show={show}>{this.props.configs.meta.role}</SubTitle>
-                    <ColorDotRow active={this.props.splashClosing} forMobile />
+                    <Title show={this.state.active}>{this.props.configs.meta.name}</Title>
+                    <SubTitle show={this.state.active}>{this.props.configs.meta.role}</SubTitle>
+                    <ColorDotRow active={this.state.active} forMobile />
                 </TitleWrapper>
             </HomeHeader>
         );
