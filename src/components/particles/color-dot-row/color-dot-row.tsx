@@ -14,10 +14,7 @@ const ColorDots = ({ forMobile = false, active = false }: Props) => {
     const dots: CoreColors[] = ['yellow', 'purple', 'orange', 'aqua'];
 
     useEffect(() => {
-        console.log('update', active, entering);
         if (active && !entering) {
-            console.log('boom');
-
             requestTimeout(() => {
                 setEntering(true);
             }, 1000);
@@ -30,8 +27,6 @@ const ColorDots = ({ forMobile = false, active = false }: Props) => {
 
     useEffect(() => {
         return () => {
-            console.log('unmounting');
-
             setEntering(false);
             setFinishedEntering(false);
         };

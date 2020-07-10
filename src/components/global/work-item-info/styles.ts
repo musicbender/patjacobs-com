@@ -30,7 +30,7 @@ export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
       !props.stopped &&
       css`
           color: ${rgbHex(props.theme.palette.white, 0.4)};
-          border-color: ${shade(0.6, props.theme.corePalette.purple)};
+          border-color: ${shade(0.7, props.theme.corePalette.purple)};
       `}
   ${props =>
       props.stopped &&

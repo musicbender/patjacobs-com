@@ -50,8 +50,6 @@ class RecentWork extends PureComponent<Props & ReduxProps, State> {
 
     constructor(props: Props & ReduxProps) {
         super(props);
-        console.log(props);
-
         this.defaultWorkStops = props.projects.map(() => false);
         this.handleResize = throttle(this.handleResize.bind(this), 100);
         this.handleWorkStops = this.handleWorkStops.bind(this);

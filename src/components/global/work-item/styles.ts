@@ -114,14 +114,14 @@ export const ImageFilter = styled.div`
 
 export const ImageCover = styled('div')<ImageCoverProps>`
     background-color: ${({ theme }) => shade(0.6, theme.corePalette.purple)};
-    opacity: 0.53;
+    opacity: 0.75;
     transform: translate3d(0, 0, 0);
-    transition: ${props => `transform 350ms ${props.theme.animate.easeIn}`};
+    transition: ${props => `transform 450ms ${props.theme.animate.easeOut}`};
     ${props =>
         props.isStopped &&
         css`
-            transform: translate3d(-100%, 0, 0);
-            transition: transform 350ms ${props.theme.animate.easeIn};
+            transform: translate3d(-101%, 0, 0);
+            transition: transform 450ms ${props.theme.animate.easeInOut};
         `}
 `;
 

@@ -14,8 +14,6 @@ export const superCenter = (left = '50%', top = '50%', x = '-50%', y = '-50%') =
     `;
 };
 
-console.log('theme', theme);
-
 export const gridSizes: { [key: string]: number } = theme.gridSizes;
 
 export const gridValue = (size = 's', unit = '%'): string => {

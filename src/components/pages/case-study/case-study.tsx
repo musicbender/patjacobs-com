@@ -190,6 +190,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
     render() {
         const active: boolean =
             this.state.atTop && !this.props.splashOpen && !this.props.transportOpen;
+
         return (
             <CaseStudyPage>
                 {this.props.project && (
