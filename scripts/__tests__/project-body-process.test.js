@@ -1,4 +1,4 @@
-import { processRawBody } from '../project-body-process';
+const { processRawBody } = require('../project-body-process');
 
 // mocks
 const mockProjectBody1 = require('../../test/mocks/project-body-1.json');
