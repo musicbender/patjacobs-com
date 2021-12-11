@@ -49,7 +49,7 @@ exports.createPages = async ({ graphql, actions }) => {
                         sectionId
                         heading
                     }
-                    projects(where: { disabled: false, status: PUBLISHED, linkType: Case_Study }) {
+                    projects(where: { disabled: false, linkType: Case_Study }) {
                         updatedAt
                         createdAt
                         id
@@ -62,8 +62,8 @@ exports.createPages = async ({ graphql, actions }) => {
                         overview
                         lastDeployedOn
                         projectPublishDate
-                        status
                         storybookUrl
+                        order
                         githubRepoUrl
                         team
                         imageDesktop {

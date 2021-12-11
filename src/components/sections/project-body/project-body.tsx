@@ -17,11 +17,11 @@ type BodyItem = SitePageContextProjectBody;
 const projectBody = ({ body, getRevealProps }: Props) => {
     const renderParagraph = (item: BodyItem, i: number) => {
         return item.text.map((textItem: ProjectBodyParagraphText, j: number) => {
-            if (!textItem.leaf) return;
-            const key = `paragraph-${i}-${j}-${textItem.leaf.length}`;
+            if (!textItem.text) return;
+            const key = `paragraph-${i}-${j}-${textItem.text.length}`;
             return (
                 <RevealBlock {...getRevealProps(key, 'text')} key={key}>
-                    <BodyParagraph>{textItem.leaf}</BodyParagraph>
+                    <BodyParagraph>{textItem.text}</BodyParagraph>
                 </RevealBlock>
             );
         });
@@ -35,9 +35,9 @@ const projectBody = ({ body, getRevealProps }: Props) => {
                 <RevealBlock {...getRevealProps(key, 'img')} key={key}>
                     <BodyImage src={item.data.src} alt={item.data.altText || item.data.title} />
                 </RevealBlock>
-                {item.text && item.text[0] && item.text[0].leaf && (
+                {item.text && (
                     <RevealBlock {...getRevealProps(key, 'text')} key={key + '-caption'}>
-                        <Caption>[ {item.text[0].leaf} ]</Caption>
+                        <Caption>[ {item.text} ]</Caption>
                     </RevealBlock>
                 )}
             </React.Fragment>
@@ -52,9 +52,9 @@ const projectBody = ({ body, getRevealProps }: Props) => {
                 <RevealBlock {...getRevealProps(key, 'video')} key={key}>
                     <BodyVideo src={item.data.src} />
                 </RevealBlock>
-                {item.text && item.text[0] && item.text[0].leaf && (
+                {item.text && (
                     <RevealBlock {...getRevealProps(key, 'text')} key={key + '-caption'}>
-                        <Caption>[ {item.text[0].leaf} ]</Caption>
+                        <Caption>[ {item.text} ]</Caption>
                     </RevealBlock>
                 )}
             </React.Fragment>

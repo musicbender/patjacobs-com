@@ -12,16 +12,29 @@ export type Scalars = {
    * representation of dates and times using the Gregorian calendar.
    */
   Date: any;
-  GCMS_DateTime: any;
-  /** Custom scalar representing a Slate rich text AST */
-  GCMS_RichTextAST: any;
   /**
-   * The `Long` scalar type represents non-fractional signed whole numeric values.
-   * Long can represent values between -(2^63) and 2^63 - 1.
+   * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+   * date-timeformat outlined in section 5.6 of the RFC 3339 profile of the ISO 8601
+   * standard for representationof dates and times using the Gregorian calendar.
    */
-  GCMS_Long: any;
+  GCMS_DateTime: any;
+  /**
+   * A date string, such as 2007-12-03 (YYYY-MM-DD), compliant with ISO 8601 standard
+   * for representation of dates using the Gregorian calendar.
+   */
+  GCMS_Date: any;
+  /** Slate-compatible RichText AST */
+  GCMS_RichTextAST: any;
   /** Raw JSON value */
   GCMS_Json: any;
+  /**
+   * The Long scalar type represents non-fractional signed whole numeric values. Long
+   * can represent values between -(2^63) and 2^63 - 1.
+   */
+  GCMS_Long: any;
+  GCMS_Hex: any;
+  GCMS_RGBAHue: any;
+  GCMS_RGBATransparency: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
@@ -1358,23 +1371,61 @@ export type FloatQueryOperatorInput = {
 };
 
 export type Gcms = {
-  assets: Array<Maybe<Gcms_Asset>>;
-  skills: Array<Maybe<Gcms_Skill>>;
-  projects: Array<Maybe<Gcms_Project>>;
-  socialLinks: Array<Maybe<Gcms_SocialLink>>;
-  sections: Array<Maybe<Gcms_Section>>;
-  asset?: Maybe<Gcms_Asset>;
-  skill?: Maybe<Gcms_Skill>;
-  project?: Maybe<Gcms_Project>;
-  socialLink?: Maybe<Gcms_SocialLink>;
-  section?: Maybe<Gcms_Section>;
-  assetsConnection: Gcms_AssetConnection;
-  skillsConnection: Gcms_SkillConnection;
-  projectsConnection: Gcms_ProjectConnection;
-  socialLinksConnection: Gcms_SocialLinkConnection;
-  sectionsConnection: Gcms_SectionConnection;
   /** Fetches an object given its ID */
   node?: Maybe<Gcms_Node>;
+  /** Retrieve multiple assets */
+  assets: Array<Gcms_Asset>;
+  /** Retrieve a single asset */
+  asset?: Maybe<Gcms_Asset>;
+  /** Retrieve multiple assets using the Relay connection interface */
+  assetsConnection: Gcms_AssetConnection;
+  /** Retrieve document version */
+  assetVersion?: Maybe<Gcms_DocumentVersion>;
+  /** Retrieve multiple projects */
+  projects: Array<Gcms_Project>;
+  /** Retrieve a single project */
+  project?: Maybe<Gcms_Project>;
+  /** Retrieve multiple projects using the Relay connection interface */
+  projectsConnection: Gcms_ProjectConnection;
+  /** Retrieve document version */
+  projectVersion?: Maybe<Gcms_DocumentVersion>;
+  /** Retrieve multiple sections */
+  sections: Array<Gcms_Section>;
+  /** Retrieve a single section */
+  section?: Maybe<Gcms_Section>;
+  /** Retrieve multiple sections using the Relay connection interface */
+  sectionsConnection: Gcms_SectionConnection;
+  /** Retrieve document version */
+  sectionVersion?: Maybe<Gcms_DocumentVersion>;
+  /** Retrieve multiple skills */
+  skills: Array<Gcms_Skill>;
+  /** Retrieve a single skill */
+  skill?: Maybe<Gcms_Skill>;
+  /** Retrieve multiple skills using the Relay connection interface */
+  skillsConnection: Gcms_SkillConnection;
+  /** Retrieve document version */
+  skillVersion?: Maybe<Gcms_DocumentVersion>;
+  /** Retrieve multiple socialLinks */
+  socialLinks: Array<Gcms_SocialLink>;
+  /** Retrieve a single socialLink */
+  socialLink?: Maybe<Gcms_SocialLink>;
+  /** Retrieve multiple socialLinks using the Relay connection interface */
+  socialLinksConnection: Gcms_SocialLinkConnection;
+  /** Retrieve document version */
+  socialLinkVersion?: Maybe<Gcms_DocumentVersion>;
+  /** Retrieve multiple users */
+  users: Array<Gcms_User>;
+  /** Retrieve a single user */
+  user?: Maybe<Gcms_User>;
+  /** Retrieve multiple users using the Relay connection interface */
+  usersConnection: Gcms_UserConnection;
+};
+
+
+export type GcmsNodeArgs = {
+  id: Scalars['ID'];
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
 };
 
 
@@ -1386,75 +1437,15 @@ export type GcmsAssetsArgs = {
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-};
-
-
-export type GcmsSkillsArgs = {
-  where?: Maybe<Gcms_SkillWhereInput>;
-  orderBy?: Maybe<Gcms_SkillOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
-
-export type GcmsProjectsArgs = {
-  where?: Maybe<Gcms_ProjectWhereInput>;
-  orderBy?: Maybe<Gcms_ProjectOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
-
-export type GcmsSocialLinksArgs = {
-  where?: Maybe<Gcms_SocialLinkWhereInput>;
-  orderBy?: Maybe<Gcms_SocialLinkOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
-
-export type GcmsSectionsArgs = {
-  where?: Maybe<Gcms_SectionWhereInput>;
-  orderBy?: Maybe<Gcms_SectionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
 };
 
 
 export type GcmsAssetArgs = {
   where: Gcms_AssetWhereUniqueInput;
-};
-
-
-export type GcmsSkillArgs = {
-  where: Gcms_SkillWhereUniqueInput;
-};
-
-
-export type GcmsProjectArgs = {
-  where: Gcms_ProjectWhereUniqueInput;
-};
-
-
-export type GcmsSocialLinkArgs = {
-  where: Gcms_SocialLinkWhereUniqueInput;
-};
-
-
-export type GcmsSectionArgs = {
-  where: Gcms_SectionWhereUniqueInput;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
 };
 
 
@@ -1466,17 +1457,33 @@ export type GcmsAssetsConnectionArgs = {
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
 };
 
 
-export type GcmsSkillsConnectionArgs = {
-  where?: Maybe<Gcms_SkillWhereInput>;
-  orderBy?: Maybe<Gcms_SkillOrderByInput>;
+export type GcmsAssetVersionArgs = {
+  where: Gcms_VersionWhereInput;
+};
+
+
+export type GcmsProjectsArgs = {
+  where?: Maybe<Gcms_ProjectWhereInput>;
+  orderBy?: Maybe<Gcms_ProjectOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+
+export type GcmsProjectArgs = {
+  where: Gcms_ProjectWhereUniqueInput;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
 };
 
 
@@ -1488,17 +1495,33 @@ export type GcmsProjectsConnectionArgs = {
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
 };
 
 
-export type GcmsSocialLinksConnectionArgs = {
-  where?: Maybe<Gcms_SocialLinkWhereInput>;
-  orderBy?: Maybe<Gcms_SocialLinkOrderByInput>;
+export type GcmsProjectVersionArgs = {
+  where: Gcms_VersionWhereInput;
+};
+
+
+export type GcmsSectionsArgs = {
+  where?: Maybe<Gcms_SectionWhereInput>;
+  orderBy?: Maybe<Gcms_SectionOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+
+export type GcmsSectionArgs = {
+  where: Gcms_SectionWhereUniqueInput;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
 };
 
 
@@ -1510,50 +1533,293 @@ export type GcmsSectionsConnectionArgs = {
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
 };
 
 
-export type GcmsNodeArgs = {
-  id: Scalars['ID'];
+export type GcmsSectionVersionArgs = {
+  where: Gcms_VersionWhereInput;
 };
 
-export type Gcms_AggregateAsset = {
+
+export type GcmsSkillsArgs = {
+  where?: Maybe<Gcms_SkillWhereInput>;
+  orderBy?: Maybe<Gcms_SkillOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+
+export type GcmsSkillArgs = {
+  where: Gcms_SkillWhereUniqueInput;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+
+export type GcmsSkillsConnectionArgs = {
+  where?: Maybe<Gcms_SkillWhereInput>;
+  orderBy?: Maybe<Gcms_SkillOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+
+export type GcmsSkillVersionArgs = {
+  where: Gcms_VersionWhereInput;
+};
+
+
+export type GcmsSocialLinksArgs = {
+  where?: Maybe<Gcms_SocialLinkWhereInput>;
+  orderBy?: Maybe<Gcms_SocialLinkOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+
+export type GcmsSocialLinkArgs = {
+  where: Gcms_SocialLinkWhereUniqueInput;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+
+export type GcmsSocialLinksConnectionArgs = {
+  where?: Maybe<Gcms_SocialLinkWhereInput>;
+  orderBy?: Maybe<Gcms_SocialLinkOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+
+export type GcmsSocialLinkVersionArgs = {
+  where: Gcms_VersionWhereInput;
+};
+
+
+export type GcmsUsersArgs = {
+  where?: Maybe<Gcms_UserWhereInput>;
+  orderBy?: Maybe<Gcms_UserOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+
+export type GcmsUserArgs = {
+  where: Gcms_UserWhereUniqueInput;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+
+export type GcmsUsersConnectionArgs = {
+  where?: Maybe<Gcms_UserWhereInput>;
+  orderBy?: Maybe<Gcms_UserOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Gcms_Stage;
+  locales?: Array<Gcms_Locale>;
+};
+
+export type Gcms__FilterKind = 
+  | 'search'
+  | 'AND'
+  | 'OR'
+  | 'NOT'
+  | 'eq'
+  | 'eq_not'
+  | 'in'
+  | 'not_in'
+  | 'lt'
+  | 'lte'
+  | 'gt'
+  | 'gte'
+  | 'contains'
+  | 'not_contains'
+  | 'starts_with'
+  | 'not_starts_with'
+  | 'ends_with'
+  | 'not_ends_with'
+  | 'contains_all'
+  | 'contains_some'
+  | 'contains_none'
+  | 'relational_single'
+  | 'relational_every'
+  | 'relational_some'
+  | 'relational_none';
+
+export type Gcms__MutationInputFieldKind = 
+  | 'scalar'
+  | 'richText'
+  | 'richTextWithEmbeds'
+  | 'enum'
+  | 'relation'
+  | 'union'
+  | 'virtual';
+
+export type Gcms__MutationKind = 
+  | 'create'
+  | 'publish'
+  | 'unpublish'
+  | 'update'
+  | 'upsert'
+  | 'delete'
+  | 'updateMany'
+  | 'publishMany'
+  | 'unpublishMany'
+  | 'deleteMany';
+
+export type Gcms__OrderDirection = 
+  | 'asc'
+  | 'desc';
+
+export type Gcms__RelationInputCardinality = 
+  | 'one'
+  | 'many';
+
+export type Gcms__RelationInputKind = 
+  | 'create'
+  | 'update';
+
+export type Gcms__RelationKind = 
+  | 'regular'
+  | 'union';
+
+export type Gcms__SystemDateTimeFieldVariation = 
+  | 'base'
+  | 'localization'
+  | 'combined';
+
+export type Gcms_Aggregate = {
   count: Scalars['Int'];
 };
 
-export type Gcms_AggregateProject = {
-  count: Scalars['Int'];
-};
-
-export type Gcms_AggregateSection = {
-  count: Scalars['Int'];
-};
-
-export type Gcms_AggregateSkill = {
-  count: Scalars['Int'];
-};
-
-export type Gcms_AggregateSocialLink = {
-  count: Scalars['Int'];
-};
-
+/** Asset system model */
 export type Gcms_Asset = Gcms_Node & {
-  status: Gcms_Status;
-  updatedAt: Scalars['GCMS_DateTime'];
-  createdAt: Scalars['GCMS_DateTime'];
+  /** System stage field */
+  stage: Gcms_Stage;
+  /** System Locale field */
+  locale: Gcms_Locale;
+  /** Get the other localizations for this document */
+  localizations: Array<Gcms_Asset>;
+  /** Get the document in other stages */
+  documentInStages: Array<Gcms_Asset>;
+  /** The unique identifier */
   id: Scalars['ID'];
+  /** The time the document was created */
+  createdAt: Scalars['GCMS_DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<Gcms_User>;
+  /** The time the document was updated */
+  updatedAt: Scalars['GCMS_DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<Gcms_User>;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<Gcms_User>;
+  /** The file handle */
   handle: Scalars['String'];
+  /** The file name */
   fileName: Scalars['String'];
+  /** The height of the file */
   height?: Maybe<Scalars['Float']>;
+  /** The file width */
   width?: Maybe<Scalars['Float']>;
+  /** The file size */
   size?: Maybe<Scalars['Float']>;
+  /** The mime type of the file */
   mimeType?: Maybe<Scalars['String']>;
-  imageDesktopProject?: Maybe<Array<Gcms_Project>>;
+  imageDesktopProject: Array<Gcms_Project>;
+  /** List of Asset versions */
+  history: Array<Gcms_Version>;
   /** Get the url for the asset with provided transformations applied. */
   url: Scalars['String'];
 };
 
 
+/** Asset system model */
+export type Gcms_AssetLocalizationsArgs = {
+  locales?: Array<Gcms_Locale>;
+  includeCurrent?: Scalars['Boolean'];
+};
+
+
+/** Asset system model */
+export type Gcms_AssetDocumentInStagesArgs = {
+  stages?: Array<Gcms_Stage>;
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+};
+
+
+/** Asset system model */
+export type Gcms_AssetCreatedAtArgs = {
+  variation?: Gcms_SystemDateTimeFieldVariation;
+};
+
+
+/** Asset system model */
+export type Gcms_AssetCreatedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Asset system model */
+export type Gcms_AssetUpdatedAtArgs = {
+  variation?: Gcms_SystemDateTimeFieldVariation;
+};
+
+
+/** Asset system model */
+export type Gcms_AssetUpdatedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Asset system model */
+export type Gcms_AssetPublishedAtArgs = {
+  variation?: Gcms_SystemDateTimeFieldVariation;
+};
+
+
+/** Asset system model */
+export type Gcms_AssetPublishedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Asset system model */
 export type Gcms_AssetImageDesktopProjectArgs = {
   where?: Maybe<Gcms_ProjectWhereInput>;
   orderBy?: Maybe<Gcms_ProjectOrderByInput>;
@@ -1562,11 +1828,28 @@ export type Gcms_AssetImageDesktopProjectArgs = {
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  locales?: Maybe<Array<Gcms_Locale>>;
 };
 
 
+/** Asset system model */
+export type Gcms_AssetHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: Maybe<Gcms_Stage>;
+};
+
+
+/** Asset system model */
 export type Gcms_AssetUrlArgs = {
   transformation?: Maybe<Gcms_AssetTransformationInput>;
+};
+
+export type Gcms_AssetConnectInput = {
+  /** Document to connect */
+  where: Gcms_AssetWhereUniqueInput;
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<Gcms_ConnectPositionInput>;
 };
 
 /** A connection to a list of items. */
@@ -1574,35 +1857,58 @@ export type Gcms_AssetConnection = {
   /** Information to aid in pagination. */
   pageInfo: Gcms_PageInfo;
   /** A list of edges. */
-  edges: Array<Maybe<Gcms_AssetEdge>>;
-  aggregate: Gcms_AggregateAsset;
+  edges: Array<Gcms_AssetEdge>;
+  aggregate: Gcms_Aggregate;
 };
 
 export type Gcms_AssetCreateInput = {
-  status?: Maybe<Gcms_Status>;
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
   handle: Scalars['String'];
   fileName: Scalars['String'];
   height?: Maybe<Scalars['Float']>;
   width?: Maybe<Scalars['Float']>;
   size?: Maybe<Scalars['Float']>;
   mimeType?: Maybe<Scalars['String']>;
-  imageDesktopProject?: Maybe<Gcms_ProjectCreateManyWithoutImageDesktopInput>;
+  imageDesktopProject?: Maybe<Gcms_ProjectCreateManyInlineInput>;
+  /** Inline mutations for managing document localizations excluding the default locale */
+  localizations?: Maybe<Gcms_AssetCreateLocalizationsInput>;
 };
 
-export type Gcms_AssetCreateOneWithoutImageDesktopProjectInput = {
-  upload?: Maybe<Gcms_AssetUploadWithoutImageDesktopProjectInput>;
-  create?: Maybe<Gcms_AssetCreateWithoutImageDesktopProjectInput>;
+export type Gcms_AssetCreateLocalizationDataInput = {
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  handle: Scalars['String'];
+  fileName: Scalars['String'];
+  height?: Maybe<Scalars['Float']>;
+  width?: Maybe<Scalars['Float']>;
+  size?: Maybe<Scalars['Float']>;
+  mimeType?: Maybe<Scalars['String']>;
+};
+
+export type Gcms_AssetCreateLocalizationInput = {
+  /** Localization input */
+  data: Gcms_AssetCreateLocalizationDataInput;
+  locale: Gcms_Locale;
+};
+
+export type Gcms_AssetCreateLocalizationsInput = {
+  /** Create localizations for the newly-created document */
+  create?: Maybe<Array<Gcms_AssetCreateLocalizationInput>>;
+};
+
+export type Gcms_AssetCreateManyInlineInput = {
+  /** Create and connect multiple existing Asset documents */
+  create?: Maybe<Array<Gcms_AssetCreateInput>>;
+  /** Connect multiple existing Asset documents */
+  connect?: Maybe<Array<Gcms_AssetWhereUniqueInput>>;
+};
+
+export type Gcms_AssetCreateOneInlineInput = {
+  /** Create and connect one Asset document */
+  create?: Maybe<Gcms_AssetCreateInput>;
+  /** Connect one existing Asset document */
   connect?: Maybe<Gcms_AssetWhereUniqueInput>;
-};
-
-export type Gcms_AssetCreateWithoutImageDesktopProjectInput = {
-  status?: Maybe<Gcms_Status>;
-  handle: Scalars['String'];
-  fileName: Scalars['String'];
-  height?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
-  size?: Maybe<Scalars['Float']>;
-  mimeType?: Maybe<Scalars['String']>;
 };
 
 /** An edge in a connection. */
@@ -1613,131 +1919,9 @@ export type Gcms_AssetEdge = {
   cursor: Scalars['String'];
 };
 
-export type Gcms_AssetOrderByInput = 
-  | 'status_ASC'
-  | 'status_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'handle_ASC'
-  | 'handle_DESC'
-  | 'fileName_ASC'
-  | 'fileName_DESC'
-  | 'height_ASC'
-  | 'height_DESC'
-  | 'width_ASC'
-  | 'width_DESC'
-  | 'size_ASC'
-  | 'size_DESC'
-  | 'mimeType_ASC'
-  | 'mimeType_DESC';
-
-export type Gcms_AssetPreviousValues = {
-  status: Gcms_Status;
-  updatedAt: Scalars['GCMS_DateTime'];
-  createdAt: Scalars['GCMS_DateTime'];
-  id: Scalars['ID'];
-  handle: Scalars['String'];
-  fileName: Scalars['String'];
-  height?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
-  size?: Maybe<Scalars['Float']>;
-  mimeType?: Maybe<Scalars['String']>;
-};
-
-export type Gcms_AssetSubscriptionPayload = {
-  mutation: Gcms_MutationType;
-  node?: Maybe<Gcms_Asset>;
-  updatedFields?: Maybe<Array<Scalars['String']>>;
-  previousValues?: Maybe<Gcms_AssetPreviousValues>;
-};
-
-export type Gcms_AssetSubscriptionWhereInput = {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<Gcms_AssetSubscriptionWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<Gcms_AssetSubscriptionWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<Gcms_AssetSubscriptionWhereInput>>;
-  /** The subscription event gets dispatched when it's listed in mutation_in */
-  mutation_in?: Maybe<Array<Gcms_MutationType>>;
-  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
-  updatedFields_contains?: Maybe<Scalars['String']>;
-  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
-  updatedFields_contains_every?: Maybe<Array<Scalars['String']>>;
-  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
-  updatedFields_contains_some?: Maybe<Array<Scalars['String']>>;
-  node?: Maybe<Gcms_AssetWhereInput>;
-};
-
-/** Transformations for Assets */
-export type Gcms_AssetTransformationInput = {
-  image?: Maybe<Gcms_ImageTransformationInput>;
-  document?: Maybe<Gcms_DocumentTransformationInput>;
-  /** Pass `true` if you want to validate the passed transformation parameters */
-  validateOptions?: Maybe<Scalars['Boolean']>;
-};
-
-export type Gcms_AssetUpdateInput = {
-  status?: Maybe<Gcms_Status>;
-  handle?: Maybe<Scalars['String']>;
-  fileName?: Maybe<Scalars['String']>;
-  height?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
-  size?: Maybe<Scalars['Float']>;
-  mimeType?: Maybe<Scalars['String']>;
-  imageDesktopProject?: Maybe<Gcms_ProjectUpdateManyWithoutImageDesktopInput>;
-};
-
-export type Gcms_AssetUpdateManyMutationInput = {
-  status?: Maybe<Gcms_Status>;
-  handle?: Maybe<Scalars['String']>;
-  fileName?: Maybe<Scalars['String']>;
-  height?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
-  size?: Maybe<Scalars['Float']>;
-  mimeType?: Maybe<Scalars['String']>;
-};
-
-export type Gcms_AssetUpdateOneWithoutImageDesktopProjectInput = {
-  create?: Maybe<Gcms_AssetCreateWithoutImageDesktopProjectInput>;
-  connect?: Maybe<Gcms_AssetWhereUniqueInput>;
-  disconnect?: Maybe<Scalars['Boolean']>;
-  delete?: Maybe<Scalars['Boolean']>;
-  update?: Maybe<Gcms_AssetUpdateWithoutImageDesktopProjectDataInput>;
-  upsert?: Maybe<Gcms_AssetUpsertWithoutImageDesktopProjectInput>;
-};
-
-export type Gcms_AssetUpdateWithoutImageDesktopProjectDataInput = {
-  status?: Maybe<Gcms_Status>;
-  handle?: Maybe<Scalars['String']>;
-  fileName?: Maybe<Scalars['String']>;
-  height?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
-  size?: Maybe<Scalars['Float']>;
-  mimeType?: Maybe<Scalars['String']>;
-};
-
-export type Gcms_AssetUploadInput = {
-  url: Scalars['String'];
-  status?: Maybe<Gcms_Status>;
-  imageDesktopProject?: Maybe<Gcms_ProjectCreateManyWithoutImageDesktopInput>;
-};
-
-export type Gcms_AssetUploadWithoutImageDesktopProjectInput = {
-  url: Scalars['String'];
-  status?: Maybe<Gcms_Status>;
-};
-
-export type Gcms_AssetUpsertWithoutImageDesktopProjectInput = {
-  update: Gcms_AssetUpdateWithoutImageDesktopProjectDataInput;
-  create: Gcms_AssetCreateWithoutImageDesktopProjectInput;
-};
-
-export type Gcms_AssetWhereInput = {
+/** Identifies documents */
+export type Gcms_AssetManyWhereInput = {
+  /** Contains search across all appropriate fields. */
   _search?: Maybe<Scalars['String']>;
   /** Logical AND on all given filters. */
   AND?: Maybe<Array<Gcms_AssetWhereInput>>;
@@ -1745,28 +1929,25 @@ export type Gcms_AssetWhereInput = {
   OR?: Maybe<Array<Gcms_AssetWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
   NOT?: Maybe<Array<Gcms_AssetWhereInput>>;
-  status?: Maybe<Gcms_Status>;
+  id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
-  status_not?: Maybe<Gcms_Status>;
+  id_not?: Maybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  status_in?: Maybe<Array<Gcms_Status>>;
+  id_in?: Maybe<Array<Scalars['ID']>>;
   /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<Gcms_Status>>;
-  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
   createdAt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
@@ -1782,6 +1963,214 @@ export type Gcms_AssetWhereInput = {
   createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  createdBy?: Maybe<Gcms_UserWhereInput>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedBy?: Maybe<Gcms_UserWhereInput>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedBy?: Maybe<Gcms_UserWhereInput>;
+  imageDesktopProject_every?: Maybe<Gcms_ProjectWhereInput>;
+  imageDesktopProject_some?: Maybe<Gcms_ProjectWhereInput>;
+  imageDesktopProject_none?: Maybe<Gcms_ProjectWhereInput>;
+};
+
+export type Gcms_AssetOrderByInput = 
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'publishedAt_ASC'
+  | 'publishedAt_DESC'
+  | 'handle_ASC'
+  | 'handle_DESC'
+  | 'fileName_ASC'
+  | 'fileName_DESC'
+  | 'height_ASC'
+  | 'height_DESC'
+  | 'width_ASC'
+  | 'width_DESC'
+  | 'size_ASC'
+  | 'size_DESC'
+  | 'mimeType_ASC'
+  | 'mimeType_DESC';
+
+/** Transformations for Assets */
+export type Gcms_AssetTransformationInput = {
+  image?: Maybe<Gcms_ImageTransformationInput>;
+  document?: Maybe<Gcms_DocumentTransformationInput>;
+  /** Pass true if you want to validate the passed transformation parameters */
+  validateOptions?: Maybe<Scalars['Boolean']>;
+};
+
+export type Gcms_AssetUpdateInput = {
+  handle?: Maybe<Scalars['String']>;
+  fileName?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['Float']>;
+  width?: Maybe<Scalars['Float']>;
+  size?: Maybe<Scalars['Float']>;
+  mimeType?: Maybe<Scalars['String']>;
+  imageDesktopProject?: Maybe<Gcms_ProjectUpdateManyInlineInput>;
+  /** Manage document localizations */
+  localizations?: Maybe<Gcms_AssetUpdateLocalizationsInput>;
+};
+
+export type Gcms_AssetUpdateLocalizationDataInput = {
+  handle?: Maybe<Scalars['String']>;
+  fileName?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['Float']>;
+  width?: Maybe<Scalars['Float']>;
+  size?: Maybe<Scalars['Float']>;
+  mimeType?: Maybe<Scalars['String']>;
+};
+
+export type Gcms_AssetUpdateLocalizationInput = {
+  data: Gcms_AssetUpdateLocalizationDataInput;
+  locale: Gcms_Locale;
+};
+
+export type Gcms_AssetUpdateLocalizationsInput = {
+  /** Localizations to create */
+  create?: Maybe<Array<Gcms_AssetCreateLocalizationInput>>;
+  /** Localizations to update */
+  update?: Maybe<Array<Gcms_AssetUpdateLocalizationInput>>;
+  upsert?: Maybe<Array<Gcms_AssetUpsertLocalizationInput>>;
+  /** Localizations to delete */
+  delete?: Maybe<Array<Gcms_Locale>>;
+};
+
+export type Gcms_AssetUpdateManyInlineInput = {
+  /** Create and connect multiple Asset documents */
+  create?: Maybe<Array<Gcms_AssetCreateInput>>;
+  /** Connect multiple existing Asset documents */
+  connect?: Maybe<Array<Gcms_AssetConnectInput>>;
+  /** Override currently-connected documents with multiple existing Asset documents */
+  set?: Maybe<Array<Gcms_AssetWhereUniqueInput>>;
+  /** Update multiple Asset documents */
+  update?: Maybe<Array<Gcms_AssetUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Asset documents */
+  upsert?: Maybe<Array<Gcms_AssetUpsertWithNestedWhereUniqueInput>>;
+  /** Disconnect multiple Asset documents */
+  disconnect?: Maybe<Array<Gcms_AssetWhereUniqueInput>>;
+  /** Delete multiple Asset documents */
+  delete?: Maybe<Array<Gcms_AssetWhereUniqueInput>>;
+};
+
+export type Gcms_AssetUpdateManyInput = {
+  fileName?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['Float']>;
+  width?: Maybe<Scalars['Float']>;
+  size?: Maybe<Scalars['Float']>;
+  mimeType?: Maybe<Scalars['String']>;
+  /** Optional updates to localizations */
+  localizations?: Maybe<Gcms_AssetUpdateManyLocalizationsInput>;
+};
+
+export type Gcms_AssetUpdateManyLocalizationDataInput = {
+  fileName?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['Float']>;
+  width?: Maybe<Scalars['Float']>;
+  size?: Maybe<Scalars['Float']>;
+  mimeType?: Maybe<Scalars['String']>;
+};
+
+export type Gcms_AssetUpdateManyLocalizationInput = {
+  data: Gcms_AssetUpdateManyLocalizationDataInput;
+  locale: Gcms_Locale;
+};
+
+export type Gcms_AssetUpdateManyLocalizationsInput = {
+  /** Localizations to update */
+  update?: Maybe<Array<Gcms_AssetUpdateManyLocalizationInput>>;
+};
+
+export type Gcms_AssetUpdateManyWithNestedWhereInput = {
+  /** Document search */
+  where: Gcms_AssetWhereInput;
+  /** Update many input */
+  data: Gcms_AssetUpdateManyInput;
+};
+
+export type Gcms_AssetUpdateOneInlineInput = {
+  /** Create and connect one Asset document */
+  create?: Maybe<Gcms_AssetCreateInput>;
+  /** Update single Asset document */
+  update?: Maybe<Gcms_AssetUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Asset document */
+  upsert?: Maybe<Gcms_AssetUpsertWithNestedWhereUniqueInput>;
+  /** Connect existing Asset document */
+  connect?: Maybe<Gcms_AssetWhereUniqueInput>;
+  /** Disconnect currently connected Asset document */
+  disconnect?: Maybe<Scalars['Boolean']>;
+  /** Delete currently connected Asset document */
+  delete?: Maybe<Scalars['Boolean']>;
+};
+
+export type Gcms_AssetUpdateWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: Gcms_AssetWhereUniqueInput;
+  /** Document to update */
+  data: Gcms_AssetUpdateInput;
+};
+
+export type Gcms_AssetUpsertInput = {
+  /** Create document if it didn't exist */
+  create: Gcms_AssetCreateInput;
+  /** Update document if it exists */
+  update: Gcms_AssetUpdateInput;
+};
+
+export type Gcms_AssetUpsertLocalizationInput = {
+  update: Gcms_AssetUpdateLocalizationDataInput;
+  create: Gcms_AssetCreateLocalizationDataInput;
+  locale: Gcms_Locale;
+};
+
+export type Gcms_AssetUpsertWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: Gcms_AssetWhereUniqueInput;
+  /** Upsert data */
+  data: Gcms_AssetUpsertInput;
+};
+
+/** Identifies documents */
+export type Gcms_AssetWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<Gcms_AssetWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<Gcms_AssetWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<Gcms_AssetWhereInput>>;
   id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>;
@@ -1789,14 +2178,6 @@ export type Gcms_AssetWhereInput = {
   id_in?: Maybe<Array<Scalars['ID']>>;
   /** All values that are not contained in given list. */
   id_not_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values less than the given value. */
-  id_lt?: Maybe<Scalars['ID']>;
-  /** All values less than or equal the given value. */
-  id_lte?: Maybe<Scalars['ID']>;
-  /** All values greater than the given value. */
-  id_gt?: Maybe<Scalars['ID']>;
-  /** All values greater than or equal the given value. */
-  id_gte?: Maybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -1807,8 +2188,56 @@ export type Gcms_AssetWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>;
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>;
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  createdBy?: Maybe<Gcms_UserWhereInput>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedBy?: Maybe<Gcms_UserWhereInput>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedBy?: Maybe<Gcms_UserWhereInput>;
   handle?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   handle_not?: Maybe<Scalars['String']>;
@@ -1816,14 +2245,6 @@ export type Gcms_AssetWhereInput = {
   handle_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   handle_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  handle_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  handle_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  handle_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  handle_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   handle_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -1834,7 +2255,7 @@ export type Gcms_AssetWhereInput = {
   handle_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   handle_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   handle_not_ends_with?: Maybe<Scalars['String']>;
   fileName?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
@@ -1843,14 +2264,6 @@ export type Gcms_AssetWhereInput = {
   fileName_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   fileName_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  fileName_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  fileName_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  fileName_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  fileName_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   fileName_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -1861,7 +2274,7 @@ export type Gcms_AssetWhereInput = {
   fileName_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   fileName_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   fileName_not_ends_with?: Maybe<Scalars['String']>;
   height?: Maybe<Scalars['Float']>;
   /** All values that are not equal to given value. */
@@ -1915,14 +2328,6 @@ export type Gcms_AssetWhereInput = {
   mimeType_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   mimeType_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  mimeType_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  mimeType_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  mimeType_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  mimeType_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   mimeType_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -1933,22 +2338,47 @@ export type Gcms_AssetWhereInput = {
   mimeType_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   mimeType_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   mimeType_not_ends_with?: Maybe<Scalars['String']>;
   imageDesktopProject_every?: Maybe<Gcms_ProjectWhereInput>;
   imageDesktopProject_some?: Maybe<Gcms_ProjectWhereInput>;
   imageDesktopProject_none?: Maybe<Gcms_ProjectWhereInput>;
 };
 
+/** References Asset record uniquely */
 export type Gcms_AssetWhereUniqueInput = {
   id?: Maybe<Scalars['ID']>;
-  handle?: Maybe<Scalars['String']>;
 };
 
 export type Gcms_BatchPayload = {
   /** The number of nodes that have been affected by the Batch operation. */
   count: Scalars['GCMS_Long'];
 };
+
+/** Representing a color value comprising of HEX, RGBA and css color values */
+export type Gcms_Color = {
+  hex: Scalars['GCMS_Hex'];
+  rgba: Gcms_Rgba;
+  css: Scalars['String'];
+};
+
+/** Accepts either HEX or RGBA color value. At least one of hex or rgba value should be passed. If both are passed RGBA is used. */
+export type Gcms_ColorInput = {
+  hex?: Maybe<Scalars['GCMS_Hex']>;
+  rgba?: Maybe<Gcms_RgbaInput>;
+};
+
+export type Gcms_ConnectPositionInput = {
+  /** Connect document after specified document */
+  after?: Maybe<Scalars['ID']>;
+  /** Connect document before specified document */
+  before?: Maybe<Scalars['ID']>;
+  /** Connect document at first position */
+  start?: Maybe<Scalars['Boolean']>;
+  /** Connect document at last position */
+  end?: Maybe<Scalars['Boolean']>;
+};
+
 
 
 export type Gcms_DocumentFileTypes = 
@@ -1961,8 +2391,8 @@ export type Gcms_DocumentFileTypes =
   | 'txt'
   | 'webp'
   | 'docx'
-  | 'html'
   | 'pdf'
+  | 'html'
   | 'doc'
   | 'xlsx'
   | 'xls'
@@ -2005,6 +2435,15 @@ export type Gcms_DocumentTransformationInput = {
   output?: Maybe<Gcms_DocumentOutputInput>;
 };
 
+export type Gcms_DocumentVersion = {
+  id: Scalars['ID'];
+  stage: Gcms_Stage;
+  revision: Scalars['Int'];
+  createdAt: Scalars['GCMS_DateTime'];
+  data?: Maybe<Scalars['GCMS_Json']>;
+};
+
+
 export type Gcms_ImageFit = 
   /** Resizes the image to fit within the specified parameters without distorting, cropping, or changing the aspect ratio. */
   | 'clip'
@@ -2041,19 +2480,37 @@ export type Gcms_ImageTransformationInput = {
 };
 
 
+/** Locale system enumeration */
 export type Gcms_Locale = 
-  | 'EN';
+  /** System locale */
+  | 'en';
+
+/** Representing a geolocation point with latitude and longitude */
+export type Gcms_Location = {
+  latitude: Scalars['Float'];
+  longitude: Scalars['Float'];
+  distance: Scalars['Float'];
+};
 
 
-export type Gcms_MutationType = 
-  | 'CREATED'
-  | 'UPDATED'
-  | 'DELETED';
+/** Representing a geolocation point with latitude and longitude */
+export type Gcms_LocationDistanceArgs = {
+  from: Gcms_LocationInput;
+};
+
+/** Input for a geolocation point with latitude and longitude */
+export type Gcms_LocationInput = {
+  latitude: Scalars['Float'];
+  longitude: Scalars['Float'];
+};
+
 
 /** An object with an ID */
 export type Gcms_Node = {
   /** The id of the object. */
   id: Scalars['ID'];
+  /** The Stage of an object */
+  stage: Gcms_Stage;
 };
 
 /** Information about pagination in a connection. */
@@ -2066,29 +2523,98 @@ export type Gcms_PageInfo = {
   startCursor?: Maybe<Scalars['String']>;
   /** When paginating forwards, the cursor to continue. */
   endCursor?: Maybe<Scalars['String']>;
+  /** Number of items in the current page. */
+  pageSize?: Maybe<Scalars['Int']>;
 };
 
+/** Content for project case study page */
 export type Gcms_Project = Gcms_Node & {
-  status: Gcms_Status;
-  updatedAt: Scalars['GCMS_DateTime'];
-  createdAt: Scalars['GCMS_DateTime'];
+  /** System stage field */
+  stage: Gcms_Stage;
+  /** Get the document in other stages */
+  documentInStages: Array<Gcms_Project>;
+  /** The unique identifier */
   id: Scalars['ID'];
+  /** The time the document was created */
+  createdAt: Scalars['GCMS_DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<Gcms_User>;
+  /** The time the document was updated */
+  updatedAt: Scalars['GCMS_DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<Gcms_User>;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<Gcms_User>;
   projectId: Scalars['String'];
   title: Scalars['String'];
   projectType: Gcms_ProjectType;
-  imageDesktop?: Maybe<Gcms_Asset>;
+  /** Order the project is displayed */
+  order?: Maybe<Scalars['Int']>;
   description?: Maybe<Scalars['String']>;
+  overview?: Maybe<Scalars['String']>;
+  imageDesktop?: Maybe<Gcms_Asset>;
   disabled?: Maybe<Scalars['Boolean']>;
   techList: Array<Scalars['String']>;
+  /** Listing of team members that also worked on project. Example: 2 Designers, 3 Brand Managers, 1 DevOps, 2 Engineers, etc. */
+  team: Array<Scalars['String']>;
   externalUrl?: Maybe<Scalars['String']>;
-  body?: Maybe<Gcms_RichText>;
   linkType?: Maybe<Gcms_ProjectLinkType>;
   githubRepoUrl?: Maybe<Scalars['String']>;
-  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>;
-  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
-  team: Array<Scalars['String']>;
   storybookUrl?: Maybe<Scalars['String']>;
-  overview?: Maybe<Scalars['String']>;
+  projectPublishDate?: Maybe<Scalars['GCMS_Date']>;
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
+  body?: Maybe<Gcms_RichText>;
+  /** List of Project versions */
+  history: Array<Gcms_Version>;
+};
+
+
+/** Content for project case study page */
+export type Gcms_ProjectDocumentInStagesArgs = {
+  stages?: Array<Gcms_Stage>;
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+};
+
+
+/** Content for project case study page */
+export type Gcms_ProjectCreatedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Content for project case study page */
+export type Gcms_ProjectUpdatedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Content for project case study page */
+export type Gcms_ProjectPublishedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Content for project case study page */
+export type Gcms_ProjectImageDesktopArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Content for project case study page */
+export type Gcms_ProjectHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: Maybe<Gcms_Stage>;
+};
+
+export type Gcms_ProjectConnectInput = {
+  /** Document to connect */
+  where: Gcms_ProjectWhereUniqueInput;
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<Gcms_ConnectPositionInput>;
 };
 
 /** A connection to a list of items. */
@@ -2096,60 +2622,50 @@ export type Gcms_ProjectConnection = {
   /** Information to aid in pagination. */
   pageInfo: Gcms_PageInfo;
   /** A list of edges. */
-  edges: Array<Maybe<Gcms_ProjectEdge>>;
-  aggregate: Gcms_AggregateProject;
+  edges: Array<Gcms_ProjectEdge>;
+  aggregate: Gcms_Aggregate;
 };
 
+/** Content types for projects on case studies */
+export type Gcms_ProjectContentType = 
+  | 'Img'
+  | 'Text'
+  | 'Video';
+
 export type Gcms_ProjectCreateInput = {
-  status?: Maybe<Gcms_Status>;
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
   projectId: Scalars['String'];
   title: Scalars['String'];
   projectType: Gcms_ProjectType;
+  order?: Maybe<Scalars['Int']>;
   description?: Maybe<Scalars['String']>;
+  overview?: Maybe<Scalars['String']>;
+  imageDesktop?: Maybe<Gcms_AssetCreateOneInlineInput>;
   disabled?: Maybe<Scalars['Boolean']>;
+  techList?: Maybe<Array<Scalars['String']>>;
+  team?: Maybe<Array<Scalars['String']>>;
   externalUrl?: Maybe<Scalars['String']>;
-  body?: Maybe<Scalars['GCMS_RichTextAST']>;
   linkType?: Maybe<Gcms_ProjectLinkType>;
   githubRepoUrl?: Maybe<Scalars['String']>;
-  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>;
-  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
   storybookUrl?: Maybe<Scalars['String']>;
-  overview?: Maybe<Scalars['String']>;
-  techList?: Maybe<Gcms_ProjectCreatetechListInput>;
-  team?: Maybe<Gcms_ProjectCreateteamInput>;
-  imageDesktop?: Maybe<Gcms_AssetCreateOneWithoutImageDesktopProjectInput>;
+  projectPublishDate?: Maybe<Scalars['GCMS_Date']>;
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
+  body?: Maybe<Scalars['GCMS_RichTextAST']>;
 };
 
-export type Gcms_ProjectCreateManyWithoutImageDesktopInput = {
-  create?: Maybe<Array<Gcms_ProjectCreateWithoutImageDesktopInput>>;
+export type Gcms_ProjectCreateManyInlineInput = {
+  /** Create and connect multiple existing Project documents */
+  create?: Maybe<Array<Gcms_ProjectCreateInput>>;
+  /** Connect multiple existing Project documents */
   connect?: Maybe<Array<Gcms_ProjectWhereUniqueInput>>;
 };
 
-export type Gcms_ProjectCreateteamInput = {
-  set?: Maybe<Array<Scalars['String']>>;
-};
-
-export type Gcms_ProjectCreatetechListInput = {
-  set?: Maybe<Array<Scalars['String']>>;
-};
-
-export type Gcms_ProjectCreateWithoutImageDesktopInput = {
-  status?: Maybe<Gcms_Status>;
-  projectId: Scalars['String'];
-  title: Scalars['String'];
-  projectType: Gcms_ProjectType;
-  description?: Maybe<Scalars['String']>;
-  disabled?: Maybe<Scalars['Boolean']>;
-  externalUrl?: Maybe<Scalars['String']>;
-  body?: Maybe<Scalars['GCMS_RichTextAST']>;
-  linkType?: Maybe<Gcms_ProjectLinkType>;
-  githubRepoUrl?: Maybe<Scalars['String']>;
-  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>;
-  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
-  storybookUrl?: Maybe<Scalars['String']>;
-  overview?: Maybe<Scalars['String']>;
-  techList?: Maybe<Gcms_ProjectCreatetechListInput>;
-  team?: Maybe<Gcms_ProjectCreateteamInput>;
+export type Gcms_ProjectCreateOneInlineInput = {
+  /** Create and connect one Project document */
+  create?: Maybe<Gcms_ProjectCreateInput>;
+  /** Connect one existing Project document */
+  connect?: Maybe<Gcms_ProjectWhereUniqueInput>;
 };
 
 /** An edge in a connection. */
@@ -2160,521 +2676,14 @@ export type Gcms_ProjectEdge = {
   cursor: Scalars['String'];
 };
 
+/** Type of link for the project */
 export type Gcms_ProjectLinkType = 
   | 'Case_Study'
   | 'External';
 
-export type Gcms_ProjectOrderByInput = 
-  | 'status_ASC'
-  | 'status_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'projectId_ASC'
-  | 'projectId_DESC'
-  | 'title_ASC'
-  | 'title_DESC'
-  | 'projectType_ASC'
-  | 'projectType_DESC'
-  | 'description_ASC'
-  | 'description_DESC'
-  | 'disabled_ASC'
-  | 'disabled_DESC'
-  | 'externalUrl_ASC'
-  | 'externalUrl_DESC'
-  | 'body_ASC'
-  | 'body_DESC'
-  | 'linkType_ASC'
-  | 'linkType_DESC'
-  | 'githubRepoUrl_ASC'
-  | 'githubRepoUrl_DESC'
-  | 'projectPublishDate_ASC'
-  | 'projectPublishDate_DESC'
-  | 'lastDeployedOn_ASC'
-  | 'lastDeployedOn_DESC'
-  | 'storybookUrl_ASC'
-  | 'storybookUrl_DESC'
-  | 'overview_ASC'
-  | 'overview_DESC';
-
-export type Gcms_ProjectPreviousValues = {
-  status: Gcms_Status;
-  updatedAt: Scalars['GCMS_DateTime'];
-  createdAt: Scalars['GCMS_DateTime'];
-  id: Scalars['ID'];
-  projectId: Scalars['String'];
-  title: Scalars['String'];
-  projectType: Gcms_ProjectType;
-  description?: Maybe<Scalars['String']>;
-  disabled?: Maybe<Scalars['Boolean']>;
-  techList: Array<Scalars['String']>;
-  externalUrl?: Maybe<Scalars['String']>;
-  body?: Maybe<Gcms_RichText>;
-  linkType?: Maybe<Gcms_ProjectLinkType>;
-  githubRepoUrl?: Maybe<Scalars['String']>;
-  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>;
-  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
-  team: Array<Scalars['String']>;
-  storybookUrl?: Maybe<Scalars['String']>;
-  overview?: Maybe<Scalars['String']>;
-};
-
-export type Gcms_ProjectScalarWhereInput = {
-  _search?: Maybe<Scalars['String']>;
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<Gcms_ProjectScalarWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<Gcms_ProjectScalarWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<Gcms_ProjectScalarWhereInput>>;
-  status?: Maybe<Gcms_Status>;
-  /** All values that are not equal to given value. */
-  status_not?: Maybe<Gcms_Status>;
-  /** All values that are contained in given list. */
-  status_in?: Maybe<Array<Gcms_Status>>;
-  /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<Gcms_Status>>;
-  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
-  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are not equal to given value. */
-  createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values less than the given value. */
-  createdAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values less than or equal the given value. */
-  createdAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than the given value. */
-  createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than or equal the given value. */
-  createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
-  id?: Maybe<Scalars['ID']>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<Scalars['ID']>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values less than the given value. */
-  id_lt?: Maybe<Scalars['ID']>;
-  /** All values less than or equal the given value. */
-  id_lte?: Maybe<Scalars['ID']>;
-  /** All values greater than the given value. */
-  id_gt?: Maybe<Scalars['ID']>;
-  /** All values greater than or equal the given value. */
-  id_gte?: Maybe<Scalars['ID']>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<Scalars['ID']>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<Scalars['ID']>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<Scalars['ID']>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<Scalars['ID']>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<Scalars['ID']>;
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<Scalars['ID']>;
-  projectId?: Maybe<Scalars['String']>;
-  /** All values that are not equal to given value. */
-  projectId_not?: Maybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  projectId_in?: Maybe<Array<Scalars['String']>>;
-  /** All values that are not contained in given list. */
-  projectId_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  projectId_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  projectId_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  projectId_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  projectId_gte?: Maybe<Scalars['String']>;
-  /** All values containing the given string. */
-  projectId_contains?: Maybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  projectId_not_contains?: Maybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  projectId_starts_with?: Maybe<Scalars['String']>;
-  /** All values not starting with the given string. */
-  projectId_not_starts_with?: Maybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  projectId_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
-  projectId_not_ends_with?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  /** All values that are not equal to given value. */
-  title_not?: Maybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>;
-  /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  title_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  title_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  title_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  title_gte?: Maybe<Scalars['String']>;
-  /** All values containing the given string. */
-  title_contains?: Maybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  title_not_contains?: Maybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  title_starts_with?: Maybe<Scalars['String']>;
-  /** All values not starting with the given string. */
-  title_not_starts_with?: Maybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  title_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
-  title_not_ends_with?: Maybe<Scalars['String']>;
-  projectType?: Maybe<Gcms_ProjectType>;
-  /** All values that are not equal to given value. */
-  projectType_not?: Maybe<Gcms_ProjectType>;
-  /** All values that are contained in given list. */
-  projectType_in?: Maybe<Array<Gcms_ProjectType>>;
-  /** All values that are not contained in given list. */
-  projectType_not_in?: Maybe<Array<Gcms_ProjectType>>;
-  description?: Maybe<Scalars['String']>;
-  /** All values that are not equal to given value. */
-  description_not?: Maybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  description_in?: Maybe<Array<Scalars['String']>>;
-  /** All values that are not contained in given list. */
-  description_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  description_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  description_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  description_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  description_gte?: Maybe<Scalars['String']>;
-  /** All values containing the given string. */
-  description_contains?: Maybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  description_not_contains?: Maybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  description_starts_with?: Maybe<Scalars['String']>;
-  /** All values not starting with the given string. */
-  description_not_starts_with?: Maybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  description_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
-  description_not_ends_with?: Maybe<Scalars['String']>;
-  disabled?: Maybe<Scalars['Boolean']>;
-  /** All values that are not equal to given value. */
-  disabled_not?: Maybe<Scalars['Boolean']>;
-  externalUrl?: Maybe<Scalars['String']>;
-  /** All values that are not equal to given value. */
-  externalUrl_not?: Maybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  externalUrl_in?: Maybe<Array<Scalars['String']>>;
-  /** All values that are not contained in given list. */
-  externalUrl_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  externalUrl_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  externalUrl_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  externalUrl_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  externalUrl_gte?: Maybe<Scalars['String']>;
-  /** All values containing the given string. */
-  externalUrl_contains?: Maybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  externalUrl_not_contains?: Maybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  externalUrl_starts_with?: Maybe<Scalars['String']>;
-  /** All values not starting with the given string. */
-  externalUrl_not_starts_with?: Maybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  externalUrl_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
-  externalUrl_not_ends_with?: Maybe<Scalars['String']>;
-  linkType?: Maybe<Gcms_ProjectLinkType>;
-  /** All values that are not equal to given value. */
-  linkType_not?: Maybe<Gcms_ProjectLinkType>;
-  /** All values that are contained in given list. */
-  linkType_in?: Maybe<Array<Gcms_ProjectLinkType>>;
-  /** All values that are not contained in given list. */
-  linkType_not_in?: Maybe<Array<Gcms_ProjectLinkType>>;
-  githubRepoUrl?: Maybe<Scalars['String']>;
-  /** All values that are not equal to given value. */
-  githubRepoUrl_not?: Maybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  githubRepoUrl_in?: Maybe<Array<Scalars['String']>>;
-  /** All values that are not contained in given list. */
-  githubRepoUrl_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  githubRepoUrl_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  githubRepoUrl_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  githubRepoUrl_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  githubRepoUrl_gte?: Maybe<Scalars['String']>;
-  /** All values containing the given string. */
-  githubRepoUrl_contains?: Maybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  githubRepoUrl_not_contains?: Maybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  githubRepoUrl_starts_with?: Maybe<Scalars['String']>;
-  /** All values not starting with the given string. */
-  githubRepoUrl_not_starts_with?: Maybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  githubRepoUrl_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
-  githubRepoUrl_not_ends_with?: Maybe<Scalars['String']>;
-  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are not equal to given value. */
-  projectPublishDate_not?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are contained in given list. */
-  projectPublishDate_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values that are not contained in given list. */
-  projectPublishDate_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values less than the given value. */
-  projectPublishDate_lt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values less than or equal the given value. */
-  projectPublishDate_lte?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than the given value. */
-  projectPublishDate_gt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than or equal the given value. */
-  projectPublishDate_gte?: Maybe<Scalars['GCMS_DateTime']>;
-  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are not equal to given value. */
-  lastDeployedOn_not?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are contained in given list. */
-  lastDeployedOn_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values that are not contained in given list. */
-  lastDeployedOn_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values less than the given value. */
-  lastDeployedOn_lt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values less than or equal the given value. */
-  lastDeployedOn_lte?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than the given value. */
-  lastDeployedOn_gt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than or equal the given value. */
-  lastDeployedOn_gte?: Maybe<Scalars['GCMS_DateTime']>;
-  storybookUrl?: Maybe<Scalars['String']>;
-  /** All values that are not equal to given value. */
-  storybookUrl_not?: Maybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  storybookUrl_in?: Maybe<Array<Scalars['String']>>;
-  /** All values that are not contained in given list. */
-  storybookUrl_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  storybookUrl_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  storybookUrl_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  storybookUrl_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  storybookUrl_gte?: Maybe<Scalars['String']>;
-  /** All values containing the given string. */
-  storybookUrl_contains?: Maybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  storybookUrl_not_contains?: Maybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  storybookUrl_starts_with?: Maybe<Scalars['String']>;
-  /** All values not starting with the given string. */
-  storybookUrl_not_starts_with?: Maybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  storybookUrl_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
-  storybookUrl_not_ends_with?: Maybe<Scalars['String']>;
-  overview?: Maybe<Scalars['String']>;
-  /** All values that are not equal to given value. */
-  overview_not?: Maybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  overview_in?: Maybe<Array<Scalars['String']>>;
-  /** All values that are not contained in given list. */
-  overview_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  overview_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  overview_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  overview_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  overview_gte?: Maybe<Scalars['String']>;
-  /** All values containing the given string. */
-  overview_contains?: Maybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  overview_not_contains?: Maybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  overview_starts_with?: Maybe<Scalars['String']>;
-  /** All values not starting with the given string. */
-  overview_not_starts_with?: Maybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  overview_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
-  overview_not_ends_with?: Maybe<Scalars['String']>;
-};
-
-export type Gcms_ProjectSubscriptionPayload = {
-  mutation: Gcms_MutationType;
-  node?: Maybe<Gcms_Project>;
-  updatedFields?: Maybe<Array<Scalars['String']>>;
-  previousValues?: Maybe<Gcms_ProjectPreviousValues>;
-};
-
-export type Gcms_ProjectSubscriptionWhereInput = {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<Gcms_ProjectSubscriptionWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<Gcms_ProjectSubscriptionWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<Gcms_ProjectSubscriptionWhereInput>>;
-  /** The subscription event gets dispatched when it's listed in mutation_in */
-  mutation_in?: Maybe<Array<Gcms_MutationType>>;
-  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
-  updatedFields_contains?: Maybe<Scalars['String']>;
-  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
-  updatedFields_contains_every?: Maybe<Array<Scalars['String']>>;
-  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
-  updatedFields_contains_some?: Maybe<Array<Scalars['String']>>;
-  node?: Maybe<Gcms_ProjectWhereInput>;
-};
-
-export type Gcms_ProjectType = 
-  | 'Work'
-  | 'Experiment';
-
-export type Gcms_ProjectUpdateInput = {
-  status?: Maybe<Gcms_Status>;
-  projectId?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  projectType?: Maybe<Gcms_ProjectType>;
-  description?: Maybe<Scalars['String']>;
-  disabled?: Maybe<Scalars['Boolean']>;
-  externalUrl?: Maybe<Scalars['String']>;
-  body?: Maybe<Scalars['GCMS_RichTextAST']>;
-  linkType?: Maybe<Gcms_ProjectLinkType>;
-  githubRepoUrl?: Maybe<Scalars['String']>;
-  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>;
-  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
-  storybookUrl?: Maybe<Scalars['String']>;
-  overview?: Maybe<Scalars['String']>;
-  techList?: Maybe<Gcms_ProjectUpdatetechListInput>;
-  team?: Maybe<Gcms_ProjectUpdateteamInput>;
-  imageDesktop?: Maybe<Gcms_AssetUpdateOneWithoutImageDesktopProjectInput>;
-};
-
-export type Gcms_ProjectUpdateManyDataInput = {
-  status?: Maybe<Gcms_Status>;
-  projectId?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  projectType?: Maybe<Gcms_ProjectType>;
-  description?: Maybe<Scalars['String']>;
-  disabled?: Maybe<Scalars['Boolean']>;
-  externalUrl?: Maybe<Scalars['String']>;
-  body?: Maybe<Scalars['GCMS_RichTextAST']>;
-  linkType?: Maybe<Gcms_ProjectLinkType>;
-  githubRepoUrl?: Maybe<Scalars['String']>;
-  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>;
-  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
-  storybookUrl?: Maybe<Scalars['String']>;
-  overview?: Maybe<Scalars['String']>;
-  techList?: Maybe<Gcms_ProjectUpdatetechListInput>;
-  team?: Maybe<Gcms_ProjectUpdateteamInput>;
-};
-
-export type Gcms_ProjectUpdateManyMutationInput = {
-  status?: Maybe<Gcms_Status>;
-  projectId?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  projectType?: Maybe<Gcms_ProjectType>;
-  description?: Maybe<Scalars['String']>;
-  disabled?: Maybe<Scalars['Boolean']>;
-  externalUrl?: Maybe<Scalars['String']>;
-  body?: Maybe<Scalars['GCMS_RichTextAST']>;
-  linkType?: Maybe<Gcms_ProjectLinkType>;
-  githubRepoUrl?: Maybe<Scalars['String']>;
-  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>;
-  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
-  storybookUrl?: Maybe<Scalars['String']>;
-  overview?: Maybe<Scalars['String']>;
-  techList?: Maybe<Gcms_ProjectUpdatetechListInput>;
-  team?: Maybe<Gcms_ProjectUpdateteamInput>;
-};
-
-export type Gcms_ProjectUpdateManyWithoutImageDesktopInput = {
-  create?: Maybe<Array<Gcms_ProjectCreateWithoutImageDesktopInput>>;
-  connect?: Maybe<Array<Gcms_ProjectWhereUniqueInput>>;
-  set?: Maybe<Array<Gcms_ProjectWhereUniqueInput>>;
-  disconnect?: Maybe<Array<Gcms_ProjectWhereUniqueInput>>;
-  delete?: Maybe<Array<Gcms_ProjectWhereUniqueInput>>;
-  update?: Maybe<Array<Gcms_ProjectUpdateWithWhereUniqueWithoutImageDesktopInput>>;
-  updateMany?: Maybe<Array<Gcms_ProjectUpdateManyWithWhereNestedInput>>;
-  deleteMany?: Maybe<Array<Gcms_ProjectScalarWhereInput>>;
-  upsert?: Maybe<Array<Gcms_ProjectUpsertWithWhereUniqueWithoutImageDesktopInput>>;
-};
-
-export type Gcms_ProjectUpdateManyWithWhereNestedInput = {
-  where: Gcms_ProjectScalarWhereInput;
-  data: Gcms_ProjectUpdateManyDataInput;
-};
-
-export type Gcms_ProjectUpdateteamInput = {
-  set?: Maybe<Array<Scalars['String']>>;
-};
-
-export type Gcms_ProjectUpdatetechListInput = {
-  set?: Maybe<Array<Scalars['String']>>;
-};
-
-export type Gcms_ProjectUpdateWithoutImageDesktopDataInput = {
-  status?: Maybe<Gcms_Status>;
-  projectId?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  projectType?: Maybe<Gcms_ProjectType>;
-  description?: Maybe<Scalars['String']>;
-  disabled?: Maybe<Scalars['Boolean']>;
-  externalUrl?: Maybe<Scalars['String']>;
-  body?: Maybe<Scalars['GCMS_RichTextAST']>;
-  linkType?: Maybe<Gcms_ProjectLinkType>;
-  githubRepoUrl?: Maybe<Scalars['String']>;
-  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>;
-  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
-  storybookUrl?: Maybe<Scalars['String']>;
-  overview?: Maybe<Scalars['String']>;
-  techList?: Maybe<Gcms_ProjectUpdatetechListInput>;
-  team?: Maybe<Gcms_ProjectUpdateteamInput>;
-};
-
-export type Gcms_ProjectUpdateWithWhereUniqueWithoutImageDesktopInput = {
-  where: Gcms_ProjectWhereUniqueInput;
-  data: Gcms_ProjectUpdateWithoutImageDesktopDataInput;
-};
-
-export type Gcms_ProjectUpsertWithWhereUniqueWithoutImageDesktopInput = {
-  where: Gcms_ProjectWhereUniqueInput;
-  update: Gcms_ProjectUpdateWithoutImageDesktopDataInput;
-  create: Gcms_ProjectCreateWithoutImageDesktopInput;
-};
-
-export type Gcms_ProjectWhereInput = {
+/** Identifies documents */
+export type Gcms_ProjectManyWhereInput = {
+  /** Contains search across all appropriate fields. */
   _search?: Maybe<Scalars['String']>;
   /** Logical AND on all given filters. */
   AND?: Maybe<Array<Gcms_ProjectWhereInput>>;
@@ -2682,28 +2691,25 @@ export type Gcms_ProjectWhereInput = {
   OR?: Maybe<Array<Gcms_ProjectWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
   NOT?: Maybe<Array<Gcms_ProjectWhereInput>>;
-  status?: Maybe<Gcms_Status>;
+  id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
-  status_not?: Maybe<Gcms_Status>;
+  id_not?: Maybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  status_in?: Maybe<Array<Gcms_Status>>;
+  id_in?: Maybe<Array<Scalars['ID']>>;
   /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<Gcms_Status>>;
-  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
   createdAt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
@@ -2719,33 +2725,39 @@ export type Gcms_ProjectWhereInput = {
   createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
-  id?: Maybe<Scalars['ID']>;
+  createdBy?: Maybe<Gcms_UserWhereInput>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are not equal to given value. */
-  id_not?: Maybe<Scalars['ID']>;
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>;
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
   /** All values less than the given value. */
-  id_lt?: Maybe<Scalars['ID']>;
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values less than or equal the given value. */
-  id_lte?: Maybe<Scalars['ID']>;
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than the given value. */
-  id_gt?: Maybe<Scalars['ID']>;
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than or equal the given value. */
-  id_gte?: Maybe<Scalars['ID']>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<Scalars['ID']>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<Scalars['ID']>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<Scalars['ID']>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<Scalars['ID']>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<Scalars['ID']>;
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<Scalars['ID']>;
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedBy?: Maybe<Gcms_UserWhereInput>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedBy?: Maybe<Gcms_UserWhereInput>;
   projectId?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   projectId_not?: Maybe<Scalars['String']>;
@@ -2753,14 +2765,6 @@ export type Gcms_ProjectWhereInput = {
   projectId_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   projectId_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  projectId_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  projectId_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  projectId_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  projectId_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   projectId_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2771,7 +2775,7 @@ export type Gcms_ProjectWhereInput = {
   projectId_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   projectId_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   projectId_not_ends_with?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
@@ -2780,14 +2784,6 @@ export type Gcms_ProjectWhereInput = {
   title_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   title_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  title_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  title_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  title_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  title_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2798,7 +2794,7 @@ export type Gcms_ProjectWhereInput = {
   title_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>;
   projectType?: Maybe<Gcms_ProjectType>;
   /** All values that are not equal to given value. */
@@ -2807,6 +2803,21 @@ export type Gcms_ProjectWhereInput = {
   projectType_in?: Maybe<Array<Gcms_ProjectType>>;
   /** All values that are not contained in given list. */
   projectType_not_in?: Maybe<Array<Gcms_ProjectType>>;
+  order?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  order_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  order_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  order_not_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  order_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  order_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  order_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  order_gte?: Maybe<Scalars['Int']>;
   description?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   description_not?: Maybe<Scalars['String']>;
@@ -2814,14 +2825,6 @@ export type Gcms_ProjectWhereInput = {
   description_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   description_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  description_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  description_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  description_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  description_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   description_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2832,11 +2835,51 @@ export type Gcms_ProjectWhereInput = {
   description_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   description_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   description_not_ends_with?: Maybe<Scalars['String']>;
+  overview?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  overview_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  overview_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  overview_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  overview_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  overview_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  overview_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  overview_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  overview_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  overview_not_ends_with?: Maybe<Scalars['String']>;
+  imageDesktop?: Maybe<Gcms_AssetWhereInput>;
   disabled?: Maybe<Scalars['Boolean']>;
   /** All values that are not equal to given value. */
   disabled_not?: Maybe<Scalars['Boolean']>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  techList?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  techList_not?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  techList_contains_all?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  techList_contains_some?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  techList_contains_none?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  team?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  team_not?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  team_contains_all?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  team_contains_some?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  team_contains_none?: Maybe<Array<Scalars['String']>>;
   externalUrl?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   externalUrl_not?: Maybe<Scalars['String']>;
@@ -2844,14 +2887,6 @@ export type Gcms_ProjectWhereInput = {
   externalUrl_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   externalUrl_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  externalUrl_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  externalUrl_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  externalUrl_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  externalUrl_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   externalUrl_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2862,7 +2897,7 @@ export type Gcms_ProjectWhereInput = {
   externalUrl_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   externalUrl_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   externalUrl_not_ends_with?: Maybe<Scalars['String']>;
   linkType?: Maybe<Gcms_ProjectLinkType>;
   /** All values that are not equal to given value. */
@@ -2878,14 +2913,6 @@ export type Gcms_ProjectWhereInput = {
   githubRepoUrl_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   githubRepoUrl_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  githubRepoUrl_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  githubRepoUrl_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  githubRepoUrl_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  githubRepoUrl_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   githubRepoUrl_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2896,23 +2923,42 @@ export type Gcms_ProjectWhereInput = {
   githubRepoUrl_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   githubRepoUrl_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   githubRepoUrl_not_ends_with?: Maybe<Scalars['String']>;
-  projectPublishDate?: Maybe<Scalars['GCMS_DateTime']>;
+  storybookUrl?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
-  projectPublishDate_not?: Maybe<Scalars['GCMS_DateTime']>;
+  storybookUrl_not?: Maybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  projectPublishDate_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  storybookUrl_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
-  projectPublishDate_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  storybookUrl_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  storybookUrl_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  storybookUrl_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  storybookUrl_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  storybookUrl_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  storybookUrl_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  storybookUrl_not_ends_with?: Maybe<Scalars['String']>;
+  projectPublishDate?: Maybe<Scalars['GCMS_Date']>;
+  /** All values that are not equal to given value. */
+  projectPublishDate_not?: Maybe<Scalars['GCMS_Date']>;
+  /** All values that are contained in given list. */
+  projectPublishDate_in?: Maybe<Array<Scalars['GCMS_Date']>>;
+  /** All values that are not contained in given list. */
+  projectPublishDate_not_in?: Maybe<Array<Scalars['GCMS_Date']>>;
   /** All values less than the given value. */
-  projectPublishDate_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  projectPublishDate_lt?: Maybe<Scalars['GCMS_Date']>;
   /** All values less than or equal the given value. */
-  projectPublishDate_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  projectPublishDate_lte?: Maybe<Scalars['GCMS_Date']>;
   /** All values greater than the given value. */
-  projectPublishDate_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  projectPublishDate_gt?: Maybe<Scalars['GCMS_Date']>;
   /** All values greater than or equal the given value. */
-  projectPublishDate_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  projectPublishDate_gte?: Maybe<Scalars['GCMS_Date']>;
   lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are not equal to given value. */
   lastDeployedOn_not?: Maybe<Scalars['GCMS_DateTime']>;
@@ -2928,33 +2974,307 @@ export type Gcms_ProjectWhereInput = {
   lastDeployedOn_gt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than or equal the given value. */
   lastDeployedOn_gte?: Maybe<Scalars['GCMS_DateTime']>;
+};
+
+export type Gcms_ProjectOrderByInput = 
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'publishedAt_ASC'
+  | 'publishedAt_DESC'
+  | 'projectId_ASC'
+  | 'projectId_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'projectType_ASC'
+  | 'projectType_DESC'
+  | 'order_ASC'
+  | 'order_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
+  | 'overview_ASC'
+  | 'overview_DESC'
+  | 'disabled_ASC'
+  | 'disabled_DESC'
+  | 'techList_ASC'
+  | 'techList_DESC'
+  | 'team_ASC'
+  | 'team_DESC'
+  | 'externalUrl_ASC'
+  | 'externalUrl_DESC'
+  | 'linkType_ASC'
+  | 'linkType_DESC'
+  | 'githubRepoUrl_ASC'
+  | 'githubRepoUrl_DESC'
+  | 'storybookUrl_ASC'
+  | 'storybookUrl_DESC'
+  | 'projectPublishDate_ASC'
+  | 'projectPublishDate_DESC'
+  | 'lastDeployedOn_ASC'
+  | 'lastDeployedOn_DESC';
+
+/** Type of project */
+export type Gcms_ProjectType = 
+  | 'Experiment'
+  | 'Work';
+
+export type Gcms_ProjectUpdateInput = {
+  projectId?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  projectType?: Maybe<Gcms_ProjectType>;
+  order?: Maybe<Scalars['Int']>;
+  description?: Maybe<Scalars['String']>;
+  overview?: Maybe<Scalars['String']>;
+  imageDesktop?: Maybe<Gcms_AssetUpdateOneInlineInput>;
+  disabled?: Maybe<Scalars['Boolean']>;
+  techList?: Maybe<Array<Scalars['String']>>;
+  team?: Maybe<Array<Scalars['String']>>;
+  externalUrl?: Maybe<Scalars['String']>;
+  linkType?: Maybe<Gcms_ProjectLinkType>;
+  githubRepoUrl?: Maybe<Scalars['String']>;
   storybookUrl?: Maybe<Scalars['String']>;
+  projectPublishDate?: Maybe<Scalars['GCMS_Date']>;
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
+  body?: Maybe<Scalars['GCMS_RichTextAST']>;
+};
+
+export type Gcms_ProjectUpdateManyInlineInput = {
+  /** Create and connect multiple Project documents */
+  create?: Maybe<Array<Gcms_ProjectCreateInput>>;
+  /** Connect multiple existing Project documents */
+  connect?: Maybe<Array<Gcms_ProjectConnectInput>>;
+  /** Override currently-connected documents with multiple existing Project documents */
+  set?: Maybe<Array<Gcms_ProjectWhereUniqueInput>>;
+  /** Update multiple Project documents */
+  update?: Maybe<Array<Gcms_ProjectUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Project documents */
+  upsert?: Maybe<Array<Gcms_ProjectUpsertWithNestedWhereUniqueInput>>;
+  /** Disconnect multiple Project documents */
+  disconnect?: Maybe<Array<Gcms_ProjectWhereUniqueInput>>;
+  /** Delete multiple Project documents */
+  delete?: Maybe<Array<Gcms_ProjectWhereUniqueInput>>;
+};
+
+export type Gcms_ProjectUpdateManyInput = {
+  title?: Maybe<Scalars['String']>;
+  projectType?: Maybe<Gcms_ProjectType>;
+  order?: Maybe<Scalars['Int']>;
+  description?: Maybe<Scalars['String']>;
+  overview?: Maybe<Scalars['String']>;
+  disabled?: Maybe<Scalars['Boolean']>;
+  techList?: Maybe<Array<Scalars['String']>>;
+  team?: Maybe<Array<Scalars['String']>>;
+  externalUrl?: Maybe<Scalars['String']>;
+  linkType?: Maybe<Gcms_ProjectLinkType>;
+  githubRepoUrl?: Maybe<Scalars['String']>;
+  storybookUrl?: Maybe<Scalars['String']>;
+  projectPublishDate?: Maybe<Scalars['GCMS_Date']>;
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
+  body?: Maybe<Scalars['GCMS_RichTextAST']>;
+};
+
+export type Gcms_ProjectUpdateManyWithNestedWhereInput = {
+  /** Document search */
+  where: Gcms_ProjectWhereInput;
+  /** Update many input */
+  data: Gcms_ProjectUpdateManyInput;
+};
+
+export type Gcms_ProjectUpdateOneInlineInput = {
+  /** Create and connect one Project document */
+  create?: Maybe<Gcms_ProjectCreateInput>;
+  /** Update single Project document */
+  update?: Maybe<Gcms_ProjectUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Project document */
+  upsert?: Maybe<Gcms_ProjectUpsertWithNestedWhereUniqueInput>;
+  /** Connect existing Project document */
+  connect?: Maybe<Gcms_ProjectWhereUniqueInput>;
+  /** Disconnect currently connected Project document */
+  disconnect?: Maybe<Scalars['Boolean']>;
+  /** Delete currently connected Project document */
+  delete?: Maybe<Scalars['Boolean']>;
+};
+
+export type Gcms_ProjectUpdateWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: Gcms_ProjectWhereUniqueInput;
+  /** Document to update */
+  data: Gcms_ProjectUpdateInput;
+};
+
+export type Gcms_ProjectUpsertInput = {
+  /** Create document if it didn't exist */
+  create: Gcms_ProjectCreateInput;
+  /** Update document if it exists */
+  update: Gcms_ProjectUpdateInput;
+};
+
+export type Gcms_ProjectUpsertWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: Gcms_ProjectWhereUniqueInput;
+  /** Upsert data */
+  data: Gcms_ProjectUpsertInput;
+};
+
+/** Identifies documents */
+export type Gcms_ProjectWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<Gcms_ProjectWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<Gcms_ProjectWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<Gcms_ProjectWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
-  storybookUrl_not?: Maybe<Scalars['String']>;
+  id_not?: Maybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  storybookUrl_in?: Maybe<Array<Scalars['String']>>;
+  id_in?: Maybe<Array<Scalars['ID']>>;
   /** All values that are not contained in given list. */
-  storybookUrl_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  storybookUrl_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  storybookUrl_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  storybookUrl_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  storybookUrl_gte?: Maybe<Scalars['String']>;
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
   /** All values containing the given string. */
-  storybookUrl_contains?: Maybe<Scalars['String']>;
+  id_contains?: Maybe<Scalars['ID']>;
   /** All values not containing the given string. */
-  storybookUrl_not_contains?: Maybe<Scalars['String']>;
+  id_not_contains?: Maybe<Scalars['ID']>;
   /** All values starting with the given string. */
-  storybookUrl_starts_with?: Maybe<Scalars['String']>;
+  id_starts_with?: Maybe<Scalars['ID']>;
   /** All values not starting with the given string. */
-  storybookUrl_not_starts_with?: Maybe<Scalars['String']>;
+  id_not_starts_with?: Maybe<Scalars['ID']>;
   /** All values ending with the given string. */
-  storybookUrl_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
-  storybookUrl_not_ends_with?: Maybe<Scalars['String']>;
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  createdBy?: Maybe<Gcms_UserWhereInput>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedBy?: Maybe<Gcms_UserWhereInput>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedBy?: Maybe<Gcms_UserWhereInput>;
+  projectId?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  projectId_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  projectId_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  projectId_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  projectId_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  projectId_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  projectId_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  projectId_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  projectId_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  projectId_not_ends_with?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  title_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  title_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  title_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  title_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  title_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  title_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  title_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: Maybe<Scalars['String']>;
+  projectType?: Maybe<Gcms_ProjectType>;
+  /** All values that are not equal to given value. */
+  projectType_not?: Maybe<Gcms_ProjectType>;
+  /** All values that are contained in given list. */
+  projectType_in?: Maybe<Array<Gcms_ProjectType>>;
+  /** All values that are not contained in given list. */
+  projectType_not_in?: Maybe<Array<Gcms_ProjectType>>;
+  order?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  order_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  order_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  order_not_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  order_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  order_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  order_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  order_gte?: Maybe<Scalars['Int']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   overview?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   overview_not?: Maybe<Scalars['String']>;
@@ -2962,14 +3282,6 @@ export type Gcms_ProjectWhereInput = {
   overview_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   overview_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  overview_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  overview_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  overview_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  overview_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   overview_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2980,33 +3292,238 @@ export type Gcms_ProjectWhereInput = {
   overview_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   overview_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   overview_not_ends_with?: Maybe<Scalars['String']>;
   imageDesktop?: Maybe<Gcms_AssetWhereInput>;
+  disabled?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  disabled_not?: Maybe<Scalars['Boolean']>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  techList?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  techList_not?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  techList_contains_all?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  techList_contains_some?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  techList_contains_none?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  team?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  team_not?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  team_contains_all?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  team_contains_some?: Maybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  team_contains_none?: Maybe<Array<Scalars['String']>>;
+  externalUrl?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  externalUrl_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  externalUrl_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  externalUrl_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  externalUrl_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  externalUrl_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  externalUrl_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  externalUrl_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  externalUrl_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  externalUrl_not_ends_with?: Maybe<Scalars['String']>;
+  linkType?: Maybe<Gcms_ProjectLinkType>;
+  /** All values that are not equal to given value. */
+  linkType_not?: Maybe<Gcms_ProjectLinkType>;
+  /** All values that are contained in given list. */
+  linkType_in?: Maybe<Array<Gcms_ProjectLinkType>>;
+  /** All values that are not contained in given list. */
+  linkType_not_in?: Maybe<Array<Gcms_ProjectLinkType>>;
+  githubRepoUrl?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  githubRepoUrl_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  githubRepoUrl_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  githubRepoUrl_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  githubRepoUrl_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  githubRepoUrl_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  githubRepoUrl_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  githubRepoUrl_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  githubRepoUrl_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  githubRepoUrl_not_ends_with?: Maybe<Scalars['String']>;
+  storybookUrl?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  storybookUrl_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  storybookUrl_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  storybookUrl_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  storybookUrl_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  storybookUrl_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  storybookUrl_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  storybookUrl_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  storybookUrl_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  storybookUrl_not_ends_with?: Maybe<Scalars['String']>;
+  projectPublishDate?: Maybe<Scalars['GCMS_Date']>;
+  /** All values that are not equal to given value. */
+  projectPublishDate_not?: Maybe<Scalars['GCMS_Date']>;
+  /** All values that are contained in given list. */
+  projectPublishDate_in?: Maybe<Array<Scalars['GCMS_Date']>>;
+  /** All values that are not contained in given list. */
+  projectPublishDate_not_in?: Maybe<Array<Scalars['GCMS_Date']>>;
+  /** All values less than the given value. */
+  projectPublishDate_lt?: Maybe<Scalars['GCMS_Date']>;
+  /** All values less than or equal the given value. */
+  projectPublishDate_lte?: Maybe<Scalars['GCMS_Date']>;
+  /** All values greater than the given value. */
+  projectPublishDate_gt?: Maybe<Scalars['GCMS_Date']>;
+  /** All values greater than or equal the given value. */
+  projectPublishDate_gte?: Maybe<Scalars['GCMS_Date']>;
+  lastDeployedOn?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  lastDeployedOn_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  lastDeployedOn_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  lastDeployedOn_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  lastDeployedOn_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  lastDeployedOn_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  lastDeployedOn_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  lastDeployedOn_gte?: Maybe<Scalars['GCMS_DateTime']>;
 };
 
+/** References Project record uniquely */
 export type Gcms_ProjectWhereUniqueInput = {
   id?: Maybe<Scalars['ID']>;
   projectId?: Maybe<Scalars['String']>;
 };
 
-/** Custom type representing a rich text value comprising of raw rich text ast, html, markdown and text values */
-export type Gcms_RichText = {
-  raw?: Maybe<Scalars['GCMS_RichTextAST']>;
-  html?: Maybe<Scalars['String']>;
-  markdown?: Maybe<Scalars['String']>;
-  text?: Maybe<Scalars['String']>;
+export type Gcms_PublishLocaleInput = {
+  /** Locales to publish */
+  locale: Gcms_Locale;
+  /** Stages to publish selected locales to */
+  stages: Array<Gcms_Stage>;
+};
+
+/** Representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
+export type Gcms_Rgba = {
+  r: Scalars['GCMS_RGBAHue'];
+  g: Scalars['GCMS_RGBAHue'];
+  b: Scalars['GCMS_RGBAHue'];
+  a: Scalars['GCMS_RGBATransparency'];
 };
 
 
+/** Input type representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
+export type Gcms_RgbaInput = {
+  r: Scalars['GCMS_RGBAHue'];
+  g: Scalars['GCMS_RGBAHue'];
+  b: Scalars['GCMS_RGBAHue'];
+  a: Scalars['GCMS_RGBATransparency'];
+};
+
+
+/** Custom type representing a rich text value comprising of raw rich text ast, html, markdown and text values */
+export type Gcms_RichText = {
+  /** Returns AST representation */
+  raw: Scalars['GCMS_RichTextAST'];
+  /** Returns HTMl representation */
+  html: Scalars['String'];
+  /** Returns Markdown representation */
+  markdown: Scalars['String'];
+  /** Returns plain-text contents of RichText */
+  text: Scalars['String'];
+};
+
+
+/** Content for sections */
 export type Gcms_Section = Gcms_Node & {
-  status: Gcms_Status;
-  updatedAt: Scalars['GCMS_DateTime'];
-  createdAt: Scalars['GCMS_DateTime'];
+  /** System stage field */
+  stage: Gcms_Stage;
+  /** Get the document in other stages */
+  documentInStages: Array<Gcms_Section>;
+  /** The unique identifier */
   id: Scalars['ID'];
-  body?: Maybe<Gcms_RichText>;
+  /** The time the document was created */
+  createdAt: Scalars['GCMS_DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<Gcms_User>;
+  /** The time the document was updated */
+  updatedAt: Scalars['GCMS_DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<Gcms_User>;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<Gcms_User>;
   sectionId?: Maybe<Scalars['String']>;
   heading?: Maybe<Scalars['String']>;
+  body?: Maybe<Gcms_RichText>;
+  /** List of Section versions */
+  history: Array<Gcms_Version>;
+};
+
+
+/** Content for sections */
+export type Gcms_SectionDocumentInStagesArgs = {
+  stages?: Array<Gcms_Stage>;
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+};
+
+
+/** Content for sections */
+export type Gcms_SectionCreatedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Content for sections */
+export type Gcms_SectionUpdatedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Content for sections */
+export type Gcms_SectionPublishedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Content for sections */
+export type Gcms_SectionHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: Maybe<Gcms_Stage>;
+};
+
+export type Gcms_SectionConnectInput = {
+  /** Document to connect */
+  where: Gcms_SectionWhereUniqueInput;
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<Gcms_ConnectPositionInput>;
 };
 
 /** A connection to a list of items. */
@@ -3014,15 +3531,30 @@ export type Gcms_SectionConnection = {
   /** Information to aid in pagination. */
   pageInfo: Gcms_PageInfo;
   /** A list of edges. */
-  edges: Array<Maybe<Gcms_SectionEdge>>;
-  aggregate: Gcms_AggregateSection;
+  edges: Array<Gcms_SectionEdge>;
+  aggregate: Gcms_Aggregate;
 };
 
 export type Gcms_SectionCreateInput = {
-  status?: Maybe<Gcms_Status>;
-  body?: Maybe<Scalars['GCMS_RichTextAST']>;
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
   sectionId?: Maybe<Scalars['String']>;
   heading?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['GCMS_RichTextAST']>;
+};
+
+export type Gcms_SectionCreateManyInlineInput = {
+  /** Create and connect multiple existing Section documents */
+  create?: Maybe<Array<Gcms_SectionCreateInput>>;
+  /** Connect multiple existing Section documents */
+  connect?: Maybe<Array<Gcms_SectionWhereUniqueInput>>;
+};
+
+export type Gcms_SectionCreateOneInlineInput = {
+  /** Create and connect one Section document */
+  create?: Maybe<Gcms_SectionCreateInput>;
+  /** Connect one existing Section document */
+  connect?: Maybe<Gcms_SectionWhereUniqueInput>;
 };
 
 /** An edge in a connection. */
@@ -3033,72 +3565,9 @@ export type Gcms_SectionEdge = {
   cursor: Scalars['String'];
 };
 
-export type Gcms_SectionOrderByInput = 
-  | 'status_ASC'
-  | 'status_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'body_ASC'
-  | 'body_DESC'
-  | 'sectionId_ASC'
-  | 'sectionId_DESC'
-  | 'heading_ASC'
-  | 'heading_DESC';
-
-export type Gcms_SectionPreviousValues = {
-  status: Gcms_Status;
-  updatedAt: Scalars['GCMS_DateTime'];
-  createdAt: Scalars['GCMS_DateTime'];
-  id: Scalars['ID'];
-  body?: Maybe<Gcms_RichText>;
-  sectionId?: Maybe<Scalars['String']>;
-  heading?: Maybe<Scalars['String']>;
-};
-
-export type Gcms_SectionSubscriptionPayload = {
-  mutation: Gcms_MutationType;
-  node?: Maybe<Gcms_Section>;
-  updatedFields?: Maybe<Array<Scalars['String']>>;
-  previousValues?: Maybe<Gcms_SectionPreviousValues>;
-};
-
-export type Gcms_SectionSubscriptionWhereInput = {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<Gcms_SectionSubscriptionWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<Gcms_SectionSubscriptionWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<Gcms_SectionSubscriptionWhereInput>>;
-  /** The subscription event gets dispatched when it's listed in mutation_in */
-  mutation_in?: Maybe<Array<Gcms_MutationType>>;
-  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
-  updatedFields_contains?: Maybe<Scalars['String']>;
-  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
-  updatedFields_contains_every?: Maybe<Array<Scalars['String']>>;
-  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
-  updatedFields_contains_some?: Maybe<Array<Scalars['String']>>;
-  node?: Maybe<Gcms_SectionWhereInput>;
-};
-
-export type Gcms_SectionUpdateInput = {
-  status?: Maybe<Gcms_Status>;
-  body?: Maybe<Scalars['GCMS_RichTextAST']>;
-  sectionId?: Maybe<Scalars['String']>;
-  heading?: Maybe<Scalars['String']>;
-};
-
-export type Gcms_SectionUpdateManyMutationInput = {
-  status?: Maybe<Gcms_Status>;
-  body?: Maybe<Scalars['GCMS_RichTextAST']>;
-  sectionId?: Maybe<Scalars['String']>;
-  heading?: Maybe<Scalars['String']>;
-};
-
-export type Gcms_SectionWhereInput = {
+/** Identifies documents */
+export type Gcms_SectionManyWhereInput = {
+  /** Contains search across all appropriate fields. */
   _search?: Maybe<Scalars['String']>;
   /** Logical AND on all given filters. */
   AND?: Maybe<Array<Gcms_SectionWhereInput>>;
@@ -3106,28 +3575,25 @@ export type Gcms_SectionWhereInput = {
   OR?: Maybe<Array<Gcms_SectionWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
   NOT?: Maybe<Array<Gcms_SectionWhereInput>>;
-  status?: Maybe<Gcms_Status>;
+  id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
-  status_not?: Maybe<Gcms_Status>;
+  id_not?: Maybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  status_in?: Maybe<Array<Gcms_Status>>;
+  id_in?: Maybe<Array<Scalars['ID']>>;
   /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<Gcms_Status>>;
-  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
   createdAt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
@@ -3143,33 +3609,39 @@ export type Gcms_SectionWhereInput = {
   createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
-  id?: Maybe<Scalars['ID']>;
+  createdBy?: Maybe<Gcms_UserWhereInput>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are not equal to given value. */
-  id_not?: Maybe<Scalars['ID']>;
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>;
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
   /** All values less than the given value. */
-  id_lt?: Maybe<Scalars['ID']>;
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values less than or equal the given value. */
-  id_lte?: Maybe<Scalars['ID']>;
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than the given value. */
-  id_gt?: Maybe<Scalars['ID']>;
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than or equal the given value. */
-  id_gte?: Maybe<Scalars['ID']>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<Scalars['ID']>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<Scalars['ID']>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<Scalars['ID']>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<Scalars['ID']>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<Scalars['ID']>;
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<Scalars['ID']>;
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedBy?: Maybe<Gcms_UserWhereInput>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedBy?: Maybe<Gcms_UserWhereInput>;
   sectionId?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   sectionId_not?: Maybe<Scalars['String']>;
@@ -3177,14 +3649,6 @@ export type Gcms_SectionWhereInput = {
   sectionId_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   sectionId_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  sectionId_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  sectionId_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  sectionId_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  sectionId_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   sectionId_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3195,7 +3659,7 @@ export type Gcms_SectionWhereInput = {
   sectionId_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   sectionId_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   sectionId_not_ends_with?: Maybe<Scalars['String']>;
   heading?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
@@ -3204,14 +3668,6 @@ export type Gcms_SectionWhereInput = {
   heading_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   heading_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  heading_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  heading_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  heading_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  heading_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   heading_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3222,177 +3678,124 @@ export type Gcms_SectionWhereInput = {
   heading_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   heading_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   heading_not_ends_with?: Maybe<Scalars['String']>;
 };
 
-export type Gcms_SectionWhereUniqueInput = {
-  id?: Maybe<Scalars['ID']>;
-  sectionId?: Maybe<Scalars['String']>;
-};
-
-export type Gcms_Skill = Gcms_Node & {
-  status: Gcms_Status;
-  updatedAt: Scalars['GCMS_DateTime'];
-  createdAt: Scalars['GCMS_DateTime'];
-  id: Scalars['ID'];
-  directionMobile?: Maybe<Gcms_SkillsDirection>;
-  label: Scalars['String'];
-  xAxisMobile?: Maybe<Scalars['Int']>;
-  yAxisMobile?: Maybe<Scalars['Int']>;
-  directionDesktop?: Maybe<Gcms_SkillsDirection>;
-  xAxisDesktop?: Maybe<Scalars['Int']>;
-  yAxisDesktop?: Maybe<Scalars['Int']>;
-};
-
-/** A connection to a list of items. */
-export type Gcms_SkillConnection = {
-  /** Information to aid in pagination. */
-  pageInfo: Gcms_PageInfo;
-  /** A list of edges. */
-  edges: Array<Maybe<Gcms_SkillEdge>>;
-  aggregate: Gcms_AggregateSkill;
-};
-
-export type Gcms_SkillCreateInput = {
-  status?: Maybe<Gcms_Status>;
-  directionMobile?: Maybe<Gcms_SkillsDirection>;
-  label: Scalars['String'];
-  xAxisMobile?: Maybe<Scalars['Int']>;
-  yAxisMobile?: Maybe<Scalars['Int']>;
-  directionDesktop?: Maybe<Gcms_SkillsDirection>;
-  xAxisDesktop?: Maybe<Scalars['Int']>;
-  yAxisDesktop?: Maybe<Scalars['Int']>;
-};
-
-/** An edge in a connection. */
-export type Gcms_SkillEdge = {
-  /** The item at the end of the edge. */
-  node: Gcms_Skill;
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String'];
-};
-
-export type Gcms_SkillOrderByInput = 
-  | 'status_ASC'
-  | 'status_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
+export type Gcms_SectionOrderByInput = 
   | 'id_ASC'
   | 'id_DESC'
-  | 'directionMobile_ASC'
-  | 'directionMobile_DESC'
-  | 'label_ASC'
-  | 'label_DESC'
-  | 'xAxisMobile_ASC'
-  | 'xAxisMobile_DESC'
-  | 'yAxisMobile_ASC'
-  | 'yAxisMobile_DESC'
-  | 'directionDesktop_ASC'
-  | 'directionDesktop_DESC'
-  | 'xAxisDesktop_ASC'
-  | 'xAxisDesktop_DESC'
-  | 'yAxisDesktop_ASC'
-  | 'yAxisDesktop_DESC';
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'publishedAt_ASC'
+  | 'publishedAt_DESC'
+  | 'sectionId_ASC'
+  | 'sectionId_DESC'
+  | 'heading_ASC'
+  | 'heading_DESC';
 
-export type Gcms_SkillPreviousValues = {
-  status: Gcms_Status;
-  updatedAt: Scalars['GCMS_DateTime'];
-  createdAt: Scalars['GCMS_DateTime'];
-  id: Scalars['ID'];
-  directionMobile?: Maybe<Gcms_SkillsDirection>;
-  label: Scalars['String'];
-  xAxisMobile?: Maybe<Scalars['Int']>;
-  yAxisMobile?: Maybe<Scalars['Int']>;
-  directionDesktop?: Maybe<Gcms_SkillsDirection>;
-  xAxisDesktop?: Maybe<Scalars['Int']>;
-  yAxisDesktop?: Maybe<Scalars['Int']>;
+export type Gcms_SectionUpdateInput = {
+  sectionId?: Maybe<Scalars['String']>;
+  heading?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['GCMS_RichTextAST']>;
 };
 
-export type Gcms_SkillsDirection = 
-  | 'Right'
-  | 'Up'
-  | 'Down';
-
-export type Gcms_SkillSubscriptionPayload = {
-  mutation: Gcms_MutationType;
-  node?: Maybe<Gcms_Skill>;
-  updatedFields?: Maybe<Array<Scalars['String']>>;
-  previousValues?: Maybe<Gcms_SkillPreviousValues>;
+export type Gcms_SectionUpdateManyInlineInput = {
+  /** Create and connect multiple Section documents */
+  create?: Maybe<Array<Gcms_SectionCreateInput>>;
+  /** Connect multiple existing Section documents */
+  connect?: Maybe<Array<Gcms_SectionConnectInput>>;
+  /** Override currently-connected documents with multiple existing Section documents */
+  set?: Maybe<Array<Gcms_SectionWhereUniqueInput>>;
+  /** Update multiple Section documents */
+  update?: Maybe<Array<Gcms_SectionUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Section documents */
+  upsert?: Maybe<Array<Gcms_SectionUpsertWithNestedWhereUniqueInput>>;
+  /** Disconnect multiple Section documents */
+  disconnect?: Maybe<Array<Gcms_SectionWhereUniqueInput>>;
+  /** Delete multiple Section documents */
+  delete?: Maybe<Array<Gcms_SectionWhereUniqueInput>>;
 };
 
-export type Gcms_SkillSubscriptionWhereInput = {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<Gcms_SkillSubscriptionWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<Gcms_SkillSubscriptionWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<Gcms_SkillSubscriptionWhereInput>>;
-  /** The subscription event gets dispatched when it's listed in mutation_in */
-  mutation_in?: Maybe<Array<Gcms_MutationType>>;
-  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
-  updatedFields_contains?: Maybe<Scalars['String']>;
-  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
-  updatedFields_contains_every?: Maybe<Array<Scalars['String']>>;
-  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
-  updatedFields_contains_some?: Maybe<Array<Scalars['String']>>;
-  node?: Maybe<Gcms_SkillWhereInput>;
+export type Gcms_SectionUpdateManyInput = {
+  heading?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['GCMS_RichTextAST']>;
 };
 
-export type Gcms_SkillUpdateInput = {
-  status?: Maybe<Gcms_Status>;
-  directionMobile?: Maybe<Gcms_SkillsDirection>;
-  label?: Maybe<Scalars['String']>;
-  xAxisMobile?: Maybe<Scalars['Int']>;
-  yAxisMobile?: Maybe<Scalars['Int']>;
-  directionDesktop?: Maybe<Gcms_SkillsDirection>;
-  xAxisDesktop?: Maybe<Scalars['Int']>;
-  yAxisDesktop?: Maybe<Scalars['Int']>;
+export type Gcms_SectionUpdateManyWithNestedWhereInput = {
+  /** Document search */
+  where: Gcms_SectionWhereInput;
+  /** Update many input */
+  data: Gcms_SectionUpdateManyInput;
 };
 
-export type Gcms_SkillUpdateManyMutationInput = {
-  status?: Maybe<Gcms_Status>;
-  directionMobile?: Maybe<Gcms_SkillsDirection>;
-  label?: Maybe<Scalars['String']>;
-  xAxisMobile?: Maybe<Scalars['Int']>;
-  yAxisMobile?: Maybe<Scalars['Int']>;
-  directionDesktop?: Maybe<Gcms_SkillsDirection>;
-  xAxisDesktop?: Maybe<Scalars['Int']>;
-  yAxisDesktop?: Maybe<Scalars['Int']>;
+export type Gcms_SectionUpdateOneInlineInput = {
+  /** Create and connect one Section document */
+  create?: Maybe<Gcms_SectionCreateInput>;
+  /** Update single Section document */
+  update?: Maybe<Gcms_SectionUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Section document */
+  upsert?: Maybe<Gcms_SectionUpsertWithNestedWhereUniqueInput>;
+  /** Connect existing Section document */
+  connect?: Maybe<Gcms_SectionWhereUniqueInput>;
+  /** Disconnect currently connected Section document */
+  disconnect?: Maybe<Scalars['Boolean']>;
+  /** Delete currently connected Section document */
+  delete?: Maybe<Scalars['Boolean']>;
 };
 
-export type Gcms_SkillWhereInput = {
+export type Gcms_SectionUpdateWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: Gcms_SectionWhereUniqueInput;
+  /** Document to update */
+  data: Gcms_SectionUpdateInput;
+};
+
+export type Gcms_SectionUpsertInput = {
+  /** Create document if it didn't exist */
+  create: Gcms_SectionCreateInput;
+  /** Update document if it exists */
+  update: Gcms_SectionUpdateInput;
+};
+
+export type Gcms_SectionUpsertWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: Gcms_SectionWhereUniqueInput;
+  /** Upsert data */
+  data: Gcms_SectionUpsertInput;
+};
+
+/** Identifies documents */
+export type Gcms_SectionWhereInput = {
+  /** Contains search across all appropriate fields. */
   _search?: Maybe<Scalars['String']>;
   /** Logical AND on all given filters. */
-  AND?: Maybe<Array<Gcms_SkillWhereInput>>;
+  AND?: Maybe<Array<Gcms_SectionWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: Maybe<Array<Gcms_SkillWhereInput>>;
+  OR?: Maybe<Array<Gcms_SectionWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<Gcms_SkillWhereInput>>;
-  status?: Maybe<Gcms_Status>;
+  NOT?: Maybe<Array<Gcms_SectionWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
-  status_not?: Maybe<Gcms_Status>;
+  id_not?: Maybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  status_in?: Maybe<Array<Gcms_Status>>;
+  id_in?: Maybe<Array<Scalars['ID']>>;
   /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<Gcms_Status>>;
-  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
   createdAt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
@@ -3408,6 +3811,210 @@ export type Gcms_SkillWhereInput = {
   createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  createdBy?: Maybe<Gcms_UserWhereInput>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedBy?: Maybe<Gcms_UserWhereInput>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedBy?: Maybe<Gcms_UserWhereInput>;
+  sectionId?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  sectionId_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  sectionId_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  sectionId_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  sectionId_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  sectionId_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  sectionId_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  sectionId_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  sectionId_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  sectionId_not_ends_with?: Maybe<Scalars['String']>;
+  heading?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  heading_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  heading_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  heading_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  heading_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  heading_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  heading_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  heading_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  heading_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  heading_not_ends_with?: Maybe<Scalars['String']>;
+};
+
+/** References Section record uniquely */
+export type Gcms_SectionWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>;
+  sectionId?: Maybe<Scalars['String']>;
+};
+
+/** Skills model */
+export type Gcms_Skill = Gcms_Node & {
+  /** System stage field */
+  stage: Gcms_Stage;
+  /** Get the document in other stages */
+  documentInStages: Array<Gcms_Skill>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** The time the document was created */
+  createdAt: Scalars['GCMS_DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<Gcms_User>;
+  /** The time the document was updated */
+  updatedAt: Scalars['GCMS_DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<Gcms_User>;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<Gcms_User>;
+  label: Scalars['String'];
+  directionMobile?: Maybe<Gcms_SkillsDirection>;
+  directionDesktop?: Maybe<Gcms_SkillsDirection>;
+  xAxisMobile?: Maybe<Scalars['Int']>;
+  yAxisMobile?: Maybe<Scalars['Int']>;
+  xAxisDesktop?: Maybe<Scalars['Int']>;
+  yAxisDesktop?: Maybe<Scalars['Int']>;
+  /** List of Skill versions */
+  history: Array<Gcms_Version>;
+};
+
+
+/** Skills model */
+export type Gcms_SkillDocumentInStagesArgs = {
+  stages?: Array<Gcms_Stage>;
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+};
+
+
+/** Skills model */
+export type Gcms_SkillCreatedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Skills model */
+export type Gcms_SkillUpdatedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Skills model */
+export type Gcms_SkillPublishedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Skills model */
+export type Gcms_SkillHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: Maybe<Gcms_Stage>;
+};
+
+export type Gcms_SkillConnectInput = {
+  /** Document to connect */
+  where: Gcms_SkillWhereUniqueInput;
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<Gcms_ConnectPositionInput>;
+};
+
+/** A connection to a list of items. */
+export type Gcms_SkillConnection = {
+  /** Information to aid in pagination. */
+  pageInfo: Gcms_PageInfo;
+  /** A list of edges. */
+  edges: Array<Gcms_SkillEdge>;
+  aggregate: Gcms_Aggregate;
+};
+
+export type Gcms_SkillCreateInput = {
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  label: Scalars['String'];
+  directionMobile?: Maybe<Gcms_SkillsDirection>;
+  directionDesktop?: Maybe<Gcms_SkillsDirection>;
+  xAxisMobile?: Maybe<Scalars['Int']>;
+  yAxisMobile?: Maybe<Scalars['Int']>;
+  xAxisDesktop?: Maybe<Scalars['Int']>;
+  yAxisDesktop?: Maybe<Scalars['Int']>;
+};
+
+export type Gcms_SkillCreateManyInlineInput = {
+  /** Create and connect multiple existing Skill documents */
+  create?: Maybe<Array<Gcms_SkillCreateInput>>;
+  /** Connect multiple existing Skill documents */
+  connect?: Maybe<Array<Gcms_SkillWhereUniqueInput>>;
+};
+
+export type Gcms_SkillCreateOneInlineInput = {
+  /** Create and connect one Skill document */
+  create?: Maybe<Gcms_SkillCreateInput>;
+  /** Connect one existing Skill document */
+  connect?: Maybe<Gcms_SkillWhereUniqueInput>;
+};
+
+/** An edge in a connection. */
+export type Gcms_SkillEdge = {
+  /** The item at the end of the edge. */
+  node: Gcms_Skill;
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+};
+
+/** Identifies documents */
+export type Gcms_SkillManyWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<Gcms_SkillWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<Gcms_SkillWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<Gcms_SkillWhereInput>>;
   id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>;
@@ -3415,14 +4022,6 @@ export type Gcms_SkillWhereInput = {
   id_in?: Maybe<Array<Scalars['ID']>>;
   /** All values that are not contained in given list. */
   id_not_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values less than the given value. */
-  id_lt?: Maybe<Scalars['ID']>;
-  /** All values less than or equal the given value. */
-  id_lte?: Maybe<Scalars['ID']>;
-  /** All values greater than the given value. */
-  id_gt?: Maybe<Scalars['ID']>;
-  /** All values greater than or equal the given value. */
-  id_gte?: Maybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -3433,15 +4032,56 @@ export type Gcms_SkillWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>;
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>;
-  directionMobile?: Maybe<Gcms_SkillsDirection>;
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are not equal to given value. */
-  directionMobile_not?: Maybe<Gcms_SkillsDirection>;
+  createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are contained in given list. */
-  directionMobile_in?: Maybe<Array<Gcms_SkillsDirection>>;
+  createdAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
   /** All values that are not contained in given list. */
-  directionMobile_not_in?: Maybe<Array<Gcms_SkillsDirection>>;
+  createdAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  createdBy?: Maybe<Gcms_UserWhereInput>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedBy?: Maybe<Gcms_UserWhereInput>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedBy?: Maybe<Gcms_UserWhereInput>;
   label?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   label_not?: Maybe<Scalars['String']>;
@@ -3449,14 +4089,6 @@ export type Gcms_SkillWhereInput = {
   label_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   label_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  label_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  label_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  label_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  label_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   label_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3467,8 +4099,22 @@ export type Gcms_SkillWhereInput = {
   label_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   label_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   label_not_ends_with?: Maybe<Scalars['String']>;
+  directionMobile?: Maybe<Gcms_SkillsDirection>;
+  /** All values that are not equal to given value. */
+  directionMobile_not?: Maybe<Gcms_SkillsDirection>;
+  /** All values that are contained in given list. */
+  directionMobile_in?: Maybe<Array<Gcms_SkillsDirection>>;
+  /** All values that are not contained in given list. */
+  directionMobile_not_in?: Maybe<Array<Gcms_SkillsDirection>>;
+  directionDesktop?: Maybe<Gcms_SkillsDirection>;
+  /** All values that are not equal to given value. */
+  directionDesktop_not?: Maybe<Gcms_SkillsDirection>;
+  /** All values that are contained in given list. */
+  directionDesktop_in?: Maybe<Array<Gcms_SkillsDirection>>;
+  /** All values that are not contained in given list. */
+  directionDesktop_not_in?: Maybe<Array<Gcms_SkillsDirection>>;
   xAxisMobile?: Maybe<Scalars['Int']>;
   /** All values that are not equal to given value. */
   xAxisMobile_not?: Maybe<Scalars['Int']>;
@@ -3499,13 +4145,6 @@ export type Gcms_SkillWhereInput = {
   yAxisMobile_gt?: Maybe<Scalars['Int']>;
   /** All values greater than or equal the given value. */
   yAxisMobile_gte?: Maybe<Scalars['Int']>;
-  directionDesktop?: Maybe<Gcms_SkillsDirection>;
-  /** All values that are not equal to given value. */
-  directionDesktop_not?: Maybe<Gcms_SkillsDirection>;
-  /** All values that are contained in given list. */
-  directionDesktop_in?: Maybe<Array<Gcms_SkillsDirection>>;
-  /** All values that are not contained in given list. */
-  directionDesktop_not_in?: Maybe<Array<Gcms_SkillsDirection>>;
   xAxisDesktop?: Maybe<Scalars['Int']>;
   /** All values that are not equal to given value. */
   xAxisDesktop_not?: Maybe<Scalars['Int']>;
@@ -3538,132 +4177,145 @@ export type Gcms_SkillWhereInput = {
   yAxisDesktop_gte?: Maybe<Scalars['Int']>;
 };
 
-export type Gcms_SkillWhereUniqueInput = {
-  id?: Maybe<Scalars['ID']>;
-};
-
-export type Gcms_SocialLink = Gcms_Node & {
-  status: Gcms_Status;
-  updatedAt: Scalars['GCMS_DateTime'];
-  createdAt: Scalars['GCMS_DateTime'];
-  id: Scalars['ID'];
-  label: Scalars['String'];
-  url?: Maybe<Scalars['String']>;
-};
-
-/** A connection to a list of items. */
-export type Gcms_SocialLinkConnection = {
-  /** Information to aid in pagination. */
-  pageInfo: Gcms_PageInfo;
-  /** A list of edges. */
-  edges: Array<Maybe<Gcms_SocialLinkEdge>>;
-  aggregate: Gcms_AggregateSocialLink;
-};
-
-export type Gcms_SocialLinkCreateInput = {
-  status?: Maybe<Gcms_Status>;
-  label: Scalars['String'];
-  url?: Maybe<Scalars['String']>;
-};
-
-/** An edge in a connection. */
-export type Gcms_SocialLinkEdge = {
-  /** The item at the end of the edge. */
-  node: Gcms_SocialLink;
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String'];
-};
-
-export type Gcms_SocialLinkOrderByInput = 
-  | 'status_ASC'
-  | 'status_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
+export type Gcms_SkillOrderByInput = 
   | 'id_ASC'
   | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'publishedAt_ASC'
+  | 'publishedAt_DESC'
   | 'label_ASC'
   | 'label_DESC'
-  | 'url_ASC'
-  | 'url_DESC';
+  | 'directionMobile_ASC'
+  | 'directionMobile_DESC'
+  | 'directionDesktop_ASC'
+  | 'directionDesktop_DESC'
+  | 'xAxisMobile_ASC'
+  | 'xAxisMobile_DESC'
+  | 'yAxisMobile_ASC'
+  | 'yAxisMobile_DESC'
+  | 'xAxisDesktop_ASC'
+  | 'xAxisDesktop_DESC'
+  | 'yAxisDesktop_ASC'
+  | 'yAxisDesktop_DESC';
 
-export type Gcms_SocialLinkPreviousValues = {
-  status: Gcms_Status;
-  updatedAt: Scalars['GCMS_DateTime'];
-  createdAt: Scalars['GCMS_DateTime'];
-  id: Scalars['ID'];
-  label: Scalars['String'];
-  url?: Maybe<Scalars['String']>;
-};
+/** Direction values for skills. */
+export type Gcms_SkillsDirection = 
+  | 'Down'
+  | 'Right'
+  | 'Up';
 
-export type Gcms_SocialLinkSubscriptionPayload = {
-  mutation: Gcms_MutationType;
-  node?: Maybe<Gcms_SocialLink>;
-  updatedFields?: Maybe<Array<Scalars['String']>>;
-  previousValues?: Maybe<Gcms_SocialLinkPreviousValues>;
-};
-
-export type Gcms_SocialLinkSubscriptionWhereInput = {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<Gcms_SocialLinkSubscriptionWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<Gcms_SocialLinkSubscriptionWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<Gcms_SocialLinkSubscriptionWhereInput>>;
-  /** The subscription event gets dispatched when it's listed in mutation_in */
-  mutation_in?: Maybe<Array<Gcms_MutationType>>;
-  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
-  updatedFields_contains?: Maybe<Scalars['String']>;
-  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
-  updatedFields_contains_every?: Maybe<Array<Scalars['String']>>;
-  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
-  updatedFields_contains_some?: Maybe<Array<Scalars['String']>>;
-  node?: Maybe<Gcms_SocialLinkWhereInput>;
-};
-
-export type Gcms_SocialLinkUpdateInput = {
-  status?: Maybe<Gcms_Status>;
+export type Gcms_SkillUpdateInput = {
   label?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
+  directionMobile?: Maybe<Gcms_SkillsDirection>;
+  directionDesktop?: Maybe<Gcms_SkillsDirection>;
+  xAxisMobile?: Maybe<Scalars['Int']>;
+  yAxisMobile?: Maybe<Scalars['Int']>;
+  xAxisDesktop?: Maybe<Scalars['Int']>;
+  yAxisDesktop?: Maybe<Scalars['Int']>;
 };
 
-export type Gcms_SocialLinkUpdateManyMutationInput = {
-  status?: Maybe<Gcms_Status>;
+export type Gcms_SkillUpdateManyInlineInput = {
+  /** Create and connect multiple Skill documents */
+  create?: Maybe<Array<Gcms_SkillCreateInput>>;
+  /** Connect multiple existing Skill documents */
+  connect?: Maybe<Array<Gcms_SkillConnectInput>>;
+  /** Override currently-connected documents with multiple existing Skill documents */
+  set?: Maybe<Array<Gcms_SkillWhereUniqueInput>>;
+  /** Update multiple Skill documents */
+  update?: Maybe<Array<Gcms_SkillUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Skill documents */
+  upsert?: Maybe<Array<Gcms_SkillUpsertWithNestedWhereUniqueInput>>;
+  /** Disconnect multiple Skill documents */
+  disconnect?: Maybe<Array<Gcms_SkillWhereUniqueInput>>;
+  /** Delete multiple Skill documents */
+  delete?: Maybe<Array<Gcms_SkillWhereUniqueInput>>;
+};
+
+export type Gcms_SkillUpdateManyInput = {
   label?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
+  directionMobile?: Maybe<Gcms_SkillsDirection>;
+  directionDesktop?: Maybe<Gcms_SkillsDirection>;
+  xAxisMobile?: Maybe<Scalars['Int']>;
+  yAxisMobile?: Maybe<Scalars['Int']>;
+  xAxisDesktop?: Maybe<Scalars['Int']>;
+  yAxisDesktop?: Maybe<Scalars['Int']>;
 };
 
-export type Gcms_SocialLinkWhereInput = {
+export type Gcms_SkillUpdateManyWithNestedWhereInput = {
+  /** Document search */
+  where: Gcms_SkillWhereInput;
+  /** Update many input */
+  data: Gcms_SkillUpdateManyInput;
+};
+
+export type Gcms_SkillUpdateOneInlineInput = {
+  /** Create and connect one Skill document */
+  create?: Maybe<Gcms_SkillCreateInput>;
+  /** Update single Skill document */
+  update?: Maybe<Gcms_SkillUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Skill document */
+  upsert?: Maybe<Gcms_SkillUpsertWithNestedWhereUniqueInput>;
+  /** Connect existing Skill document */
+  connect?: Maybe<Gcms_SkillWhereUniqueInput>;
+  /** Disconnect currently connected Skill document */
+  disconnect?: Maybe<Scalars['Boolean']>;
+  /** Delete currently connected Skill document */
+  delete?: Maybe<Scalars['Boolean']>;
+};
+
+export type Gcms_SkillUpdateWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: Gcms_SkillWhereUniqueInput;
+  /** Document to update */
+  data: Gcms_SkillUpdateInput;
+};
+
+export type Gcms_SkillUpsertInput = {
+  /** Create document if it didn't exist */
+  create: Gcms_SkillCreateInput;
+  /** Update document if it exists */
+  update: Gcms_SkillUpdateInput;
+};
+
+export type Gcms_SkillUpsertWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: Gcms_SkillWhereUniqueInput;
+  /** Upsert data */
+  data: Gcms_SkillUpsertInput;
+};
+
+/** Identifies documents */
+export type Gcms_SkillWhereInput = {
+  /** Contains search across all appropriate fields. */
   _search?: Maybe<Scalars['String']>;
   /** Logical AND on all given filters. */
-  AND?: Maybe<Array<Gcms_SocialLinkWhereInput>>;
+  AND?: Maybe<Array<Gcms_SkillWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: Maybe<Array<Gcms_SocialLinkWhereInput>>;
+  OR?: Maybe<Array<Gcms_SkillWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<Gcms_SocialLinkWhereInput>>;
-  status?: Maybe<Gcms_Status>;
+  NOT?: Maybe<Array<Gcms_SkillWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
-  status_not?: Maybe<Gcms_Status>;
+  id_not?: Maybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  status_in?: Maybe<Array<Gcms_Status>>;
+  id_in?: Maybe<Array<Scalars['ID']>>;
   /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<Gcms_Status>>;
-  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
   createdAt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
@@ -3679,33 +4331,39 @@ export type Gcms_SocialLinkWhereInput = {
   createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
-  id?: Maybe<Scalars['ID']>;
+  createdBy?: Maybe<Gcms_UserWhereInput>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are not equal to given value. */
-  id_not?: Maybe<Scalars['ID']>;
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>;
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
   /** All values less than the given value. */
-  id_lt?: Maybe<Scalars['ID']>;
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values less than or equal the given value. */
-  id_lte?: Maybe<Scalars['ID']>;
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than the given value. */
-  id_gt?: Maybe<Scalars['ID']>;
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
   /** All values greater than or equal the given value. */
-  id_gte?: Maybe<Scalars['ID']>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<Scalars['ID']>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<Scalars['ID']>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<Scalars['ID']>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<Scalars['ID']>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<Scalars['ID']>;
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<Scalars['ID']>;
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedBy?: Maybe<Gcms_UserWhereInput>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedBy?: Maybe<Gcms_UserWhereInput>;
   label?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   label_not?: Maybe<Scalars['String']>;
@@ -3713,14 +4371,6 @@ export type Gcms_SocialLinkWhereInput = {
   label_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   label_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  label_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  label_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  label_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  label_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   label_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3731,7 +4381,289 @@ export type Gcms_SocialLinkWhereInput = {
   label_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   label_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
+  label_not_ends_with?: Maybe<Scalars['String']>;
+  directionMobile?: Maybe<Gcms_SkillsDirection>;
+  /** All values that are not equal to given value. */
+  directionMobile_not?: Maybe<Gcms_SkillsDirection>;
+  /** All values that are contained in given list. */
+  directionMobile_in?: Maybe<Array<Gcms_SkillsDirection>>;
+  /** All values that are not contained in given list. */
+  directionMobile_not_in?: Maybe<Array<Gcms_SkillsDirection>>;
+  directionDesktop?: Maybe<Gcms_SkillsDirection>;
+  /** All values that are not equal to given value. */
+  directionDesktop_not?: Maybe<Gcms_SkillsDirection>;
+  /** All values that are contained in given list. */
+  directionDesktop_in?: Maybe<Array<Gcms_SkillsDirection>>;
+  /** All values that are not contained in given list. */
+  directionDesktop_not_in?: Maybe<Array<Gcms_SkillsDirection>>;
+  xAxisMobile?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  xAxisMobile_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  xAxisMobile_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  xAxisMobile_not_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  xAxisMobile_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  xAxisMobile_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  xAxisMobile_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  xAxisMobile_gte?: Maybe<Scalars['Int']>;
+  yAxisMobile?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  yAxisMobile_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  yAxisMobile_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  yAxisMobile_not_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  yAxisMobile_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  yAxisMobile_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  yAxisMobile_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  yAxisMobile_gte?: Maybe<Scalars['Int']>;
+  xAxisDesktop?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  xAxisDesktop_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  xAxisDesktop_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  xAxisDesktop_not_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  xAxisDesktop_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  xAxisDesktop_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  xAxisDesktop_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  xAxisDesktop_gte?: Maybe<Scalars['Int']>;
+  yAxisDesktop?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  yAxisDesktop_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  yAxisDesktop_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  yAxisDesktop_not_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  yAxisDesktop_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  yAxisDesktop_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  yAxisDesktop_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  yAxisDesktop_gte?: Maybe<Scalars['Int']>;
+};
+
+/** References Skill record uniquely */
+export type Gcms_SkillWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>;
+};
+
+/** Social media links */
+export type Gcms_SocialLink = Gcms_Node & {
+  /** System stage field */
+  stage: Gcms_Stage;
+  /** Get the document in other stages */
+  documentInStages: Array<Gcms_SocialLink>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** The time the document was created */
+  createdAt: Scalars['GCMS_DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<Gcms_User>;
+  /** The time the document was updated */
+  updatedAt: Scalars['GCMS_DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<Gcms_User>;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<Gcms_User>;
+  label: Scalars['String'];
+  url?: Maybe<Scalars['String']>;
+  /** List of SocialLink versions */
+  history: Array<Gcms_Version>;
+};
+
+
+/** Social media links */
+export type Gcms_SocialLinkDocumentInStagesArgs = {
+  stages?: Array<Gcms_Stage>;
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+};
+
+
+/** Social media links */
+export type Gcms_SocialLinkCreatedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Social media links */
+export type Gcms_SocialLinkUpdatedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Social media links */
+export type Gcms_SocialLinkPublishedByArgs = {
+  locales?: Maybe<Array<Gcms_Locale>>;
+};
+
+
+/** Social media links */
+export type Gcms_SocialLinkHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: Maybe<Gcms_Stage>;
+};
+
+export type Gcms_SocialLinkConnectInput = {
+  /** Document to connect */
+  where: Gcms_SocialLinkWhereUniqueInput;
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<Gcms_ConnectPositionInput>;
+};
+
+/** A connection to a list of items. */
+export type Gcms_SocialLinkConnection = {
+  /** Information to aid in pagination. */
+  pageInfo: Gcms_PageInfo;
+  /** A list of edges. */
+  edges: Array<Gcms_SocialLinkEdge>;
+  aggregate: Gcms_Aggregate;
+};
+
+export type Gcms_SocialLinkCreateInput = {
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  label: Scalars['String'];
+  url?: Maybe<Scalars['String']>;
+};
+
+export type Gcms_SocialLinkCreateManyInlineInput = {
+  /** Create and connect multiple existing SocialLink documents */
+  create?: Maybe<Array<Gcms_SocialLinkCreateInput>>;
+  /** Connect multiple existing SocialLink documents */
+  connect?: Maybe<Array<Gcms_SocialLinkWhereUniqueInput>>;
+};
+
+export type Gcms_SocialLinkCreateOneInlineInput = {
+  /** Create and connect one SocialLink document */
+  create?: Maybe<Gcms_SocialLinkCreateInput>;
+  /** Connect one existing SocialLink document */
+  connect?: Maybe<Gcms_SocialLinkWhereUniqueInput>;
+};
+
+/** An edge in a connection. */
+export type Gcms_SocialLinkEdge = {
+  /** The item at the end of the edge. */
+  node: Gcms_SocialLink;
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+};
+
+/** Identifies documents */
+export type Gcms_SocialLinkManyWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<Gcms_SocialLinkWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<Gcms_SocialLinkWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<Gcms_SocialLinkWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  createdBy?: Maybe<Gcms_UserWhereInput>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedBy?: Maybe<Gcms_UserWhereInput>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedBy?: Maybe<Gcms_UserWhereInput>;
+  label?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  label_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  label_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  label_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  label_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  label_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  label_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  label_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  label_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
   label_not_ends_with?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
@@ -3740,14 +4672,6 @@ export type Gcms_SocialLinkWhereInput = {
   url_in?: Maybe<Array<Scalars['String']>>;
   /** All values that are not contained in given list. */
   url_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values less than the given value. */
-  url_lt?: Maybe<Scalars['String']>;
-  /** All values less than or equal the given value. */
-  url_lte?: Maybe<Scalars['String']>;
-  /** All values greater than the given value. */
-  url_gt?: Maybe<Scalars['String']>;
-  /** All values greater than or equal the given value. */
-  url_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
   url_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3758,18 +4682,574 @@ export type Gcms_SocialLinkWhereInput = {
   url_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
   url_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string. */
+  /** All values not ending with the given string */
   url_not_ends_with?: Maybe<Scalars['String']>;
 };
 
+export type Gcms_SocialLinkOrderByInput = 
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'publishedAt_ASC'
+  | 'publishedAt_DESC'
+  | 'label_ASC'
+  | 'label_DESC'
+  | 'url_ASC'
+  | 'url_DESC';
+
+export type Gcms_SocialLinkUpdateInput = {
+  label?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+export type Gcms_SocialLinkUpdateManyInlineInput = {
+  /** Create and connect multiple SocialLink documents */
+  create?: Maybe<Array<Gcms_SocialLinkCreateInput>>;
+  /** Connect multiple existing SocialLink documents */
+  connect?: Maybe<Array<Gcms_SocialLinkConnectInput>>;
+  /** Override currently-connected documents with multiple existing SocialLink documents */
+  set?: Maybe<Array<Gcms_SocialLinkWhereUniqueInput>>;
+  /** Update multiple SocialLink documents */
+  update?: Maybe<Array<Gcms_SocialLinkUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple SocialLink documents */
+  upsert?: Maybe<Array<Gcms_SocialLinkUpsertWithNestedWhereUniqueInput>>;
+  /** Disconnect multiple SocialLink documents */
+  disconnect?: Maybe<Array<Gcms_SocialLinkWhereUniqueInput>>;
+  /** Delete multiple SocialLink documents */
+  delete?: Maybe<Array<Gcms_SocialLinkWhereUniqueInput>>;
+};
+
+export type Gcms_SocialLinkUpdateManyInput = {
+  label?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+export type Gcms_SocialLinkUpdateManyWithNestedWhereInput = {
+  /** Document search */
+  where: Gcms_SocialLinkWhereInput;
+  /** Update many input */
+  data: Gcms_SocialLinkUpdateManyInput;
+};
+
+export type Gcms_SocialLinkUpdateOneInlineInput = {
+  /** Create and connect one SocialLink document */
+  create?: Maybe<Gcms_SocialLinkCreateInput>;
+  /** Update single SocialLink document */
+  update?: Maybe<Gcms_SocialLinkUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single SocialLink document */
+  upsert?: Maybe<Gcms_SocialLinkUpsertWithNestedWhereUniqueInput>;
+  /** Connect existing SocialLink document */
+  connect?: Maybe<Gcms_SocialLinkWhereUniqueInput>;
+  /** Disconnect currently connected SocialLink document */
+  disconnect?: Maybe<Scalars['Boolean']>;
+  /** Delete currently connected SocialLink document */
+  delete?: Maybe<Scalars['Boolean']>;
+};
+
+export type Gcms_SocialLinkUpdateWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: Gcms_SocialLinkWhereUniqueInput;
+  /** Document to update */
+  data: Gcms_SocialLinkUpdateInput;
+};
+
+export type Gcms_SocialLinkUpsertInput = {
+  /** Create document if it didn't exist */
+  create: Gcms_SocialLinkCreateInput;
+  /** Update document if it exists */
+  update: Gcms_SocialLinkUpdateInput;
+};
+
+export type Gcms_SocialLinkUpsertWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: Gcms_SocialLinkWhereUniqueInput;
+  /** Upsert data */
+  data: Gcms_SocialLinkUpsertInput;
+};
+
+/** Identifies documents */
+export type Gcms_SocialLinkWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<Gcms_SocialLinkWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<Gcms_SocialLinkWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<Gcms_SocialLinkWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  createdBy?: Maybe<Gcms_UserWhereInput>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedBy?: Maybe<Gcms_UserWhereInput>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedBy?: Maybe<Gcms_UserWhereInput>;
+  label?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  label_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  label_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  label_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  label_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  label_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  label_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  label_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  label_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  label_not_ends_with?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  url_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  url_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  url_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  url_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  url_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  url_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  url_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  url_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  url_not_ends_with?: Maybe<Scalars['String']>;
+};
+
+/** References SocialLink record uniquely */
 export type Gcms_SocialLinkWhereUniqueInput = {
   id?: Maybe<Scalars['ID']>;
 };
 
-export type Gcms_Status = 
-  | 'DRAFT'
+/** Stage system enumeration */
+export type Gcms_Stage = 
+  /** The Published stage is where you can publish your content to. */
   | 'PUBLISHED'
-  | 'ARCHIVED';
+  /** The Draft is the default stage for all your content. */
+  | 'DRAFT';
+
+export type Gcms_SystemDateTimeFieldVariation = 
+  | 'BASE'
+  | 'LOCALIZATION'
+  | 'COMBINED';
+
+export type Gcms_UnpublishLocaleInput = {
+  /** Locales to unpublish */
+  locale: Gcms_Locale;
+  /** Stages to unpublish selected locales from */
+  stages: Array<Gcms_Stage>;
+};
+
+/** User system model */
+export type Gcms_User = Gcms_Node & {
+  /** System stage field */
+  stage: Gcms_Stage;
+  /** Get the document in other stages */
+  documentInStages: Array<Gcms_User>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** The time the document was created */
+  createdAt: Scalars['GCMS_DateTime'];
+  /** The time the document was updated */
+  updatedAt: Scalars['GCMS_DateTime'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** The username */
+  name: Scalars['String'];
+  /** Profile Picture url */
+  picture?: Maybe<Scalars['String']>;
+  /** User Kind. Can be either MEMBER, PAT or PUBLIC */
+  kind: Gcms_UserKind;
+  /** Flag to determine if user is active or not */
+  isActive: Scalars['Boolean'];
+};
+
+
+/** User system model */
+export type Gcms_UserDocumentInStagesArgs = {
+  stages?: Array<Gcms_Stage>;
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+};
+
+/** A connection to a list of items. */
+export type Gcms_UserConnection = {
+  /** Information to aid in pagination. */
+  pageInfo: Gcms_PageInfo;
+  /** A list of edges. */
+  edges: Array<Gcms_UserEdge>;
+  aggregate: Gcms_Aggregate;
+};
+
+/** An edge in a connection. */
+export type Gcms_UserEdge = {
+  /** The item at the end of the edge. */
+  node: Gcms_User;
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+};
+
+/** System User Kind */
+export type Gcms_UserKind = 
+  | 'MEMBER'
+  | 'PAT'
+  | 'PUBLIC'
+  | 'WEBHOOK';
+
+/** Identifies documents */
+export type Gcms_UserManyWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<Gcms_UserWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<Gcms_UserWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<Gcms_UserWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  name?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  name_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  name_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  name_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  picture_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  picture_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  picture_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  picture_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  picture_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  picture_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  picture_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  picture_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  picture_not_ends_with?: Maybe<Scalars['String']>;
+  kind?: Maybe<Gcms_UserKind>;
+  /** All values that are not equal to given value. */
+  kind_not?: Maybe<Gcms_UserKind>;
+  /** All values that are contained in given list. */
+  kind_in?: Maybe<Array<Gcms_UserKind>>;
+  /** All values that are not contained in given list. */
+  kind_not_in?: Maybe<Array<Gcms_UserKind>>;
+  isActive?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  isActive_not?: Maybe<Scalars['Boolean']>;
+};
+
+export type Gcms_UserOrderByInput = 
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'publishedAt_ASC'
+  | 'publishedAt_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'picture_ASC'
+  | 'picture_DESC'
+  | 'kind_ASC'
+  | 'kind_DESC'
+  | 'isActive_ASC'
+  | 'isActive_DESC';
+
+/** Identifies documents */
+export type Gcms_UserWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<Gcms_UserWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<Gcms_UserWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<Gcms_UserWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  createdAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  updatedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  publishedAt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GCMS_DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GCMS_DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GCMS_DateTime']>;
+  name?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  name_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  name_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  name_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  picture_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  picture_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  picture_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  picture_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  picture_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  picture_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  picture_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  picture_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  picture_not_ends_with?: Maybe<Scalars['String']>;
+  kind?: Maybe<Gcms_UserKind>;
+  /** All values that are not equal to given value. */
+  kind_not?: Maybe<Gcms_UserKind>;
+  /** All values that are contained in given list. */
+  kind_in?: Maybe<Array<Gcms_UserKind>>;
+  /** All values that are not contained in given list. */
+  kind_not_in?: Maybe<Array<Gcms_UserKind>>;
+  isActive?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  isActive_not?: Maybe<Scalars['Boolean']>;
+};
+
+/** References User record uniquely */
+export type Gcms_UserWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type Gcms_Version = {
+  id: Scalars['ID'];
+  stage: Gcms_Stage;
+  revision: Scalars['Int'];
+  createdAt: Scalars['GCMS_DateTime'];
+};
+
+export type Gcms_VersionWhereInput = {
+  id: Scalars['ID'];
+  stage: Gcms_Stage;
+  revision: Scalars['Int'];
+};
 
 export type GraphQlSource = Node & {
   id: Scalars['ID'];
@@ -5186,8 +6666,9 @@ export type SitePageContextNextProject = {
   techList?: Maybe<Array<Maybe<Scalars['String']>>>;
   externalUrl?: Maybe<Scalars['String']>;
   overview?: Maybe<Scalars['String']>;
+  lastDeployedOn?: Maybe<Scalars['Date']>;
   projectPublishDate?: Maybe<Scalars['Date']>;
-  status?: Maybe<Scalars['String']>;
+  order?: Maybe<Scalars['Int']>;
   team?: Maybe<Array<Maybe<Scalars['String']>>>;
   imageDesktop?: Maybe<SitePageContextNextProjectImageDesktop>;
   body?: Maybe<Array<Maybe<SitePageContextNextProjectBody>>>;
@@ -5195,52 +6676,40 @@ export type SitePageContextNextProject = {
 
 export type SitePageContextNextProjectBody = {
   contentType?: Maybe<Scalars['String']>;
-  text?: Maybe<Array<Maybe<SitePageContextNextProjectBodyText>>>;
   data?: Maybe<SitePageContextNextProjectBodyData>;
 };
 
 export type SitePageContextNextProjectBodyData = {
   src?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  mimeType?: Maybe<Scalars['String']>;
   width?: Maybe<Scalars['Int']>;
   height?: Maybe<Scalars['Int']>;
-  handle?: Maybe<Scalars['String']>;
   altText?: Maybe<Scalars['String']>;
+  mimeType?: Maybe<Scalars['String']>;
+  handle?: Maybe<Scalars['String']>;
   className?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextNextProjectBodyDataFilterInput = {
   src?: Maybe<StringQueryOperatorInput>;
+  type?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
-  mimeType?: Maybe<StringQueryOperatorInput>;
   width?: Maybe<IntQueryOperatorInput>;
   height?: Maybe<IntQueryOperatorInput>;
-  handle?: Maybe<StringQueryOperatorInput>;
   altText?: Maybe<StringQueryOperatorInput>;
+  mimeType?: Maybe<StringQueryOperatorInput>;
+  handle?: Maybe<StringQueryOperatorInput>;
   className?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageContextNextProjectBodyFilterInput = {
   contentType?: Maybe<StringQueryOperatorInput>;
-  text?: Maybe<SitePageContextNextProjectBodyTextFilterListInput>;
   data?: Maybe<SitePageContextNextProjectBodyDataFilterInput>;
 };
 
 export type SitePageContextNextProjectBodyFilterListInput = {
   elemMatch?: Maybe<SitePageContextNextProjectBodyFilterInput>;
-};
-
-export type SitePageContextNextProjectBodyText = {
-  leaf?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextNextProjectBodyTextFilterInput = {
-  leaf?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextNextProjectBodyTextFilterListInput = {
-  elemMatch?: Maybe<SitePageContextNextProjectBodyTextFilterInput>;
 };
 
 export type SitePageContextNextProjectFilterInput = {
@@ -5254,8 +6723,9 @@ export type SitePageContextNextProjectFilterInput = {
   techList?: Maybe<StringQueryOperatorInput>;
   externalUrl?: Maybe<StringQueryOperatorInput>;
   overview?: Maybe<StringQueryOperatorInput>;
+  lastDeployedOn?: Maybe<DateQueryOperatorInput>;
   projectPublishDate?: Maybe<DateQueryOperatorInput>;
-  status?: Maybe<StringQueryOperatorInput>;
+  order?: Maybe<IntQueryOperatorInput>;
   team?: Maybe<StringQueryOperatorInput>;
   imageDesktop?: Maybe<SitePageContextNextProjectImageDesktopFilterInput>;
   body?: Maybe<SitePageContextNextProjectBodyFilterListInput>;
@@ -5284,8 +6754,9 @@ export type SitePageContextProject = {
   techList?: Maybe<Array<Maybe<Scalars['String']>>>;
   externalUrl?: Maybe<Scalars['String']>;
   overview?: Maybe<Scalars['String']>;
+  lastDeployedOn?: Maybe<Scalars['Date']>;
   projectPublishDate?: Maybe<Scalars['Date']>;
-  status?: Maybe<Scalars['String']>;
+  order?: Maybe<Scalars['Int']>;
   team?: Maybe<Array<Maybe<Scalars['String']>>>;
   imageDesktop?: Maybe<SitePageContextProjectImageDesktop>;
   body?: Maybe<Array<Maybe<SitePageContextProjectBody>>>;
@@ -5293,52 +6764,40 @@ export type SitePageContextProject = {
 
 export type SitePageContextProjectBody = {
   contentType?: Maybe<Scalars['String']>;
-  text?: Maybe<Array<Maybe<SitePageContextProjectBodyText>>>;
   data?: Maybe<SitePageContextProjectBodyData>;
 };
 
 export type SitePageContextProjectBodyData = {
   src?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  mimeType?: Maybe<Scalars['String']>;
   width?: Maybe<Scalars['Int']>;
   height?: Maybe<Scalars['Int']>;
-  handle?: Maybe<Scalars['String']>;
   altText?: Maybe<Scalars['String']>;
+  mimeType?: Maybe<Scalars['String']>;
   className?: Maybe<Scalars['String']>;
+  handle?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextProjectBodyDataFilterInput = {
   src?: Maybe<StringQueryOperatorInput>;
+  type?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
-  mimeType?: Maybe<StringQueryOperatorInput>;
   width?: Maybe<IntQueryOperatorInput>;
   height?: Maybe<IntQueryOperatorInput>;
-  handle?: Maybe<StringQueryOperatorInput>;
   altText?: Maybe<StringQueryOperatorInput>;
+  mimeType?: Maybe<StringQueryOperatorInput>;
   className?: Maybe<StringQueryOperatorInput>;
+  handle?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageContextProjectBodyFilterInput = {
   contentType?: Maybe<StringQueryOperatorInput>;
-  text?: Maybe<SitePageContextProjectBodyTextFilterListInput>;
   data?: Maybe<SitePageContextProjectBodyDataFilterInput>;
 };
 
 export type SitePageContextProjectBodyFilterListInput = {
   elemMatch?: Maybe<SitePageContextProjectBodyFilterInput>;
-};
-
-export type SitePageContextProjectBodyText = {
-  leaf?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextProjectBodyTextFilterInput = {
-  leaf?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextProjectBodyTextFilterListInput = {
-  elemMatch?: Maybe<SitePageContextProjectBodyTextFilterInput>;
 };
 
 export type SitePageContextProjectFilterInput = {
@@ -5352,8 +6811,9 @@ export type SitePageContextProjectFilterInput = {
   techList?: Maybe<StringQueryOperatorInput>;
   externalUrl?: Maybe<StringQueryOperatorInput>;
   overview?: Maybe<StringQueryOperatorInput>;
+  lastDeployedOn?: Maybe<DateQueryOperatorInput>;
   projectPublishDate?: Maybe<DateQueryOperatorInput>;
-  status?: Maybe<StringQueryOperatorInput>;
+  order?: Maybe<IntQueryOperatorInput>;
   team?: Maybe<StringQueryOperatorInput>;
   imageDesktop?: Maybe<SitePageContextProjectImageDesktopFilterInput>;
   body?: Maybe<SitePageContextProjectBodyFilterListInput>;
@@ -5534,15 +6994,15 @@ export type SitePageFieldsEnum =
   | 'context___project___techList'
   | 'context___project___externalUrl'
   | 'context___project___overview'
+  | 'context___project___lastDeployedOn'
   | 'context___project___projectPublishDate'
-  | 'context___project___status'
+  | 'context___project___order'
   | 'context___project___team'
   | 'context___project___imageDesktop___fileName'
   | 'context___project___imageDesktop___height'
   | 'context___project___imageDesktop___width'
   | 'context___project___body'
   | 'context___project___body___contentType'
-  | 'context___project___body___text'
   | 'context___nextProject___updatedAt'
   | 'context___nextProject___createdAt'
   | 'context___nextProject___id'
@@ -5553,15 +7013,15 @@ export type SitePageFieldsEnum =
   | 'context___nextProject___techList'
   | 'context___nextProject___externalUrl'
   | 'context___nextProject___overview'
+  | 'context___nextProject___lastDeployedOn'
   | 'context___nextProject___projectPublishDate'
-  | 'context___nextProject___status'
+  | 'context___nextProject___order'
   | 'context___nextProject___team'
   | 'context___nextProject___imageDesktop___fileName'
   | 'context___nextProject___imageDesktop___height'
   | 'context___nextProject___imageDesktop___width'
   | 'context___nextProject___body'
   | 'context___nextProject___body___contentType'
-  | 'context___nextProject___body___text'
   | 'context___sections___case_study_overview___sectionId'
   | 'context___sections___case_study_overview___heading'
   | 'context___sections___case_study_tech_used___sectionId'
@@ -6110,7 +7570,7 @@ export type Unnamed_3_Query = { configs?: Maybe<{ settings?: Maybe<Pick<ConfigsS
 export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_4_Query = { gcms: { socialLinks: Array<Maybe<Pick<Gcms_SocialLink, 'id' | 'label' | 'url'>>> } };
+export type Unnamed_4_Query = { gcms: { socialLinks: Array<Pick<Gcms_SocialLink, 'id' | 'label' | 'url'>> } };
 
 export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6148,15 +7608,15 @@ export type Unnamed_10_Query = { configs?: Maybe<{ recentWork?: Maybe<{ particle
 export type Unnamed_11_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_11_Query = { configs?: Maybe<{ settings?: Maybe<Pick<ConfigsSettings, 'workItemsAmount'>> }>, gcms: { section?: Maybe<Pick<Gcms_Section, 'heading'>>, projects: Array<Maybe<(
-      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl' | 'linkType'>
+export type Unnamed_11_Query = { configs?: Maybe<{ settings?: Maybe<Pick<ConfigsSettings, 'workItemsAmount'>> }>, gcms: { section?: Maybe<Pick<Gcms_Section, 'heading'>>, projects: Array<(
+      Pick<Gcms_Project, 'id' | 'projectType' | 'title' | 'description' | 'projectId' | 'externalUrl' | 'linkType' | 'order'>
       & { imageDesktop?: Maybe<Pick<Gcms_Asset, 'url'>> }
-    )>> } };
+    )> } };
 
 export type Unnamed_12_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_12_Query = { configs?: Maybe<{ meta?: Maybe<Pick<ConfigsMeta, 'email'>>, settings?: Maybe<Pick<ConfigsSettings, 'skillsTop'>> }>, gcms: { skills: Array<Maybe<Pick<Gcms_Skill, 'xAxisDesktop' | 'xAxisMobile' | 'yAxisDesktop' | 'yAxisMobile' | 'directionDesktop' | 'directionMobile' | 'id' | 'label'>>> } };
+export type Unnamed_12_Query = { configs?: Maybe<{ meta?: Maybe<Pick<ConfigsMeta, 'email'>>, settings?: Maybe<Pick<ConfigsSettings, 'skillsTop'>> }>, gcms: { skills: Array<Pick<Gcms_Skill, 'xAxisDesktop' | 'xAxisMobile' | 'yAxisDesktop' | 'yAxisMobile' | 'directionDesktop' | 'directionMobile' | 'id' | 'label'>> } };
 
 export type Unnamed_13_QueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -108,6 +108,7 @@ class RecentWork extends PureComponent<Props & ReduxProps, State> {
     }
 
     renderWorkItems() {
+        console.log(this.props.projects);
         return this.props.projects.map((item, i: number) => {
             return (
                 i < this.props.configs.settings.workItemsAmount && (
@@ -153,7 +154,11 @@ export default (props: Omit<Props, 'configs'>) => (
                     section(where: { sectionId: "recent-work" }) {
                         heading
                     }
-                    projects(first: 5, where: { projectType: Work, disabled: false }) {
+                    projects(
+                        orderBy: order_ASC
+                        first: 5
+                        where: { projectType: Work, disabled: false }
+                    ) {
                         id
                         projectType
                         title
@@ -161,6 +166,7 @@ export default (props: Omit<Props, 'configs'>) => (
                         projectId
                         externalUrl
                         linkType
+                        order
                         imageDesktop {
                             url
                         }
