@@ -35,9 +35,9 @@ const projectBody = ({ body, getRevealProps }: Props) => {
                 <RevealBlock {...getRevealProps(key, 'img')} key={key}>
                     <BodyImage src={item.data.src} alt={item.data.altText || item.data.title} />
                 </RevealBlock>
-                {item.text && (
+                {item.mediaText && (
                     <RevealBlock {...getRevealProps(key, 'text')} key={key + '-caption'}>
-                        <Caption>[ {item.text} ]</Caption>
+                        <Caption>[ {item.mediaText} ]</Caption>
                     </RevealBlock>
                 )}
             </React.Fragment>
@@ -52,9 +52,9 @@ const projectBody = ({ body, getRevealProps }: Props) => {
                 <RevealBlock {...getRevealProps(key, 'video')} key={key}>
                     <BodyVideo src={item.data.src} />
                 </RevealBlock>
-                {item.text && (
+                {item.mediaText && (
                     <RevealBlock {...getRevealProps(key, 'text')} key={key + '-caption'}>
-                        <Caption>[ {item.text} ]</Caption>
+                        <Caption>[ {item.mediaText} ]</Caption>
                     </RevealBlock>
                 )}
             </React.Fragment>

@@ -2,7 +2,7 @@ import React from 'react';
 import TextEmbeds from './text-embeds';
 import Triangle from '../triangle';
 import { mapDotsWithText } from '../../../util/dot-grid';
-import { Skill, Axis } from '../../../../types';
+import { Skill, Axis, DotFormationConfig } from '../../../../types';
 import { Dots, DotFormationWrapper, Dot } from './styles';
 
 interface Props {

@@ -108,7 +108,6 @@ class RecentWork extends PureComponent<Props & ReduxProps, State> {
     }
 
     renderWorkItems() {
-        console.log(this.props.projects);
         return this.props.projects.map((item, i: number) => {
             return (
                 i < this.props.configs.settings.workItemsAmount && (

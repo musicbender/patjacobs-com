@@ -6,8 +6,7 @@ export interface CaseStudyBaseRevealProps {
 }
 
 export interface ProjectBodyParagraphText {
-    leaf: string;
-    marks?: any[];
+    text: string
 }
 
 export interface ProjectBodyMediaData {
@@ -22,12 +21,12 @@ export interface ProjectBodyMediaData {
 
 export interface ProjectBodyParagraph {
     contentType: ProjectBodyNodeType;
-    text: ProjectBodyParagraphText[] | string;
+    text: ProjectBodyParagraphText[];
 }
 
 export interface ProjectBodyMedia {
     contentType: ProjectBodyNodeType;
-    text?: string;
+    mediaText?: string;
     data: ProjectBodyMediaData;
 }
 

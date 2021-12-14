@@ -1,25 +1,15 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
-import { ISeo } from '../../../../types/global';
+import { ISeo, HeadProps } from '../../../../types/global';
 
-export interface Props {
-    pathname?: string;
-    description?: string;
-    meta?: string[];
-    keywords?: string[];
-    titlePrefix?: string;
-    image?: string;
-    article?: boolean;
-}
-
-const Head: React.FunctionComponent<Props> = ({
+const Head: React.FunctionComponent<HeadProps> = ({
     pathname = '/',
     description,
     titlePrefix,
     image,
     article = false,
-}: Props) => {
+}: HeadProps) => {
     const { site } = useStaticQuery(
         graphql`
             query {

@@ -2,6 +2,7 @@ import React from 'react';
 import Plx from 'react-plx';
 import { hasWindow } from '../../../util/util';
 import { CavieDotsWrapper, InnerWrapper, Dots } from './styles';
+import { CavieDotConfig } from '../../../../types';
 import { useStaticQuery, graphql } from 'gatsby';
 import theme from '../../../styles/theme';
 

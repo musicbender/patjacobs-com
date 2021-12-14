@@ -58,6 +58,16 @@ export interface GatsbyLocation {
     key?: string;
 }
 
+export interface HeadProps {
+    pathname?: string;
+    description?: string;
+    meta?: string[];
+    keywords?: string[];
+    titlePrefix?: string;
+    image?: string;
+    article?: boolean;
+}
+
 // enums
 export type CoreColors = 'aqua' | 'purple' | 'yellow' | 'orange';
 

@@ -1,4 +1,4 @@
-interface CavieDotConfig {
+export interface CavieDotConfig {
     index: number;
     dotSize: number;
     y: number;
@@ -7,7 +7,7 @@ interface CavieDotConfig {
     yOffset?: number;
 }
 
-interface DotFormationConfig {
+export interface DotFormationConfig {
     i: number;
     y: number;
     x: number;
@@ -16,4 +16,15 @@ interface DotFormationConfig {
     hide: boolean;
     xOffset?: number;
     yOffset?: number;
+}
+
+export interface DotGridProps {
+    sequence: number[][][];
+    index?: number;
+    started?: boolean;
+    handleSequence?: any;
+    spacing?: number;
+    interval?: number;
+    delay?: number;
+    className?: string;
 }

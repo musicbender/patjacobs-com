@@ -180,7 +180,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                     <StyledHeading text={this.props.sections['case-study-more-details'].heading} />
                 </RevealBlock>
                 <ProjectBody
-                    body={this.props.project.body as SitePageContextProjectBody[]}
+                    body={this.props.project.body.raw as SitePageContextProjectBody[]}
                     getRevealProps={this.getRevealProps}
                 />
             </Section>
@@ -196,9 +196,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                 {this.props.project && (
                     <InfoWrapper>
                         <Title atTop={this.state.atTop}>
-                            {this.props.project.title ||
-                                this.props.project.projectId ||
-                                'Case Study'}
+                            {this.props.project.title || this.props.project.projectId || 'Case Study'}
                         </Title>
                         <MetaOutterWrapper atTop={this.state.atTop}>
                             <ProjectMeta project={this.props.project} />

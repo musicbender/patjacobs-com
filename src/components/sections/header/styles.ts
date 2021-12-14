@@ -2,8 +2,9 @@ import styled, { css } from 'styled-components';
 import { media } from '../../../styles/breakpoints';
 import { gridPosition } from '../../../styles/utils/global';
 import { titleEnter, subtitleEnter, triangleEnter, moveLilSquare } from './keyframes';
-import DotGrid, { Props as DotGridProps } from '../../particles/dot-grid';
+import DotGrid from '../../particles/dot-grid';
 import LilSquare from '../../particles/lil-square';
+import { DotGridProps } from '../../../../types/particles';
 
 // constants
 const trianglePos = { prop: 'left', unit: '%', attach: 'right' };

@@ -1,1 +1,1 @@
-export { default, Props } from './dot-grid';
+export { default } from './dot-grid';

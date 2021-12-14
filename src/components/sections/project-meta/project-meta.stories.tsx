@@ -13,7 +13,7 @@ const baseProject = {
     projectPublishDate: '2/12/2016',
     storybookUrl: 'https://storybook.com',
     projectType: 'Work',
-    status: 'PUBLISHED',
+    stage: 'PUBLISHED',
     updatedAt: '',
     createdAt: '',
     projectId: 'blade-and-soul',

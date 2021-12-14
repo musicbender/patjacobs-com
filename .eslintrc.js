@@ -25,6 +25,11 @@ module.exports = {
         '@typescript-eslint', 
         'prettier',
     ],
+    settings: {
+        react: {
+            version: "detect"
+        }
+    },
     rules: {
         'prettier/prettier': 'error',
         'react/jsx-curly-newline': [

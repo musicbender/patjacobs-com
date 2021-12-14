@@ -1,17 +1,7 @@
 import React from 'react';
 import { startSequence } from '../../../util/animation';
 import { DotGridSvg, Dot, DotProps } from './styles';
-
-export interface Props {
-    sequence: number[][][];
-    index?: number;
-    started?: boolean;
-    handleSequence?: any;
-    spacing?: number;
-    interval?: number;
-    delay?: number;
-    className?: string;
-}
+import { DotGridProps } from '../../../../types/particles';
 
 const DotGrid = ({
     sequence,
@@ -22,7 +12,7 @@ const DotGrid = ({
     delay = 0,
     interval = 500,
     className,
-}: Props) => {
+}: DotGridProps) => {
     const offset: number = spacing / 2;
     const radius = 3;
     const colorMap: DotProps['color'][] = [

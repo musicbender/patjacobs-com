@@ -11,7 +11,9 @@
     "dev": "sh scripts/start-dev.sh",
     "format": "prettier --write src/**/*.{ts,tsx}",
     "lint": "eslint \"src/**/*.{ts,tsx}\" \"types/**/*.{ts,tsx}\"",
-    "lint:fix": "yarn lint -- --fix",
+    "lint:fix": "yarn lint --fix",
+    "lint:tsc": "tsc --noEmit",
+    "lint:commit": "yarn lint:tsc && lint-staged",
     "start": "yarn dev",
     "storybook": "start-storybook -p 6006 -c .storybook",
     "test": "jest",
@@ -97,7 +99,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsc --noEmit && lint-staged"
+      "pre-commit": "yarn lint:commit"
     }
   },
   "lint-staged": {

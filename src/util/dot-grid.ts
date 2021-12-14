@@ -18,9 +18,10 @@ export const getTextWidth = (text = '', spacing: number, offset = 0): string => 
 export const dotsFromCoords = (
     position: number[] = [0, 0],
     text = '',
-    direction = 'Right',
+    direction = 'right',
     columns = 15
 ): number[] => {
+    direction = direction.toLowerCase();
     let coords: number[] = position;
     let output: number[] = [];
 
@@ -50,11 +51,11 @@ export const dotsFromCoords = (
     for (let i = 0; i < dotsAmount; i++) {
         let dot;
         switch (direction) {
-            case 'Up': {
+            case 'up': {
                 dot = baseDot - columns * i;
                 break;
             }
-            case 'Down': {
+            case 'down': {
                 dot = baseDot + columns * i;
                 break;
             }

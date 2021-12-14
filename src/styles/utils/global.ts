@@ -1,7 +1,6 @@
 import { css } from 'styled-components';
 import { IGridPositionParams } from '../../../types/styles';
 import theme from '../theme';
-import { sizes } from '../breakpoints';
 
 export const px2rem = (px: number): string => `${px / 16}rem`;
 
@@ -35,10 +34,6 @@ export const gridPosition = (config: IGridPositionParams) => {
     if (!validUnits.includes(unit)) {
         unit = validUnits[0];
     }
-
-    // for (let i = 0; i <= index; i++) {
-    //     percent += gridLines[i];
-    // }
 
     percent = gridLines.reduce((total, cur, i) => {
         return i <= index ? total + cur : total;

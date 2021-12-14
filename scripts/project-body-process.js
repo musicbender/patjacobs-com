@@ -28,7 +28,7 @@ const processParagraph = (node) => {
 const processMedia = (node, contentType) => {
   return {
     contentType: contentType || node.type,
-    text: getMediaText(node),
+    mediaText: getMediaText(node),
     data: getMediaData(node),
   }
 }
@@ -36,8 +36,7 @@ const processMedia = (node, contentType) => {
 // public
 const processRawBody = (input, accumulator = [], parentType) => {
   if (!input) return;
-  const nodes = input.children;
-  return nodes.reduce((output, node) => {
+  return input.children.reduce((output, node) => {
       const type = getNodeType(node, parentType);
       const baseOutput = parentType ? [] : output;
       
