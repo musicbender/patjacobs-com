@@ -11,6 +11,7 @@ describe('styles/utils/animate.ts', () => {
             exitFrames: mockKeyframes,
         };
 
+        // prettier-ignore
         const tests: any[] = [
             {
                 assert: {
@@ -19,9 +20,7 @@ describe('styles/utils/animate.ts', () => {
                     exitType: 'blocks',
                     transition: 'exit',
                 },
-                expected: css`
-                    animation: ${mockKeyframes} ${slow} ease-in forwards;
-                `,
+                expected: css`animation: ${mockKeyframes} ${slow} ease-in forwards;`,
                 description: 'Exit type is "blocks" and trans "exit" outputs correct animation',
             },
             {
@@ -31,9 +30,7 @@ describe('styles/utils/animate.ts', () => {
                     exitType: 'reverse-blocks',
                     transition: 'exit',
                 },
-                expected: css`
-                    animation: ${mockKeyframes} ${slow} ease-in forwards;
-                `,
+                expected: css`animation: ${mockKeyframes} ${slow} ease-in forwards;`,
                 description:
                     'Exit type is "reverse-blocks" and trans "exit" outputs correct animation',
             },
@@ -44,9 +41,7 @@ describe('styles/utils/animate.ts', () => {
                     exitType: 'rows',
                     transition: 'exit',
                 },
-                expected: css`
-                    animation: ${mockKeyframes} ${slow} ease-in forwards;
-                `,
+                expected: css`animation: ${mockKeyframes} ${slow} ease-in forwards;`,
                 description:
                     'Exit type is "reverse-blocks" and trans "exit" outputs correct animation',
             },
@@ -57,9 +52,7 @@ describe('styles/utils/animate.ts', () => {
                     exitType: 'full',
                     transition: 'exit',
                 },
-                expected: css`
-                    animation: ${mockKeyframes} 1000ms ease-in-out forwards;
-                `,
+                expected: css`animation: ${mockKeyframes} 1000ms ease-in-out forwards;`,
                 description: 'Exit type is "full" and trans "exit" outputs correct animation',
             },
             {
@@ -69,9 +62,7 @@ describe('styles/utils/animate.ts', () => {
                     exitType: null,
                     transition: 'enter',
                 },
-                expected: css`
-                    animation: ${mockKeyframes} ${slow} ease-in forwards;
-                `,
+                expected: css`animation: ${mockKeyframes} ${slow} ease-in forwards;`,
                 description: 'Enter type is "blocks" and trans "enter" outputs correct animation',
             },
             {
@@ -81,9 +72,7 @@ describe('styles/utils/animate.ts', () => {
                     exitType: null,
                     transition: 'enter',
                 },
-                expected: css`
-                    animation: ${mockKeyframes} ${slow} ease-in forwards;
-                `,
+                expected: css`animation: ${mockKeyframes} ${slow} ease-in forwards;`,
                 description:
                     'Enter type is "reverse-blocks" and trans "enter" outputs correct animation',
             },
@@ -94,9 +83,7 @@ describe('styles/utils/animate.ts', () => {
                     exitType: null,
                     transition: 'enter',
                 },
-                expected: css`
-                    animation: ${mockKeyframes} ${slow} ease-in forwards;
-                `,
+                expected: css`animation: ${mockKeyframes} ${slow} ease-in forwards;`,
                 description:
                     'Enter type is "reverse-blocks" and trans "enter" outputs correct animation',
             },
@@ -107,9 +94,7 @@ describe('styles/utils/animate.ts', () => {
                     exitType: null,
                     transition: 'enter',
                 },
-                expected: css`
-                    animation: ${mockKeyframes} 1000ms ease-in-out forwards;
-                `,
+                expected: css`animation: ${mockKeyframes} 1000ms ease-in-out forwards;`,
                 description: 'Enter type is "full" and trans "enter" outputs correct animation',
             },
             {
@@ -119,9 +104,7 @@ describe('styles/utils/animate.ts', () => {
                     exitType: null,
                     transition: 'enter',
                 },
-                expected: css`
-                    animation: none;
-                `,
+                expected: css`animation: none;`,
                 description: 'Trans is enter and no enter type returns: none',
             },
             {
@@ -131,16 +114,12 @@ describe('styles/utils/animate.ts', () => {
                     exitType: null,
                     transition: 'exit',
                 },
-                expected: css`
-                    animation: none;
-                `,
+                expected: css`animation: none;`,
                 description: 'Trans is exit and no exit type returns: none',
             },
             {
                 assert: null,
-                expected: css`
-                    animation: none;
-                `,
+                expected: css`animation: none;`,
                 description: 'No config returns: none',
             },
             {
@@ -150,9 +129,7 @@ describe('styles/utils/animate.ts', () => {
                     exitType: null,
                     transition: null,
                 },
-                expected: css`
-                    animation: none;
-                `,
+                expected: css`animation: none;`,
                 description: 'No transition returns: none',
             },
         ];

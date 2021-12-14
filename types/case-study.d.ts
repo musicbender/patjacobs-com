@@ -6,7 +6,7 @@ export interface CaseStudyBaseRevealProps {
 }
 
 export interface ProjectBodyParagraphText {
-    text: string
+    text: string;
 }
 
 export interface ProjectBodyMediaData {
