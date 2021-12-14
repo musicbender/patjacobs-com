@@ -2,16 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import ProjectMeta from './project-meta';
 import theme from '../../../styles/theme';
-import { Gcms_Project } from '../../../../types';
+import { SitePageContextProject } from '../../../../types';
 
 // mock project data
 const baseProject = {
     id: '123',
     externalUrl: 'https://bladeandsoul.com',
-    githubRepoUrl: 'https://github.com',
     lastDeployedOn: '7/12/2019',
     projectPublishDate: '2/12/2016',
-    storybookUrl: 'https://storybook.com',
     projectType: 'Work',
     stage: 'PUBLISHED',
     updatedAt: '',
@@ -24,10 +22,8 @@ const baseProject = {
 
 const project = {
     externalUrl: 'https://bladeandsoul.com',
-    githubRepoUrl: 'https://github.com',
     lastDeployedOn: '7/12/2019',
     projectPublishDate: '2/12/2016',
-    storybookUrl: 'https://storybook.com',
     projectType: 'Work',
 };
 
@@ -48,11 +44,11 @@ export default {
 
 // stories
 export const AllData = () => (
-    <ProjectMeta project={{ ...baseProject, ...project } as Gcms_Project} />
+    <ProjectMeta project={{ ...baseProject, ...project } as SitePageContextProject} />
 );
 
 export const OnlyType = () => (
-    <ProjectMeta project={{ ...baseProject, projectType: project.projectType } as Gcms_Project} />
+    <ProjectMeta project={{ ...baseProject, projectType: project.projectType } as SitePageContextProject} />
 );
 
 export const TypeAndUrl = () => (
@@ -62,7 +58,7 @@ export const TypeAndUrl = () => (
                 ...baseProject,
                 projectType: 'Work',
                 externalUrl: 'https://bladeandsoul.com',
-            } as Gcms_Project
+            } as SitePageContextProject
         }
     />
 );
@@ -75,7 +71,7 @@ export const TypeUrlAndPublishDate = () => (
                 projectType: 'Work',
                 externalUrl: 'https://bladeandsoul.com',
                 projectPublishDate: '2/12/2016',
-            } as Gcms_Project
+            } as SitePageContextProject
         }
     />
 );
@@ -89,7 +85,7 @@ export const WithLastDeployedOn = () => (
                 externalUrl: 'https://bladeandsoul.com',
                 projectPublishDate: '2/12/2016',
                 lastDeployedOn: '7/12/2019',
-            } as Gcms_Project
+            } as SitePageContextProject
         }
     />
 );
@@ -104,7 +100,7 @@ export const WithGithub = () => (
                 projectPublishDate: '2/12/2016',
                 lastDeployedOn: '7/12/2019',
                 githubRepoUrl: 'https://github.com',
-            } as Gcms_Project
+            } as SitePageContextProject
         }
     />
 );

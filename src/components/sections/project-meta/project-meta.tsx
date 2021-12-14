@@ -11,11 +11,11 @@ import {
     IconWrapper,
     Icon,
 } from './styles';
-import { Gcms_Project } from '../../../../types';
+import { SitePageContextProject } from '../../../../types';
 import { pruneUrl } from '../../../util/util';
 
 interface Props {
-    project?: Gcms_Project;
+    project?: SitePageContextProject;
 }
 
 const ProjectMeta = ({ project }: Props) => {
@@ -52,10 +52,6 @@ const ProjectMeta = ({ project }: Props) => {
         </IconWrapper>
     );
 
-    const hasIcons = () => {
-        return !!project.githubRepoUrl || !!project.storybookUrl;
-    };
-
     const publishDate: Date = parseISO(project.projectPublishDate);
 
     return (
@@ -89,12 +85,6 @@ const ProjectMeta = ({ project }: Props) => {
                             {project.projectType.toLowerCase()}
                         </ContentValue>
                     </ContentWrapper>
-                )}
-                {hasIcons() && (
-                    <IconsWrapper>
-                        {project.githubRepoUrl && getGithubIcon(project.githubRepoUrl)}
-                        {project.storybookUrl && getStorybookIcon(project.storybookUrl)}
-                    </IconsWrapper>
                 )}
             </ProjectMetaWrapper>
         )

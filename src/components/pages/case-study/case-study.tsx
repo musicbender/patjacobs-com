@@ -29,12 +29,13 @@ import {
     Configs,
     SitePageContextProjectBody,
     RevealedElementsState,
+    SitePageContextProject
 } from '../../../../types';
 import ScrollLine from '../../global/scroll-line';
 
 interface Props {
-    project: Gcms_Project;
-    nextProject: Gcms_Project;
+    project: SitePageContextProject;
+    nextProject: SitePageContextProject;
     sections: Sections;
     configs: Configs;
     location: GatsbyLocation;
@@ -180,7 +181,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                     <StyledHeading text={this.props.sections['case-study-more-details'].heading} />
                 </RevealBlock>
                 <ProjectBody
-                    body={this.props.project.body.raw as SitePageContextProjectBody[]}
+                    body={this.props.project.body as SitePageContextProjectBody[]}
                     getRevealProps={this.getRevealProps}
                 />
             </Section>
