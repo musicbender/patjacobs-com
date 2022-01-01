@@ -7,7 +7,6 @@ import {
     Label,
     ContentValue,
     ContentValueLink,
-    IconsWrapper,
     IconWrapper,
     Icon,
 } from './styles';
@@ -67,7 +66,7 @@ const ProjectMeta = ({ project }: Props) => {
                 {project.externalUrl && (
                     <ContentWrapper color="orange">
                         <Label>{content.siteUrl}</Label>
-                        <ContentValueLink href={content.siteUrl} target="_blank">
+                        <ContentValueLink href={project.externalUrl} target="_blank">
                             {pruneUrl(project.externalUrl)}
                         </ContentValueLink>
                     </ContentWrapper>

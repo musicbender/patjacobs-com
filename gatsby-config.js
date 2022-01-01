@@ -28,7 +28,7 @@ module.exports = {
             resolve: 'gatsby-plugin-manifest',
             options: {
                 name: 'Pat Jacobs | Web Engineer',
-                short_name: 'patjacobs.io',
+                short_name: 'patjacobs.com',
                 start_url: '/',
                 background_color: '#1e1e1e',
                 theme_color: '#32D2C9',
