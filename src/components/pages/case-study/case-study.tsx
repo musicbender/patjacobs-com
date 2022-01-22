@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-// import { Link } from 'gatsby';
 import Plx from 'react-plx';
 import { connect } from 'react-redux';
 import { throttle, hasWindow } from '../../../util/util';
@@ -7,6 +6,7 @@ import ProjectMeta from '../../sections/project-meta';
 import ProjectBody from '../../sections/project-body';
 import RevealBlock from '../../global/reveal-block';
 import BarList from '../../global/bar-list';
+import settings from '../../../configs/settings.json';
 import {
     CaseStudyPage,
     InfoWrapper,
@@ -22,14 +22,12 @@ import {
 } from './styles';
 import {
     Gcms_Project,
-    GatsbyLocation,
     Sections,
     CaseStudyBaseRevealProps,
     RevealBlockContentType,
-    Configs,
     SitePageContextProjectBody,
     RevealedElementsState,
-    SitePageContextProject
+    SitePageContextProject,
 } from '../../../../types';
 import ScrollLine from '../../global/scroll-line';
 
@@ -37,8 +35,6 @@ interface Props {
     project: SitePageContextProject;
     nextProject: SitePageContextProject;
     sections: Sections;
-    configs: Configs;
-    location: GatsbyLocation;
 }
 
 interface ReduxProps {
@@ -224,7 +220,7 @@ class CaseStudy extends PureComponent<Props & ReduxProps, State> {
                                 <StyledUpNext
                                     label={this.props.nextProject.title}
                                     path={`/case-studies/${this.props.nextProject.projectId}`}
-                                    gridLines={this.props.configs.settings.gridLines}
+                                    gridLines={settings.gridLines}
                                 />
                             )}
                         </Middle>
