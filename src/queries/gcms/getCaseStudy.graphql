@@ -1,0 +1,36 @@
+query getCaseStudy($projectId: String!) {
+    sections(where: { sectionId_contains: "case-study-" }) {
+        sectionId
+        heading
+    }
+    projects(where: { linkType: Case_Study }) {
+        projectId
+        projectType
+    }
+    project(where: { projectId: $projectId }) {
+        updatedAt
+        createdAt
+        id
+        projectId
+        title
+        projectType
+        description
+        techList
+        externalUrl
+        overview
+        lastDeployedOn
+        projectPublishDate
+        storybookUrl
+        order
+        githubRepoUrl
+        team
+        imageDesktop {
+            fileName
+            height
+            width
+        }
+        body {
+            raw
+        }
+    }
+}

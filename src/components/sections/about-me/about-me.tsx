@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
 import Plx from 'react-plx';
 import { hasWindow, countLongestArray } from '../../../util/util';
 import { startSequence } from '../../../util/animation';
@@ -13,18 +12,7 @@ interface Props {
 }
 
 const AboutMe = ({ atAbout = false, isMobile }: Props) => {
-    const { gcms } = useStaticQuery(graphql`
-        query {
-            gcms {
-                section(where: { sectionId: "about-me" }) {
-                    heading
-                    body {
-                        html
-                    }
-                }
-            }
-        }
-    `);
+    // TODO: getAboutMeSection.graphql
 
     const [dotGridIndex, updateSequence] = useState(0);
     const interval = 180;

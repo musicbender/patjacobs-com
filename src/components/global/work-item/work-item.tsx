@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
 import Plx from 'react-plx';
 import { hasWindow } from '../../../util/util';
 import {
@@ -37,26 +36,6 @@ const WorkItem = ({
     baseTop,
     isMobile = false,
 }: Props) => {
-    const { configs } = useStaticQuery(graphql`
-        query {
-            configs {
-                recentWork {
-                    workItemPlx {
-                        image {
-                            startValue
-                        }
-                        info {
-                            startValue
-                        }
-                        mobileInfo {
-                            startValue
-                        }
-                    }
-                }
-            }
-        }
-    `);
-
     const baseEnd: number = isMobile ? baseTop - 200 : baseTop;
     const accumulator: number = isMobile ? 250 : 535;
     const onClient: boolean = hasWindow();

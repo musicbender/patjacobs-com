@@ -1,21 +1,9 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
 import { SocialWrapper, InnerWrapper, LinkText } from './styles';
 import { Gcms_SocialLink } from '../../../../types';
 
 const Social = () => {
-    const { gcms } = useStaticQuery(graphql`
-        query {
-            gcms {
-                socialLinks {
-                    id
-                    label
-                    url
-                }
-            }
-        }
-    `);
-
+    // TODO: use getSocialLinks.graphql
     return (
         <SocialWrapper>
             <InnerWrapper>

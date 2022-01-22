@@ -1,19 +1,9 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
 import Curtain from '../../global/curtain';
 import { SplashScreenWrapper, LogoOutterWrapper, StyledLogo } from './styles';
 
 const SplashScreen: React.SFC = () => {
     const splashDuration = 3000;
-    const data = useStaticQuery(graphql`
-        query {
-            configs {
-                settings {
-                    splashScreenDebug
-                }
-            }
-        }
-    `);
 
     return (
         <SplashScreenWrapper>

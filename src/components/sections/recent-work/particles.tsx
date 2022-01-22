@@ -6,32 +6,12 @@ import dotGrids from './dots';
 import { hasWindow } from '../../../util/util';
 import { RecentWorkParticle } from './styles';
 import { Query } from '../../../../types';
-import { useStaticQuery, graphql } from 'gatsby';
 
 interface Props {
     isMobile?: boolean;
 }
 
 const Particles = ({ isMobile = false }: Props) => {
-    const { configs }: Query = useStaticQuery(graphql`
-        query {
-            configs {
-                recentWork {
-                    particleData {
-                        name
-                        type
-                        color
-                        size
-                        plx
-                    }
-                }
-                settings {
-                    gridLines
-                }
-            }
-        }
-    `);
-
     const getPlxData = values => [
         {
             start: 'self',

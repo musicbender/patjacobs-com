@@ -1,6 +1,5 @@
 import React from 'react';
 import Plx from 'react-plx';
-import { useStaticQuery, graphql } from 'gatsby';
 import { reduceSegment, hasWindow } from '../../../util/util';
 import { RevealBlockWrapper, OutterWrapper, InnerWrapper, ContentWrapper, Content } from './styles';
 import { RevealBlockContentType } from '../../../../types';
@@ -32,16 +31,6 @@ const revealBlock = ({
     disableMobile = true,
     className,
 }: Props) => {
-    const { configs } = useStaticQuery(graphql`
-        query {
-            configs {
-                settings {
-                    gridLines
-                }
-            }
-        }
-    `);
-
     const gLines = gridLines || configs.settings.gridLines;
     const width = reduceSegment(startGrid, endGrid, gLines);
     const position = reduceSegment(0, startGrid, gLines);

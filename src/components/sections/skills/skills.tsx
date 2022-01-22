@@ -5,7 +5,6 @@ import Heading from '../../global/heading';
 import { setSkillsTop } from '../../../actions/home';
 import { hasWindow, throttle } from '../../../util/util';
 import { SkillsWrapper, DotWrapper, StyledDotFormation } from './styles';
-import { StaticQuery, graphql } from 'gatsby';
 import { Configs, Gcms_Skill, Query } from '../../../../types';
 import { compileSkillsData } from '../../../util/data';
 
@@ -153,36 +152,4 @@ class SkillsSection extends PureComponent<Props & ReduxProps, State> {
     }
 }
 
-const ConnectedSkills = connect(mapStateToProps, mapDispatchToProps)(SkillsSection);
-
-export default (props: Omit<Props, 'configs' | 'skills'>) => (
-    <StaticQuery
-        query={graphql`
-            query {
-                configs {
-                    meta {
-                        email
-                    }
-                    settings {
-                        skillsTop
-                    }
-                }
-                gcms {
-                    skills {
-                        xAxisDesktop
-                        xAxisMobile
-                        yAxisDesktop
-                        yAxisMobile
-                        directionDesktop
-                        directionMobile
-                        id
-                        label
-                    }
-                }
-            }
-        `}
-        render={(data: Query) => (
-            <ConnectedSkills configs={data.configs} skills={data.gcms.skills} {...props} />
-        )}
-    />
-);
+export default connect(mapStateToProps, mapDispatchToProps)(SkillsSection);

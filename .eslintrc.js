@@ -9,7 +9,7 @@ module.exports = {
         'prettier/@typescript-eslint',
         'plugin:react/recommended',
         'plugin:prettier/recommended',
-        'prettier/react'
+        'prettier/react',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -17,27 +17,17 @@ module.exports = {
         sourceType: 'module',
         exmaVersion: 2018,
     },
-    ignorePatterns: [
-        "node_modules/",
-        "test",
-    ],
-    plugins: [
-        '@typescript-eslint', 
-        'prettier',
-    ],
+    ignorePatterns: ['node_modules/', 'test'],
+    plugins: ['@typescript-eslint', 'prettier'],
     settings: {
         react: {
-            version: "detect"
-        }
+            version: 'detect',
+        },
     },
     rules: {
         'prettier/prettier': 'error',
-        'react/jsx-curly-newline': [
-            "error", 
-            "consistent"
-        ],
-        '@typescript-eslint/array-type': 'error',
-        '@typescript-eslint/consistent-type-definitions': 'error',
+        'react/jsx-curly-newline': ['error', 'consistent'],
+        '@typescript-eslint/array-type': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-parameter-properties': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
@@ -55,6 +45,7 @@ module.exports = {
         '@typescript-eslint/unified-signatures': 'error',
         '@typescript-eslint/no-unused-vars': 'error',
         '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/consistent-type-definitions': 'off',
         camelcase: 'off',
         '@typescript-eslint/camelcase': 'off',
         'react/display-name': 'off',
@@ -65,14 +56,7 @@ module.exports = {
         eqeqeq: ['error', 'smart'],
         'no-template-curly-in-string': 'error',
         'no-eval': 'error',
-        'id-blacklist': [
-            'error',
-            'any',
-            'number',
-            'string',
-            'boolean',
-            'Undefined'
-        ],
+        'id-blacklist': ['error', 'any', 'number', 'string', 'boolean', 'Undefined'],
         'id-match': 'error',
         'max-classes-per-file': ['error', 1],
         'no-bitwise': 'off',
@@ -102,6 +86,6 @@ module.exports = {
         radix: 'error',
         'spaced-comment': 'error',
         'use-isnan': 'error',
-        'valid-typeof': 'off'
-    }
+        'valid-typeof': 'off',
+    },
 };

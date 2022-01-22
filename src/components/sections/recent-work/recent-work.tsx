@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import update from 'immutability-helper';
@@ -138,48 +137,4 @@ class RecentWork extends PureComponent<Props & ReduxProps, State> {
     }
 }
 
-const ConnectedRecentWork = connect(mapStateToProps, mapDispatchToProps)(RecentWork);
-
-export default (props: Omit<Props, 'configs'>) => (
-    <StaticQuery
-        query={graphql`
-            query {
-                configs {
-                    settings {
-                        workItemsAmount
-                    }
-                }
-                gcms {
-                    section(where: { sectionId: "recent-work" }) {
-                        heading
-                    }
-                    projects(
-                        orderBy: order_ASC
-                        first: 5
-                        where: { projectType: Work, disabled: false }
-                    ) {
-                        id
-                        projectType
-                        title
-                        description
-                        projectId
-                        externalUrl
-                        linkType
-                        order
-                        imageDesktop {
-                            url
-                        }
-                    }
-                }
-            }
-        `}
-        render={data => (
-            <ConnectedRecentWork
-                configs={data.configs}
-                section={data.gcms.section}
-                projects={data.gcms.projects}
-                {...props}
-            />
-        )}
-    />
-);
+export default connect(mapStateToProps, mapDispatchToProps)(RecentWork);

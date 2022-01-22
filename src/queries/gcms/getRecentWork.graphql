@@ -1,0 +1,22 @@
+query getRecentWork {
+  section(where: { sectionId: "recent-work" }) {
+      heading
+  }
+  projects(
+      orderBy: order_ASC
+      first: 5
+      where: { projectType: Work, disabled: false }
+  ) {
+      id
+      projectType
+      title
+      description
+      projectId
+      externalUrl
+      linkType
+      order
+      imageDesktop {
+          url
+      }
+  }
+}

@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
 import { connect } from 'react-redux';
 import Plx from 'react-plx';
 import ColorDotRow from '../../particles/color-dot-row';
@@ -180,33 +179,4 @@ class Header extends PureComponent<Props & ReduxProps, State> {
     }
 }
 
-const ConnectedHeader = connect(mapStateToProps)(Header);
-
-export default (props: Omit<Props, 'configs'>) => (
-    <StaticQuery
-        query={graphql`
-            query {
-                configs {
-                    meta {
-                        name
-                        role
-                    }
-                    header {
-                        triangles {
-                            id
-                            color
-                            size
-                            plx
-                            start
-                            end
-                        }
-                    }
-                    settings {
-                        gridLines
-                    }
-                }
-            }
-        `}
-        render={data => <ConnectedHeader configs={data.configs} {...props} />}
-    />
-);
+export default connect(mapStateToProps)(Header);

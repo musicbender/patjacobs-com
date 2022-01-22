@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeCurtainState } from '../../../actions/global';
 import { clearRequestTimeout, requestTimeout } from '../../../util/shims';
@@ -25,15 +24,6 @@ const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props)
     const [exiting, setExiting] = useState(false);
     const curtainState: string = useSelector((state: IStore) => state.global.curtainState);
     const dispatch = useDispatch();
-    const { settings } = useStaticQuery(graphql`
-        query {
-            configs {
-                settings {
-                    gridLines
-                }
-            }
-        }
-    `).configs;
 
     const getOpeningDuration = () => {
         if (entrance === 'none') return 0;

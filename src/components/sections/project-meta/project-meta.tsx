@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
 import { format, parseISO } from 'date-fns';
 import {
     ProjectMetaWrapper,
@@ -18,21 +17,6 @@ interface Props {
 }
 
 const ProjectMeta = ({ project }: Props) => {
-    const { projectMeta: content } = useStaticQuery(graphql`
-        query {
-            configs {
-                caseStudy {
-                    projectMeta {
-                        datePublished
-                        lastDeployment
-                        siteUrl
-                        projectType
-                    }
-                }
-            }
-        }
-    `).configs.caseStudy;
-
     const getGithubIcon = (url: string) => (
         <IconWrapper href={url} target="_blank">
             <Icon role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

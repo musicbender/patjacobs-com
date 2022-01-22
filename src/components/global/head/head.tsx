@@ -1,6 +1,5 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
 import { ISeo, HeadProps } from '../../../../types/global';
 
 const Head: React.FunctionComponent<HeadProps> = ({
@@ -10,25 +9,6 @@ const Head: React.FunctionComponent<HeadProps> = ({
     image,
     article = false,
 }: HeadProps) => {
-    const { site } = useStaticQuery(
-        graphql`
-            query {
-                site {
-                    siteMetadata {
-                        site
-                        title
-                        titleTemplate
-                        description
-                        siteUrl
-                        language
-                        color
-                        twitter
-                    }
-                }
-            }
-        `
-    );
-
     const title = titlePrefix
         ? `${titlePrefix} | ${site.siteMetadata.title}`
         : site.siteMetadata.title;

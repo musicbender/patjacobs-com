@@ -1,0 +1,101 @@
+{
+  "workItemPlx": {
+    "image": [
+      {
+        "startValue": 5
+      },
+      {
+        "startValue": 11
+      }
+    ],
+    "info": [
+      {
+        "startValue": 8
+      },
+      {
+        "startValue": -2
+      }
+    ],
+    "mobileInfo": [
+      {
+        "startValue": -6
+      },
+      {
+        "startValue": 7
+      }
+    ]
+  },
+  "particleData": [
+    {
+      "name": "triangle-a",
+      "type": "triangle",
+      "color": "purple",
+      "size": "small",
+      "plx": [10, -10]
+    },
+    {
+      "name": "triangle-b",
+      "type": "triangle",
+      "color": "purple",
+      "size": "medium",
+      "plx": [3, -10]
+    },
+    {
+      "name": "triangle-c",
+      "type": "triangle",
+      "color": "purple",
+      "size": "small",
+      "plx": [3, -10]
+    },
+    {
+      "name": "triangle-d",
+      "type": "triangle",
+      "color": "purple",
+      "size": "small",
+      "plx": [3, -10]
+    },
+    {
+      "name": "triangle-e",
+      "type": "triangle",
+      "color": "purple",
+      "size": "medium",
+      "plx": [3, -10]
+    },
+    {
+      "name": "triangle-f",
+      "type": "triangle",
+      "color": "orange",
+      "size": "medium",
+      "plx": [10, -10]
+    },
+    {
+      "name": "triangle-g",
+      "type": "triangle",
+      "color": "orange",
+      "size": "medium",
+      "plx": [8, -2]
+    },
+    {
+      "name": "triangle-h",
+      "type": "triangle",
+      "color": "orange",
+      "size": "small",
+      "plx": [15, -15]
+    },
+    {
+      "name": "dot-grid-a",
+      "type": "dots",
+      "plx": [1, -18]
+    },
+    {
+      "name": "dot-grid-b",
+      "type": "dots",
+      "plx": [3, -2]
+    },
+    {
+      "name": "dot-grid-c",
+      "type": "dots",
+      "plx": [10, -10]
+    }
+  ]
+}

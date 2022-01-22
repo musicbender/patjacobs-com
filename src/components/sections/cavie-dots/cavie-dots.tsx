@@ -3,7 +3,6 @@ import Plx from 'react-plx';
 import { hasWindow } from '../../../util/util';
 import { CavieDotsWrapper, InnerWrapper, Dots } from './styles';
 import { CavieDotConfig } from '../../../../types';
-import { useStaticQuery, graphql } from 'gatsby';
 import theme from '../../../styles/theme';
 
 interface Props {
@@ -13,16 +12,6 @@ interface Props {
 }
 
 const CavieDots = ({ atBottom, bottom, baseStart = 0 }: Props) => {
-    const { configs } = useStaticQuery(graphql`
-        query {
-            configs {
-                settings {
-                    homeBottom
-                }
-            }
-        }
-    `);
-
     const dotAmount = 25;
     const accumulator = 100;
     const bottomLoc: number = bottom || configs.settings.homeBottom;

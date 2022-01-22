@@ -15,11 +15,9 @@ const Index: React.FunctionComponent<IProps> = (props: IProps) => {
     return (
         <>
             {props.entry.state.enabled && (
-                <TransitionPortal>
-                    <Modal>
-                        <Curtain entrance="full" exit="full" duration={1275} />
-                    </Modal>
-                </TransitionPortal>
+                <Modal>
+                    <Curtain entrance="full" exit="full" duration={1275} />
+                </Modal>
             )}
             <Home />
         </>
@@ -27,3 +25,11 @@ const Index: React.FunctionComponent<IProps> = (props: IProps) => {
 };
 
 export default Index;
+
+{
+    /* <TransitionPortal>
+    <Modal>
+        <Curtain entrance="full" exit="full" duration={1275} />
+    </Modal>
+</TransitionPortal> */
+}

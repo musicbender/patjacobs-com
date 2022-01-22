@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
 import { ThemeProvider } from 'styled-components';
 import theme from '../styles/theme';
 import { bindActionCreators, Dispatch, AnyAction } from 'redux';
@@ -16,7 +15,7 @@ import Footer from '../components/global/footer';
 import Modal from '../components/global/modal';
 import SplashScreen from '../components/sections/splash-screen';
 import { AppWrapper, OutterWrapper, InnerWrapper } from './styles';
-import { Configs, IStore, HeadProps } from '../../types';
+import { IStore, HeadProps } from '../../types';
 
 interface ReduxProps {
     splashOpen?: boolean;
@@ -133,29 +132,4 @@ export class Layout extends PureComponent<Props & ReduxProps> {
     }
 }
 
-const ConnectedLayout = connect(mapStateToProps, mapDispatchToProps)(Layout);
-
-export default (props: Omit<Props, 'configs'>) => (
-    <StaticQuery
-        query={graphql`
-            query {
-                site {
-                    siteMetadata {
-                        site
-                    }
-                }
-                configs {
-                    settings {
-                        gridLines
-                        transportDuration
-                        mobileBreakpoint
-                        splashScreenDebug
-                        splashScreenTimeout
-                        curtainDuration
-                    }
-                }
-            }
-        `}
-        render={data => <ConnectedLayout configs={data.configs} {...props} />}
-    />
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
