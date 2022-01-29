@@ -11,130 +11,130 @@ import { RecentWorkWrapper, ParentWrapper, WorkItemsWrapper } from './styles';
 import { Gcms_Section, Gcms_Project, Configs } from '../../../../types';
 
 interface Props {
-    configs?: Configs;
-    section?: Gcms_Section;
-    projects?: Gcms_Project[];
+  configs?: Configs;
+  section?: Gcms_Section;
+  projects?: Gcms_Project[];
 }
 
 interface ReduxProps {
-    recentWorkTop: number;
-    isMobile: boolean;
-    transportOpen: boolean;
-    setRecentWorkTop: (args: any) => any;
+  recentWorkTop: number;
+  isMobile: boolean;
+  transportOpen: boolean;
+  setRecentWorkTop: (args: any) => any;
 }
 
 interface State {
-    workStops: boolean[];
+  workStops: boolean[];
 }
 
 const mapStateToProps = ({ global, home }) => {
-    return {
-        recentWorkTop: home.recentWorkTop,
-        isMobile: global.isMobile,
-        transportOpen: global.transportOpen,
-    };
+  return {
+    recentWorkTop: home.recentWorkTop,
+    isMobile: global.isMobile,
+    transportOpen: global.transportOpen,
+  };
 };
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            setRecentWorkTop,
-        },
-        dispatch
-    );
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      setRecentWorkTop,
+    },
+    dispatch,
+  );
 };
 
 class RecentWork extends PureComponent<Props & ReduxProps, State> {
-    defaultWorkStops: boolean[];
+  defaultWorkStops: boolean[];
 
-    constructor(props: Props & ReduxProps) {
-        super(props);
-        this.defaultWorkStops = props.projects.map(() => false);
-        this.handleResize = throttle(this.handleResize.bind(this), 100);
-        this.handleWorkStops = this.handleWorkStops.bind(this);
-        this.state = {
-            workStops: this.defaultWorkStops,
-        };
+  constructor(props: Props & ReduxProps) {
+    super(props);
+    this.defaultWorkStops = props.projects.map(() => false);
+    this.handleResize = throttle(this.handleResize.bind(this), 100);
+    this.handleWorkStops = this.handleWorkStops.bind(this);
+    this.state = {
+      workStops: this.defaultWorkStops,
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.transportOpen && this.props.transportOpen) {
+      this.resetWorkStops();
+    }
+  }
+
+  handleResize() {
+    this.setTop(true);
+  }
+
+  setTop(didResize = false, input?: any): void {
+    let value = input;
+
+    if (value == null) {
+      const section = document.getElementById('recent-work-section');
+      const rect = section.getBoundingClientRect();
+      value = rect.top;
     }
 
-    componentDidMount() {
-        window.addEventListener('resize', this.handleResize);
-    }
+    this.props.setRecentWorkTop({ value, didResize });
+  }
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.handleResize);
-    }
+  handleWorkStops(index, stopped) {
+    return () => {
+      const isStopped = stopped !== null ? stopped : !this.state.workStops[index];
+      const newState = update(this.state, {
+        workStops: {
+          [index]: {
+            $set: isStopped,
+          },
+        },
+      });
 
-    componentDidUpdate(prevProps) {
-        if (!prevProps.transportOpen && this.props.transportOpen) {
-            this.resetWorkStops();
-        }
-    }
+      this.setState(newState);
+    };
+  }
 
-    handleResize() {
-        this.setTop(true);
-    }
+  resetWorkStops() {
+    this.setState({ workStops: this.defaultWorkStops });
+  }
 
-    setTop(didResize = false, input?: any): void {
-        let value = input;
+  renderWorkItems() {
+    return this.props.projects.map((item, i: number) => {
+      return (
+        i < this.props.configs.settings.workItemsAmount && (
+          <WorkItem
+            item={item}
+            index={i}
+            isStopped={this.state.workStops[i]}
+            handleWorkStops={this.handleWorkStops}
+            baseTop={this.props.recentWorkTop}
+            isMobile={this.props.isMobile}
+            key={item.title + `${i * 7}`}
+          />
+        )
+      );
+    });
+  }
 
-        if (value == null) {
-            const section = document.getElementById('recent-work-section');
-            const rect = section.getBoundingClientRect();
-            value = rect.top;
-        }
-
-        this.props.setRecentWorkTop({ value, didResize });
-    }
-
-    handleWorkStops(index, stopped) {
-        return () => {
-            const isStopped = stopped !== null ? stopped : !this.state.workStops[index];
-            const newState = update(this.state, {
-                workStops: {
-                    [index]: {
-                        $set: isStopped,
-                    },
-                },
-            });
-
-            this.setState(newState);
-        };
-    }
-
-    resetWorkStops() {
-        this.setState({ workStops: this.defaultWorkStops });
-    }
-
-    renderWorkItems() {
-        return this.props.projects.map((item, i: number) => {
-            return (
-                i < this.props.configs.settings.workItemsAmount && (
-                    <WorkItem
-                        item={item}
-                        index={i}
-                        isStopped={this.state.workStops[i]}
-                        handleWorkStops={this.handleWorkStops}
-                        baseTop={this.props.recentWorkTop}
-                        isMobile={this.props.isMobile}
-                        key={item.title + `${i * 7}`}
-                    />
-                )
-            );
-        });
-    }
-
-    render() {
-        return (
-            <RecentWorkWrapper id="recent-work-section">
-                <Heading text={this.props.section.heading} />
-                <ParentWrapper>
-                    <WorkItemsWrapper>{this.renderWorkItems()}</WorkItemsWrapper>
-                </ParentWrapper>
-                <Particles isMobile={this.props.isMobile} />
-            </RecentWorkWrapper>
-        );
-    }
+  render() {
+    return (
+      <RecentWorkWrapper id="recent-work-section">
+        <Heading text={this.props.section.heading} />
+        <ParentWrapper>
+          <WorkItemsWrapper>{this.renderWorkItems()}</WorkItemsWrapper>
+        </ParentWrapper>
+        <Particles isMobile={this.props.isMobile} />
+      </RecentWorkWrapper>
+    );
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecentWork);

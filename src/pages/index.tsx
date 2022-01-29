@@ -1,35 +1,38 @@
 import React from 'react';
-import { TransitionPortal } from 'gatsby-plugin-transition-link';
+import { GetStaticProps } from 'next';
 import Home from '../components/pages/home';
-import Modal from '../components/global/modal';
-import Curtain from '../components/global/curtain/curtain';
+// import Modal from '../components/global/modal';
+// import Curtain from '../components/global/curtain/curtain';
+import { useGetHomeContentQuery } from '../../types/graphcms-schema';
 
-interface IProps {
-    location: {
-        pathname: string;
-    };
-    entry: any;
-}
+type Props = {};
 
-const Index: React.FunctionComponent<IProps> = (props: IProps) => {
-    return (
-        <>
-            {props.entry.state.enabled && (
+const Index: React.FunctionComponent<Props> = () => {
+  return (
+    <>
+      {/* {(
                 <Modal>
                     <Curtain entrance="full" exit="full" duration={1275} />
                 </Modal>
-            )}
-            <Home />
-        </>
-    );
+            )} */}
+      <Home />
+    </>
+  );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { data } = useGetHomeContentQuery();
+  return {
+    props: {
+      gcmsData: data,
+    },
+  };
 };
 
 export default Index;
 
-{
-    /* <TransitionPortal>
+/* <TransitionPortal>
     <Modal>
         <Curtain entrance="full" exit="full" duration={1275} />
     </Modal>
 </TransitionPortal> */
-}

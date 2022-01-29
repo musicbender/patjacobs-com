@@ -12,112 +12,109 @@ import { Modes } from '../../../../types';
 import CavieDots from '../../sections/cavie-dots';
 
 interface ReduxProps {
-    mode?: Modes;
-    pageLoaded: boolean;
-    splashOpen: boolean;
-    isMobile: boolean;
-    aboutTop: number;
-    recentWorkTop: number;
-    skillsTop: number;
-    setAboutTop: () => AnyAction;
+  mode?: Modes;
+  pageLoaded: boolean;
+  splashOpen: boolean;
+  isMobile: boolean;
+  aboutTop: number;
+  recentWorkTop: number;
+  skillsTop: number;
+  setAboutTop: () => AnyAction;
 }
 
 interface State {
-    atAbout: boolean;
-    atBottom: boolean;
+  atAbout: boolean;
+  atBottom: boolean;
 }
 
 const mapStateToProps = ({ global, home }) => ({
-    pageLoaded: global.pageLoaded,
-    splashOpen: global.splashOpen,
-    mode: global.mode,
-    isMobile: global.isMobile,
-    aboutTop: home.aboutTop,
-    recentWorkTop: home.recentWorkTop,
-    skillsTop: home.skillsTop,
+  pageLoaded: global.pageLoaded,
+  splashOpen: global.splashOpen,
+  mode: global.mode,
+  isMobile: global.isMobile,
+  aboutTop: home.aboutTop,
+  recentWorkTop: home.recentWorkTop,
+  skillsTop: home.skillsTop,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
-    return bindActionCreators(
-        {
-            setAboutTop,
-        },
-        dispatch
-    );
+  return bindActionCreators(
+    {
+      setAboutTop,
+    },
+    dispatch,
+  );
 };
 
 class Home extends PureComponent<ReduxProps, State> {
-    constructor(props: ReduxProps) {
-        super(props);
-        this.handleScroll = throttle(this.handleScroll.bind(this), 80);
-        this.state = {
-            atAbout: false,
-            atBottom: false,
-        };
-    }
+  constructor(props: ReduxProps) {
+    super(props);
+    this.handleScroll = throttle(this.handleScroll.bind(this), 80);
+    this.state = {
+      atAbout: false,
+      atBottom: false,
+    };
+  }
 
-    componentDidMount(): void {
-        window.addEventListener('scroll', this.handleScroll);
-    }
+  componentDidMount(): void {
+    window.addEventListener('scroll', this.handleScroll);
+  }
 
-    componentWillUnmount(): void {
-        window.removeEventListener('scroll', this.handleScroll);
-    }
+  componentWillUnmount(): void {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
 
-    handleScroll(): void {
-        const scrollY = window.scrollY;
+  handleScroll(): void {
+    const scrollY = window.scrollY;
 
-        if (scrollY >= this.props.aboutTop) {
-            if (!this.state.atAbout) {
-                this.setState({ atAbout: true });
-            }
+    if (scrollY >= this.props.aboutTop) {
+      if (!this.state.atAbout) {
+        this.setState({ atAbout: true });
+      }
 
-            if (scrollY >= this.props.skillsTop) {
-                if (!this.state.atBottom) {
-                    this.setState({ atBottom: true });
-                }
-            }
+      if (scrollY >= this.props.skillsTop) {
+        if (!this.state.atBottom) {
+          this.setState({ atBottom: true });
         }
+      }
+    }
 
-        if (scrollY < this.props.skillsTop) {
-            if (this.state.atBottom) {
-                this.setState({ atBottom: false });
-            }
+    if (scrollY < this.props.skillsTop) {
+      if (this.state.atBottom) {
+        this.setState({ atBottom: false });
+      }
 
-            if (scrollY < this.props.aboutTop) {
-                if (this.state.atAbout) {
-                    this.setState({ atAbout: false });
-                }
-            }
+      if (scrollY < this.props.aboutTop) {
+        if (this.state.atAbout) {
+          this.setState({ atAbout: false });
         }
+      }
     }
+  }
 
-    handleBottom(atBottom = !this.state.atBottom) {
-        this.setState({ atBottom });
-    }
+  handleBottom(atBottom = !this.state.atBottom) {
+    this.setState({ atBottom });
+  }
 
-    render() {
-        return (
-            <HomePage>
-                <OutterWrapper>
-                    <Header />
-                    <DotSequenceWrapper>
-                        <AboutMe
-                            atAbout={this.state.atAbout}
-                            setAboutTop={this.props.setAboutTop}
-                            isMobile={this.props.isMobile}
-                        />
-                        <RecentWork />
-                        <CavieDots
-                            baseStart={this.props.recentWorkTop - 400}
-                            atBottom={this.state.atBottom}
-                        />
-                        <SkillsSection atBottom={this.state.atBottom} />
-                    </DotSequenceWrapper>
-                </OutterWrapper>
-            </HomePage>
-        );
-    }
+  render() {
+    return (
+      <HomePage>
+        <OutterWrapper>
+          <Header />
+          <DotSequenceWrapper>
+            <AboutMe
+              atAbout={this.state.atAbout}
+              setAboutTop={this.props.setAboutTop}
+              isMobile={this.props.isMobile}
+            />
+            <RecentWork />
+            <CavieDots baseStart={this.props.recentWorkTop - 400} atBottom={this.state.atBottom} />
+            <SkillsSection atBottom={this.state.atBottom} />
+          </DotSequenceWrapper>
+        </OutterWrapper>
+      </HomePage>
+    );
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

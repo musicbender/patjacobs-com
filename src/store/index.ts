@@ -7,9 +7,9 @@ import { globalMiddleware, homeMiddleware } from '../middleware';
 const middleware = [globalMiddleware, homeMiddleware, promise];
 
 const allMiddlewares =
-    process.env.NODE_ENV === 'development'
-        ? composeWithDevTools(applyMiddleware(...middleware))
-        : applyMiddleware(...middleware);
+  process.env.NODE_ENV === 'development'
+    ? composeWithDevTools(applyMiddleware(...middleware))
+    : applyMiddleware(...middleware);
 
 const store = createStore(reducers, {}, allMiddlewares);
 

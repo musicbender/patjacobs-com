@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,11 +16,5 @@
     "jsx": "react",
     "noEmit": true
   },
-  "include": [
-    "src", 
-    "types", 
-    "data",
-    "jest.config.js",
-    "codegen.js"
-  ]
+  "include": ["src", "types", "jest.config.js", "codegen.js"]
 }

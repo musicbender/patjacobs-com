@@ -3,84 +3,84 @@ import { RevealBlockContentType } from '../../../../types';
 import { media, sizes } from '../../../styles/breakpoints';
 
 interface RevealBlockWrapperProps {
-    gridWidth: number;
-    position?: number;
-    mobileIgnoreGrid?: boolean;
+  gridWidth: number;
+  position?: number;
+  mobileIgnoreGrid?: boolean;
 }
 
 interface WrapperProps {
-    active?: boolean;
-    delay?: number;
-    disableMobile?: boolean;
+  active?: boolean;
+  delay?: number;
+  disableMobile?: boolean;
 }
 
 interface ContentWrapperProps {
-    contentType: RevealBlockContentType;
+  contentType: RevealBlockContentType;
 }
 
 export const RevealBlockWrapper = styled('div')<RevealBlockWrapperProps>`
-    width: ${props => `${props.gridWidth || 0}vw`};
-    margin-left: ${props => `${props.position || 0}%;`};
-    overflow: hidden;
-    ${`@media screen and (max-width: ${sizes.tablet - 1}px)`} {
-        ${props =>
-            props.mobileIgnoreGrid &&
-            css`
-                width: 100%;
-                margin-left: 0;
-            `}
-    }
+  width: ${(props) => `${props.gridWidth || 0}vw`};
+  margin-left: ${(props) => `${props.position || 0}%;`};
+  overflow: hidden;
+  ${`@media screen and (max-width: ${sizes.tablet - 1}px)`} {
+    ${(props) =>
+      props.mobileIgnoreGrid &&
+      css`
+        width: 100%;
+        margin-left: 0;
+      `}
+  }
 `;
 
 const Wrapper = styled('div')<WrapperProps>`
-    will-change: transform;
-    visibility: hidden;
-    transition: ${({ delay, theme }) =>
-        `transform ${theme.animate.superSlow} ${theme.animate.superEaseOut} ${delay}ms, visibility ${theme.animate.superSlow} ${theme.animate.superEaseOut} ${delay}ms;`};
-    ${`@media screen and (max-width: ${sizes.tablet - 1}px)`} {
-        ${props =>
-            props.disableMobile &&
-            css`
-                transition: none;
-                transform: none;
-                visibility: visible;
-            `};
-    }
+  will-change: transform;
+  visibility: hidden;
+  transition: ${({ delay, theme }) =>
+    `transform ${theme.animate.superSlow} ${theme.animate.superEaseOut} ${delay}ms, visibility ${theme.animate.superSlow} ${theme.animate.superEaseOut} ${delay}ms;`};
+  ${`@media screen and (max-width: ${sizes.tablet - 1}px)`} {
+    ${(props) =>
+      props.disableMobile &&
+      css`
+        transition: none;
+        transform: none;
+        visibility: visible;
+      `};
+  }
 `;
 
 export const OutterWrapper = styled(Wrapper)`
-    overflow: hidden;
-    transform: translateX(-100%);
-    ${props =>
-        props.active &&
-        css`
-            transform: none;
-            visibility: visible;
-        `};
+  overflow: hidden;
+  transform: translateX(-100%);
+  ${(props) =>
+    props.active &&
+    css`
+      transform: none;
+      visibility: visible;
+    `};
 `;
 
 export const InnerWrapper = styled(Wrapper)`
-    transform: translateX(75%);
-    ${props =>
-        props.active &&
-        css`
-            transform: none;
-            visibility: visible;
-        `};
+  transform: translateX(75%);
+  ${(props) =>
+    props.active &&
+    css`
+      transform: none;
+      visibility: visible;
+    `};
 `;
 
 export const ContentWrapper = styled('div')<ContentWrapperProps>`
-    ${props =>
-        props.contentType === 'text' &&
-        css`
-            margin-top: 2em;
-        `};
+  ${(props) =>
+    props.contentType === 'text' &&
+    css`
+      margin-top: 2em;
+    `};
 `;
 
 export const Content = styled('div')<ContentWrapperProps>`
-    ${props =>
-        props.contentType === 'generic' &&
-        `
+  ${(props) =>
+    props.contentType === 'generic' &&
+    `
             > * {
                 position: relative;
                 width: 100%;
@@ -88,26 +88,26 @@ export const Content = styled('div')<ContentWrapperProps>`
                 padding: 1.5em;
             }
         `};
-    ${props =>
-        props.contentType === 'line' &&
-        `
+  ${(props) =>
+    props.contentType === 'line' &&
+    `
         > * {
             position: relative;
             width: 100%;
         }
     `};
-    ${props =>
-        props.contentType === 'text' &&
-        `
+  ${(props) =>
+    props.contentType === 'text' &&
+    `
             font-size: 16px;
             margin-bottom: 2em;
             ${media.tablet`
               font-size: calc(.55556vw + 12px);
             `}
         `};
-    ${props =>
-        (props.contentType === 'video' || props.contentType === 'img') &&
-        ` 
+  ${(props) =>
+    (props.contentType === 'video' || props.contentType === 'img') &&
+    ` 
           padding-bottom: 56.25%;
           height: 0;
           position: relative;

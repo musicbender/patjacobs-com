@@ -4,55 +4,49 @@ import { InnerWrapper, Line, Text, ButtonA, ButtonLink, ButtonDiv } from './styl
 const tlConf = require('../../../constants/transition-link.json');
 
 interface Props {
-    type?: ButtonTypes;
-    text?: string;
-    url?: string;
-    isExternal?: boolean;
-    className?: string;
-    callback?: (event: React.MouseEvent) => any;
+  type?: ButtonTypes;
+  text?: string;
+  url?: string;
+  isExternal?: boolean;
+  className?: string;
+  callback?: (event: React.MouseEvent) => any;
 }
 
 const Button = ({
-    type = 'line',
-    text = 'Learn More',
-    url = '/',
-    isExternal = false,
-    className,
-    callback = null,
+  type = 'line',
+  text = 'Learn More',
+  url = '/',
+  isExternal = false,
+  className,
+  callback = null,
 }: Props) => {
-    const getInnerContent = (
-        <InnerWrapper type={type}>
-            {type === 'line' && <Line />}
-            <Text>{text}</Text>
-        </InnerWrapper>
-    );
+  const getInnerContent = (
+    <InnerWrapper type={type}>
+      {type === 'line' && <Line />}
+      <Text>{text}</Text>
+    </InnerWrapper>
+  );
 
-    switch (true) {
-        case isExternal:
-            return (
-                <ButtonA type={type} href={url} target="_blank" className={className}>
-                    {getInnerContent}
-                </ButtonA>
-            );
-        case !!url:
-            return (
-                <ButtonLink
-                    {...tlConf.main}
-                    to={url}
-                    type={type}
-                    onClick={callback}
-                    className={className}
-                >
-                    {getInnerContent}
-                </ButtonLink>
-            );
-        default:
-            return (
-                <ButtonDiv type={type} onClick={callback} className={className}>
-                    {getInnerContent}
-                </ButtonDiv>
-            );
-    }
+  switch (true) {
+    case isExternal:
+      return (
+        <ButtonA type={type} href={url} target="_blank" className={className}>
+          {getInnerContent}
+        </ButtonA>
+      );
+    case !!url:
+      return (
+        <ButtonLink {...tlConf.main} to={url} type={type} onClick={callback} className={className}>
+          {getInnerContent}
+        </ButtonLink>
+      );
+    default:
+      return (
+        <ButtonDiv type={type} onClick={callback} className={className}>
+          {getInnerContent}
+        </ButtonDiv>
+      );
+  }
 };
 
 export default Button;

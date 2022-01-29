@@ -1,35 +1,35 @@
 declare global {
-    interface Window {
-        __REDUX_DEVTOOLS_EXTENSION__: any;
-        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
-        href: string;
-    }
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__: any;
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
+    href: string;
+  }
 }
 
 // types
 interface StartSequenceOptions {
-    length?: number;
-    delay?: number;
-    interval?: number;
-    index?: number;
+  length?: number;
+  delay?: number;
+  interval?: number;
+  index?: number;
 }
 
 export interface TestItem {
-    assert: any;
-    expected: any;
-    description?: string;
+  assert: any;
+  expected: any;
+  description?: string;
 }
 
 // interfaces
 export interface ISeo {
-    title: string;
-    description: string;
-    image: string;
-    url: string;
-    twitter: string;
-    site: string;
-    color: string;
-    language: string;
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+  twitter: string;
+  site: string;
+  color: string;
+  language: string;
 }
 
 export type ButtonTypes = 'line' | 'ridicularge-XL';
@@ -37,35 +37,19 @@ export type ButtonTypes = 'line' | 'ridicularge-XL';
 export type Axis = 'x' | 'y';
 
 export interface Skill {
-    text: string;
-    position: number[];
-    direction: string;
-}
-
-export interface GatsbyLocation {
-    pathname?: string;
-    search?: string;
-    hash?: string;
-    href?: string;
-    origin?: string;
-    protocol?: string;
-    host?: string;
-    hostname?: string;
-    port?: string;
-    state?: {
-        key?: string;
-    };
-    key?: string;
+  text: string;
+  position: number[];
+  direction: string;
 }
 
 export interface HeadProps {
-    pathname?: string;
-    description?: string;
-    meta?: string[];
-    keywords?: string[];
-    titlePrefix?: string;
-    image?: string;
-    article?: boolean;
+  pathname?: string;
+  description?: string;
+  meta?: string[];
+  keywords?: string[];
+  titlePrefix?: string;
+  image?: string;
+  article?: boolean;
 }
 
 // enums
@@ -74,36 +58,36 @@ export type CoreColors = 'aqua' | 'purple' | 'yellow' | 'orange';
 export type RevealBlockContentType = 'generic' | 'text' | 'img' | 'video' | 'line';
 
 export enum ECurtainTypes {
-    'none',
-    'blocks',
-    'reverse-blocks',
-    'rows',
-    'full',
+  'none',
+  'blocks',
+  'reverse-blocks',
+  'rows',
+  'full',
 }
 
 export enum ECurtainColorLayouts {
-    'blocks',
-    'rows',
-    'full',
+  'blocks',
+  'rows',
+  'full',
 }
 
 export enum ECurtainTransition {
-    'enter',
-    'exit',
+  'enter',
+  'exit',
 }
 
 export enum TriangleSizes {
-    'micro',
-    'tiny',
-    'small',
-    'medium',
-    'giant',
+  'micro',
+  'tiny',
+  'small',
+  'medium',
+  'giant',
 }
 
 export enum ParticleColors {
-    'aqua',
-    'purple',
-    'yellow',
-    'orange',
-    'white',
+  'aqua',
+  'purple',
+  'yellow',
+  'orange',
+  'white',
 }

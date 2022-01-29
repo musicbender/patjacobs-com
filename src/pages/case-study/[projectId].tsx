@@ -1,78 +1,83 @@
 import React from 'react';
-import { GetStaticProps } from 'next';
-import { gql } from 'graphql-request';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { processRawBody } from '../../util/project-body-process';
 import { getNextProject, getRelatedProjects } from '../../util/projects';
-import { gcmsClient } from '../../util/requests';
 import CaseStudy from '../../components/pages/case-study';
-import { GatsbyLocation } from '../../../types';
-import Modal from '../../components/global/modal';
-import Curtain from '../../components/global/curtain/curtain';
+import { useGetAllProjectIdsQuery, useGetCaseStudyQuery } from '../../../types/graphcms-schema';
+// import Modal from '../../components/global/modal';
+// import Curtain from '../../components/global/curtain/curtain';
+import { dehydrate, QueryClient } from 'react-query';
 
-interface Props {
-    project: any;
-    relatedProjets: any;
-    sections: any;
-    mount?: boolean;
-    entry?: any;
-    exit?: any;
-}
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-    let gcmsRequest;
-
-    // process sections data
-    const processSections = sections => {
-        let output = {};
-
-        sections.forEach(section => {
-            output = {
-                ...output,
-                [section.sectionId]: section,
-            };
-        });
-
-        return output;
-    };
-
-    const processedProject = {
-        ...gcmsRequest.data.gcms.project,
-        body: processRawBody(gcmsRequest.data.gcms.project.body.raw),
-    };
-
-    const relatedProjects = getRelatedProjects(
-        gcmsRequest.data.gcms.project.projectType,
-        gcmsRequest.data.gcms.projects
-    );
-
-    return {
-        props: {
-            project: processedProject,
-            nextProject: getNextProject(params.projectId, relatedProjects),
-            sections: processSections(gcmsRequest.data.gcms.sections),
-        },
-    };
-};
-
-const CaseStudyTemplate = (props: Props) => (
-    <>
-        {props.entry.state.enabled && (
+const CaseStudyTemplate = ({ projectId }) => (
+  <>
+    {/* {props.entry.state.enabled && (
             <Modal>
                 <Curtain entrance="full" exit="full" duration={1275} />
             </Modal>
-        )}
-        <CaseStudy
-            project={props.project}
-            nextProject={props.nextProject}
-            sections={props.sections}
-        />
-    </>
+        )} */}
+    <CaseStudy projectId={projectId} />
+  </>
 );
 
 export default CaseStudyTemplate;
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = useGetAllProjectIdsQuery();
+  const paths = data.projects.map(({ projectId }) => ({
+    params: { projectId },
+  }));
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const queryClient = new QueryClient();
+
+  const processGcmsData = async () => {
+    const { data } = useGetCaseStudyQuery({ projectId: params.projectId as string });
+
+    // process sections data
+    const processSections = (sections) => {
+      let output = {};
+
+      sections.forEach((section) => {
+        output = {
+          ...output,
+          [section.sectionId]: section,
+        };
+      });
+
+      return output;
+    };
+
+    const processedProject = {
+      ...data.project,
+      body: processRawBody(data.project.body.raw),
+    };
+
+    const relatedProjects = getRelatedProjects(data.project.projectType, data.projects);
+
+    return {
+      project: processedProject,
+      nextProject: getNextProject(params.projectId, relatedProjects),
+      sections: processSections(data.sections),
+    };
+  };
+
+  await queryClient.prefetchQuery(
+    useGetCaseStudyQuery.getKey({ projectId: params.projectId as string }),
+    processGcmsData,
+  );
+
+  return {
+    props: {
+      projectId: params.projectId,
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
+
 {
-    /* <TransitionPortal>
+  /* <TransitionPortal>
     <Modal>
         <Curtain entrance="full" exit="full" duration={1275} />
     </Modal>

@@ -8,52 +8,52 @@ import { RecentWorkParticle } from './styles';
 import { Query } from '../../../../types';
 
 interface Props {
-    isMobile?: boolean;
+  isMobile?: boolean;
 }
 
 const Particles = ({ isMobile = false }: Props) => {
-    const getPlxData = values => [
+  const getPlxData = (values) => [
+    {
+      start: 'self',
+      duration: '100vh',
+      properties: [
         {
-            start: 'self',
-            duration: '100vh',
-            properties: [
-                {
-                    startValue: values[0],
-                    endValue: values[1],
-                    unit: 'em',
-                    property: 'translateY',
-                },
-            ],
+          startValue: values[0],
+          endValue: values[1],
+          unit: 'em',
+          property: 'translateY',
         },
-    ];
+      ],
+    },
+  ];
 
-    const getParticle = p => {
-        const { name, type, ...params } = p;
-        switch (type) {
-            case 'triangle':
-                return <Triangle {...params} />;
-            case 'dots':
-                return <DotGrid sequence={dotGrids[name]} />;
-        }
-    };
+  const getParticle = (p) => {
+    const { name, type, ...params } = p;
+    switch (type) {
+      case 'triangle':
+        return <Triangle {...params} />;
+      case 'dots':
+        return <DotGrid sequence={dotGrids[name]} />;
+    }
+  };
 
-    return (
-        <>
-            {configs.recentWork.particleData.map((p, i) => {
-                return (
-                    <RecentWorkParticle
-                        particleID={p.name}
-                        gridLines={configs.settings.gridLines}
-                        key={'work-particle' + i + p.name}
-                    >
-                        <Plx parallaxData={getPlxData(p.plx)} disabled={!hasWindow() || isMobile}>
-                            {getParticle(p)}
-                        </Plx>
-                    </RecentWorkParticle>
-                );
-            })}
-        </>
-    );
+  return (
+    <>
+      {configs.recentWork.particleData.map((p, i) => {
+        return (
+          <RecentWorkParticle
+            particleID={p.name}
+            gridLines={configs.settings.gridLines}
+            key={'work-particle' + i + p.name}
+          >
+            <Plx parallaxData={getPlxData(p.plx)} disabled={!hasWindow() || isMobile}>
+              {getParticle(p)}
+            </Plx>
+          </RecentWorkParticle>
+        );
+      })}
+    </>
+  );
 };
 
 export default Particles;

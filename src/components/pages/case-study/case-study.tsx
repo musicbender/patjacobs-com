@@ -1,234 +1,180 @@
-import React, { PureComponent } from 'react';
+import React, { FC, PureComponent, useEffect, useState } from 'react';
 import Plx from 'react-plx';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { throttle, hasWindow } from '../../../util/util';
 import ProjectMeta from '../../sections/project-meta';
 import ProjectBody from '../../sections/project-body';
 import RevealBlock from '../../global/reveal-block';
 import BarList from '../../global/bar-list';
 import settings from '../../../configs/settings.json';
+import { useThrottle } from '../../../hooks';
 import {
-    CaseStudyPage,
-    InfoWrapper,
-    Title,
-    MetaOutterWrapper,
-    Main,
-    Top,
-    Middle,
-    Section,
-    StyledHeading,
-    Paragraph,
-    StyledUpNext,
+  CaseStudyPage,
+  InfoWrapper,
+  Title,
+  MetaOutterWrapper,
+  Main,
+  Top,
+  Middle,
+  Section,
+  StyledHeading,
+  Paragraph,
+  StyledUpNext,
 } from './styles';
-import {
-    Gcms_Project,
-    Sections,
-    CaseStudyBaseRevealProps,
-    RevealBlockContentType,
-    SitePageContextProjectBody,
-    RevealedElementsState,
-    SitePageContextProject,
-} from '../../../../types';
+import { RevealBlockContentType, RevealedElementsState, Store } from '../../../../types';
 import ScrollLine from '../../global/scroll-line';
+import { useGetCaseStudyQuery } from '../../../../types/graphcms-schema';
 
-interface Props {
-    project: SitePageContextProject;
-    nextProject: SitePageContextProject;
-    sections: Sections;
-}
-
-interface ReduxProps {
-    splashOpen?: boolean;
-    transportOpen?: boolean;
-}
-
-interface State {
-    atTop: boolean;
-    revealedElements: RevealedElementsState;
-}
-
-const mapStateToProps = ({ global }) => {
-    return {
-        splashOpen: global.splashOpen,
-        transportOpen: global.transportOpen,
-    };
+type Props = {
+  projectId: string;
 };
 
-class CaseStudy extends PureComponent<Props & ReduxProps, State> {
-    baseRevealProps: CaseStudyBaseRevealProps;
-    plxData: any[];
+const CaseStudy: FC<Props> = ({ projectId }) => {
+  const [atTop, setAtTop] = useState(true);
+  const [revealedElements, setRevealedElements] = useState<RevealedElementsState>({});
 
-    constructor(props: Props) {
-        super(props);
-        this.handleScroll = throttle(this.handleScroll.bind(this), 5);
+  const throttledAtTop = useThrottle(atTop, 5);
+  const { splashOpen, transportOpen } = useSelector((state: Store) => state.global);
+  const { data: gcmsData } = useGetCaseStudyQuery({ projectId });
 
-        this.baseRevealProps = {
-            startGrid: 3,
-            endGrid: 6,
-        };
+  const active: boolean = throttledAtTop && !splashOpen && !transportOpen;
 
-        this.plxData = [
-            {
-                start: 'self',
-                duration: 100,
-                properties: [
-                    {
-                        startValue: 1,
-                        endValue: 1,
-                        property: 'opacity',
-                    },
-                ],
-            },
-        ];
+  const baseRevealProps = {
+    startGrid: 3,
+    endGrid: 6,
+  };
 
-        this.state = {
-            atTop: true,
-            revealedElements: {},
-        };
+  const plxData = [
+    {
+      start: 'self',
+      duration: 100,
+      properties: [
+        {
+          startValue: 1,
+          endValue: 1,
+          property: 'opacity',
+        },
+      ],
+    },
+  ];
+
+  const handleScroll = (): void => {
+    if (window.scrollY === 0 && !throttledAtTop) {
+      setAtTop(true);
     }
 
-    componentDidMount(): void {
-        window.addEventListener('scroll', this.handleScroll);
+    if (throttledAtTop && window.scrollY > 0) {
+      setAtTop(true);
     }
+  };
 
-    componentWillUnmount(): void {
-        window.removeEventListener('scroll', this.handleScroll);
-    }
-
-    handleScroll(): void {
-        if (window.scrollY === 0 && !this.state.atTop) {
-            this.setState({ atTop: true });
-        }
-
-        if (this.state.atTop && window.scrollY > 0) {
-            this.setState({ atTop: false });
-        }
-    }
-
-    getRevealProps = (elm: string, contentType: RevealBlockContentType = 'generic') => {
-        const isActive: boolean = this.isRevealed(elm);
-        return {
-            ...this.baseRevealProps,
-            active: isActive,
-            contentType,
-            plxProps: {
-                parallaxData: this.plxData,
-                onPlxEnd: hasWindow() ? this.addRevealed(elm) : null,
-            },
-        };
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
     };
+  }, []);
 
-    addRevealed = (elm: string): (() => void) => {
-        return (): void => {
-            if (this.isRevealed(elm)) return;
-            this.setState({
-                revealedElements: {
-                    ...this.state.revealedElements,
-                    [elm]: true,
-                },
-            });
-        };
+  const getRevealProps = (elm: string, contentType: RevealBlockContentType = 'generic') => ({
+    ...baseRevealProps,
+    active: isRevealed(elm),
+    contentType,
+    plxProps: {
+      parallaxData: plxData,
+      onPlxEnd: hasWindow() ? addRevealed(elm) : null,
+    },
+  });
+
+  const addRevealed = (elm: string): (() => void) => {
+    return (): void => {
+      if (isRevealed(elm)) return;
+      setRevealedElements({ ...revealedElements, [elm]: true });
     };
+  };
 
-    isRevealed = (elm: string): boolean => {
-        return !!this.state.revealedElements[elm];
-    };
+  const isRevealed = (elm: string): boolean => !!revealedElements[elm];
 
-    renderOverview() {
-        return (
-            <Section>
-                <RevealBlock {...this.getRevealProps('heading-overview', 'text')}>
-                    <StyledHeading text={this.props.sections['case-study-overview'].heading} />
-                </RevealBlock>
-                <RevealBlock {...this.getRevealProps('overview', 'text')}>
-                    <Paragraph>{this.props.project.overview}</Paragraph>
-                </RevealBlock>
-            </Section>
-        );
-    }
+  const renderOverview = (): JSX.Element => {
+    return (
+      <Section>
+        <RevealBlock {...getRevealProps('heading-overview', 'text')}>
+          <StyledHeading text={gcmsData.sections['case-study-overview'].heading} />
+        </RevealBlock>
+        <RevealBlock {...getRevealProps('overview', 'text')}>
+          <Paragraph>{gcmsData.project.overview}</Paragraph>
+        </RevealBlock>
+      </Section>
+    );
+  };
 
-    propIsEqual = (targetProp: any) => (prev: any, next: any): boolean => {
-        return prev[targetProp] === next[targetProp];
-    };
+  const renderBarList = (key: string, items: string[] = []) => {
+    const isActive: boolean = isRevealed(key);
+    return (
+      <Section>
+        <RevealBlock {...getRevealProps(`heading${key}`, 'text')}>
+          <StyledHeading text={gcmsData.sections[`case-study-${key}`].heading} />
+        </RevealBlock>
+        <Plx
+          freeze={isActive}
+          disabled={!hasWindow()}
+          parallaxData={plxData}
+          onPlxEnd={hasWindow() ? addRevealed(key) : null}
+        >
+          <BarList items={items} active={isActive} />
+        </Plx>
+      </Section>
+    );
+  };
 
-    renderBarList(key: string, items: string[] = []) {
-        const active: boolean = this.isRevealed(key);
-        return (
-            <Section>
-                <RevealBlock {...this.getRevealProps(`heading${key}`, 'text')}>
-                    <StyledHeading text={this.props.sections[`case-study-${key}`].heading} />
-                </RevealBlock>
-                <Plx
-                    freeze={active}
-                    disabled={!hasWindow()}
-                    parallaxData={this.plxData}
-                    onPlxEnd={hasWindow() ? this.addRevealed(key) : null}
-                >
-                    <BarList items={items} active={active} />
-                </Plx>
-            </Section>
-        );
-    }
+  const renderBody = (): JSX.Element => {
+    return (
+      <Section>
+        <RevealBlock {...getRevealProps('heading-body', 'text')}>
+          <StyledHeading text={gcmsData.sections['case-study-more-details'].heading} />
+        </RevealBlock>
+        <ProjectBody body={gcmsData.project.body} getRevealProps={getRevealProps} />
+      </Section>
+    );
+  };
 
-    renderBody() {
-        return (
-            <Section>
-                <RevealBlock {...this.getRevealProps('heading-body', 'text')}>
-                    <StyledHeading text={this.props.sections['case-study-more-details'].heading} />
-                </RevealBlock>
-                <ProjectBody
-                    body={this.props.project.body as SitePageContextProjectBody[]}
-                    getRevealProps={this.getRevealProps}
-                />
-            </Section>
-        );
-    }
+  return (
+    <CaseStudyPage>
+      {gcmsData.project && (
+        <InfoWrapper>
+          <Title atTop={throttledAtTop}>
+            {gcmsData.project.title || gcmsData.project.projectId || 'Case Study'}
+          </Title>
+          <MetaOutterWrapper atTop={throttledAtTop}>
+            <ProjectMeta project={gcmsData.project} />
+          </MetaOutterWrapper>
+        </InfoWrapper>
+      )}
+      {gcmsData.project && (
+        <Main>
+          <Top>
+            <ScrollLine atTop={throttledAtTop} active={active} />
+          </Top>
+          <Middle>
+            {gcmsData.project.overview && renderOverview()}
+            {gcmsData.project.techList &&
+              gcmsData.project.techList.length > 0 &&
+              renderBarList('tech-used', gcmsData.project.techList)}
+            {gcmsData.project.body && renderBody()}
+            {gcmsData.project.team &&
+              gcmsData.project.team.length > 0 &&
+              renderBarList('team', gcmsData.project.team)}
+            {gcmsData.nextProject && (
+              <StyledUpNext
+                label={gcmsData.nextProject.title}
+                path={`/case-studies/${gcmsData.nextProject.projectId}`}
+                gridLines={settings.gridLines}
+              />
+            )}
+          </Middle>
+        </Main>
+      )}
+    </CaseStudyPage>
+  );
+};
 
-    render() {
-        const active: boolean =
-            this.state.atTop && !this.props.splashOpen && !this.props.transportOpen;
-
-        return (
-            <CaseStudyPage>
-                {this.props.project && (
-                    <InfoWrapper>
-                        <Title atTop={this.state.atTop}>
-                            {this.props.project.title ||
-                                this.props.project.projectId ||
-                                'Case Study'}
-                        </Title>
-                        <MetaOutterWrapper atTop={this.state.atTop}>
-                            <ProjectMeta project={this.props.project} />
-                        </MetaOutterWrapper>
-                    </InfoWrapper>
-                )}
-                {this.props.project && (
-                    <Main>
-                        <Top>
-                            <ScrollLine atTop={this.state.atTop} active={active} />
-                        </Top>
-                        <Middle>
-                            {this.props.project.overview && this.renderOverview()}
-                            {this.props.project.techList &&
-                                this.props.project.techList.length > 0 &&
-                                this.renderBarList('tech-used', this.props.project.techList)}
-                            {this.props.project.body && this.renderBody()}
-                            {this.props.project.team &&
-                                this.props.project.team.length > 0 &&
-                                this.renderBarList('team', this.props.project.team)}
-                            {this.props.nextProject && (
-                                <StyledUpNext
-                                    label={this.props.nextProject.title}
-                                    path={`/case-studies/${this.props.nextProject.projectId}`}
-                                    gridLines={settings.gridLines}
-                                />
-                            )}
-                        </Middle>
-                    </Main>
-                )}
-            </CaseStudyPage>
-        );
-    }
-}
-
-export default connect(mapStateToProps)(CaseStudy);
+export default CaseStudy;

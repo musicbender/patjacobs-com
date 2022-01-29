@@ -13,22 +13,22 @@ import { Provider } from 'react-redux';
 import store from '../src/store';
 
 addParameters({
-    options: {
-        isFullScreen: true,
-        theme: themes.dark,
-    },
+  options: {
+    isFullScreen: true,
+    theme: themes.dark,
+  },
 });
 
-addDecorator(story => (
-    <Provider store={store}>
-        <ThemeProvider theme={theme}>
-            <AppWrapper mode="dark">
-                <GlobalStyle />
-                <OutterWrapper>
-                    <GridLines gridLines={settings.gridLines} />
-                    <InnerWrapper>{story()}</InnerWrapper>
-                </OutterWrapper>
-            </AppWrapper>
-        </ThemeProvider>
-    </Provider>
+addDecorator((story) => (
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <AppWrapper mode="dark">
+        <GlobalStyle />
+        <OutterWrapper>
+          <GridLines gridLines={settings.gridLines} />
+          <InnerWrapper>{story()}</InnerWrapper>
+        </OutterWrapper>
+      </AppWrapper>
+    </ThemeProvider>
+  </Provider>
 ));

@@ -1,5 +1,4 @@
 export * from './global';
-export * from './graphcms-schema';
 export * from './state';
 export * from './styles';
 export * from './sections';

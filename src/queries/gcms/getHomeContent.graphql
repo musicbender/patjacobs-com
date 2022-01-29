@@ -1,0 +1,39 @@
+query getHomeContent {
+  recentWorkSection: section(where: { sectionId: "recent-work" }) {
+    heading
+  }
+  aboutMeSection: section(where: { sectionId: "about-me" }) {
+    heading
+    body {
+      html
+    }
+  }
+  projects(orderBy: order_ASC, first: 5, where: { projectType: Work, disabled: false }) {
+    id
+    projectType
+    title
+    description
+    projectId
+    externalUrl
+    linkType
+    order
+    imageDesktop {
+      url
+    }
+  }
+  skills {
+    xAxisDesktop
+    xAxisMobile
+    yAxisDesktop
+    yAxisMobile
+    directionDesktop
+    directionMobile
+    id
+    label
+  }
+  socialLinks {
+    id
+    label
+    url
+  }
+}

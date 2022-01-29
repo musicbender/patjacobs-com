@@ -7,15 +7,15 @@ import Button from '../button';
 import { InnerWrapper, Line, Text as ButtonText } from '../button/styles';
 
 interface ItemInfoProps {
-    stopped?: boolean;
+  stopped?: boolean;
 }
 
 export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
   width: 84vw;
-  margin-left: ${props => `${props.theme.gridSizes.s}%`};
+  margin-left: ${(props) => `${props.theme.gridSizes.s}%`};
   text-align: left;
-  color: ${props => rgbHex(props.theme.palette.white, 0.87)};
-  background-color: ${props => props.theme.palette.darkBlack};
+  color: ${(props) => rgbHex(props.theme.palette.white, 0.87)};
+  background-color: ${(props) => props.theme.palette.darkBlack};
   border-width: 0.6em;
   border-style: solid;
   padding: 2.25em 1.75em 0.2em;
@@ -26,44 +26,44 @@ export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
     margin-left: 0;
     border-width: 0.45em;
   `}
-  ${props =>
-      !props.stopped &&
-      css`
-          color: ${rgbHex(props.theme.palette.white, 0.4)};
-          border-color: ${shade(0.7, props.theme.corePalette.purple)};
-      `}
-  ${props =>
-      props.stopped &&
-      css`
-          color: ${rgbHex(props.theme.palette.white, 0.87)};
-          border-color: ${shade(0.4, props.theme.corePalette.purple)};
-      `}
+  ${(props) =>
+    !props.stopped &&
+    css`
+      color: ${rgbHex(props.theme.palette.white, 0.4)};
+      border-color: ${shade(0.7, props.theme.corePalette.purple)};
+    `}
+  ${(props) =>
+    props.stopped &&
+    css`
+      color: ${rgbHex(props.theme.palette.white, 0.87)};
+      border-color: ${shade(0.4, props.theme.corePalette.purple)};
+    `}
 `;
 
 export const Title = styled.h5`
-    margin: 0 0 1em;
-    font-family: ${props => props.theme.fonts.futura};
-    font-size: 1rem;
-    font-weight: 200;
-    text-transform: uppercase;
-    color: inherit;
-    ${media.tablet`
+  margin: 0 0 1em;
+  font-family: ${(props) => props.theme.fonts.futura};
+  font-size: 1rem;
+  font-weight: 200;
+  text-transform: uppercase;
+  color: inherit;
+  ${media.tablet`
     font-size: 1.5rem;
   `}
 `;
 
 export const Description = styled.p`
-    margin: 0 0 1.5em;
-    font-family: ${props => props.theme.fonts.inconsolata};
-    font-size: 1rem;
-    line-height: 1.75;
-    color: inherit;
-    opacity: 0.6;
+  margin: 0 0 1.5em;
+  font-family: ${(props) => props.theme.fonts.inconsolata};
+  font-size: 1rem;
+  line-height: 1.75;
+  color: inherit;
+  opacity: 0.6;
 `;
 
 interface StyledButtonProps {
-    isParallax: boolean;
-    stopped: boolean;
+  isParallax: boolean;
+  stopped: boolean;
 }
 
 const btnColor = siteTheme.corePalette.purple;
@@ -78,10 +78,10 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
       color: ${btnColor};
     }
   }
-  ${props =>
-      !props.isParallax &&
-      props.stopped &&
-      css`
+  ${(props) =>
+    !props.isParallax &&
+    props.stopped &&
+    css`
     ${InnerWrapper} {
         transition: transform 1s ease-in-out ${props.theme.animate.fast};
         ${ButtonText} {
@@ -105,25 +105,25 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
         }
       }
   `}
-  ${props =>
-      !props.isParallax &&
-      !props.stopped &&
-      css`
-          ${InnerWrapper} {
-              transform: translate3d(50%, 0, 0);
-          }
-      `}
-  ${props =>
-      props.isParallax &&
-      props.stopped &&
-      css`
-          opacity: 1;
-      `}
-  ${props =>
-      props.isParallax &&
-      !props.stopped &&
-      css`
-          opacity: 0;
-          transition: opacity ${props.theme.animate.fast} ${props.theme.animate.easeIn};
-      `}
+  ${(props) =>
+    !props.isParallax &&
+    !props.stopped &&
+    css`
+      ${InnerWrapper} {
+        transform: translate3d(50%, 0, 0);
+      }
+    `}
+  ${(props) =>
+    props.isParallax &&
+    props.stopped &&
+    css`
+      opacity: 1;
+    `}
+  ${(props) =>
+    props.isParallax &&
+    !props.stopped &&
+    css`
+      opacity: 0;
+      transition: opacity ${props.theme.animate.fast} ${props.theme.animate.easeIn};
+    `}
 `;

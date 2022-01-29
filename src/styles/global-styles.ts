@@ -4,8 +4,8 @@ import { normalize } from 'styled-normalize';
 import { ITheme } from '../../types/styles';
 
 interface GlobalStyles {
-    theme: ITheme;
-    media?: any;
+  theme: ITheme;
+  media?: any;
 }
 
 export default createGlobalStyle<GlobalStyles>`
@@ -13,7 +13,7 @@ export default createGlobalStyle<GlobalStyles>`
   html {
     -webkit-font-smoothing: antialiased;
     margin: 0;
-    background: ${props => props.theme.modes.dark.bg}; 
+    background: ${(props) => props.theme.modes.dark.bg}; 
     box-sizing: border-box;
     font-size: 16px;
     ${media.tablet`

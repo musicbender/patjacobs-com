@@ -3,12 +3,12 @@
     "exit": {
       "length": 1
     },
-    "entry":{
-        "appearAfter": 1,
-        "length": 1,
-        "state": {
-            "enabled": true
-        }
+    "entry": {
+      "appearAfter": 1,
+      "length": 1,
+      "state": {
+        "enabled": true
+      }
     }
   }
 }
