@@ -1,53 +1,47 @@
-// privite
-const getNodeType = (node, parentType) => {
-  return parentType || node.type || null;
-};
+import { GcmsProjectBodyNode, GcmsProjectBodyRaw, ProjectBodyItem } from '../../types';
 
-const getMediaText = (node) => {
+const getMediaText = (node: GcmsProjectBodyNode): string | null => {
   if (node.altText) {
     return node.altText;
-  } else if (node.children && node.children > 0 && !!node.children[0].text) {
+  } else if (node.children && node.children.length && !!node.children[0].text) {
     return node.children[0].text || null;
   }
 
   return null;
 };
 
-const getMediaData = (node) => {
+const getMediaData = (node: GcmsProjectBodyNode): ProjectBodyItem => {
   const { children, ...output } = node;
-  return output;
+  return output as ProjectBodyItem;
 };
 
-const processParagraph = (node) => {
+const processParagraph = (node: GcmsProjectBodyNode): ProjectBodyItem => {
   return {
-    contentType: 'paragraph',
-    text: node.children,
+    type: 'paragraph',
+    text: node.children as string & GcmsProjectBodyNode[],
   };
 };
 
-const processMedia = (node, contentType) => {
+const processMedia = (node: GcmsProjectBodyNode): ProjectBodyItem => {
   return {
-    contentType: contentType || node.type,
+    type: node.type,
     mediaText: getMediaText(node),
-    data: getMediaData(node),
+    ...getMediaData(node),
   };
 };
 
 // public
-export const processRawBody = (input: any, accumulator = [], parentType?: any) => {
+export const processRawBody = (input: GcmsProjectBodyRaw): ProjectBodyItem[] => {
   if (!input) return;
-  return input.children.reduce((output, node) => {
-    const type = getNodeType(node, parentType);
-    const baseOutput = parentType ? [] : output;
-
-    switch (type) {
+  return input.children.reduce((output: ProjectBodyItem[], node: GcmsProjectBodyNode) => {
+    switch (node.type) {
       case 'paragraph':
-        return [...baseOutput, processParagraph(node)];
+        return [...output, processParagraph(node)];
       case 'image':
       case 'video':
-        return [...baseOutput, processMedia(node, type)];
+        return [...output, processMedia(node)];
       default:
-        return baseOutput;
+        return output;
     }
-  }, accumulator);
+  }, [] as ProjectBodyItem[]);
 };

@@ -32,7 +32,6 @@ type Props = {
 const CaseStudy: FC<Props> = ({ projectId }) => {
   const [atTop, setAtTop] = useState(true);
   const [revealedElements, setRevealedElements] = useState<RevealedElementsState>({});
-
   const throttledAtTop = useThrottle(atTop, 5);
   const { splashOpen, transportOpen } = useSelector((state: Store) => state.global);
   const { data: gcmsData } = useGetCaseStudyQuery({ projectId });

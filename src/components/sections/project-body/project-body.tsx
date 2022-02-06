@@ -1,22 +1,16 @@
 import React from 'react';
 import RevealBlock from '../../global/reveal-block';
 import { ProjectBodyWrapper, BodyParagraph, BodyImage, BodyVideo, Caption } from './styles';
-import {
-  SitePageContextProjectBody,
-  ProjectBodyParagraphText,
-  RevealBlockContentType,
-} from '../../../../types';
+import { GcmsProjectBodyNode, ProjectBodyItem, RevealBlockContentType } from '../../../../types';
 
 interface Props {
-  body: SitePageContextProjectBody[];
+  body: ProjectBodyItem[];
   getRevealProps(elm: string, contentType: RevealBlockContentType): any;
 }
 
-type BodyItem = SitePageContextProjectBody;
-
-const projectBody = ({ body, getRevealProps }: Props) => {
-  const renderParagraph = (item: BodyItem, i: number) => {
-    return item.text.map((textItem: ProjectBodyParagraphText, j: number) => {
+const projectBody = ({ body, getRevealProps }: Props): JSX.Element => {
+  const renderParagraph = (item: ProjectBodyItem, i: number) => {
+    return item.text.map((textItem: GcmsProjectBodyNode, j: number) => {
       if (!textItem.text) return;
       const key = `paragraph-${i}-${j}-${textItem.text.length}`;
       return (
@@ -27,13 +21,13 @@ const projectBody = ({ body, getRevealProps }: Props) => {
     });
   };
 
-  const renderImage = (item: BodyItem, i: number) => {
-    if (!item.data.src) return;
-    const key = `image-${i}-${item.data.handle}`;
+  const renderImage = (item: ProjectBodyItem, i: number): JSX.Element => {
+    if (!item.src) return;
+    const key = `image-${i}-${item.handle}`;
     return (
       <React.Fragment key={key + '-fragment'}>
         <RevealBlock {...getRevealProps(key, 'img')} key={key}>
-          <BodyImage src={item.data.src} alt={item.data.altText || item.data.title} />
+          <BodyImage src={item.src} alt={item.altText || item.title} />
         </RevealBlock>
         {item.mediaText && (
           <RevealBlock {...getRevealProps(key, 'text')} key={key + '-caption'}>
@@ -44,13 +38,13 @@ const projectBody = ({ body, getRevealProps }: Props) => {
     );
   };
 
-  const renderVideo = (item: BodyItem, i: number) => {
-    if (!item.data.src) return;
-    const key = `video-${i}-${item.data.handle}`;
+  const renderVideo = (item: ProjectBodyItem, i: number) => {
+    if (!item.src) return;
+    const key = `video-${i}-${item.handle}`;
     return (
       <React.Fragment key={key + '-fragment'}>
         <RevealBlock {...getRevealProps(key, 'video')} key={key}>
-          <BodyVideo src={item.data.src} />
+          <BodyVideo src={item.src} />
         </RevealBlock>
         {item.mediaText && (
           <RevealBlock {...getRevealProps(key, 'text')} key={key + '-caption'}>
@@ -61,20 +55,21 @@ const projectBody = ({ body, getRevealProps }: Props) => {
     );
   };
 
-  const renderNodes = () => {
-    return body.map((item: BodyItem, i: number) => {
-      switch (item.contentType) {
-        case 'paragraph':
-          return renderParagraph(item, i);
-        case 'image':
-          return renderImage(item, i);
-        case 'video':
-          return renderVideo(item, i);
-      }
-    });
-  };
-
-  return <ProjectBodyWrapper>{body && renderNodes()}</ProjectBodyWrapper>;
+  return (
+    <ProjectBodyWrapper>
+      {body &&
+        body.map((item: ProjectBodyItem, i: number) => {
+          switch (item.type) {
+            case 'paragraph':
+              return renderParagraph(item, i);
+            case 'image':
+              return renderImage(item, i);
+            case 'video':
+              return renderVideo(item, i);
+          }
+        })}
+    </ProjectBodyWrapper>
+  );
 };
 
 export default projectBody;

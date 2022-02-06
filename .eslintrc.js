@@ -43,7 +43,12 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/unified-signatures': 'error',
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        ignoreRestSiblings: true,
+      },
+    ],
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/consistent-type-definitions': 'off',
     camelcase: 'off',

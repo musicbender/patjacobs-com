@@ -1,3 +1,5 @@
+import { Project } from './graphcms-schema';
+
 export type ProjectBodyNodeType = 'paragraph' | 'image' | 'video';
 
 export interface CaseStudyBaseRevealProps {
@@ -9,27 +11,49 @@ export interface ProjectBodyParagraphText {
   text: string;
 }
 
-export interface ProjectBodyMediaData {
-  src: string;
-  title?: string;
-  mimeType?: string;
-  width?: string;
-  height?: number;
-  handle?: number;
-  altText?: string;
-}
-
-export interface ProjectBodyParagraph {
-  contentType: ProjectBodyNodeType;
-  text: ProjectBodyParagraphText[];
-}
-
-export interface ProjectBodyMedia {
-  contentType: ProjectBodyNodeType;
-  mediaText?: string;
-  data: ProjectBodyMediaData;
-}
-
 export interface RevealedElementsState {
   [key: string]: boolean;
 }
+
+export type GcmsProjectBodyNodeType = 'image' | 'paragraph' | 'video';
+
+export type GcmsProjectBodyNodeMimeType = 'image/jpeg' | 'video/mp4';
+
+export type GcmsProjectBodyNode = {
+  src?: string;
+  type: ProjectBodyNodeType;
+  title?: string;
+  width?: number;
+  height?: number;
+  handle?: string;
+  altText?: string;
+  mimeType?: ProjectBodyNodeMimeType;
+  className?: string;
+  text?: string;
+  children?: GcmsProjectBodyNode[];
+};
+
+export type GcmsProjectBodyRaw = {
+  children: GcmsProjectBodyNode[];
+};
+
+export type ProjectBodyItem = GcmsProjectBodyNode & {
+  mediaText?: string;
+  text?: GcmsProjectBodyNode[];
+};
+
+export type OmitProjectBody = Omit<Project, 'body'>;
+
+export type ProcessedProject = OmitProjectBody & {
+  body: ProjectBodyItem[];
+};
+
+export type Sections = {
+  [key: string]: Section;
+};
+
+export type ProcessedGcmsData = {
+  project: ProcessedProject;
+  nextProject: ProcessedProject;
+  sections: Sections;
+};

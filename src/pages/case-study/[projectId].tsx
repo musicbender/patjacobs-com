@@ -3,10 +3,21 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { processRawBody } from '../../util/project-body-process';
 import { getNextProject, getRelatedProjects } from '../../util/projects';
 import CaseStudy from '../../components/pages/case-study';
-import { useGetAllProjectIdsQuery, useGetCaseStudyQuery } from '../../../types/graphcms-schema';
 // import Modal from '../../components/global/modal';
 // import Curtain from '../../components/global/curtain/curtain';
 import { dehydrate, QueryClient } from 'react-query';
+import {
+  GcmsProjectBodyRaw,
+  OmitProjectBody,
+  ProcessedProject,
+  ProcessedGcmsData,
+  Sections,
+} from '../../../types';
+import {
+  Section,
+  useGetAllProjectIdsQuery,
+  useGetCaseStudyQuery,
+} from '../../../types/graphcms-schema';
 
 const CaseStudyTemplate = ({ projectId }) => (
   <>
@@ -32,26 +43,28 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const queryClient = new QueryClient();
 
-  const processGcmsData = async () => {
-    const { data } = useGetCaseStudyQuery({ projectId: params.projectId as string });
+  // process sections data
+  const processSections = (sections: Section[]): Sections => {
+    let output = {};
 
-    // process sections data
-    const processSections = (sections) => {
-      let output = {};
+    sections.forEach((section: Section) => {
+      output = {
+        ...output,
+        [section.sectionId]: section,
+      };
+    });
 
-      sections.forEach((section) => {
-        output = {
-          ...output,
-          [section.sectionId]: section,
-        };
-      });
+    return output;
+  };
 
-      return output;
-    };
+  const processGcmsData = async (): Promise<ProcessedGcmsData> => {
+    const { data } = await useGetCaseStudyQuery({ projectId: params.projectId as string });
 
-    const processedProject = {
-      ...data.project,
-      body: processRawBody(data.project.body.raw),
+    console.log('processGcmsData', data);
+
+    const processedProject: ProcessedProject = {
+      ...(data.project as OmitProjectBody),
+      body: processRawBody(data.project.body.raw as GcmsProjectBodyRaw),
     };
 
     const relatedProjects = getRelatedProjects(data.project.projectType, data.projects);
@@ -59,13 +72,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return {
       project: processedProject,
       nextProject: getNextProject(params.projectId, relatedProjects),
-      sections: processSections(data.sections),
+      sections: processSections(data.sections as Section[]),
     };
   };
 
   await queryClient.prefetchQuery(
     useGetCaseStudyQuery.getKey({ projectId: params.projectId as string }),
-    processGcmsData,
+    () => processGcmsData(),
   );
 
   return {
