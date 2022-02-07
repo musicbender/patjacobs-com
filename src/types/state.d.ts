@@ -23,7 +23,6 @@ export type HomeActionPayload = {
   value: number;
 };
 
-export { AppState } from '../src/reducers';
+export { AppState } from '@reducers';
 
-// enums
 export type Modes = 'light' | 'dark';

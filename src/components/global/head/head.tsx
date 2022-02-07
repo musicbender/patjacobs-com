@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { ISeo, HeadProps } from '../../../../types/global';
+import { ISeo, HeadProps } from '../../../types/global';
 
 const Head: React.FunctionComponent<HeadProps> = ({
   pathname = '/',

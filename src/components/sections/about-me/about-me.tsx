@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Plx from 'react-plx';
-import { hasWindow, countLongestArray } from '../../../util/util';
-import { startSequence } from '../../../util/animation';
+import { hasWindow, countLongestArray } from '@util/util';
+import { startSequence } from '@util/animation';
 import { dotGridA } from './dots';
 import { StyledHeading, StyledDotGrid, ContentBox, AboutMeSection } from './styles';
+import { useGetAboutMeSectionQuery } from '@types';
 
 interface Props {
   atAbout: boolean;
@@ -12,11 +13,7 @@ interface Props {
 }
 
 const AboutMe = ({ atAbout = false, isMobile }: Props) => {
-  // TODO: getAboutMeSection.graphql
-
-  const [dotGridIndex, updateSequence] = useState(0);
-  const interval = 180;
-  const delay = 0;
+  const data = useGetAboutMeSectionQuery();
 
   // on mount
   useEffect(() => {
@@ -25,29 +22,9 @@ const AboutMe = ({ atAbout = false, isMobile }: Props) => {
     // TODO: set top here
   }, []);
 
-  // on update
-  useEffect(() => {
-    if (atAbout) {
-      const dotGridLength = countLongestArray([dotGridA]);
-
-      startSequence(
-        {
-          length: (dotGridLength as number) || 0,
-          interval,
-          delay,
-          index: dotGridIndex,
-        },
-        updateSequence,
-      );
-    } else {
-      updateSequence(0);
-    }
-  }, [atAbout]);
-
   return (
     <AboutMeSection id="about-section">
-      <StyledHeading text={gcms.section.heading} />
-      <StyledDotGrid sequence={dotGridA} index={dotGridIndex} />
+      <StyledHeading text={data.heading} />
       <Plx
         disabled={!hasWindow() || isMobile}
         parallaxData={[
@@ -66,7 +43,7 @@ const AboutMe = ({ atAbout = false, isMobile }: Props) => {
           },
         ]}
       >
-        <ContentBox dangerouslySetInnerHTML={{ __html: gcms.section.body.html }} />
+        <ContentBox dangerouslySetInnerHTML={{ __html: data.body.html }} />
       </Plx>
     </AboutMeSection>
   );

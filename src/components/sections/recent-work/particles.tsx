@@ -5,14 +5,14 @@ import Triangle from '../../particles/triangle';
 import dotGrids from './dots';
 import { hasWindow } from '../../../util/util';
 import { RecentWorkParticle } from './styles';
-import { Query } from '../../../../types';
+import { Query } from '../../../types';
 
 interface Props {
   isMobile?: boolean;
 }
 
 const Particles = ({ isMobile = false }: Props) => {
-  const getPlxData = (values) => [
+  const getPlxData = values => [
     {
       start: 'self',
       duration: '100vh',
@@ -27,7 +27,7 @@ const Particles = ({ isMobile = false }: Props) => {
     },
   ];
 
-  const getParticle = (p) => {
+  const getParticle = p => {
     const { name, type, ...params } = p;
     switch (type) {
       case 'triangle':

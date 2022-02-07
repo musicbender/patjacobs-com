@@ -4,7 +4,7 @@ import { gridPosition } from '../../../styles/utils/global';
 import { titleEnter, subtitleEnter, triangleEnter, moveLilSquare } from './keyframes';
 import DotGrid from '../../particles/dot-grid';
 import LilSquare from '../../particles/lil-square';
-import { DotGridProps } from '../../../../types/particles';
+import { DotGridProps } from '../../../types/particles';
 
 // constants
 const trianglePos = { prop: 'left', unit: '%', attach: 'right' };
@@ -33,7 +33,7 @@ export const HomeHeader = styled('div')<HomeHeaderProps>`
   ${media.tablet`
     height: 61em;
   `}
-  ${(props) =>
+  ${props =>
     props.splashOpen &&
     css`
       overflow: hidden;
@@ -50,7 +50,7 @@ export const DotGridWrapper = styled.div`
 `;
 
 export const TitleWrapper = styled.div`
-  margin: ${(props) => `0 0 0 ${props.theme.gridSizes.s}%`};
+  margin: ${props => `0 0 0 ${props.theme.gridSizes.s}%`};
   padding-top: 5em;
   ${media.tablet`
     padding-top: 8em;
@@ -59,19 +59,18 @@ export const TitleWrapper = styled.div`
 
 export const Title = styled('h1')<TitleProps>`
   margin: 0 0 0.45em -0.08em;
-  font-family: ${(props) => props.theme.fonts.futura};
+  font-family: ${props => props.theme.fonts.futura};
   font-size: 5.5rem;
   font-weight: normal;
   line-height: 1.1;
   opacity: 0;
   transform: translate3d(0, -1em, 0);
-  ${(props) =>
+  ${props =>
     props.show &&
     css`
       animation: ${({ theme }) =>
         css`
-          ${titleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate
-            .headerDelay} forwards
+          ${titleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate.headerDelay} forwards
         `};
     `};
   ${media.tablet`
@@ -88,13 +87,12 @@ export const SubTitle = styled('h2')<TitleProps>`
   letter-spacing: 0.67em;
   opacity: 0;
   transform: translate3d(0, 2em, 0);
-  ${(props) =>
+  ${props =>
     props.show &&
     css`
       animation: ${({ theme }) =>
         css`
-          ${subtitleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate
-            .headerDelay} forwards
+          ${subtitleEnter} ${theme.animate.headerDuration} ease-out ${theme.animate.headerDelay} forwards
         `};
     `};
   ${media.tablet`
@@ -162,7 +160,7 @@ export const TriangleParallax = styled('div')<TriangleParallaxProps>`
       top: 75em;
       animation-delay: calc(${theme.animate.headerDelay} + 2400ms);
     `}
-  ${(props) =>
+  ${props =>
     !props.show &&
     css`
       animation: none;
@@ -176,8 +174,7 @@ export const StyledLilSquare = styled(LilSquare)`
   border-color: ${({ theme }) => theme.palette.grey};
   animation: ${({ theme }) =>
     css`
-      ${moveLilSquare} ${theme.animate.headerDuration} steps(1) ${theme.animate
-        .headerDelay} forwards
+      ${moveLilSquare} ${theme.animate.headerDuration} steps(1) ${theme.animate.headerDelay} forwards
     `};
   transform: translate3d(-30vw, -24em, 0) rotate(0deg);
 `;

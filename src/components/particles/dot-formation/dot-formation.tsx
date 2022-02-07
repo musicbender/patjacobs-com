@@ -2,7 +2,7 @@ import React from 'react';
 import TextEmbeds from './text-embeds';
 import Triangle from '../triangle';
 import { mapDotsWithText } from '../../../util/dot-grid';
-import { Skill, Axis, DotFormationConfig } from '../../../../types';
+import { Skill, Axis, DotFormationConfig } from '../../../types';
 import { Dots, DotFormationWrapper, Dot } from './styles';
 
 interface Props {
@@ -39,7 +39,7 @@ const DotFormation = ({
     return ((index + 1) / vector) * dotSize;
   };
 
-  const renderDot = (config) => {
+  const renderDot = config => {
     const { i, x, y, hide, xOffset, yOffset } = config;
     return (
       <Dot

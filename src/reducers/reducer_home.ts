@@ -1,6 +1,6 @@
 import initialState from '../store/initial-state';
 import { AnyAction } from 'redux';
-import { ABOUT_TOP_SET, RECENT_WORK_TOP_SET, SKILLS_TOP_SET } from '../constants/constants';
+import { ABOUT_TOP_SET, RECENT_WORK_TOP_SET, SKILLS_TOP_SET } from '../constants/global';
 
 export default function home(state = initialState.home, action: AnyAction) {
   const { type, payload } = action;

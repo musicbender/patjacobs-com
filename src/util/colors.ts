@@ -1,7 +1,7 @@
 import theme from '../styles/theme';
 import { moveAllInArray } from './util';
-import { ITheme } from '../../types/styles';
-import { CoreColors } from '../../types';
+import { ITheme } from '../types/styles';
+import { CoreColors } from '../types';
 
 export const getRandomColor = (
   outputType: 'hex' | 'name' = 'hex',

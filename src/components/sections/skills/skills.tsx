@@ -5,7 +5,7 @@ import Heading from '../../global/heading';
 import { setSkillsTop } from '../../../actions/home';
 import { hasWindow, throttle } from '../../../util/util';
 import { SkillsWrapper, DotWrapper, StyledDotFormation } from './styles';
-import { Configs, Gcms_Skill, Query } from '../../../../types';
+import { Configs, Gcms_Skill, Query } from '../../../types';
 import { compileSkillsData } from '../../../util/data';
 
 interface Props {
@@ -31,7 +31,7 @@ const mapStateToProps = ({ home }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       setSkillsTop,
@@ -51,8 +51,31 @@ class SkillsSection extends PureComponent<Props & ReduxProps, State> {
     this.gridID = 'skills-dot-grid';
     this.defaultColor = 'rgb(249, 141, 81)';
     this.hideArray = [
-      10, 11, 12, 13, 14, 25, 26, 27, 28, 29, 40, 41, 42, 43, 44, 55, 56, 57, 58, 59, 70, 71, 72,
-      73, 74,
+      10,
+      11,
+      12,
+      13,
+      14,
+      25,
+      26,
+      27,
+      28,
+      29,
+      40,
+      41,
+      42,
+      43,
+      44,
+      55,
+      56,
+      57,
+      58,
+      59,
+      70,
+      71,
+      72,
+      73,
+      74,
     ];
 
     this.state = {

@@ -17,7 +17,7 @@ import {
 import {
   ConfigsRecentWorkWorkItemPlxImage,
   ConfigsRecentWorkWorkItemPlxInfo,
-} from '../../../../types';
+} from '../../../types';
 
 interface Props {
   item: any;

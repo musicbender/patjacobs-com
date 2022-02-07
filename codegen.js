@@ -13,7 +13,7 @@ module.exports = {
   },
   documents: 'src/**/*.graphql',
   generates: {
-    'types/graphcms-schema.d.ts': {
+    'src/types/graphcms-schema.d.ts': {
       plugins: [
         'typescript',
         'typescript-operations',

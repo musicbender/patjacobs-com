@@ -1,13 +1,14 @@
-import React, { FC, PureComponent, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Plx from 'react-plx';
-import { connect, useSelector } from 'react-redux';
-import { throttle, hasWindow } from '../../../util/util';
-import ProjectMeta from '../../sections/project-meta';
-import ProjectBody from '../../sections/project-body';
-import RevealBlock from '../../global/reveal-block';
-import BarList from '../../global/bar-list';
-import settings from '../../../configs/settings.json';
-import { useThrottle } from '../../../hooks';
+import { useSelector } from 'react-redux';
+import { hasWindow } from '@util/util';
+import ScrollLine from '@components/global/scroll-line';
+import ProjectMeta from '@components/sections/project-meta';
+import ProjectBody from '@components/sections/project-body';
+import RevealBlock from '@components/global/reveal-block';
+import BarList from '@components/global/bar-list';
+import settings from '@configs/settings.json';
+import { useThrottle } from '@hooks';
 import {
   CaseStudyPage,
   InfoWrapper,
@@ -21,9 +22,7 @@ import {
   Paragraph,
   StyledUpNext,
 } from './styles';
-import { RevealBlockContentType, RevealedElementsState, Store } from '../../../../types';
-import ScrollLine from '../../global/scroll-line';
-import { useGetCaseStudyQuery } from '../../../../types/graphcms-schema';
+import { RevealBlockContentType, RevealedElementsState, Store, useGetCaseStudyQuery } from '@types';
 
 type Props = {
   projectId: string;

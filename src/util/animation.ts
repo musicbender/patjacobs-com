@@ -1,7 +1,7 @@
 import { hasWindow } from './util';
 import { requestTimeout, requestInterval, clearRequestInterval } from './shims';
-import { StartSequenceOptions } from '../../types/global';
-import { CurtainState } from '../../types';
+import { StartSequenceOptions } from '../types/global';
+import { CurtainState } from '../types';
 
 export const startSequence = (options: StartSequenceOptions, func: any): void => {
   if (!options.length && options.length < 1) return;

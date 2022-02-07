@@ -1,10 +1,10 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { processRawBody } from '../../util/project-body-process';
-import { getNextProject, getRelatedProjects } from '../../util/projects';
-import CaseStudy from '../../components/pages/case-study';
-// import Modal from '../../components/global/modal';
-// import Curtain from '../../components/global/curtain/curtain';
+import { processRawBody } from '@util/project-body-process';
+import { getNextProject, getRelatedProjects } from '@util/projects';
+import CaseStudy from '@components/pages/case-study';
+// import Modal from 'components/global/modal';
+// import Curtain from 'components/global/curtain/curtain';
 import { dehydrate, QueryClient } from 'react-query';
 import {
   GcmsProjectBodyRaw,
@@ -12,12 +12,10 @@ import {
   ProcessedProject,
   ProcessedGcmsData,
   Sections,
-} from '../../../types';
-import {
   Section,
   useGetAllProjectIdsQuery,
   useGetCaseStudyQuery,
-} from '../../../types/graphcms-schema';
+} from '@types';
 
 const CaseStudyTemplate = ({ projectId }) => (
   <>

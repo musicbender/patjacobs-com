@@ -6,9 +6,9 @@ import {
   MENU_CHANGED,
   RECENT_WORK_TOP_SET,
   IS_MOBILE_SET,
-} from '../constants/constants';
+} from '../constants/global';
 import { AnyAction } from 'redux';
-import { CurtainState } from '../../types';
+import { CurtainState } from '../types';
 
 export function loadPage() {
   return {

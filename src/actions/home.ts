@@ -1,6 +1,6 @@
-import { ABOUT_TOP_SET, RECENT_WORK_TOP_SET, SKILLS_TOP_SET } from '../constants/constants';
+import { ABOUT_TOP_SET, RECENT_WORK_TOP_SET, SKILLS_TOP_SET } from '../constants/global';
 import { AnyAction } from 'redux';
-import { IHomeActionPayload } from '../../types/state';
+import { IHomeActionPayload } from '../types/state';
 
 export function setAboutTop(params: IHomeActionPayload): AnyAction {
   return {

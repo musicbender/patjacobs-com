@@ -1,0 +1,8 @@
+query getAboutMeSection {
+  aboutMeSection: section(where: { sectionId: "about-me" }) {
+    heading
+    body {
+      html
+    }
+  }
+}

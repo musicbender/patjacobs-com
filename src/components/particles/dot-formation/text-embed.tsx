@@ -3,7 +3,7 @@ import {
   Skill,
   DorFormationTextEmbedOffsets,
   DotFormationTextEmbedDirection,
-} from '../../../../types';
+} from '../../../types';
 import { TextEmbedWrapper, TextEmbedTextWrapper, RevealBar, InnerTextWrapper } from './styles';
 
 interface Props {

@@ -9,7 +9,7 @@ import {
   IconWrapper,
   Icon,
 } from './styles';
-import { SitePageContextProject } from '../../../../types';
+import { SitePageContextProject } from '../../../types';
 import { pruneUrl } from '../../../util/util';
 
 interface Props {

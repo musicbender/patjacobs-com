@@ -1,4 +1,4 @@
-import { GcmsProjectBodyNode, GcmsProjectBodyRaw, ProjectBodyItem } from '../../types';
+import { GcmsProjectBodyNode, GcmsProjectBodyRaw, ProjectBodyItem } from '../types';
 
 const getMediaText = (node: GcmsProjectBodyNode): string | null => {
   if (node.altText) {

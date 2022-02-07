@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-import './public/fonts/fonts.css';
+import '../../public/fonts/fonts.css';
 
 export default function PJApp({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient());

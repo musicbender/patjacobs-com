@@ -11,10 +11,31 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "experimentalDecorators": true,
-    "jsx": "react",
-    "noEmit": true
+    "jsx": "preserve",
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@configs/*": ["src/configs/*"],
+      "@hooks": ["src/hooks"],
+      "@store/*": ["src/store/*"],
+      "@types": ["src/types"],
+      "@util/*": ["src/util/*"],
+      "@constants/*": ["src/constants/*"],
+      "@reducers": ["src/reducers"],
+      "@middleware": ["src/middleware"],
+      "@styles/*": ["src/styles/*"],
+      "@queries/*": ["src/queries/*"],
+      "@actions/*": ["src/actions/*"],
+      "@assets/*": ["src/assets/*"],
+      "@public/*": ["public/*"]
+    },
+    "strict": false,
+    "incremental": true
   },
-  "include": ["src", "types", "jest.config.js", "codegen.js"]
+  "include": ["src", "jest.config.js", "codegen.js"],
+  "exclude": ["node_modules"]
 }

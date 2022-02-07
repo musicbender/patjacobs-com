@@ -1,6 +1,6 @@
 import React from 'react';
 import { TriangleWrapper } from './styles';
-import { ParticleColors, TriangleSizes } from '../../../../types/global';
+import { ParticleColors, TriangleSizes } from '../../../types/global';
 
 export interface Props {
   color?: keyof typeof ParticleColors;

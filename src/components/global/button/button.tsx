@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonTypes } from '../../../../types';
+import { ButtonTypes } from '../../../types';
 import { InnerWrapper, Line, Text, ButtonA, ButtonLink, ButtonDiv } from './styles';
 const tlConf = require('../../../constants/transition-link.json');
 

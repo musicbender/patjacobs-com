@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import promise from 'redux-promise';
-import reducers from '../reducers';
-import { globalMiddleware, homeMiddleware } from '../middleware';
+import reducers from '@reducers';
+import { globalMiddleware, homeMiddleware } from '@middleware';
 
 const middleware = [globalMiddleware, homeMiddleware, promise];
 

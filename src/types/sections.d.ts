@@ -1,4 +1,4 @@
-import { Gcms_Section } from './';
+import { Gcms_Section } from '.';
 
 export type DotFormationTextEmbedDirection = 'Up' | 'Down' | 'Right';
 

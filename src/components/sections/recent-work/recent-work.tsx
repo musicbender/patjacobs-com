@@ -8,7 +8,7 @@ import WorkItem from '../../global/work-item/work-item';
 import { throttle } from '../../../util/util';
 import { setRecentWorkTop } from '../../../actions/global';
 import { RecentWorkWrapper, ParentWrapper, WorkItemsWrapper } from './styles';
-import { Gcms_Section, Gcms_Project, Configs } from '../../../../types';
+import { Gcms_Section, Gcms_Project, Configs } from '../../../types';
 
 interface Props {
   configs?: Configs;
@@ -35,7 +35,7 @@ const mapStateToProps = ({ global, home }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       setRecentWorkTop,

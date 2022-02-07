@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BarListWrapper, StyledRevealBlock, ListItem } from './styles';
-import { CoreColors } from '../../../../types';
+import { CoreColors } from '../../../types';
 import { getRandomColor, getRandomColorSequence } from '../../../util/colors';
 
 interface Props {

@@ -1,3 +1,9 @@
+# logs
+yarn-error.log
+*.log
+npm-debug.log*
+package-lock.json
+
 # dependencies
 /node_modules
 
@@ -5,13 +11,24 @@
 /coverage
 
 # production
+/.next
 /build
 
+# VS Code
+.vscode
+
+# jest junit reports
+reports
+
+# Optional npm cache directory
+.npm
+
 # generated 
-/types/graphcms-schema.d.ts
+src/types/graphcms-schema.d.ts
 
 # misc
+.git
 .DS_Store
+.env
 .env.*
 
-npm-debug.log*

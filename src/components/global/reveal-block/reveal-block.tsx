@@ -2,7 +2,7 @@ import React from 'react';
 import Plx from 'react-plx';
 import { reduceSegment, hasWindow } from '../../../util/util';
 import { RevealBlockWrapper, OutterWrapper, InnerWrapper, ContentWrapper, Content } from './styles';
-import { RevealBlockContentType } from '../../../../types';
+import { RevealBlockContentType } from '../../../types';
 
 interface Props {
   startGrid?: number;

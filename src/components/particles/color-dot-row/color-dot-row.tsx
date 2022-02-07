@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ColorDotsRow, DesktopWrapper, MobileWrapper, Dot } from './styles';
-import { CoreColors } from '../../../../types';
+import { CoreColors } from '../../../types';
 import { requestTimeout } from '../../../util/shims';
 
 interface Props {

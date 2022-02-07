@@ -2,7 +2,7 @@ import React from 'react';
 import Plx from 'react-plx';
 import { hasWindow } from '../../../util/util';
 import { CavieDotsWrapper, InnerWrapper, Dots } from './styles';
-import { CavieDotConfig } from '../../../../types';
+import { CavieDotConfig } from '../../../types';
 import theme from '../../../styles/theme';
 
 interface Props {

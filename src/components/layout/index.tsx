@@ -15,7 +15,7 @@ import Footer from '../global/footer';
 import Modal from '../global/modal';
 import SplashScreen from '../sections/splash-screen';
 import { AppWrapper, OutterWrapper, InnerWrapper } from './styles';
-import { Store, HeadProps } from '../../../types';
+import { Store, HeadProps } from '../../types';
 
 interface ReduxProps {
   splashOpen?: boolean;

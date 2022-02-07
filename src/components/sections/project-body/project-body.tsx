@@ -1,7 +1,7 @@
 import React from 'react';
 import RevealBlock from '../../global/reveal-block';
 import { ProjectBodyWrapper, BodyParagraph, BodyImage, BodyVideo, Caption } from './styles';
-import { GcmsProjectBodyNode, ProjectBodyItem, RevealBlockContentType } from '../../../../types';
+import { GcmsProjectBodyNode, ProjectBodyItem, RevealBlockContentType } from '../../../types';
 
 interface Props {
   body: ProjectBodyItem[];

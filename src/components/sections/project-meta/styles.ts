@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { media } from '../../../styles/breakpoints';
 import { getRandomColor } from '../../../util/colors';
-import { CoreColors } from '../../../../types';
+import { CoreColors } from '../../../types';
 
 interface ContentProps {
   color?: CoreColors;
@@ -22,7 +22,7 @@ export const ContentWrapper = styled('div')<ContentProps>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: ${(props) => props.theme.corePalette[props.color]};
+  color: ${props => props.theme.corePalette[props.color]};
   ${media.tablet`
         margin: ${`${conf.desktopMargin}em auto 0`};
     `}

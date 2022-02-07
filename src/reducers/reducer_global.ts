@@ -1,4 +1,4 @@
-import initialState from '../store/initial-state';
+import initialState from '@store/initial-state';
 import { AnyAction } from 'redux';
 import {
   PAGE_LOADED,
@@ -8,7 +8,7 @@ import {
   TRANSPORT_CHANGED,
   MENU_CHANGED,
   IS_MOBILE_SET,
-} from '../constants/constants';
+} from '@constants/global';
 
 export default function global(state = initialState.global, action: AnyAction) {
   const { type, payload } = action;

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import rgbHex from 'hex-to-rgba';
 import TransitionLink from 'gatsby-plugin-transition-link';
 import { media } from '../../../styles/breakpoints';
-import { ButtonTypes, ITheme } from '../../../../types';
+import { ButtonTypes, ITheme } from '../../../types';
 
 interface ButtonProps {
   type: ButtonTypes;
@@ -14,36 +14,36 @@ const buttonStyles = (props: ButtonProps & { theme: ITheme }) => css`
     cursor: pointer;
   }
   ${props.type === 'ridicularge-XL' &&
-  css`
-    padding: 1.5em 2em;
-    font-size: 3rem;
-    background-color: ${props.theme.palette.black};
-  `}
+    css`
+      padding: 1.5em 2em;
+      font-size: 3rem;
+      background-color: ${props.theme.palette.black};
+    `}
   ${props.type === 'line' &&
-  css`
-    position: relative;
-    display: inline-block;
-    max-width: 12em;
-    width: 80%;
-    overflow-x: hidden;
-    ${media.tablet`
+    css`
+      position: relative;
+      display: inline-block;
+      max-width: 12em;
+      width: 80%;
+      overflow-x: hidden;
+      ${media.tablet`
                 width: 100%;
             `}
-    ${media.desktopS`
+      ${media.desktopS`
                 width: 80%;
             `}
              &:hover {
-      ${Text} {
-        cursor: pointer;
-        transform: translate3d(1em, 0, 0);
-        transition: transform ${props.theme.animate.fast} ${props.theme.animate.easeInOut};
+        ${Text} {
+          cursor: pointer;
+          transform: translate3d(1em, 0, 0);
+          transition: transform ${props.theme.animate.fast} ${props.theme.animate.easeInOut};
+        }
       }
-    }
-  `}
+    `}
 `;
 
 export const InnerWrapper = styled('div')<ButtonProps>`
-  ${(props) =>
+  ${props =>
     props.type === 'line' &&
     css`
       width: 250%;
@@ -65,22 +65,22 @@ export const InnerWrapper = styled('div')<ButtonProps>`
 `;
 
 export const ButtonA = styled('a')<ButtonProps>`
-  ${(props) => buttonStyles(props)}
+  ${props => buttonStyles(props)}
 `;
 
 export const ButtonLink = styled(TransitionLink)<ButtonProps>`
-  ${(props) => buttonStyles(props)}
+  ${props => buttonStyles(props)}
 `;
 
 export const ButtonDiv = styled('div')<ButtonProps>`
-  ${(props) => buttonStyles(props)}
+  ${props => buttonStyles(props)}
 `;
 
 export const Line = styled('span')`
   display: inline-block;
   width: 70%;
   height: 0.075em;
-  background-color: ${(props) => rgbHex(props.theme.palette.white, 0.87)};
+  background-color: ${props => rgbHex(props.theme.palette.white, 0.87)};
   transform: translate3d(0, 0.01em, 0);
 `;
 

@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import Home from '../components/pages/home';
 // import Modal from '../components/global/modal';
 // import Curtain from '../components/global/curtain/curtain';
-import { useGetHomeContentQuery } from '../../types/graphcms-schema';
+import { useGetHomeContentQuery } from '../types/graphcms-schema';
 
 type Props = {};
 

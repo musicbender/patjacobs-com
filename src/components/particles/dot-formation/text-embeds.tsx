@@ -1,7 +1,7 @@
 import React from 'react';
 import TextEmbed from './text-embed';
 import { getTextWidth } from '../../../util/dot-grid';
-import { Skill, Axis, DotFormationTextEmbedDirection } from '../../../../types';
+import { Skill, Axis, DotFormationTextEmbedDirection } from '../../../types';
 import { TextEmbedsWrapper } from './styles';
 
 interface Props {

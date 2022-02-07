@@ -1,6 +1,6 @@
 import React from 'react';
 import { LilSquareWrapper } from './styles';
-import { ParticleColors } from '../../../../types/global';
+import { ParticleColors } from '../../../types/global';
 
 interface Props {
   color?: keyof typeof ParticleColors;

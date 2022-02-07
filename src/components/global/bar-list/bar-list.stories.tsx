@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { storiesOf } from '@storybook/react';
 import BarList from './bar-list';
-import { CoreColors } from '../../../../types';
+import { CoreColors } from '../../../types';
 
 // configuration
 const conf = {

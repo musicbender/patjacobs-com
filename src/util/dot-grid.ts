@@ -1,4 +1,4 @@
-import { Skill } from '../../types';
+import { Skill } from '../types';
 
 export const getTextWidth = (text = '', spacing: number, offset = 0): string => {
   if (!spacing || !text || typeof text !== 'string' || typeof spacing !== 'number') {

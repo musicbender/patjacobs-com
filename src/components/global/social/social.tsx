@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { SocialWrapper, InnerWrapper, LinkText } from './styles';
-import { SocialLink } from '../../../../types/graphcms-schema';
+import { SocialLink } from '../../../types/graphcms-schema';
 
 type Props = {
   socialLinks: SocialLink[];

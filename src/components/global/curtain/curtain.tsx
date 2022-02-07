@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeCurtainState } from '../../../actions/global';
 import { clearRequestTimeout, requestTimeout } from '../../../util/shims';
 import { CurtainWrapper, Block, InnerBlock } from './styles';
-import { ECurtainTypes, ECurtainTransition, ConfigsSettings, Store } from '../../../../types';
+import { ECurtainTypes, ECurtainTransition, ConfigsSettings, Store } from '../../../types';
 import theme from '../../../styles/theme';
 
 interface Props {
