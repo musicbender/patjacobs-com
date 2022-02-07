@@ -6,10 +6,10 @@ module.exports = {
   },
   extends: [
     'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
+    'next',
+    'next/core-web-vitals',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
-    'prettier/react',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -27,6 +27,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'react/jsx-curly-newline': ['error', 'consistent'],
+    'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/array-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-parameter-properties': 'off',

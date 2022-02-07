@@ -14,10 +14,10 @@ export const TriangleWrapper = styled('svg')<TriangleWrapperProps>`
   stroke-linejoin: round;
   stroke-miterlimit: 1.41421;
   pointer-events: auto;
-  opacity: ${props => props.opacity || 1};
-  ${props => props.size === 'micro' && 'width: 0.25em;'}
-  ${props => props.size === 'tiny' && 'width: 1em;'}
-  ${props =>
+  opacity: ${(props) => props.opacity || 1};
+  ${(props) => props.size === 'micro' && 'width: 0.25em;'}
+  ${(props) => props.size === 'tiny' && 'width: 1em;'}
+  ${(props) =>
     props.size === 'small' &&
     css`
       width: 2em;
@@ -25,7 +25,7 @@ export const TriangleWrapper = styled('svg')<TriangleWrapperProps>`
       width: 2.75em;
     `}
     `}
-  ${props =>
+  ${(props) =>
     props.size === 'medium' &&
     css`
       width: 5.5em;
@@ -33,10 +33,10 @@ export const TriangleWrapper = styled('svg')<TriangleWrapperProps>`
       width: 7em;
     `}
     `}
-  ${props => props.size === 'giant' && 'width: 70%;'}
-  ${props => props.color === 'white' && `fill: ${props.theme.palette.white};`}
-  ${props => props.color === 'purple' && `fill: ${props.theme.corePalette.purple};`}
-  ${props => props.color === 'yellow' && `fill: ${props.theme.corePalette.yellow};`}
-  ${props => props.color === 'orange' && `fill: ${props.theme.corePalette.orange};`}
-  ${props => props.color === 'aqua' && `fill: ${props.theme.corePalette.aqua};`}
+  ${(props) => props.size === 'giant' && 'width: 70%;'}
+  ${(props) => props.color === 'white' && `fill: ${props.theme.palette.white};`}
+  ${(props) => props.color === 'purple' && `fill: ${props.theme.corePalette.purple};`}
+  ${(props) => props.color === 'yellow' && `fill: ${props.theme.corePalette.yellow};`}
+  ${(props) => props.color === 'orange' && `fill: ${props.theme.corePalette.orange};`}
+  ${(props) => props.color === 'aqua' && `fill: ${props.theme.corePalette.aqua};`}
 `;

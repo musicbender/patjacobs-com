@@ -50,7 +50,7 @@ const DotGrid = ({
     );
   };
 
-  const renderAllRows = rows => {
+  const renderAllRows = (rows) => {
     return rows.map(renderRow);
   };
 

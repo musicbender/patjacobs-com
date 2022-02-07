@@ -39,7 +39,7 @@ const Decorator = styled.div`
 export default {
   title: 'ProjectMeta',
   component: ProjectMeta,
-  decorators: [story => <Decorator>{story()}</Decorator>],
+  decorators: [(story) => <Decorator>{story()}</Decorator>],
 };
 
 // stories

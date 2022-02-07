@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import Plx from 'react-plx';
-import { hasWindow, countLongestArray } from '@util/util';
-import { startSequence } from '@util/animation';
-import { dotGridA } from './dots';
-import { StyledHeading, StyledDotGrid, ContentBox, AboutMeSection } from './styles';
+import { hasWindow } from '@util/util';
+import { StyledHeading, ContentBox, AboutMeSection } from './styles';
 import { useGetAboutMeSectionQuery } from '@types';
 
 interface Props {
@@ -13,18 +10,10 @@ interface Props {
 }
 
 const AboutMe = ({ atAbout = false, isMobile }: Props) => {
-  const data = useGetAboutMeSectionQuery();
-
-  // on mount
-  useEffect(() => {
-    // const section = document.getElementById('about-section');
-    // const rect = section.getBoundingClientRect();
-    // TODO: set top here
-  }, []);
-
+  const { data } = useGetAboutMeSectionQuery();
   return (
     <AboutMeSection id="about-section">
-      <StyledHeading text={data.heading} />
+      <StyledHeading text={data.aboutMeSection.heading} />
       <Plx
         disabled={!hasWindow() || isMobile}
         parallaxData={[
@@ -43,7 +32,7 @@ const AboutMe = ({ atAbout = false, isMobile }: Props) => {
           },
         ]}
       >
-        <ContentBox dangerouslySetInnerHTML={{ __html: data.body.html }} />
+        <ContentBox dangerouslySetInnerHTML={{ __html: data.aboutMeSection.body.html }} />
       </Plx>
     </AboutMeSection>
   );

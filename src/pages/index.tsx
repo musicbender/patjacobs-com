@@ -1,30 +1,31 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { GetStaticProps } from 'next';
-import Home from '../components/pages/home';
+import Home from '@components/pages/home';
 // import Modal from '../components/global/modal';
 // import Curtain from '../components/global/curtain/curtain';
-import { useGetHomeContentQuery } from '../types/graphcms-schema';
+import { useGetAboutMeSectionQuery, useGetRecentWorkQuery, useGetSkillsQuery } from '@types';
+import { dehydrate, QueryClient } from 'react-query';
 
-type Props = {};
-
-const Index: React.FunctionComponent<Props> = () => {
-  return (
-    <>
-      {/* {(
-                <Modal>
-                    <Curtain entrance="full" exit="full" duration={1275} />
-                </Modal>
-            )} */}
-      <Home />
-    </>
-  );
+const Index: FC = () => {
+  return <Home />;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = useGetHomeContentQuery();
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(useGetAboutMeSectionQuery.getKey(), () =>
+    useGetAboutMeSectionQuery.fetcher(),
+  );
+
+  await queryClient.prefetchQuery(useGetRecentWorkQuery.getKey(), () =>
+    useGetRecentWorkQuery.fetcher(),
+  );
+
+  await queryClient.prefetchQuery(useGetSkillsQuery.getKey(), () => useGetSkillsQuery.fetcher());
+
   return {
     props: {
-      gcmsData: data,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 };

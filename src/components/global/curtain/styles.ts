@@ -52,24 +52,24 @@ export const InnerBlock = styled('div')<InnerBlockProps>`
   left: 0;
   height: 100%;
   width: 110%;
-  background-color: ${props => props.theme.palette.matteBlack};
+  background-color: ${(props) => props.theme.palette.matteBlack};
   transform: translate3d(-5%, 0, 0);
   animation-delay: 0ms;
   animation-fill-mode: forwards;
-  animation-duration: ${props => props.duration || props.theme.animate.slow};
-  ${props => props.transition === 'enter' && 'transform: translate3d(110%, 0, 0);'}
-  ${props => props.transition === 'exit' && 'transform: translate3d(0, 0, 0);'}
-  ${props =>
+  animation-duration: ${(props) => props.duration || props.theme.animate.slow};
+  ${(props) => props.transition === 'enter' && 'transform: translate3d(110%, 0, 0);'}
+  ${(props) => props.transition === 'exit' && 'transform: translate3d(0, 0, 0);'}
+  ${(props) =>
     props.transition === 'enter' &&
     css`
       animation-name: ${splashBlockEnter};
       animation-timing-function: ${props.enterType === 'full' ? 'ease-in-out' : 'linear'};
     `}
-  ${props =>
+  ${(props) =>
     props.transition === 'exit' &&
     css`
       animation-name: ${splashBlockExit};
       animation-timing-function: ${props.exitType === 'full' ? 'ease-in-out' : 'linear'};
     `}
-  ${props => props.delay && `animation-delay: ${props.delay};`}
+  ${(props) => props.delay && `animation-delay: ${props.delay};`}
 `;

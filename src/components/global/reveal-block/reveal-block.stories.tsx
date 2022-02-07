@@ -62,8 +62,8 @@ const GenericWrapper = styled.div`
 `;
 
 const LineContent = styled('div')<LineContentProps>`
-  height: ${props => props.height};
-  background-color: ${props => props.lineColor};
+  height: ${(props) => props.height};
+  background-color: ${(props) => props.lineColor};
 `;
 
 const GenericComponent = ({ text = conf.mockText }) => (

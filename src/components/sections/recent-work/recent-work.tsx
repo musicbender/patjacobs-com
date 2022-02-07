@@ -35,7 +35,7 @@ const mapStateToProps = ({ global, home }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       setRecentWorkTop,

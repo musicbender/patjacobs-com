@@ -1,0 +1,7 @@
+query getSocialLinks {
+  socialLinks {
+    id
+    label
+    url
+  }
+}

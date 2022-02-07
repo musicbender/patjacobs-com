@@ -39,7 +39,7 @@ const DotFormation = ({
     return ((index + 1) / vector) * dotSize;
   };
 
-  const renderDot = config => {
+  const renderDot = (config) => {
     const { i, x, y, hide, xOffset, yOffset } = config;
     return (
       <Dot

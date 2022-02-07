@@ -36,14 +36,14 @@ export const Dot = styled('svg')<DotProps>`
   opacity: 1;
   visibility: visible;
   transition: fill 150ms linear;
-  ${props =>
+  ${(props) =>
     props.hasText &&
     props.active &&
     css`
       opacity: 0;
       transition: opacity 0ms linear 1s;
     `}
-  ${props =>
+  ${(props) =>
     props.hide &&
     css`
       visibility: hidden;
@@ -62,25 +62,25 @@ export const TextEmbedWrapper = styled('div')<TextEmbedProps>`
   position: absolute;
   height: 1.5em;
   overflow: hidden;
-  ${props =>
+  ${(props) =>
     props.direction === 'Right' &&
     css`
       transform-origin: center left;
       transform: rotate(0deg);
     `}
-  ${props =>
+  ${(props) =>
     props.direction === 'Up' &&
     css`
       transform-origin: calc(-1.5% + 6px) calc(37% + 1px);
       transform: rotate(-90deg);
     `}
-  ${props =>
+  ${(props) =>
     props.direction === 'Down' &&
     css`
       transform-origin: 0.175em 0.9em;
       transform: rotate(90deg);
     `}
-  ${props =>
+  ${(props) =>
     props.text === 'aws' &&
     css`
       transform-origin: 4.5% 51%;
@@ -109,7 +109,7 @@ export const InnerTextWrapper = styled('span')<InnerTextWrapperProps>`
     opacity ${theme.animate.moderate} ${theme.animate.easeInOut}, 
     transform ${theme.animate.moderate} ${theme.animate.easeInOut}
   `};
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
       opacity: 1;
@@ -131,7 +131,7 @@ export const RevealBar = styled('div')<RevealBarProps>`
   transform: translateX(-110%);
   transform-origin: left;
   transition: transform 0ms;
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
       transform: translateX(110%);

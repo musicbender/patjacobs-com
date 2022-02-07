@@ -20,9 +20,9 @@ import {
 
 const Header: FC = () => {
   const [active, setActive] = useState(false);
-  const splashOpen = useSelector(state => state.global.splashOpen);
-  const curtainState = useSelector(state => state.global.curtainState);
-  const isMobile = useSelector(state => state.global.isMobile);
+  const splashOpen = useSelector((state) => state.global.splashOpen);
+  const curtainState = useSelector((state) => state.global.curtainState);
+  const isMobile = useSelector((state) => state.global.isMobile);
 
   useEffect(() => {
     if (!active && curtainInClose(curtainState)) {
