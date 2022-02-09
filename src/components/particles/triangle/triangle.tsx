@@ -1,13 +1,13 @@
 import React from 'react';
 import { TriangleWrapper } from './styles';
-import { ParticleColors, TriangleSizes } from '../../../types/global';
+import { ParticleColors, TriangleSizes } from '@types';
 
-export interface Props {
+export type Props = {
   color?: keyof typeof ParticleColors;
   size?: keyof typeof TriangleSizes;
   opacity?: number;
   className?: string;
-}
+};
 
 const Triangle = ({ color = 'white', size = 'medium', opacity, className }: Props) => {
   const opacities: { [key in keyof typeof TriangleSizes]: number } = {

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import DotGrid from './dot-grid';
-const sequences = require('../../../../test/mocks/dot-grid.json');
+const sequences = require('@test/mocks/dot-grid.json');
 
 const description = 'Dot grid matrix animation component';
 
-interface Props {
+type Props = {
   sequence: number[][][];
   index?: number;
   started?: boolean;
@@ -13,12 +13,12 @@ interface Props {
   interval?: number;
   delay?: number;
   className?: string;
-}
+};
 
-interface State {
+type State = {
   dotGridIndex?: number;
   dotGridStarted?: boolean;
-}
+};
 
 class DotGridContainer extends Component<Props, State> {
   constructor(props) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import ProjectMeta from './project-meta';
-import theme from '../../../styles/theme';
-import { SitePageContextProject } from '../../../types';
+import theme from '@styles/theme';
+import { SitePageContextProject } from '@types';
 
 // mock project data
 const baseProject = {
@@ -39,7 +39,7 @@ const Decorator = styled.div`
 export default {
   title: 'ProjectMeta',
   component: ProjectMeta,
-  decorators: [(story) => <Decorator>{story()}</Decorator>],
+  decorators: [story => <Decorator>{story()}</Decorator>],
 };
 
 // stories

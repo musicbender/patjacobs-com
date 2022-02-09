@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { media } from '../../../styles/breakpoints';
-import Heading from '../../global/heading';
+import { media } from '@styles/breakpoints';
+import Heading from '@components/global/heading';
 import DotGrid from '../../particles/dot-grid';
 import hexRgb from 'hex-to-rgba';
 

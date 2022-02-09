@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import hexToRgb from 'hex-to-rgba';
-import { media } from '../../../styles/breakpoints';
+import { media } from '@styles/breakpoints';
 
 export const SocialWrapper = styled.div`
   height: 1.15em;

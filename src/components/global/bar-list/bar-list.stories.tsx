@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { storiesOf } from '@storybook/react';
 import BarList from './bar-list';
-import { CoreColors } from '../../../types';
+import { CoreColors } from '@types';
 
 // configuration
 const conf = {
@@ -23,16 +23,16 @@ const conf = {
 };
 
 // wrapper component
-interface Props {
+type Props = {
   items?: string[];
   active?: boolean;
   color?: CoreColors;
   colorPattern?: 'multi' | 'single';
-}
+};
 
-interface State {
+type State = {
   active: boolean;
-}
+};
 
 class BarListContainer extends PureComponent<Props, State> {
   constructor(props) {

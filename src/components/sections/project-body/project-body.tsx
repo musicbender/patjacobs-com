@@ -1,12 +1,12 @@
 import React from 'react';
-import RevealBlock from '../../global/reveal-block';
+import RevealBlock from '@components/global/reveal-block';
 import { ProjectBodyWrapper, BodyParagraph, BodyImage, BodyVideo, Caption } from './styles';
-import { GcmsProjectBodyNode, ProjectBodyItem, RevealBlockContentType } from '../../../types';
+import { GcmsProjectBodyNode, ProjectBodyItem, RevealBlockContentType } from '@types';
 
-interface Props {
+type Props = {
   body: ProjectBodyItem[];
   getRevealProps(elm: string, contentType: RevealBlockContentType): any;
-}
+};
 
 const projectBody = ({ body, getRevealProps }: Props): JSX.Element => {
   const renderParagraph = (item: ProjectBodyItem, i: number) => {

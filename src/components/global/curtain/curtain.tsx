@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCurtainState } from '../../../actions/global';
-import { clearRequestTimeout, requestTimeout } from '../../../util/shims';
+import { changeCurtainState } from '@actions/global';
+import { clearRequestTimeout, requestTimeout } from '@util/shims';
 import { CurtainWrapper, Block, InnerBlock } from './styles';
-import { ECurtainTypes, ECurtainTransition, ConfigsSettings, Store } from '../../../types';
-import theme from '../../../styles/theme';
+import { ECurtainTypes, ECurtainTransition, Store } from '@types';
+import settings from '@configs/settings.json';
+import theme from '@styles/theme';
 
-interface Props {
+type Props = {
   duration?: number;
   entrance?: keyof typeof ECurtainTypes;
   exit?: keyof typeof ECurtainTypes;
-  settings?: ConfigsSettings;
-}
+};
 
-const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props) => {
+const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props): JSX.Element => {
   const blockNum = 7;
   const baseDelay = 55;
   let openingDuration = 0;

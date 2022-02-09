@@ -1,16 +1,16 @@
 import React from 'react';
-import { ButtonTypes } from '../../../types';
+import { ButtonTypes } from '@types';
 import { InnerWrapper, Line, Text, ButtonA, ButtonLink, ButtonDiv } from './styles';
-const tlConf = require('../../../constants/transition-link.json');
+const tlConf = require('@constants/transition-link.json');
 
-interface Props {
+type Props = {
   type?: ButtonTypes;
   text?: string;
   url?: string;
   isExternal?: boolean;
   className?: string;
   callback?: (event: React.MouseEvent) => any;
-}
+};
 
 const Button = ({
   type = 'line',

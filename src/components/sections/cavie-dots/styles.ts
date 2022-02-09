@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components';
-import { media } from '../../../styles/breakpoints';
+import { media } from '@styles/breakpoints';
 
-interface CavieDotsWrapperProps {
+type CavieDotsWrapperProps = {
   show: boolean;
   hide: boolean;
-}
+};
 
-interface DotsProps {
+type DotsProps = {
   hide: boolean;
-}
+};
 
 export const CavieDotsWrapper = styled('div')<CavieDotsWrapperProps>`
   display: none;
@@ -18,8 +18,8 @@ export const CavieDotsWrapper = styled('div')<CavieDotsWrapperProps>`
   width: 50vw;
   height: 100vh;
   ${media.tablet`display: block;`}
-  ${(props) => props.show && media.tablet`display: block;`}
-  ${(props) => props.hide && media.tablet`display: none;`}
+  ${props => props.show && media.tablet`display: block;`}
+  ${props => props.hide && media.tablet`display: none;`}
 `;
 
 export const InnerWrapper = styled.div`
@@ -38,14 +38,14 @@ export const Dots = styled('div')<DotsProps>`
     left: 47.375em;
     padding-bottom: 27.3em;
   `}
-  ${(props) =>
+  ${props =>
     props.hide &&
     css`
       display: none;
     `}
   > .dot {
     position: absolute;
-    fill: ${(props) => props.theme.corePalette.purple};
+    fill: ${props => props.theme.corePalette.purple};
     transform: translateY(100vh);
     transition: ${({ theme }) => `transform ${theme.animate.fast} ease-out`};
   }

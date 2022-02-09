@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Plx from 'react-plx';
-import { hasWindow } from '../../../util/util';
+import config from '@configs/recent-work.json';
+import { hasWindow } from '@util/util';
 import {
   WorkItemWrapper,
   ImageOutterWrapper,
@@ -14,28 +15,24 @@ import {
   ImageFilter,
   ImageCover,
 } from './styles';
-import {
-  ConfigsRecentWorkWorkItemPlxImage,
-  ConfigsRecentWorkWorkItemPlxInfo,
-} from '../../../types';
 
-interface Props {
+type Props = {
   item: any;
   index: number;
   isStopped?: boolean;
   handleWorkStops?: (...args: any) => any;
   isMobile?: boolean;
   baseTop?: number;
-}
+};
 
-const WorkItem = ({
+const WorkItem: FC<Props> = ({
   item,
   index = 0,
   isStopped = false,
   handleWorkStops,
   baseTop,
   isMobile = false,
-}: Props) => {
+}) => {
   const baseEnd: number = isMobile ? baseTop - 200 : baseTop;
   const accumulator: number = isMobile ? 250 : 535;
   const onClient: boolean = hasWindow();
@@ -49,7 +46,7 @@ const WorkItem = ({
     }
   };
 
-  const getPlxData = (seg: ConfigsRecentWorkWorkItemPlxImage) => [
+  const getPlxData = seg => [
     {
       start: 'self',
       end: baseEnd + accumulator * index,
@@ -66,56 +63,52 @@ const WorkItem = ({
   ];
 
   const renderImageSection = () => {
-    return configs.recentWork.workItemPlx.image.map(
-      (seg: ConfigsRecentWorkWorkItemPlxImage, i: number) => (
-        <Plx
-          parallaxData={getPlxData(seg)}
-          disabled={!onClient}
-          className={`parallax index-${i}`}
-          key={`${i}` + item.id + 'image' + JSON.stringify(seg)}
-        >
-          <ImageParallaxInner index={i}>
-            <ImageInnerWrapper>
-              <WorkImage index={i} bgImage={`url(${item.imageDesktop.url})`} />
-              <ImageFilter />
-              <ImageCover isStopped={isStopped} />
-            </ImageInnerWrapper>
-          </ImageParallaxInner>
-        </Plx>
-      ),
-    );
+    return config.workItemPlx.image.map((seg, i: number) => (
+      <Plx
+        parallaxData={getPlxData(seg)}
+        disabled={!onClient}
+        className={`parallax index-${i}`}
+        key={`${i}` + item.id + 'image' + JSON.stringify(seg)}
+      >
+        <ImageParallaxInner index={i}>
+          <ImageInnerWrapper>
+            <WorkImage index={i} bgImage={`url(${item.imageDesktop.url})`} />
+            <ImageFilter />
+            <ImageCover isStopped={isStopped} />
+          </ImageInnerWrapper>
+        </ImageParallaxInner>
+      </Plx>
+    ));
   };
 
   const renderInfoSection = () => {
-    return configs.recentWork.workItemPlx.info.map(
-      (seg: ConfigsRecentWorkWorkItemPlxInfo, i: number) => {
-        const plxSeg = isMobile ? configs.recentWork.workItemPlx.mobileInfo[i] : seg;
-        return (
-          <Plx
-            parallaxData={getPlxData(plxSeg)}
-            onPlxStart={onClient ? handleWorkStops(index, false) : null}
-            onPlxEnd={onClient ? handleWorkStops(index, true) : null}
-            disabled={!onClient}
-            className={`parallax index-${i}`}
-            key={`${i}` + item.id + 'info' + JSON.stringify(seg)}
-          >
-            <InfoParallaxInner>
-              <InfoInnerWrapper>
-                <StyledWorkItemInfo
-                  title={item.title}
-                  description={item.description}
-                  buttonUrl={getItemUrl()}
-                  linkType={item.listType}
-                  isStopped={isStopped}
-                  isMobile={isMobile}
-                  isParallax
-                />
-              </InfoInnerWrapper>
-            </InfoParallaxInner>
-          </Plx>
-        );
-      },
-    );
+    return config.workItemPlx.info.map((seg, i: number) => {
+      const plxSeg = isMobile ? config.workItemPlx.mobileInfo[i] : seg;
+      return (
+        <Plx
+          parallaxData={getPlxData(plxSeg)}
+          onPlxStart={onClient ? handleWorkStops(index, false) : null}
+          onPlxEnd={onClient ? handleWorkStops(index, true) : null}
+          disabled={!onClient}
+          className={`parallax index-${i}`}
+          key={`${i}` + item.id + 'info' + JSON.stringify(seg)}
+        >
+          <InfoParallaxInner>
+            <InfoInnerWrapper>
+              <StyledWorkItemInfo
+                title={item.title}
+                description={item.description}
+                buttonUrl={getItemUrl()}
+                linkType={item.listType}
+                isStopped={isStopped}
+                isMobile={isMobile}
+                isParallax
+              />
+            </InfoInnerWrapper>
+          </InfoParallaxInner>
+        </Plx>
+      );
+    });
   };
 
   return (

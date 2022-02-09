@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
-import { media } from '../../../styles/breakpoints';
+import { media } from '@styles/breakpoints';
 import DotFormation from '../../particles/dot-formation';
 
-interface StyledDotFormationProps {
+type StyledDotFormationProps = {
   breakpoint: 'mobile' | 'desktop';
-}
+};
 
 export const SkillsWrapper = styled.div`
   position: relative;
@@ -38,13 +38,13 @@ export const StyledDotFormation = styled(DotFormation)<StyledDotFormationProps>`
   }};
   left: 92%;
   transform: translateX(-100%);
-  ${(props) =>
+  ${props =>
     props.breakpoint === 'mobile' &&
     css`
       padding-bottom: 225%;
       ${media.tablet`display: none;`}
     `};
-  ${(props) =>
+  ${props =>
     props.breakpoint === 'desktop' &&
     css`
       display: none;

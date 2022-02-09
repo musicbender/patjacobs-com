@@ -1,12 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
 import { ScrollLineWrapper, InnerWrapper, ScrollLineRevealBlock, Line, HelperText } from './styles';
 
-interface Props {
+type Props = {
   active?: boolean;
   atTop?: boolean;
-}
+};
 
-const ScrollLine = ({ active = false, atTop = true }: Props) => {
+const ScrollLine: FC<Props> = ({ active = false, atTop = true }) => {
   return (
     <ScrollLineWrapper>
       <HelperText active={active}>{atTop ? '[ do scoll ]' : '[ good job ]'}</HelperText>

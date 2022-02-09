@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
-import { media } from '../../../styles/breakpoints';
-import { gridPosition } from '../../../styles/utils/global';
+import { media } from '@styles/breakpoints';
+import { gridPosition } from '@styles/utils/global';
 
-interface RecentWorkParticleProps {
+type RecentWorkParticleProps = {
   gridLines: number[];
   particleID: string;
-}
+};
 
 export const RecentWorkWrapper = styled.div`
   position: relative;

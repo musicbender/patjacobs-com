@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 import RevealBlock from './reveal-block';
-const settings = require('../../../../data/configs/settings');
-import { RevealBlockContentType } from '../../../types';
+const settings = require('@configs/settings');
+import { RevealBlockContentType } from '@types';
 
 // configuration
 const conf = {
@@ -16,17 +16,17 @@ const conf = {
 };
 
 // wrapper component
-interface Props {
+type Props = {
   startGrid?: number;
   endGrid?: number;
   active?: boolean;
   children?: any;
   contentType?: RevealBlockContentType;
-}
+};
 
-interface State {
+type State = {
   active: boolean;
-}
+};
 
 class RevealBlockContainer extends PureComponent<Props, State> {
   constructor(props) {
@@ -52,18 +52,18 @@ class RevealBlockContainer extends PureComponent<Props, State> {
 }
 
 // styled components
-interface LineContentProps {
+type LineContentProps = {
   height?: string;
   lineColor?: string;
-}
+};
 
 const GenericWrapper = styled.div`
   background-color: black;
 `;
 
 const LineContent = styled('div')<LineContentProps>`
-  height: ${(props) => props.height};
-  background-color: ${(props) => props.lineColor};
+  height: ${props => props.height};
+  background-color: ${props => props.lineColor};
 `;
 
 const GenericComponent = ({ text = conf.mockText }) => (

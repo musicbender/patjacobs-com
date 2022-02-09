@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { BarListWrapper, StyledRevealBlock, ListItem } from './styles';
-import { CoreColors } from '../../../types';
-import { getRandomColor, getRandomColorSequence } from '../../../util/colors';
+import { CoreColors } from '@types';
+import { getRandomColor, getRandomColorSequence } from '@util/colors';
 
-interface Props {
+type Props = {
   items?: string[];
   active?: boolean;
   color?: CoreColors;
   colorPattern?: 'multi' | 'single';
-}
+};
 
 const BarList = ({ items = [], active = false, color, colorPattern = 'multi' }: Props) => {
   const [singleColor, setSingleColor] = useState(null);

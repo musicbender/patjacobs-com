@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from '../../../styles/breakpoints';
+import { media } from '@styles/breakpoints';
 import { Paragraph } from '../../pages/case-study/styles';
 
 export const ProjectBodyWrapper = styled.div``;

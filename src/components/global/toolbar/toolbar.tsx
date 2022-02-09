@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Logo from '../logo';
 import { ToolBarWrapper, InnerWrapper, StyledLink } from './styles';
-const tlConfig = require('../../../constants/transition-link.json');
+const tlConfig = require('@constants/transition-link.json');
 
-interface Props {
+type Props = {
   handleToTop(e?: any): any;
   location?: {
     pathname?: string;
   };
-}
-const Toolbar = ({ location, handleToTop }: Props) => {
+};
+
+const Toolbar: FC<Props> = ({ location, handleToTop }) => {
   const handleLogoClick = (): void => {
     if (location.pathname !== '/') return;
     if (window.scrollY < 100) return;

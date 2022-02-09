@@ -1,18 +1,14 @@
 import React from 'react';
-import {
-  Skill,
-  DorFormationTextEmbedOffsets,
-  DotFormationTextEmbedDirection,
-} from '../../../types';
+import { Skill, DorFormationTextEmbedOffsets, DotFormationTextEmbedDirection } from '@types';
 import { TextEmbedWrapper, TextEmbedTextWrapper, RevealBar, InnerTextWrapper } from './styles';
 
-interface Props {
+type Props = {
   data: Skill;
   spacing?: number[];
   offsets?: DorFormationTextEmbedOffsets;
   width?: string;
   active?: boolean;
-}
+};
 
 const TextEmbed = ({ data, spacing, offsets, width = '0', active = false }: Props) => {
   const { text, position, direction } = data;

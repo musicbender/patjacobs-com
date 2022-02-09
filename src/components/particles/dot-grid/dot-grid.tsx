@@ -1,7 +1,7 @@
 import React from 'react';
-import { startSequence } from '../../../util/animation';
+import { startSequence } from '@util/animation';
 import { DotGridSvg, Dot, DotProps } from './styles';
-import { DotGridProps } from '../../../types/particles';
+import { DotGridProps } from '@types';
 
 const DotGrid = ({
   sequence,
@@ -50,7 +50,7 @@ const DotGrid = ({
     );
   };
 
-  const renderAllRows = (rows) => {
+  const renderAllRows = rows => {
     return rows.map(renderRow);
   };
 

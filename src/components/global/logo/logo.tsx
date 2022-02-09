@@ -1,8 +1,8 @@
-import React from 'react';
-import theme from '../../../styles/theme';
+import { FC } from 'react';
+import theme from '@styles/theme';
 import { LogoWrapper } from './styles';
 
-enum EColors {
+enum Colors {
   'white',
   'black',
   'yellow',
@@ -11,26 +11,24 @@ enum EColors {
   'aqua',
 }
 
-interface IProps {
-  color: keyof typeof EColors;
+type Props = {
+  color: keyof typeof Colors;
   className?: string;
-}
+};
 
-const Logo = ({ color, className }: IProps) => {
+const Logo: FC<Props> = ({ color = 'white', className }) => {
   const colors: any = {
     white: '#fff',
     black: 'rgb(30,30,30)',
     ...theme.corePalette,
   };
 
-  const colorValue: string = colors[color];
-
   return (
     <LogoWrapper
       width="100%"
       height="100%"
       viewBox="0 0 21 21"
-      color={colorValue}
+      color={colors[color]}
       className={className}
     >
       <g>
@@ -39,10 +37,6 @@ const Logo = ({ color, className }: IProps) => {
       </g>
     </LogoWrapper>
   );
-};
-
-Logo.defaultProps = {
-  color: 'white',
 };
 
 export default Logo;

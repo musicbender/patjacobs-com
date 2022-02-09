@@ -1,15 +1,15 @@
 import styled, { css, keyframes } from 'styled-components';
-import RevealBlock from '../../global/reveal-block';
-import { superCenter } from '../../../styles/utils/global';
+import RevealBlock from '@components/global/reveal-block';
+import { superCenter } from '@styles/utils/global';
 
 // types
-interface ScrollLineProps {
+type ScrollLineProps = {
   active?: boolean;
-}
+};
 
-interface HelperTextProps {
+type HelperTextProps = {
   active?: boolean;
-}
+};
 
 // keyframes
 const scrollLineLoop = keyframes`
@@ -41,7 +41,7 @@ export const HelperText = styled('p')<HelperTextProps>`
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
-  ${(props) =>
+  ${props =>
     props.active &&
     css`
       opacity: 0;
@@ -49,7 +49,7 @@ export const HelperText = styled('p')<HelperTextProps>`
         ${showText} ${props.theme.animate.slow} ease-out ${props.theme.animate.slow} forwards
       `};
     `};
-  ${(props) =>
+  ${props =>
     !props.active &&
     css`
       opacity: 1;
@@ -65,7 +65,7 @@ export const InnerWrapper = styled('div')<ScrollLineProps>`
   width: 100%;
   overflow: hidden;
   animation: none;
-  ${(props) =>
+  ${props =>
     props.active &&
     css`
       animation: ${css`

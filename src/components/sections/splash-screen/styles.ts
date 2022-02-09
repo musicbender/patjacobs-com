@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from 'styled-components';
-import { superCenter } from '../../../styles/utils/global';
-import Logo from '../../global/logo';
+import { superCenter } from '@styles/utils/global';
+import Logo from '@components/global/logo';
 
 // keyframes
 const showSplashLogo = keyframes`
@@ -53,7 +53,7 @@ export const StyledLogo = styled(Logo)<{ debug: boolean }>`
       animation: ${hideLogo} ${theme.animate.moderate} ${theme.animate.logoIn} forwards;
     `}
   animation-delay: 3425ms;
-  ${(props) => props.debug && 'animation-delay: 3000000ms;'}
+  ${props => props.debug && 'animation-delay: 3000000ms;'}
   path {
     stroke-dasharray: 36;
     stroke-dashoffset: 36;

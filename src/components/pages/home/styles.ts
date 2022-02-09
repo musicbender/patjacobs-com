@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from '../../../styles/breakpoints';
+import { media } from '@styles/breakpoints';
 
 export const HomePage = styled.main`
   position: relative;
@@ -7,9 +7,9 @@ export const HomePage = styled.main`
 
 export const OutterWrapper = styled.div`
   position: relative;
-  margin-bottom: ${(props) => props.theme.sizes.footerHeightM};
+  margin-bottom: ${props => props.theme.sizes.footerHeightM};
   ${media.tablet`
-    margin-bottom: ${(props) => props.theme.sizes.footerHeightD};
+    margin-bottom: ${props => props.theme.sizes.footerHeightD};
   `}
 `;
 

@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { HeadingWrapper } from './styles';
 
-interface Props {
+type Props = {
   text: string;
   className?: string;
-}
+};
 
-const Heading = ({ text, className }: Props) => (
+const Heading: FC<Props> = ({ text, className }) => (
   <HeadingWrapper className={className}>{text}</HeadingWrapper>
 );
 

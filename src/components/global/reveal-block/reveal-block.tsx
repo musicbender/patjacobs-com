@@ -1,37 +1,36 @@
-import React from 'react';
+import { FC } from 'react';
 import Plx from 'react-plx';
-import { reduceSegment, hasWindow } from '../../../util/util';
+import { reduceSegment, hasWindow } from '@util/util';
+import settings from '@configs/settings.json';
 import { RevealBlockWrapper, OutterWrapper, InnerWrapper, ContentWrapper, Content } from './styles';
-import { RevealBlockContentType } from '../../../types';
+import { RevealBlockContentType } from '@types';
 
-interface Props {
+type Props = {
   startGrid?: number;
   endGrid?: number;
   active?: boolean;
   delay?: number;
   contentType?: RevealBlockContentType;
-  gridLines?: number[];
   plxProps?: any;
   mobileIgnoreGrid?: boolean;
   disableMobile?: boolean;
   className?: string;
   children?: any;
-}
+};
 
-const revealBlock = ({
+const revealBlock: FC<Props> = ({
   startGrid = 1,
   endGrid = 4,
   contentType = 'generic',
   active = false,
   delay = 0,
   children,
-  gridLines,
   plxProps,
   mobileIgnoreGrid = true,
   disableMobile = true,
   className,
-}: Props) => {
-  const gLines = gridLines || configs.settings.gridLines;
+}) => {
+  const gLines: number[] = settings.gridLines;
   const width = reduceSegment(startGrid, endGrid, gLines);
   const position = reduceSegment(0, startGrid, gLines);
 

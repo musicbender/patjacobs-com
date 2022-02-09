@@ -1,4 +1,4 @@
-import theme from '../../styles/theme';
+import theme from '@styles/theme';
 import { getRandomColor, getRandomColorSequence } from '../colors';
 
 describe('util/colors.js', () => {

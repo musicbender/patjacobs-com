@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { media, sizes } from '../../../styles/breakpoints';
-import Social from '../social';
+import { media, sizes } from '@styles/breakpoints';
+import Social from '@components/global/social';
 
 export const FooterWrapper = styled.div`
   position: fixed;

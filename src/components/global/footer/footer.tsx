@@ -1,12 +1,12 @@
-import React from 'react';
-import Triangle from '../../particles/triangle';
+import React, { FC } from 'react';
+import Triangle from '@components/particles/triangle';
 import { FooterWrapper, StyledSocial, TriangleWrapper } from './styles';
 
-interface Props {
+type Props = {
   handleToTop(e: any): any;
-}
+};
 
-const Footer = ({ handleToTop }: Props) => {
+const Footer: FC<Props> = ({ handleToTop }) => {
   return (
     <FooterWrapper>
       <StyledSocial />

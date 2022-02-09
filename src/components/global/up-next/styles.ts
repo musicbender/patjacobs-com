@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
-import TransitionLink from 'gatsby-plugin-transition-link';
-import { media } from '../../../styles/breakpoints';
+import { media } from '@styles/breakpoints';
+import Link from 'next/link';
 
-interface LineProps {
+type LineProps = {
   active?: boolean;
-}
+};
 
 export const UpNextWrapper = styled.div`
   position: relative;
@@ -37,7 +37,7 @@ export const LinkWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const StyledLink = styled(TransitionLink)`
+export const StyledLink = styled(Link)`
   font-size: 1.75rem;
   color: ${({ theme }) => theme.palette.white};
   text-decoration: none;
@@ -72,7 +72,7 @@ export const Line = styled('div')<LineProps>`
         bottom: 1em;
         transform: translateX(-75%);
     `}
-  ${(props) =>
+  ${props =>
     props.active &&
     css`
       ${media.tablet`

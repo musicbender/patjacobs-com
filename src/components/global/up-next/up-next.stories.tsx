@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import UpNext from './up-next';
-import theme from '../../../styles/theme';
+import theme from '@styles/theme';
 
 // test data
 const tests = [
@@ -26,7 +26,7 @@ const Decorator = styled.div`
 export default {
   title: 'UpNext',
   component: UpNext,
-  decorators: [(story) => <Decorator>{story()}</Decorator>],
+  decorators: [story => <Decorator>{story()}</Decorator>],
 };
 
 // stories

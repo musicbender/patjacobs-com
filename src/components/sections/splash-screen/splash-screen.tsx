@@ -1,15 +1,16 @@
-import React from 'react';
-import Curtain from '../../global/curtain';
+import { FC } from 'react';
+import Curtain from '@components/global/curtain';
+import settings from '@configs/settings.json';
 import { SplashScreenWrapper, LogoOutterWrapper, StyledLogo } from './styles';
 
-const SplashScreen: React.SFC = () => {
+const SplashScreen: FC = () => {
   const splashDuration = 3000;
 
   return (
     <SplashScreenWrapper>
-      <Curtain duration={data.configs.settings.splashScreenDebug ? 3000000 : splashDuration} />
+      <Curtain duration={settings.splashScreenDebug ? 3000000 : splashDuration} />
       <LogoOutterWrapper>
-        <StyledLogo color="aqua" debug={data.configs.settings.splashScreenDebug} />
+        <StyledLogo color="aqua" debug={settings.splashScreenDebug} />
       </LogoOutterWrapper>
     </SplashScreenWrapper>
   );

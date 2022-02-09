@@ -1,11 +1,11 @@
 import React from 'react';
 import TextEmbeds from './text-embeds';
-import Triangle from '../triangle';
-import { mapDotsWithText } from '../../../util/dot-grid';
-import { Skill, Axis, DotFormationConfig } from '../../../types';
+import Triangle from '@components/particles/triangle';
+import { mapDotsWithText } from '@util/dot-grid';
+import { Skill, Axis, DotFormationConfig } from '@types';
 import { Dots, DotFormationWrapper, Dot } from './styles';
 
-interface Props {
+type Props = {
   columns?: number;
   rows?: number;
   dotSize?: number;
@@ -15,7 +15,7 @@ interface Props {
   shape?: 'square' | 'triangle';
   textConfig: Skill[];
   className?: string;
-}
+};
 
 const DotFormation = ({
   columns = 32,

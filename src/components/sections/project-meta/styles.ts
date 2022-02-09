@@ -1,11 +1,13 @@
 import styled, { css } from 'styled-components';
-import { media } from '../../../styles/breakpoints';
-import { getRandomColor } from '../../../util/colors';
-import { CoreColors } from '../../../types';
+import { media } from '@styles/breakpoints';
+import { getRandomColor } from '@util/colors';
+import { CoreColors } from '@types';
+import GitHubIcon from '@components/icons/github';
+import StorybookIcon from '@components/icons/storybook';
 
-interface ContentProps {
+type ContentProps = {
   color?: CoreColors;
-}
+};
 
 const conf = {
   desktopMargin: 2.25,
@@ -22,7 +24,7 @@ export const ContentWrapper = styled('div')<ContentProps>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: ${(props) => props.theme.corePalette[props.color]};
+  color: ${props => props.theme.corePalette[props.color]};
   ${media.tablet`
         margin: ${`${conf.desktopMargin}em auto 0`};
     `}
@@ -96,7 +98,13 @@ export const IconWrapper = styled.a`
   }
 `;
 
-export const Icon = styled.svg`
+export const GithubIcon = styled(GitHubIcon)`
+  width: 2em;
+  fill: ${({ theme }) => theme.palette.white};
+  transition: ${({ theme }) => `fill ${theme.animate.fast}`};
+`;
+
+export const StorybookIcon = styled(StorybookIcon)`
   width: 2em;
   fill: ${({ theme }) => theme.palette.white};
   transition: ${({ theme }) => `fill ${theme.animate.fast}`};

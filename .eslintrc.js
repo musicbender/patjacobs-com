@@ -51,7 +51,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/consistent-type-definitions': 'off',
+    '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     camelcase: 'off',
     '@typescript-eslint/camelcase': 'off',
     'react/display-name': 'off',

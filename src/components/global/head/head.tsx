@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { ISeo, HeadProps } from '../../../types/global';
+import meta from '@configs/meta.json';
+import { ISeo, HeadProps } from '@types';
 
 const Head: React.FunctionComponent<HeadProps> = ({
   pathname = '/',
@@ -9,23 +10,21 @@ const Head: React.FunctionComponent<HeadProps> = ({
   image,
   article = false,
 }: HeadProps) => {
-  const title = titlePrefix
-    ? `${titlePrefix} | ${site.siteMetadata.title}`
-    : site.siteMetadata.title;
+  const title = titlePrefix ? `${titlePrefix} | ${meta.title}` : meta.title;
 
   const seo: ISeo = {
-    title: title || site.siteMetadata.title,
-    description: description || site.siteMetadata.description,
-    image: image || `${site.siteMetadata.siteUrl}/assets/thumbnail.png`,
-    url: `${site.siteMetadata.siteUrl}${pathname}`,
-    twitter: site.siteMetadata.twitter,
-    site: site.siteMetadata.site,
-    color: site.siteMetadata.color,
-    language: site.siteMetadata.language,
+    title: title || meta.title,
+    description: description || meta.description,
+    image: image || `${meta.siteUrl}/assets/thumbnail.png`,
+    url: `${meta.siteUrl}${pathname}`,
+    twitter: meta.twitter,
+    site: meta.site,
+    color: meta.color,
+    language: meta.language,
   };
 
   return (
-    <Helmet title={title || site.siteMetadata.title}>
+    <Helmet title={title || meta.title}>
       <html lang={seo.language} />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />

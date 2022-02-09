@@ -1,81 +1,26 @@
-import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import update from 'immutability-helper';
+import React, { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Particles from './particles';
-import Heading from '../../global/heading';
-import WorkItem from '../../global/work-item/work-item';
-import { throttle } from '../../../util/util';
-import { setRecentWorkTop } from '../../../actions/global';
+import Heading from '@components/global/heading';
+import WorkItem from '@components/global/work-item/work-item';
+import settings from '@configs/settings.json';
+import { RECENT_WORK_TOP_SET } from '@constants/global';
+import { usePrevious, useThrottle } from '@hooks';
+import { useGetRecentWorkQuery, Project } from '@types';
 import { RecentWorkWrapper, ParentWrapper, WorkItemsWrapper } from './styles';
-import { Gcms_Section, Gcms_Project, Configs } from '../../../types';
 
-interface Props {
-  configs?: Configs;
-  section?: Gcms_Section;
-  projects?: Gcms_Project[];
-}
+const RecentWork: FC = () => {
+  const { data } = useGetRecentWorkQuery();
+  const defaultWorkStops: boolean[] = data.projects.map(() => false);
+  const [workStops, setWorkStops] = useState<boolean[]>(defaultWorkStops);
+  const recentWorkTop = useSelector((state: Storage) => state.home.recentWorkTop);
+  const isMobile = useSelector((state: Storage) => state.global.isMobile);
+  const transportOpen = useSelector((state: Storage) => state.global.transportOpen);
+  const throttledRecentWorkTop = useThrottle(recentWorkTop);
+  const prevState = usePrevious({ transportOpen });
+  const dispatch = useDispatch();
 
-interface ReduxProps {
-  recentWorkTop: number;
-  isMobile: boolean;
-  transportOpen: boolean;
-  setRecentWorkTop: (args: any) => any;
-}
-
-interface State {
-  workStops: boolean[];
-}
-
-const mapStateToProps = ({ global, home }) => {
-  return {
-    recentWorkTop: home.recentWorkTop,
-    isMobile: global.isMobile,
-    transportOpen: global.transportOpen,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      setRecentWorkTop,
-    },
-    dispatch,
-  );
-};
-
-class RecentWork extends PureComponent<Props & ReduxProps, State> {
-  defaultWorkStops: boolean[];
-
-  constructor(props: Props & ReduxProps) {
-    super(props);
-    this.defaultWorkStops = props.projects.map(() => false);
-    this.handleResize = throttle(this.handleResize.bind(this), 100);
-    this.handleWorkStops = this.handleWorkStops.bind(this);
-    this.state = {
-      workStops: this.defaultWorkStops,
-    };
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.transportOpen && this.props.transportOpen) {
-      this.resetWorkStops();
-    }
-  }
-
-  handleResize() {
-    this.setTop(true);
-  }
-
-  setTop(didResize = false, input?: any): void {
+  const setTop = (didResize = false, input?: any): void => {
     let value = input;
 
     if (value == null) {
@@ -84,57 +29,57 @@ class RecentWork extends PureComponent<Props & ReduxProps, State> {
       value = rect.top;
     }
 
-    this.props.setRecentWorkTop({ value, didResize });
-  }
+    dispatch({ type: RECENT_WORK_TOP_SET, payload: { value, didResize } });
+  };
 
-  handleWorkStops(index, stopped) {
+  const handleResize = (): void => {
+    setTop(true);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
     return () => {
-      const isStopped = stopped !== null ? stopped : !this.state.workStops[index];
-      const newState = update(this.state, {
-        workStops: {
-          [index]: {
-            $set: isStopped,
-          },
-        },
-      });
-
-      this.setState(newState);
+      window.removeEventListener('resize', handleResize);
     };
-  }
+  }, []);
 
-  resetWorkStops() {
-    this.setState({ workStops: this.defaultWorkStops });
-  }
+  useEffect(() => {
+    if (!prevState.transportOpen && transportOpen) {
+      setWorkStops(defaultWorkStops);
+    }
+  }, [transportOpen]);
 
-  renderWorkItems() {
-    return this.props.projects.map((item, i: number) => {
-      return (
-        i < this.props.configs.settings.workItemsAmount && (
-          <WorkItem
-            item={item}
-            index={i}
-            isStopped={this.state.workStops[i]}
-            handleWorkStops={this.handleWorkStops}
-            baseTop={this.props.recentWorkTop}
-            isMobile={this.props.isMobile}
-            key={item.title + `${i * 7}`}
-          />
-        )
-      );
-    });
-  }
+  const handleWorkStops = (index: number, stopped?: boolean) => (): void => {
+    const updatedArr: boolean[] = [...workStops];
+    updatedArr[index] = stopped !== null ? stopped : !workStops[index];
+    setWorkStops(updatedArr);
+  };
 
-  render() {
-    return (
-      <RecentWorkWrapper id="recent-work-section">
-        <Heading text={this.props.section.heading} />
-        <ParentWrapper>
-          <WorkItemsWrapper>{this.renderWorkItems()}</WorkItemsWrapper>
-        </ParentWrapper>
-        <Particles isMobile={this.props.isMobile} />
-      </RecentWorkWrapper>
-    );
-  }
-}
+  return (
+    <RecentWorkWrapper id="recent-work-section">
+      <Heading text={data.recentWorkSection.heading} />
+      <ParentWrapper>
+        <WorkItemsWrapper>
+          {data.projects.map((item: Project, i: number) => {
+            return (
+              i < settings.workItemsAmount && (
+                <WorkItem
+                  item={item}
+                  index={i}
+                  isStopped={workStops[i]}
+                  handleWorkStops={handleWorkStops}
+                  baseTop={throttledRecentWorkTop}
+                  isMobile={isMobile}
+                  key={item.title + `${i * 7}`}
+                />
+              )
+            );
+          })}
+        </WorkItemsWrapper>
+      </ParentWrapper>
+      <Particles isMobile={isMobile} />
+    </RecentWorkWrapper>
+  );
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecentWork);
+export default RecentWork;

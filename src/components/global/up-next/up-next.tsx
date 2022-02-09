@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { UpNextWrapper, NextText, LinkWrapper, StyledLink, Line } from './styles';
-const tlConfig = require('../../../constants/transition-link.json');
+const tlConfig = require('@constants/transition-link.json');
 
-interface Props {
+type Props = {
   label?: string;
   path?: string;
   className?: string;
-}
+};
 
-const upNext = ({ label = 'Next Page', path = '/', className }: Props) => {
+const upNext: FC<Props> = ({ label = 'Next Page', path = '/', className }) => {
   const [hovered, setHovered] = useState(false);
   return (
     <UpNextWrapper className={className}>

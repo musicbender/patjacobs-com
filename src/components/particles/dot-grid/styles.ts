@@ -1,26 +1,26 @@
 import styled, { css } from 'styled-components';
-import { CoreColors } from '../../../types';
+import { CoreColors } from '@types';
 
-interface DotGridSvgProps {
+type DotGridSvgProps = {
   width: string;
   height: string;
-}
+};
 
 export const DotGridSvg = styled('svg')<DotGridSvgProps>`
   position: absolute;
-  ${(props) => css`
+  ${props => css`
     width: ${props.width};
     height: ${props.height};
   `}
 `;
 
-export interface DotProps {
+export type DotProps = {
   color: CoreColors | 'white' | 'dull' | 'disabled' | string;
-}
+};
 
 export const Dot = styled('circle')<DotProps>`
-  ${(props) => props.color === 'dull' && 'fill: rgba(80, 80, 80, 0.5);'}
-  ${(props) => props.color === 'white' && `fill: ${props.theme.palette.white};`}
+  ${props => props.color === 'dull' && 'fill: rgba(80, 80, 80, 0.5);'}
+  ${props => props.color === 'white' && `fill: ${props.theme.palette.white};`}
   ${(props): string => {
     switch (props.color) {
       case 'dull':

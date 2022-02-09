@@ -30,9 +30,9 @@ export const reduceSegment = (start: number, end: number, numArray: number[] = [
   return numArray.slice(start, end).reduce((acc, value) => acc + value);
 };
 
-export const throttle = (func: any, wait: number): any => {
+export const throttle = (func: Function, wait: number): any => {
   let time = Date.now();
-  return function (e: any) {
+  return (e: any) => {
     if (time + wait - Date.now() < 0) {
       func(e);
       time = Date.now();

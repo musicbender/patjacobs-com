@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ColorDotsRow, DesktopWrapper, MobileWrapper, Dot } from './styles';
-import { CoreColors } from '../../../types';
-import { requestTimeout } from '../../../util/shims';
+import { CoreColors } from '@types';
+import { requestTimeout } from '@util/shims';
 
-interface Props {
+type Props = {
   forMobile?: boolean;
   active?: boolean;
-}
+};
 
 const ColorDots = ({ forMobile = false, active = false }: Props) => {
   const [entering, setEntering] = useState(false);
@@ -23,7 +23,7 @@ const ColorDots = ({ forMobile = false, active = false }: Props) => {
         setFinishedEntering(true);
       }, 14000);
     }
-  });
+  }, [active, entering]);
 
   useEffect(() => {
     return () => {
@@ -32,7 +32,7 @@ const ColorDots = ({ forMobile = false, active = false }: Props) => {
     };
   }, []);
 
-  const mapDots = () => {
+  const mapDots = (): JSX.Element[] => {
     return dots.map((dot: CoreColors, i: number) => (
       <Dot
         color={dot}

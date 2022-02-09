@@ -3,11 +3,11 @@ import { hasWindow } from '@util/util';
 import { StyledHeading, ContentBox, AboutMeSection } from './styles';
 import { useGetAboutMeSectionQuery } from '@types';
 
-interface Props {
+type Props = {
   atAbout: boolean;
   setAboutTop: () => void;
   isMobile: boolean;
-}
+};
 
 const AboutMe = ({ atAbout = false, isMobile }: Props) => {
   const { data } = useGetAboutMeSectionQuery();

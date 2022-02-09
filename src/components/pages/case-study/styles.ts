@@ -1,17 +1,17 @@
 import styled, { css } from 'styled-components';
-import { media } from '../../../styles/breakpoints';
-import { gridPosition } from '../../../styles/utils/global';
-import Heading from '../../global/heading';
-import UpNext from '../../global/up-next';
+import { media } from '@styles/breakpoints';
+import { gridPosition } from '@styles/utils/global';
+import Heading from '@components/global/heading';
+import UpNext from '@components/global/up-next';
 
 // types
-interface MetaProps {
+type MetaProps = {
   atTop?: boolean;
-}
+};
 
-interface UpNextProps {
+type UpNextProps = {
   gridLines: number[];
-}
+};
 
 // styled components
 export const CaseStudyPage = styled.div`
@@ -38,14 +38,14 @@ export const InfoWrapper = styled.div`
 `;
 
 export const Title = styled('h1')<MetaProps>`
-  ${(props) =>
+  ${props =>
     props.atTop &&
     css`
       ${media.tablet`
                  transform: scale(3);
             `}
     `};
-  ${(props) =>
+  ${props =>
     !props.atTop &&
     css`
       ${media.tablet`
@@ -73,14 +73,14 @@ export const MetaOutterWrapper = styled('div')<MetaProps>`
   ${media.tablet`
         width: ${({ theme }) => `${theme.gridSizes.m}vw`};
     `}
-  ${(props) =>
+  ${props =>
     props.atTop &&
     css`
       ${media.tablet`
                  transform: translate3d(0,5em,0);
             `}
     `};
-  ${(props) =>
+  ${props =>
     !props.atTop &&
     css`
       ${media.tablet`
@@ -135,7 +135,7 @@ export const StyledUpNext = styled(UpNext)<UpNextProps>`
   ${media.tablet`
         margin-top: 0;
     `}
-  ${(props) =>
+  ${props =>
     css`
       left: 0;
       ${media.tablet`
