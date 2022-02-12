@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import Plx from 'react-plx';
+import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import { hasWindow } from '@util/util';
 import ScrollLine from '@components/global/scroll-line';
@@ -22,7 +23,7 @@ import {
   Paragraph,
   StyledUpNext,
 } from './styles';
-import { RevealBlockContentType, RevealedElementsState, Store, useGetCaseStudyQuery } from '@types';
+import { ProcessedGcmsData, RevealBlockContentType, RevealedElementsState, Store } from '@types';
 
 type Props = {
   projectId: string;
@@ -33,7 +34,9 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
   const [revealedElements, setRevealedElements] = useState<RevealedElementsState>({});
   const throttledAtTop = useThrottle(atTop, 5);
   const { splashOpen, transportOpen } = useSelector((state: Store) => state.global);
-  const { data: gcmsData } = useGetCaseStudyQuery({ projectId });
+  const { data: gcmsData } = useQuery<ProcessedGcmsData, Error>(
+    `processed-case-study-${projectId}`,
+  );
 
   const active: boolean = throttledAtTop && !splashOpen && !transportOpen;
 

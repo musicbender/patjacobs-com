@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components';
 import rgbHex from 'hex-to-rgba';
 import { media } from '@styles/breakpoints';
-import { ButtonTypes, ITheme } from '@types';
+import { ButtonTypes, Theme } from '@types';
 import Link from 'next/link';
 
 type ButtonProps = {
   type: ButtonTypes;
 };
 
-const buttonStyles = (props: ButtonProps & { theme: ITheme }) => css`
+const buttonStyles = (props: ButtonProps & { theme: Theme }) => css`
   color: ${rgbHex(props.theme.palette.white, 0.87)};
   &:hover {
     cursor: pointer;

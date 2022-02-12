@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { media } from '../src/styles/breakpoints';
 
 export const OutterWrapper = styled.div`
   position: relative;

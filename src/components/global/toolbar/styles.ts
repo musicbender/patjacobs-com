@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import TransitionLink from 'gatsby-plugin-transition-link';
 import { media } from '@styles/breakpoints';
 import { superCenter } from '@styles/utils/global';
+import Link from 'next/link';
 
 const iconOpacity = 0.675;
 
@@ -11,9 +11,10 @@ export const ToolBarWrapper = styled.div`
   height: ${props => props.theme.sizes.toolbarHeight};
   background-color: transparent;
   z-index: 9;
+
   ${media.tablet`
-        position: fixed;
-    `}
+    position: fixed;
+  `}
 `;
 
 export const InnerWrapper = styled.div`
@@ -24,13 +25,15 @@ export const InnerWrapper = styled.div`
   height: 100%;
 `;
 
-export const StyledLink = styled(TransitionLink)`
+export const StyledLink = styled(Link)`
   ${superCenter('92%')}
   display: inline-block;
   width: 1.85em;
+
   ${media.tablet`
-        left: 96%;
-    `}
+    left: 96%;
+  `}
+
   svg {
     fill: ${props => props.theme.palette.white};
     opacity: ${iconOpacity};

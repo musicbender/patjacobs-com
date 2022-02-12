@@ -4,8 +4,10 @@ query getCaseStudy($projectId: String!) {
     heading
   }
   projects(where: { linkType: Case_Study }) {
+    id
     projectId
     projectType
+    title
   }
   project(where: { projectId: $projectId }) {
     updatedAt

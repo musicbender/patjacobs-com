@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { media } from '@styles/breakpoints';
 import { gridPosition } from '@styles/utils/global';
 import { titleEnter, subtitleEnter, triangleEnter, moveLilSquare } from './keyframes';
-import DotGrid from '../../particles/dot-grid';
-import LilSquare from '../../particles/lil-square';
-import { DotGridProps } from '@types/particles';
+import DotGrid from '@components/particles/dot-grid';
+import LilSquare from '@components/particles/lil-square';
+import { DotGridProps } from '@types';
 
 // constants
 const trianglePos = { prop: 'left', unit: '%', attach: 'right' };
@@ -30,9 +30,11 @@ type TriangleParallaxProps = {
 export const HomeHeader = styled('div')<HomeHeaderProps>`
   position: relative;
   height: 100vh;
+
   ${media.tablet`
     height: 61em;
   `}
+
   ${props =>
     props.splashOpen &&
     css`

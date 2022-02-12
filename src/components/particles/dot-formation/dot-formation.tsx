@@ -2,7 +2,7 @@ import React from 'react';
 import TextEmbeds from './text-embeds';
 import Triangle from '@components/particles/triangle';
 import { mapDotsWithText } from '@util/dot-grid';
-import { Skill, Axis, DotFormationConfig } from '@types';
+import { SkillText, Axis, DotFormationConfig } from '@types';
 import { Dots, DotFormationWrapper, Dot } from './styles';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
   hideArray?: number[];
   color?: string;
   shape?: 'square' | 'triangle';
-  textConfig: Skill[];
+  textConfig: SkillText[];
   className?: string;
 };
 
@@ -39,7 +39,7 @@ const DotFormation = ({
     return ((index + 1) / vector) * dotSize;
   };
 
-  const renderDot = (config) => {
+  const renderDot = config => {
     const { i, x, y, hide, xOffset, yOffset } = config;
     return (
       <Dot

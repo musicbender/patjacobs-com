@@ -1,4 +1,4 @@
-import { Skill } from '../types';
+import { SkillText } from '@types';
 
 export const getTextWidth = (text = '', spacing: number, offset = 0): string => {
   if (!spacing || !text || typeof text !== 'string' || typeof spacing !== 'number') {
@@ -70,10 +70,10 @@ export const dotsFromCoords = (
   return output;
 };
 
-export const mapDotsWithText = (textConfig: Skill[], columns: number): number[] => {
+export const mapDotsWithText = (textConfig: SkillText[], columns: number): number[] => {
   let output: number[] = [];
 
-  textConfig.forEach((item: Skill): void => {
+  textConfig.forEach((item: SkillText): void => {
     const { position, text, direction } = item;
     const dotArr = dotsFromCoords(position, text, direction, columns);
     output = [...output, ...dotArr];

@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
-import { IGridPositionParams } from '../../types/styles';
-import theme from '../theme';
+import { GridPositionParams } from '@types';
+import theme from '@styles/theme';
 
 export const px2rem = (px: number): string => `${px / 16}rem`;
 
@@ -19,7 +19,7 @@ export const gridValue = (size = 's', unit = '%'): string => {
   return gridSizes[size] + unit;
 };
 
-export const gridPosition = (config: IGridPositionParams) => {
+export const gridPosition = (config: GridPositionParams) => {
   const { gridLines = [], index = 0, prop = 'left', attach = 'left' } = config;
   const validUnits: string[] = ['%', 'vw'];
   let unit: string = config.unit || '%';
@@ -27,7 +27,7 @@ export const gridPosition = (config: IGridPositionParams) => {
 
   if (!gridLines[index]) {
     return css`
-      ${prop}: 0%;
+      ${prop} 0%;
     `;
   }
 

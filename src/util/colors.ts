@@ -1,11 +1,10 @@
-import theme from '../styles/theme';
-import { moveAllInArray } from './util';
-import { ITheme } from '../types/styles';
-import { CoreColors } from '../types';
+import theme from '@styles/theme';
+import { moveAllInArray } from '@util/util';
+import { CoreColors, Theme } from '@types';
 
 export const getRandomColor = (
   outputType: 'hex' | 'name' = 'hex',
-  colors: ITheme = theme.corePalette,
+  colors = theme.corePalette,
 ): CoreColors | string => {
   const colorArr = Object.keys(colors);
   const randomKey = colorArr[Math.floor(Math.random() * colorArr.length)];

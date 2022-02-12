@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import Plx from 'react-plx';
 import { hasWindow } from '@util/util';
 import settings from '@configs/settings.json';
@@ -12,7 +12,7 @@ type Props = {
   bottom?: number;
 };
 
-const CavieDots = ({ atBottom, bottom, baseStart = 0 }: Props) => {
+const CavieDots: FC<Props> = ({ atBottom, bottom, baseStart = 0 }) => {
   const dotAmount = 25;
   const accumulator = 100;
   const bottomLoc: number = bottom || settings.homeBottom;

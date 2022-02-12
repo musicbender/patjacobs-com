@@ -1,5 +1,5 @@
 import { Middleware, Dispatch, AnyAction } from 'redux';
-import { ABOUT_TOP_SET, RECENT_WORK_TOP_SET, SKILLS_TOP_SET } from 'constants/constants';
+import { ABOUT_TOP_SET, RECENT_WORK_TOP_SET, SKILLS_TOP_SET } from '@constants/global';
 
 const homeMiddleware: Middleware<Dispatch> = () => (next: Dispatch<AnyAction>) => (
   action: AnyAction,

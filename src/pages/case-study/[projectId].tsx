@@ -65,8 +65,6 @@ export const getStaticProps: GetStaticProps = async ({
   const processGcmsData = async (): Promise<ProcessedGcmsData> => {
     const data = await useGetCaseStudyQuery.fetcher({ projectId: params.projectId as string })();
 
-    console.log('processGcmsData', data);
-
     const processedProject: ProcessedProject = {
       ...(data.project as OmitProjectBody),
       body: processRawBody(data.project.body.raw as GcmsProjectBodyRaw),
@@ -76,15 +74,12 @@ export const getStaticProps: GetStaticProps = async ({
 
     return {
       project: processedProject,
-      nextProject: getNextProject(params.projectId, relatedProjects),
+      nextProject: getNextProject(params.projectId as string, relatedProjects),
       sections: processSections(data.sections as Section[]),
     };
   };
 
-  await queryClient.prefetchQuery(
-    useGetCaseStudyQuery.getKey({ projectId: params.projectId as string }),
-    () => processGcmsData(),
-  );
+  await queryClient.prefetchQuery(`processed-case-study-${params.projectId}`, processGcmsData);
 
   return {
     props: {

@@ -3,25 +3,24 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION__: any;
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
     href: string;
+    webkitRequestAnimationFrame: any;
+    webkitCancelAnimationFrame: any;
   }
 }
-
-// types
-interface StartSequenceOptions {
+type StartSequenceOptions = {
   length?: number;
   delay?: number;
   interval?: number;
   index?: number;
-}
+};
 
-export interface TestItem {
+export type TestItem = {
   assert: any;
   expected: any;
   description?: string;
-}
+};
 
-// interfaces
-export interface ISeo {
+export type ISeo = {
   title: string;
   description: string;
   image: string;
@@ -30,19 +29,19 @@ export interface ISeo {
   site: string;
   color: string;
   language: string;
-}
+};
 
 export type ButtonTypes = 'line' | 'ridicularge-XL';
 
 export type Axis = 'x' | 'y';
 
-export interface Skill {
+export type SkillText = {
   text: string;
   position: number[];
   direction: string;
-}
+};
 
-export interface HeadProps {
+export type HeadProps = {
   pathname?: string;
   description?: string;
   meta?: string[];
@@ -50,7 +49,7 @@ export interface HeadProps {
   titlePrefix?: string;
   image?: string;
   article?: boolean;
-}
+};
 
 // enums
 export type CoreColors = 'aqua' | 'purple' | 'yellow' | 'orange';

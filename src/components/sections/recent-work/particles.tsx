@@ -1,11 +1,12 @@
 import React from 'react';
 import Plx from 'react-plx';
-import DotGrid from '../../particles/dot-grid';
-import Triangle from '../../particles/triangle';
-import dotGrids from './dots';
+import DotGrid from '@components/particles/dot-grid';
+import Triangle from '@components/particles/triangle';
+import config from '@configs/recent-work.json';
+import settings from '@configs/settings.json';
 import { hasWindow } from '@util/util';
+import dotGrids from './dots';
 import { RecentWorkParticle } from './styles';
-import { Query } from '@types';
 
 type Props = {
   isMobile?: boolean;
@@ -39,11 +40,11 @@ const Particles = ({ isMobile = false }: Props) => {
 
   return (
     <>
-      {configs.recentWork.particleData.map((p, i) => {
+      {config.particleData.map((p, i) => {
         return (
           <RecentWorkParticle
             particleID={p.name}
-            gridLines={configs.settings.gridLines}
+            gridLines={settings.gridLines}
             key={'work-particle' + i + p.name}
           >
             <Plx parallaxData={getPlxData(p.plx)} disabled={!hasWindow() || isMobile}>

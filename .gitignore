@@ -3,6 +3,7 @@ yarn-error.log
 *.log
 npm-debug.log*
 package-lock.json
+tsconfig.tsbuildinfo
 
 # dependencies
 /node_modules

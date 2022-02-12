@@ -98,13 +98,13 @@ export const IconWrapper = styled.a`
   }
 `;
 
-export const GithubIcon = styled(GitHubIcon)`
+export const StyledGithubIcon = styled(GitHubIcon)`
   width: 2em;
   fill: ${({ theme }) => theme.palette.white};
   transition: ${({ theme }) => `fill ${theme.animate.fast}`};
 `;
 
-export const StorybookIcon = styled(StorybookIcon)`
+export const StyledStorybookIcon = styled(StorybookIcon)`
   width: 2em;
   fill: ${({ theme }) => theme.palette.white};
   transition: ${({ theme }) => `fill ${theme.animate.fast}`};

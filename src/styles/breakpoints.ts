@@ -1,5 +1,5 @@
 import { css, ThemedCssFunction } from 'styled-components';
-import { IBreakPoints, ITheme } from '../types/styles';
+import { IBreakPoints, Theme } from '@types';
 
 export const sizes: IBreakPoints = {
   desktopXXL: 1920,
@@ -22,4 +22,4 @@ export const media = (Object.keys(sizes) as (keyof typeof sizes)[]).reduce((accu
     }
   `;
   return accumulator;
-}, {} as { [key in keyof typeof sizes]: ThemedCssFunction<ITheme> });
+}, {} as { [key in keyof typeof sizes]: ThemedCssFunction<Theme> });

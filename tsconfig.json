@@ -31,7 +31,8 @@
       "@queries/*": ["src/queries/*"],
       "@actions/*": ["src/actions/*"],
       "@assets/*": ["src/assets/*"],
-      "@public/*": ["public/*"]
+      "@public/*": ["public/*"],
+      "@test/*": ["test/*"]
     },
     "strict": false,
     "incremental": true

@@ -4,7 +4,7 @@ import { setSkillsTop } from '@actions/home';
 import hideArray from './hide.json';
 import settings from '@configs/settings.json';
 import { SkillsWrapper, DotWrapper, StyledDotFormation } from './styles';
-import { useGetSkillsQuery } from '@types';
+import { Skill, useGetSkillsQuery } from '@types';
 import { compileSkillsData } from '@util/data';
 import { useDispatch } from 'react-redux';
 import { usePrevious, useThrottleCallback } from '@hooks';
@@ -26,7 +26,7 @@ const SkillsSection: FC<Props> = ({ atBottom }) => {
     let value = input;
 
     if (value == null) {
-      const elm: HTMLElement = document.getElementById(this.gridID);
+      const elm: HTMLElement = document.getElementById(GRID_ID);
       const rect: ClientRect = elm.getBoundingClientRect();
       value = rect.top - rect.height / 2 + 490;
     }
@@ -63,7 +63,7 @@ const SkillsSection: FC<Props> = ({ atBottom }) => {
           active={atBottom}
           hideArray={hideArray}
           color={color}
-          textConfig={compileSkillsData('desktop', data.skills)}
+          textConfig={compileSkillsData('desktop', data.skills as Skill[])}
         />
         <StyledDotFormation
           breakpoint="mobile"
@@ -71,7 +71,7 @@ const SkillsSection: FC<Props> = ({ atBottom }) => {
           rows={20}
           active={true}
           color={color}
-          textConfig={compileSkillsData('mobile', data.skills)}
+          textConfig={compileSkillsData('mobile', data.skills as Skill[])}
         />
       </DotWrapper>
     </SkillsWrapper>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Plx from 'react-plx';
 import ColorDotRow from '@components/particles/color-dot-row';
@@ -8,7 +8,7 @@ import { curtainInClose } from '@util/animation';
 import config from '@configs/header.json';
 import metaConfig from '@configs/meta.json';
 import settings from '@configs/settings.json';
-import { TriangleSizes, ParticleColors } from '@types';
+import { TriangleSizes, ParticleColors, Store } from '@types';
 import {
   HomeHeader,
   TitleWrapper,
@@ -20,9 +20,9 @@ import {
 
 const Header: FC = () => {
   const [active, setActive] = useState(false);
-  const splashOpen = useSelector((state) => state.global.splashOpen);
-  const curtainState = useSelector((state) => state.global.curtainState);
-  const isMobile = useSelector((state) => state.global.isMobile);
+  const splashOpen = useSelector((state: Store) => state.global.splashOpen);
+  const curtainState = useSelector((state: Store) => state.global.curtainState);
+  const isMobile = useSelector((state: Store) => state.global.isMobile);
 
   useEffect(() => {
     if (!active && curtainInClose(curtainState)) {
@@ -30,7 +30,7 @@ const Header: FC = () => {
     }
   }, [active, curtainState]);
 
-  const getPlxData = ({ plx, start, end }: ConfigsHeaderTriangles) => {
+  const getPlxData = ({ plx, start, end }) => {
     return [
       {
         start,

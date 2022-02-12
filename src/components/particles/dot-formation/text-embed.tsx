@@ -1,9 +1,9 @@
 import React from 'react';
-import { Skill, DorFormationTextEmbedOffsets, DotFormationTextEmbedDirection } from '@types';
+import { SkillText, DorFormationTextEmbedOffsets, DotFormationTextEmbedDirection } from '@types';
 import { TextEmbedWrapper, TextEmbedTextWrapper, RevealBar, InnerTextWrapper } from './styles';
 
 type Props = {
-  data: Skill;
+  data: SkillText;
   spacing?: number[];
   offsets?: DorFormationTextEmbedOffsets;
   width?: string;

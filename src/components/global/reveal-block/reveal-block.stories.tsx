@@ -44,7 +44,7 @@ class RevealBlockContainer extends PureComponent<Props, State> {
 
   render() {
     return (
-      <RevealBlock {...this.props} active={this.state.active} gridLines={settings.gridLines}>
+      <RevealBlock {...this.props} active={this.state.active}>
         {this.props.children}
       </RevealBlock>
     );

@@ -1,7 +1,7 @@
-import theme from '../styles/theme';
+import theme from '@styles/theme';
 
 // types
-export type ITheme = typeof theme;
+export type Theme = typeof theme;
 
 // interfaces
 export interface IBreakPoints {
@@ -16,7 +16,7 @@ export interface IBreakPoints {
   mobileS: number;
 }
 
-export interface IGridPositionParams {
+export interface GridPositionParams {
   gridLines?: number[] = [];
   index?: number = 0;
   prop?: string = 'left';

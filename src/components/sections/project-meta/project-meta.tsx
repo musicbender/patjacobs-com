@@ -10,8 +10,8 @@ import {
   ContentValue,
   ContentValueLink,
   IconWrapper,
-  StorybookIcon,
-  GithubIcon,
+  StyledStorybookIcon,
+  StyledGithubIcon,
 } from './styles';
 
 type Props = {
@@ -21,13 +21,13 @@ type Props = {
 const ProjectMeta = ({ project }: Props): JSX.Element => {
   const getGithubIcon = (url: string) => (
     <IconWrapper href={url} target="_blank">
-      <GithubIcon />
+      <StyledGithubIcon />
     </IconWrapper>
   );
 
   const getStorybookIcon = (url: string): JSX.Element => (
     <IconWrapper href={url} target="_blank">
-      <StorybookIcon />
+      <StyledStorybookIcon />
     </IconWrapper>
   );
 

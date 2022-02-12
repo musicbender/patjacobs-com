@@ -1,4 +1,4 @@
-import theme from '../theme';
+import theme from '@styles/theme';
 import { Keyframes, css, FlattenSimpleInterpolation } from 'styled-components';
 
 interface GetBlockAnimation {

@@ -12,7 +12,7 @@ enum Colors {
 }
 
 type Props = {
-  color: keyof typeof Colors;
+  color?: keyof typeof Colors;
   className?: string;
 };
 

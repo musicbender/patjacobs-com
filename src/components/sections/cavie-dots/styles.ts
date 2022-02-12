@@ -17,6 +17,7 @@ export const CavieDotsWrapper = styled('div')<CavieDotsWrapperProps>`
   left: 50%;
   width: 50vw;
   height: 100vh;
+
   ${media.tablet`display: block;`}
   ${props => props.show && media.tablet`display: block;`}
   ${props => props.hide && media.tablet`display: none;`}
@@ -33,11 +34,13 @@ export const Dots = styled('div')<DotsProps>`
   width: 49.2%;
   padding-bottom: 48%;
   transform: translateX(-100%);
+
   ${media.desktopXXL`
     width: 27.5em;
     left: 47.375em;
     padding-bottom: 27.3em;
   `}
+
   ${props =>
     props.hide &&
     css`

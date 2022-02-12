@@ -1,11 +1,11 @@
 import React from 'react';
 import TextEmbed from './text-embed';
 import { getTextWidth } from '@util/dot-grid';
-import { Skill, Axis, DotFormationTextEmbedDirection } from '@types';
+import { SkillText, Axis, DotFormationTextEmbedDirection } from '@types';
 import { TextEmbedsWrapper } from './styles';
 
 type Props = {
-  textConfig: Skill[];
+  textConfig: SkillText[];
   spacing?: number[];
   getDotOffset(index: number, axis: Axis): number;
   dotSize?: number;
@@ -21,7 +21,7 @@ const TextEmbeds = ({
   active,
   rowMajority,
 }: Props) => {
-  const getTextOffset = (item: Skill): number => {
+  const getTextOffset = (item: SkillText): number => {
     return item.direction === 'Right'
       ? getDotOffset(item.position[0], 'x')
       : getDotOffset(item.position[1], 'y');
@@ -40,7 +40,7 @@ const TextEmbeds = ({
 
   return (
     <TextEmbedsWrapper>
-      {textConfig.map((item: Skill, i: number) => (
+      {textConfig.map((item: SkillText, i: number) => (
         <TextEmbed
           data={item}
           spacing={spacing}

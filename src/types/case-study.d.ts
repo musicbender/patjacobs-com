@@ -52,8 +52,13 @@ export type Sections = {
   [key: string]: Section;
 };
 
+export type RelatedProject = { __typename?: 'Project' } & Pick<
+  Project,
+  'id' | 'projectId' | 'projectType' | 'title'
+>;
+
 export type ProcessedGcmsData = {
   project: ProcessedProject;
-  nextProject: ProcessedProject;
+  nextProject: RelatedProject;
   sections: Sections;
 };

@@ -1,7 +1,7 @@
-import { TRANSPORT_CHANGED, IS_MOBILE_SET } from 'constants/constants';
-import { changeTransport } from 'actions/global';
-import { isMobileSize } from 'util/util';
-import { requestTimeout } from 'util/shims';
+import { TRANSPORT_CHANGED, IS_MOBILE_SET } from '@constants/global';
+import { changeTransport } from '@actions/global';
+import { isMobileSize } from '@util/util';
+import { requestTimeout } from '@util/shims';
 import { Middleware, Dispatch, AnyAction, MiddlewareAPI } from 'redux';
 
 const globalMiddleware: Middleware<Dispatch> = (store: MiddlewareAPI) => (

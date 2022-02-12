@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ProjectMeta from './project-meta';
 import theme from '@styles/theme';
-import { SitePageContextProject } from '@types';
+import { ProcessedProject } from '@types';
 
 // mock project data
 const baseProject = {
@@ -44,13 +44,11 @@ export default {
 
 // stories
 export const AllData = () => (
-  <ProjectMeta project={{ ...baseProject, ...project } as SitePageContextProject} />
+  <ProjectMeta project={{ ...baseProject, ...project } as ProcessedProject} />
 );
 
 export const OnlyType = () => (
-  <ProjectMeta
-    project={{ ...baseProject, projectType: project.projectType } as SitePageContextProject}
-  />
+  <ProjectMeta project={{ ...baseProject, projectType: project.projectType } as ProcessedProject} />
 );
 
 export const TypeAndUrl = () => (
@@ -60,7 +58,7 @@ export const TypeAndUrl = () => (
         ...baseProject,
         projectType: 'Work',
         externalUrl: 'https://bladeandsoul.com',
-      } as SitePageContextProject
+      } as ProcessedProject
     }
   />
 );
@@ -73,7 +71,7 @@ export const TypeUrlAndPublishDate = () => (
         projectType: 'Work',
         externalUrl: 'https://bladeandsoul.com',
         projectPublishDate: '2/12/2016',
-      } as SitePageContextProject
+      } as ProcessedProject
     }
   />
 );
@@ -87,7 +85,7 @@ export const WithLastDeployedOn = () => (
         externalUrl: 'https://bladeandsoul.com',
         projectPublishDate: '2/12/2016',
         lastDeployedOn: '7/12/2019',
-      } as SitePageContextProject
+      } as ProcessedProject
     }
   />
 );
@@ -102,7 +100,7 @@ export const WithGithub = () => (
         projectPublishDate: '2/12/2016',
         lastDeployedOn: '7/12/2019',
         githubRepoUrl: 'https://github.com',
-      } as SitePageContextProject
+      } as ProcessedProject
     }
   />
 );
