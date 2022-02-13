@@ -1,6 +1,6 @@
 import { getTextWidth, dotsFromCoords, mapDotsWithText } from '../dot-grid';
-import mockDotTextConfig from '../../../test/mocks/dot-text-config.json';
-import { TestItem } from '../../types/global';
+import mockDotTextConfig from '@test/mocks/dot-text-config.json';
+import { TestItem } from '@types';
 
 describe('util/dot-grid.js', () => {
   describe('dotsFromCoords()', () => {

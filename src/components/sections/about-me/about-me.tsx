@@ -11,6 +11,7 @@ type Props = {
 
 const AboutMe = ({ atAbout = false, isMobile }: Props) => {
   const { data } = useGetAboutMeSectionQuery();
+  console.log('about me', data);
   return (
     <AboutMeSection id="about-section">
       <StyledHeading text={data.aboutMeSection.heading} />

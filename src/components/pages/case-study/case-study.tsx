@@ -24,6 +24,7 @@ import {
   StyledUpNext,
 } from './styles';
 import { ProcessedGcmsData, RevealBlockContentType, RevealedElementsState, Store } from '@types';
+import { processGcmsData } from '@pages/case-study/[projectId]';
 
 type Props = {
   projectId: string;
@@ -35,7 +36,8 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
   const throttledAtTop = useThrottle(atTop, 5);
   const { splashOpen, transportOpen } = useSelector((state: Store) => state.global);
   const { data: gcmsData } = useQuery<ProcessedGcmsData, Error>(
-    `processed-case-study-${projectId}`,
+    ['processed-case-study', projectId],
+    () => processGcmsData(projectId),
   );
 
   const active: boolean = throttledAtTop && !splashOpen && !transportOpen;

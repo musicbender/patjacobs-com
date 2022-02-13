@@ -1,6 +1,6 @@
 import { getIndexOrLast, countLongestArray, reduceSegment, moveAllInArray } from '../util';
-const settings = require('../../../data/configs/settings.json');
-import { TestItem } from '../../types/global';
+const settings = require('@configs/settings.json');
+import { TestItem } from '@types';
 
 describe('util.js', () => {
   describe('getIndexOrLast()', () => {

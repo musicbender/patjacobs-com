@@ -16,7 +16,7 @@ const upNext: FC<Props> = ({ label = 'Next Page', path = '/', className }) => {
       <LinkWrapper>
         <StyledLink
           {...tlConfig.main}
-          to={path}
+          href={path}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >

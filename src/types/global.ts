@@ -1,12 +1,3 @@
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION__: any;
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
-    href: string;
-    webkitRequestAnimationFrame: any;
-    webkitCancelAnimationFrame: any;
-  }
-}
 type StartSequenceOptions = {
   length?: number;
   delay?: number;

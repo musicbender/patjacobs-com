@@ -20,7 +20,7 @@ const Toolbar: FC<Props> = ({ location, handleToTop }) => {
   return (
     <ToolBarWrapper>
       <InnerWrapper>
-        <StyledLink {...tlConfig.main} to="/" onClick={handleLogoClick}>
+        <StyledLink {...tlConfig.main} href="/" onClick={handleLogoClick}>
           <Logo color="white" />
         </StyledLink>
       </InnerWrapper>

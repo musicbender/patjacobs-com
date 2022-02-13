@@ -36,7 +36,13 @@ const Button = ({
       );
     case !!url:
       return (
-        <ButtonLink {...tlConf.main} to={url} type={type} onClick={callback} className={className}>
+        <ButtonLink
+          {...tlConf.main}
+          href={url}
+          type={type}
+          onClick={callback}
+          className={className}
+        >
           {getInnerContent}
         </ButtonLink>
       );

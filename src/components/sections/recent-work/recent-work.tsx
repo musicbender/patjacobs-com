@@ -44,7 +44,7 @@ const RecentWork: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!prevState.transportOpen && transportOpen) {
+    if (!prevState?.transportOpen && transportOpen) {
       setWorkStops(defaultWorkStops);
     }
   }, [transportOpen]);

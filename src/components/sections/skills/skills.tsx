@@ -48,7 +48,7 @@ const SkillsSection: FC<Props> = ({ atBottom }) => {
   }, []);
 
   useEffect(() => {
-    if (prevState.atBottom && !atBottom) {
+    if (prevState?.atBottom && !atBottom) {
       setColor(DEFAULT_COLOR);
     }
   }, [atBottom]);

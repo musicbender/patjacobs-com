@@ -4,7 +4,6 @@ import { SocialLink, useGetSocialLinksQuery } from '@types';
 
 const Social: FC = () => {
   const { data } = useGetSocialLinksQuery();
-  // TODO: use getSocialLinks.graphql
   return (
     <SocialWrapper>
       <InnerWrapper>

@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import promise from 'redux-promise';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from '@reducers';
 import { globalMiddleware, homeMiddleware } from '@middleware';
 

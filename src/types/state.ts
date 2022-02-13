@@ -23,6 +23,6 @@ export type HomeActionPayload = {
   value: number;
 };
 
-export { AppState } from '@reducers';
+export type { AppState } from '@reducers';
 
 export type Modes = 'light' | 'dark';

@@ -1,4 +1,4 @@
-import { Project } from './graphcms-schema';
+import { Project, Section } from './graphcms-schema';
 
 export type ProjectBodyNodeType = 'paragraph' | 'image' | 'video';
 
@@ -27,7 +27,7 @@ export type GcmsProjectBodyNode = {
   height?: number;
   handle?: string;
   altText?: string;
-  mimeType?: ProjectBodyNodeMimeType;
+  mimeType?: GcmsProjectBodyNodeMimeType;
   className?: string;
   text?: string;
   children?: GcmsProjectBodyNode[];

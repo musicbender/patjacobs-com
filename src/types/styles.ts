@@ -16,10 +16,10 @@ export interface IBreakPoints {
   mobileS: number;
 }
 
-export interface GridPositionParams {
-  gridLines?: number[] = [];
-  index?: number = 0;
-  prop?: string = 'left';
-  unit?: string = '%';
-  attach?: string = 'left';
-}
+export type GridPositionParams = {
+  gridLines?: number[];
+  index?: number;
+  prop?: string;
+  unit?: string;
+  attach?: string;
+};
