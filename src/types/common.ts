@@ -1,4 +1,4 @@
-type StartSequenceOptions = {
+export type StartSequenceOptions = {
   length?: number;
   delay?: number;
   interval?: number;

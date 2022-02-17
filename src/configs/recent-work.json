@@ -1,23 +1,20 @@
 {
   "workItemPlx": {
-    "image": [
-      {
+    "image": [{
         "startValue": 5
       },
       {
         "startValue": 11
       }
     ],
-    "info": [
-      {
+    "info": [{
         "startValue": 8
       },
       {
         "startValue": -2
       }
     ],
-    "mobileInfo": [
-      {
+    "mobileInfo": [{
         "startValue": -6
       },
       {
@@ -25,8 +22,7 @@
       }
     ]
   },
-  "particleData": [
-    {
+  "particleData": [{
       "name": "triangle-a",
       "type": "triangle",
       "color": "purple",
@@ -81,21 +77,6 @@
       "color": "orange",
       "size": "small",
       "plx": [15, -15]
-    },
-    {
-      "name": "dot-grid-a",
-      "type": "dots",
-      "plx": [1, -18]
-    },
-    {
-      "name": "dot-grid-b",
-      "type": "dots",
-      "plx": [3, -2]
-    },
-    {
-      "name": "dot-grid-c",
-      "type": "dots",
-      "plx": [10, -10]
     }
   ]
 }

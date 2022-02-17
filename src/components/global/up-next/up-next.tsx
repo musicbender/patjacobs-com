@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import { FC, useState } from 'react';
 import { UpNextWrapper, NextText, LinkWrapper, StyledLink, Line } from './styles';
-const tlConfig = require('@constants/transition-link.json');
 
 type Props = {
   label?: string;
@@ -8,24 +8,21 @@ type Props = {
   className?: string;
 };
 
-const upNext: FC<Props> = ({ label = 'Next Page', path = '/', className }) => {
+const UpNext: FC<Props> = ({ label = 'Next Page', path = '/', className }) => {
   const [hovered, setHovered] = useState(false);
   return (
     <UpNextWrapper className={className}>
       <NextText>NEXT:</NextText>
       <LinkWrapper>
-        <StyledLink
-          {...tlConfig.main}
-          href={path}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          {label}
-        </StyledLink>
-        <Line active={hovered} />
+        <Link href={path} passHref>
+          <StyledLink onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+            {label}
+          </StyledLink>
+          <Line active={hovered} />
+        </Link>
       </LinkWrapper>
     </UpNextWrapper>
   );
 };
 
-export default upNext;
+export default UpNext;

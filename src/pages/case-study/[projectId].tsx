@@ -39,7 +39,7 @@ const CaseStudyTemplate = ({ projectId }) => (
 export default CaseStudyTemplate;
 
 export const processGcmsData = async (projectId: string): Promise<ProcessedGcmsData> => {
-  const { data } = await useGetCaseStudyQuery({ projectId });
+  const { data } = useGetCaseStudyQuery({ projectId });
 
   const processedProject: ProcessedProject = {
     ...(data.project as OmitProjectBody),
@@ -70,10 +70,12 @@ export const processGcmsData = async (projectId: string): Promise<ProcessedGcmsD
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = useGetAllProjectIdsQuery();
+  const { data } = await useGetAllProjectIdsQuery();
+  console.log(data);
   const paths = data.projects.map(({ projectId }) => ({
     params: { projectId },
   }));
+
   return { paths, fallback: false };
 };
 

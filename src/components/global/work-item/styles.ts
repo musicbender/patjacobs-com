@@ -157,35 +157,45 @@ export const InfoOutterWrapper = styled('div')<ParallaxProps>`
   left: 0;
   width: 100%;
   height: 100%;
+
   ${media.tablet`
-        top: 6em;
-        width: 59.52%;
-    `}
+    top: 6em;
+    width: 59.52%;
+  `}
+
   > .parallax {
     position: absolute;
+
     ${StyledWorkItemInfo} {
       margin: 0;
     }
+
     &.index-0 {
       ${({ theme }) => css`
         left: ${`${theme.gridSizes.s}%`};
         width: ${`calc(${theme.gridSizes.m}% + ${theme.gridSizes.s}% + ${theme.gridSizes.m}%)`};
+
         ${media.tablet`
           left: ${`calc(${theme.gridSizes.m}% * 4)`};
           width: ${`calc(${theme.gridSizes.s}% * 4)`};
         `}
       `}
     }
+
     &.index-1 {
       ${({ theme }) => css`
         left: 50vw;
         width: calc(42vw);
+
         ${StyledWorkItemInfo} {
           transform: translateX(-42vw);
         }
+
         ${media.tablet`
-        left: ${`calc((${theme.gridSizes.m}% * 4) + (${theme.gridSizes.s}% * 4))`};
-        width: ${`calc(${theme.gridSizes.m}% * 4)`};
+          left: ${`calc((${theme.gridSizes.m}% * 4) + (${theme.gridSizes.s}% * 4))`};
+          width: ${`calc(${theme.gridSizes.m}% * 4)
+        `};
+
         ${StyledWorkItemInfo} {
           transform: ${`translateX(-${theme.gridSizes.s}vw)`};
         }

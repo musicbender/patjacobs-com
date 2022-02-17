@@ -1,18 +1,17 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { FC } from 'react';
-import Logo from '../logo';
-import { ToolBarWrapper, InnerWrapper, StyledLink } from './styles';
-const tlConfig = require('@constants/transition-link.json');
+import Logo from '@components/global/logo';
+import { ToolBarWrapper, InnerWrapper, LogoWrapper } from './styles';
 
 type Props = {
   handleToTop(e?: any): any;
-  location?: {
-    pathname?: string;
-  };
 };
 
-const Toolbar: FC<Props> = ({ location, handleToTop }) => {
+const Toolbar: FC<Props> = ({ handleToTop }) => {
+  const router = useRouter();
   const handleLogoClick = (): void => {
-    if (location.pathname !== '/') return;
+    if (router.pathname !== '/') return;
     if (window.scrollY < 100) return;
     handleToTop();
   };
@@ -20,9 +19,11 @@ const Toolbar: FC<Props> = ({ location, handleToTop }) => {
   return (
     <ToolBarWrapper>
       <InnerWrapper>
-        <StyledLink {...tlConfig.main} href="/" onClick={handleLogoClick}>
-          <Logo color="white" />
-        </StyledLink>
+        <Link href="/" passHref>
+          <LogoWrapper onClick={handleLogoClick}>
+            <Logo color="white" />
+          </LogoWrapper>
+        </Link>
       </InnerWrapper>
     </ToolBarWrapper>
   );

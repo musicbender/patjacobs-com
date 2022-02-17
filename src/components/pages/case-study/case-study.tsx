@@ -169,7 +169,7 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
             {gcmsData.nextProject && (
               <StyledUpNext
                 label={gcmsData.nextProject.title}
-                path={`/case-studies/${gcmsData.nextProject.projectId}`}
+                path={`/case-study/${gcmsData.nextProject.projectId}`}
                 gridLines={settings.gridLines}
               />
             )}

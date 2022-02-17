@@ -1,6 +1,5 @@
 query getAllProjectIds {
   projects(where: { linkType: Case_Study }) {
     projectId
-    projectType
   }
 }

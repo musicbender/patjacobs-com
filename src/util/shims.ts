@@ -1,8 +1,8 @@
-import { hasWindow } from './util';
+import { hasWindow } from '@util/util';
 
 export const requestAnimFrame = (() => {
   if (!hasWindow() || (!window.requestAnimationFrame && !window.webkitRequestAnimationFrame)) {
-    return function (callback: any) {
+    return function(callback: any) {
       setTimeout(callback, 1000 / 60);
     };
   }
@@ -31,7 +31,7 @@ export const clearRequestInterval = (data: any): void => {
   cancelAnimationFrame(data.id);
 };
 
-export const requestTimeout = function (fn: any, delay: number): any {
+export const requestTimeout = function(fn: any, delay: number): any {
   if (!hasWindow() || (!window.requestAnimationFrame && !window.webkitRequestAnimationFrame))
     return setTimeout(fn, delay);
 
@@ -53,7 +53,7 @@ export const requestTimeout = function (fn: any, delay: number): any {
   return handle;
 };
 
-export const clearRequestTimeout = function (handle: any): void {
+export const clearRequestTimeout = function(handle: any): void {
   if (hasWindow() && window.cancelAnimationFrame) {
     window.cancelAnimationFrame(handle.value);
   } else if (hasWindow() && window.webkitCancelAnimationFrame) {

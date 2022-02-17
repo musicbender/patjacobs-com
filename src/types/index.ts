@@ -1,4 +1,4 @@
-export * from './global';
+export * from './common';
 export * from './state';
 export * from './styles';
 export * from './sections';

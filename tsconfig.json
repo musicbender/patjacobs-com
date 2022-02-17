@@ -15,7 +15,7 @@
     "experimentalDecorators": true,
     "jsx": "preserve",
     "noEmit": true,
-    "typeRoots": ["src/types/custom-types.d.ts"],
+    "typeRoots": ["./src/types", "node_modules/@types"],
     "baseUrl": "./",
     "paths": {
       "@components/*": ["src/components/*"],
@@ -38,6 +38,6 @@
     "strict": false,
     "incremental": true
   },
-  "include": ["next-env.d.ts", "src/**/*", "jest.config.js", "codegen.js"],
+  "include": ["next-env.d.ts", "src/types/global.d.ts", "src", "jest.config.js", "codegen.js"],
   "exclude": ["node_modules", "build", ".next"]
 }

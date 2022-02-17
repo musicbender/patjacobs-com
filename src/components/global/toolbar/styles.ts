@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { media } from '@styles/breakpoints';
 import { superCenter } from '@styles/utils/global';
-import Link from 'next/link';
 
 const iconOpacity = 0.675;
 
 export const ToolBarWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: ${props => props.theme.sizes.toolbarHeight};
+  height: ${({ theme }) => theme.sizes.toolbarHeight};
   background-color: transparent;
   z-index: 9;
 
@@ -25,7 +24,7 @@ export const InnerWrapper = styled.div`
   height: 100%;
 `;
 
-export const StyledLink = styled(Link)`
+export const LogoWrapper = styled.a`
   ${superCenter('92%')}
   display: inline-block;
   width: 1.85em;
@@ -35,7 +34,7 @@ export const StyledLink = styled(Link)`
   `}
 
   svg {
-    fill: ${props => props.theme.palette.white};
+    fill: ${({ theme }) => theme.palette.white};
     opacity: ${iconOpacity};
     width: 100%;
   }

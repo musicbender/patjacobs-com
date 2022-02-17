@@ -24,8 +24,8 @@ reports
 # Optional npm cache directory
 .npm
 
-# generated 
-src/types/graphcms-schema.d.ts
+# generated
+/src/types/graphcms-schema.ts
 
 # misc
 .git

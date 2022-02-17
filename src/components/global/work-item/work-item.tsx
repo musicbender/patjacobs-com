@@ -42,7 +42,7 @@ const WorkItem: FC<Props> = ({
       case 'External':
         return item.externalUrl;
       case 'Case_Study':
-        return `/case-studies/${item.projectId}`;
+        return `/case-study/${item.projectId}`;
     }
   };
 

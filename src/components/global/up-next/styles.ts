@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { media } from '@styles/breakpoints';
-import Link from 'next/link';
 
 type LineProps = {
   active?: boolean;
@@ -10,10 +9,11 @@ export const UpNextWrapper = styled.div`
   position: relative;
   width: 100%;
   padding-top: 7em;
+
   ${media.tablet`
-        width: 67vw;
-        padding-top: 11em;
-    `}
+    width: 67vw;
+    padding-top: 11em;
+  `}
 `;
 
 export const NextText = styled.h6`
@@ -25,9 +25,10 @@ export const NextText = styled.h6`
   transform-origin: bottom left;
   font-size: 1rem;
   letter-spacing: 0.5em;
+
   ${media.tablet`
-        font-size: 1.65rem;
-    `}
+    font-size: 1.65rem;
+  `}
 `;
 
 export const LinkWrapper = styled.div`
@@ -37,26 +38,31 @@ export const LinkWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled.a`
   font-size: 1.75rem;
   color: ${({ theme }) => theme.palette.white};
   text-decoration: none;
   transition: ${({ theme }) => `color ${theme.animate.moderate} ${theme.animate.easeInOut}`};
+
   &:hover {
     color: ${({ theme }) => theme.corePalette.aqua};
   }
+
   ${media.tablet`
-        font-size: 2rem;
-    `}
+    font-size: 2rem;
+  `}
+
   ${media.desktopM`
-        font-size: 3rem;
-    `}
-    ${media.desktopM`
-        font-size: 4rem;
-    `}
-    ${media.desktopXL`
-        font-size: 5rem;
-    `}
+    font-size: 3rem;
+  `}
+  
+  ${media.desktopM`
+    font-size: 4rem;
+  `}
+  
+  ${media.desktopXL`
+    font-size: 5rem;
+  `}
 `;
 
 export const Line = styled('div')<LineProps>`
@@ -68,15 +74,17 @@ export const Line = styled('div')<LineProps>`
   background-color: ${({ theme }) => theme.corePalette.aqua};
   transform: translateX(0%);
   transition: ${({ theme }) => `transform ${theme.animate.moderate} ${theme.animate.easeInOut}`};
+
   ${media.tablet`
-        bottom: 1em;
-        transform: translateX(-75%);
-    `}
-  ${props =>
+    bottom: 1em;
+    transform: translateX(-75%);
+  `}
+
+  ${(props) =>
     props.active &&
     css`
       ${media.tablet`
-                transform: translateX(0%);
-            `}
+        transform: translateX(0%);
+      `}
     `};
 `;

@@ -26,7 +26,7 @@ const Decorator = styled.div`
 export default {
   title: 'UpNext',
   component: UpNext,
-  decorators: [story => <Decorator>{story()}</Decorator>],
+  decorators: [(story) => <Decorator>{story()}</Decorator>],
 };
 
 // stories

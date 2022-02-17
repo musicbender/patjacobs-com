@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { media } from '@styles/breakpoints';
 import Heading from '@components/global/heading';
-import DotGrid from '@components/particles/dot-grid';
 import hexRgb from 'hex-to-rgba';
 
 export const AboutMeSection = styled.div`
@@ -19,12 +18,6 @@ export const AboutMeSection = styled.div`
 
 export const StyledHeading = styled(Heading)`
   margin-left: 0;
-`;
-
-export const StyledDotGrid = styled(DotGrid)`
-  position: absolute;
-  top: 18em;
-  left: -92%;
 `;
 
 export const ContentBox = styled.div`

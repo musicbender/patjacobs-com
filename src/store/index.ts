@@ -1,8 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, Store } from 'redux';
 import promise from 'redux-promise';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from '@reducers';
+import { createWrapper, Context } from 'next-redux-wrapper';
 import { globalMiddleware, homeMiddleware } from '@middleware';
+import { Store as State } from '@types';
 
 const middleware = [globalMiddleware, homeMiddleware, promise];
 
@@ -11,6 +13,6 @@ const allMiddlewares =
     ? composeWithDevTools(applyMiddleware(...middleware))
     : applyMiddleware(...middleware);
 
-const store = createStore(reducers, {}, allMiddlewares);
+const makeStore = (context: Context) => createStore(reducers, {}, allMiddlewares);
 
-export default store;
+export const wrapper = createWrapper<Store<State>>(makeStore, { debug: true });
