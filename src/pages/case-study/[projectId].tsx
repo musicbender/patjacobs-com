@@ -17,6 +17,7 @@ import {
   useGetAllProjectIdsQuery,
   useGetCaseStudyQuery,
   useGetSocialLinksQuery,
+  GetCaseStudyQuery,
 } from '@types';
 
 type CaseStudyPageStaticProps = {
@@ -39,7 +40,9 @@ const CaseStudyTemplate = ({ projectId }) => (
 export default CaseStudyTemplate;
 
 export const processGcmsData = async (projectId: string): Promise<ProcessedGcmsData> => {
-  const { data } = useGetCaseStudyQuery({ projectId });
+  const data: GetCaseStudyQuery = await useGetCaseStudyQuery.fetcher({
+    projectId,
+  })();
 
   const processedProject: ProcessedProject = {
     ...(data.project as OmitProjectBody),
@@ -64,14 +67,13 @@ export const processGcmsData = async (projectId: string): Promise<ProcessedGcmsD
 
   return {
     project: processedProject,
-    nextProject: getNextProject(projectId, relatedProjects),
+    nextProject: getNextProject(data.project.projectId, relatedProjects),
     sections: processSections(data.sections as Section[]),
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await useGetAllProjectIdsQuery();
-  console.log(data);
+  const data = await useGetAllProjectIdsQuery.fetcher()();
   const paths = data.projects.map(({ projectId }) => ({
     params: { projectId },
   }));
@@ -87,11 +89,6 @@ export const getStaticProps: GetStaticProps = async ({
   await queryClient.prefetchQuery(
     useGetSocialLinksQuery.getKey(),
     useGetSocialLinksQuery.fetcher(),
-  );
-
-  await queryClient.prefetchQuery(
-    useGetCaseStudyQuery.getKey({ projectId: params.projectId as string }),
-    () => useGetCaseStudyQuery.fetcher({ projectId: params.projectId as string }),
   );
 
   await queryClient.prefetchQuery(['processed-case-study', params.projectId], () =>

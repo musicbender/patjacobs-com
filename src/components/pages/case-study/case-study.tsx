@@ -9,7 +9,7 @@ import ProjectBody from '@components/sections/project-body';
 import RevealBlock from '@components/global/reveal-block';
 import BarList from '@components/global/bar-list';
 import settings from '@configs/settings.json';
-import { useThrottle } from '@hooks';
+import { useThrottle, useThrottleCallback } from '@hooks';
 import {
   CaseStudyPage,
   InfoWrapper,
@@ -61,15 +61,15 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
     },
   ];
 
-  const handleScroll = (): void => {
+  const handleScroll = useThrottleCallback((): void => {
     if (window.scrollY === 0 && !throttledAtTop) {
       setAtTop(true);
     }
 
     if (throttledAtTop && window.scrollY > 0) {
-      setAtTop(true);
+      setAtTop(false);
     }
-  };
+  }, 5);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);

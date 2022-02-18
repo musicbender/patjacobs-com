@@ -1,10 +1,8 @@
 import theme from '@styles/theme';
 
-// types
 export type Theme = typeof theme;
 
-// interfaces
-export interface IBreakPoints {
+export type IBreakPoints = {
   desktopXXL: number;
   desktopXL: number;
   desktopL: number;
@@ -14,7 +12,7 @@ export interface IBreakPoints {
   mobileL: number;
   mobileM: number;
   mobileS: number;
-}
+};
 
 export type GridPositionParams = {
   gridLines?: number[];

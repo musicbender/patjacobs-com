@@ -1,6 +1,6 @@
 export type DotFormationTextEmbedDirection = 'Up' | 'Down' | 'Right';
 
-export interface DorFormationTextEmbedOffsets {
+export type DorFormationTextEmbedOffsets = {
   x: number;
   y: number;
-}
+};

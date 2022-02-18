@@ -2,18 +2,18 @@ import { Project, Section } from './graphcms-schema';
 
 export type ProjectBodyNodeType = 'paragraph' | 'image' | 'video';
 
-export interface CaseStudyBaseRevealProps {
+export type CaseStudyBaseRevealProps = {
   startGrid: number;
   endGrid: number;
-}
+};
 
-export interface ProjectBodyParagraphText {
+export type ProjectBodyParagraphText = {
   text: string;
-}
+};
 
-export interface RevealedElementsState {
+export type RevealedElementsState = {
   [key: string]: boolean;
-}
+};
 
 export type GcmsProjectBodyNodeType = 'image' | 'paragraph' | 'video';
 

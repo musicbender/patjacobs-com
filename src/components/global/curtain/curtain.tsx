@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeCurtainState } from '@actions/global';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
@@ -16,11 +16,10 @@ type Props = {
 const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props): JSX.Element => {
   const blockNum = 7;
   const baseDelay = 55;
-  let openingDuration = 0;
-  let openTimeout;
-  let closingTimeout;
-  let closedTimeout;
-
+  const openingDurationRef = useRef(0);
+  const openTimeoutRef = useRef(null);
+  const closingTimeoutRef = useRef(null);
+  const closedTimeoutRef = useRef(null);
   const [exiting, setExiting] = useState(false);
   const curtainState: string = useSelector((state: Store) => state.global.curtainState);
   const dispatch = useDispatch();
@@ -33,26 +32,26 @@ const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props)
   useEffect(() => {
     dispatch(changeCurtainState('opening'));
 
-    openingDuration = getOpeningDuration();
+    openingDurationRef.current = getOpeningDuration();
 
-    openTimeout = requestTimeout(() => {
+    openTimeoutRef.current = requestTimeout(() => {
       dispatch(changeCurtainState('open'));
-    }, openingDuration);
+    }, openingDurationRef.current);
 
-    closingTimeout = requestTimeout(() => {
+    closingTimeoutRef.current = requestTimeout(() => {
       setExiting(true);
       dispatch(changeCurtainState('closing'));
     }, duration);
 
-    closedTimeout = requestTimeout(() => {
+    closedTimeoutRef.current = requestTimeout(() => {
       dispatch(changeCurtainState('closed'));
     }, duration * 2);
 
     return () => {
       if (curtainState !== 'closed') dispatch(changeCurtainState('closed'));
-      clearRequestTimeout(openTimeout);
-      clearRequestTimeout(closingTimeout);
-      clearRequestTimeout(closedTimeout);
+      clearRequestTimeout(openTimeoutRef.current);
+      clearRequestTimeout(closingTimeoutRef.current);
+      clearRequestTimeout(closedTimeoutRef.current);
     };
   }, []);
 

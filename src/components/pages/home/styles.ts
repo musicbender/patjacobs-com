@@ -7,9 +7,9 @@ export const HomePage = styled.main`
 
 export const OutterWrapper = styled.div`
   position: relative;
-  margin-bottom: ${props => props.theme.sizes.footerHeightM};
+  margin-bottom: ${(props) => props.theme.sizes.footerHeightM};
   ${media.tablet`
-    margin-bottom: ${props => props.theme.sizes.footerHeightD};
+    margin-bottom: ${(props) => props.theme.sizes.footerHeightD};
   `}
 `;
 

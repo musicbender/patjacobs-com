@@ -18,8 +18,8 @@ const UpNext: FC<Props> = ({ label = 'Next Page', path = '/', className }) => {
           <StyledLink onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             {label}
           </StyledLink>
-          <Line active={hovered} />
         </Link>
+        <Line active={hovered} />
       </LinkWrapper>
     </UpNextWrapper>
   );

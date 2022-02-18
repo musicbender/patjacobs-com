@@ -40,6 +40,7 @@ export const LinkWrapper = styled.div`
 
 export const StyledLink = styled.a`
   font-size: 1.75rem;
+  margin-bottom: 1.5em;
   color: ${({ theme }) => theme.palette.white};
   text-decoration: none;
   transition: ${({ theme }) => `color ${theme.animate.moderate} ${theme.animate.easeInOut}`};
@@ -76,7 +77,7 @@ export const Line = styled('div')<LineProps>`
   transition: ${({ theme }) => `transform ${theme.animate.moderate} ${theme.animate.easeInOut}`};
 
   ${media.tablet`
-    bottom: 1em;
+    bottom: 0.5em;
     transform: translateX(-75%);
   `}
 

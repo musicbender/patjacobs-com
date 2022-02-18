@@ -1,9 +1,9 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { ThemeProvider } from 'styled-components';
 import theme from '@styles/theme';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestTimeout } from '@util/shims';
+import { clearRequestTimeout, requestTimeout } from '@util/shims';
 import { changeSplashOpen, changeTransport, setIsMobile } from '@actions/global';
 import GlobalStyles from '@styles/global-styles';
 import Head from '@components/global/head';
@@ -28,6 +28,7 @@ const Layout: FC = ({ headProps = {}, children }: Props) => {
   const isMobile = useSelector((state: Store) => state.global.isMobile);
   const skillsTop = useSelector((state: Store) => state.home.skillsTop);
   const mode = useSelector((state: Store) => state.global.mode);
+  const splashTimeoutRef = useRef(null);
   const dispatch = useDispatch();
 
   const handleResize = useThrottleCallback((): void => {
@@ -42,16 +43,19 @@ const Layout: FC = ({ headProps = {}, children }: Props) => {
 
   useEffect(() => {
     dispatch(setIsMobile());
-    const splashTimeout = settings.splashScreenDebug ? 6000000 : settings.splashScreenTimeout;
 
-    requestTimeout(() => {
-      changeSplashOpen(false);
-    }, splashTimeout);
+    splashTimeoutRef.current = requestTimeout(
+      () => {
+        dispatch(changeSplashOpen(false));
+      },
+      settings.splashScreenDebug ? 6000000 : settings.splashScreenTimeout,
+    );
 
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      clearRequestTimeout(splashTimeoutRef.current);
     };
   }, []);
 

@@ -12,10 +12,10 @@ type ItemInfoProps = {
 
 export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
   width: 84vw;
-  margin-left: ${props => `${props.theme.gridSizes.s}%`};
+  margin-left: ${(props) => `${props.theme.gridSizes.s}%`};
   text-align: left;
-  color: ${props => rgbHex(props.theme.palette.white, 0.87)};
-  background-color: ${props => props.theme.palette.darkBlack};
+  color: ${(props) => rgbHex(props.theme.palette.white, 0.87)};
+  background-color: ${(props) => props.theme.palette.darkBlack};
   border-width: 0.6em;
   border-style: solid;
   padding: 2.25em 1.75em 0.2em;
@@ -26,13 +26,13 @@ export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
     margin-left: 0;
     border-width: 0.45em;
   `}
-  ${props =>
+  ${(props) =>
     !props.stopped &&
     css`
       color: ${rgbHex(props.theme.palette.white, 0.4)};
       border-color: ${shade(0.7, props.theme.corePalette.purple)};
     `}
-  ${props =>
+  ${(props) =>
     props.stopped &&
     css`
       color: ${rgbHex(props.theme.palette.white, 0.87)};
@@ -42,7 +42,7 @@ export const ItemInfoWrapper = styled('div')<ItemInfoProps>`
 
 export const Title = styled.h5`
   margin: 0 0 1em;
-  font-family: ${props => props.theme.fonts.futura};
+  font-family: ${(props) => props.theme.fonts.futura};
   font-size: 1rem;
   font-weight: 200;
   text-transform: uppercase;
@@ -54,7 +54,7 @@ export const Title = styled.h5`
 
 export const Description = styled.p`
   margin: 0 0 1.5em;
-  font-family: ${props => props.theme.fonts.inconsolata};
+  font-family: ${(props) => props.theme.fonts.inconsolata};
   font-size: 1rem;
   line-height: 1.75;
   color: inherit;
@@ -78,7 +78,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
       color: ${btnColor};
     }
   }
-  ${props =>
+  ${(props) =>
     !props.isParallax &&
     props.stopped &&
     css`
@@ -105,7 +105,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
         }
       }
   `}
-  ${props =>
+  ${(props) =>
     !props.isParallax &&
     !props.stopped &&
     css`
@@ -113,13 +113,13 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
         transform: translate3d(50%, 0, 0);
       }
     `}
-  ${props =>
+  ${(props) =>
     props.isParallax &&
     props.stopped &&
     css`
       opacity: 1;
     `}
-  ${props =>
+  ${(props) =>
     props.isParallax &&
     !props.stopped &&
     css`
