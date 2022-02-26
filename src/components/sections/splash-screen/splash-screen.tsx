@@ -4,14 +4,10 @@ import settings from '@configs/settings.json';
 import { SplashScreenWrapper, LogoOutterWrapper, StyledLogo } from './styles';
 
 const SplashScreen: FC = () => {
-  const splashDuration = 3000;
-
+  const splashDuration = settings.splashScreenDebug ? 300 : 3;
   return (
     <SplashScreenWrapper>
-      <Curtain duration={settings.splashScreenDebug ? 3000000 : splashDuration} />
-      <LogoOutterWrapper>
-        <StyledLogo color="aqua" debug={settings.splashScreenDebug} />
-      </LogoOutterWrapper>
+      <Curtain durations={[0, 3, 3]} withLogo />
     </SplashScreenWrapper>
   );
 };

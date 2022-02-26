@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next';
 import { processRawBody } from '@util/project-body-process';
 import { getNextProject, getRelatedProjects } from '@util/projects';
@@ -19,25 +19,20 @@ import {
   useGetSocialLinksQuery,
   GetCaseStudyQuery,
 } from '@types';
+import withCurtain from '@components/hoc/with-curtain';
 
-type CaseStudyPageStaticProps = {
-  projectId: string | string[];
+type Props = {
+  projectId: string;
   dehydratedState: DehydratedState;
 };
 
-const CaseStudyTemplate = ({ projectId }) => (
+const CaseStudyTemplate: FC<Props> = ({ projectId }) => (
   <Layout>
-    {/* {props.entry.state.enabled && (
-            <Modal>
-                <Curtain entrance="full" exit="full" duration={1275} />
-            </Modal>
-        )} */}
-
     <CaseStudy projectId={projectId} />
   </Layout>
 );
 
-export default CaseStudyTemplate;
+export default withCurtain(CaseStudyTemplate);
 
 export const processGcmsData = async (projectId: string): Promise<ProcessedGcmsData> => {
   const data: GetCaseStudyQuery = await useGetCaseStudyQuery.fetcher({
@@ -83,7 +78,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({
   params,
-}): Promise<GetStaticPropsResult<CaseStudyPageStaticProps>> => {
+}): Promise<GetStaticPropsResult<Props>> => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(
@@ -97,7 +92,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   return {
     props: {
-      projectId: params.projectId,
+      projectId: params.projectId as string,
       dehydratedState: dehydrate(queryClient),
     },
   };

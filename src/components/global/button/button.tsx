@@ -36,7 +36,7 @@ const Button = ({
       );
     case !!url:
       return (
-        <Link href={url} passHref>
+        <Link href={url} passHref scroll={false}>
           <ButtonA type={type} onClick={callback} className={className}>
             {getInnerContent}
           </ButtonA>

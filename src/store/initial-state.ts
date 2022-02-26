@@ -1,4 +1,4 @@
-export default {
+const initialState = {
   global: {
     pageLoaded: false,
     curtainState: 'closed',
@@ -14,3 +14,5 @@ export default {
     skillsTop: 5540,
   },
 };
+
+export default initialState;

@@ -47,7 +47,7 @@ export type CoreColors = 'aqua' | 'purple' | 'yellow' | 'orange';
 
 export type RevealBlockContentType = 'generic' | 'text' | 'img' | 'video' | 'line';
 
-export enum ECurtainTypes {
+export enum CurtainTypes {
   'none',
   'blocks',
   'reverse-blocks',
@@ -55,13 +55,13 @@ export enum ECurtainTypes {
   'full',
 }
 
-export enum ECurtainColorLayouts {
+export enum CurtainColorLayouts {
   'blocks',
   'rows',
   'full',
 }
 
-export enum ECurtainTransition {
+export enum CurtainTransition {
   'enter',
   'exit',
 }

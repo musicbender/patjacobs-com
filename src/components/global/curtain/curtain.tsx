@@ -2,120 +2,143 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeCurtainState } from '@actions/global';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
-import { CurtainWrapper, Block, InnerBlock } from './styles';
-import { ECurtainTypes, ECurtainTransition, Store } from '@types';
+import {
+  CurtainOverlay,
+  CurtainWrapper,
+  Block,
+  InnerBlock,
+  LogoOutterWrapper,
+  StyledLogo,
+} from './styles';
+import { CurtainTypes, Store } from '@types';
 import settings from '@configs/settings.json';
 import theme from '@styles/theme';
+import { createPortal } from 'react-dom';
+import { findPartialSum, hasWindow } from '@util/util';
 
 type Props = {
-  duration?: number;
-  entrance?: keyof typeof ECurtainTypes;
-  exit?: keyof typeof ECurtainTypes;
+  durations?: number[];
+  speed?: number;
+  entrance?: keyof typeof CurtainTypes;
+  exit?: keyof typeof CurtainTypes;
+  withLogo?: boolean;
 };
 
-const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props): JSX.Element => {
-  const blockNum = 7;
-  const baseDelay = 55;
-  const openingDurationRef = useRef(0);
+const Curtain = ({
+  durations = [2, 2, 2],
+  speed = 1,
+  entrance = 'none',
+  exit = 'blocks',
+  withLogo = false,
+}: Props): JSX.Element => {
+  const rows = 7;
+  const columns = settings.gridLines.length;
+  const msMultiplier = 1000;
+
   const openTimeoutRef = useRef(null);
   const closingTimeoutRef = useRef(null);
   const closedTimeoutRef = useRef(null);
-  const [exiting, setExiting] = useState(false);
-  const curtainState: string = useSelector((state: Store) => state.global.curtainState);
-  const dispatch = useDispatch();
 
-  const getOpeningDuration = () => {
-    if (entrance === 'none') return 0;
-    return entrance === 'full' ? 1000 : +theme.animate.slow;
-  };
+  const [exiting, setExiting] = useState(false);
+  const [closed, setClosed] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(changeCurtainState('opening'));
 
-    openingDurationRef.current = getOpeningDuration();
-
     openTimeoutRef.current = requestTimeout(() => {
       dispatch(changeCurtainState('open'));
-    }, openingDurationRef.current);
+    }, durations[0] * msMultiplier);
 
     closingTimeoutRef.current = requestTimeout(() => {
       setExiting(true);
       dispatch(changeCurtainState('closing'));
-    }, duration);
+    }, (durations[0] + durations[1]) * msMultiplier);
 
     closedTimeoutRef.current = requestTimeout(() => {
       dispatch(changeCurtainState('closed'));
-    }, duration * 2);
+      setClosed(true);
+    }, (durations[0] + durations[1] + durations[2]) * msMultiplier);
 
     return () => {
-      if (curtainState !== 'closed') dispatch(changeCurtainState('closed'));
+      dispatch(changeCurtainState('closed'));
       clearRequestTimeout(openTimeoutRef.current);
       clearRequestTimeout(closingTimeoutRef.current);
       clearRequestTimeout(closedTimeoutRef.current);
     };
   }, []);
 
-  const getBlockDelay = (i: number, j: number): number => {
+  const getBlockDelay = (i: number, j: number, action: 'enter' | 'exit'): number => {
+    const baseDelay = 0.055;
     switch (true) {
-      case exiting && exit === 'blocks':
-      case !exiting && entrance === 'blocks':
-        const max = (settings.gridLines.length * blockNum * baseDelay) / 2;
+      case action === 'exit' && exit === 'blocks':
+      case action === 'enter' && entrance === 'blocks':
+        const max = (columns * rows * baseDelay) / 2;
         return max - baseDelay * ((i + 1) / 2) * (j + 1);
-      case exiting && exit === 'reverse-blocks':
-      case !exiting && entrance === 'reverse-blocks':
+      case action === 'exit' && exit === 'reverse-blocks':
+      case action === 'enter' && entrance === 'reverse-blocks':
         return baseDelay * i;
-      case exiting && exit === 'rows':
-      case !exiting && entrance === 'rows':
+      case action === 'exit' && exit === 'rows':
+      case action === 'enter' && entrance === 'rows':
         return baseDelay * (settings.gridLines.length - 1 - j);
       default:
         return baseDelay;
     }
   };
 
-  const getBlockDuration = (): string => {
-    let blockDuration: string = theme.animate.verySlow;
-
-    if ((exiting && exit === 'full') || (!exiting && entrance === 'full')) {
-      blockDuration = 1000 + 'ms';
-    }
-
-    return blockDuration;
-  };
-
-  const getTransitionState = (): keyof typeof ECurtainTransition | null => {
-    const isEnter: boolean = !exiting && entrance !== 'none';
-    const isExit: boolean = exiting && exit !== 'none';
-    return isEnter ? 'enter' : isExit ? 'exit' : null;
-  };
-
-  const renderBlock = (i: number, j: number) => {
-    const delay: number = getBlockDelay(i, j);
+  const renderBlock = (i: number, j: number): JSX.Element => {
+    console.log('block', i, j, findPartialSum(durations, 1) + getBlockDelay(i, j, 'exit'));
     return (
       <Block key={'splash-block' + i + '_' + j}>
-        <InnerBlock
-          transition={getTransitionState()}
-          enterType={entrance}
-          exitType={exit}
-          delay={delay + 'ms'}
-          duration={getBlockDuration()}
-        ></InnerBlock>
+        {entrance !== 'none' && (
+          <InnerBlock
+            initial={{ x: 0 }}
+            animate={{ x: '100%' }}
+            exit={{ x: 100 }}
+            transition={{
+              duration: speed,
+              delay: getBlockDelay(i, j, 'enter'),
+            }}
+          />
+        )}
+        {exit !== 'none' && (
+          <InnerBlock
+            initial={{ x: 0 }}
+            animate={{ x: '-110%' }}
+            exit={{ x: '-110%' }}
+            transition={{
+              duration: speed,
+              delay: findPartialSum(durations, 1) + getBlockDelay(i, j, 'exit'),
+            }}
+          />
+        )}
       </Block>
     );
   };
 
-  return (
-    <CurtainWrapper>
-      {settings.gridLines.map((g: number, i: number) => {
-        let blocks: any[] = [];
+  return hasWindow() && !closed
+    ? createPortal(
+        <CurtainOverlay>
+          <CurtainWrapper>
+            {settings.gridLines.map((g: number, i: number): JSX.Element[] => {
+              let blocks: JSX.Element[] = [];
 
-        for (let j = 0; j < blockNum; j++) {
-          blocks = [...blocks, renderBlock(i, j)];
-        }
+              for (let j = 0; j < rows; j++) {
+                blocks = [...blocks, renderBlock(i, j)];
+              }
 
-        return blocks;
-      })}
-    </CurtainWrapper>
-  );
+              return blocks;
+            })}
+          </CurtainWrapper>
+          {withLogo && (
+            <LogoOutterWrapper>
+              <StyledLogo color="aqua" debug={settings.splashScreenDebug} />
+            </LogoOutterWrapper>
+          )}
+        </CurtainOverlay>,
+        window.document.body,
+      )
+    : null;
 };
 
 export default Curtain;

@@ -11,6 +11,7 @@ import {
 } from '@types';
 import { dehydrate, QueryClient } from 'react-query';
 import Layout from '@components/layout';
+import withCurtain from '@components/hoc/with-curtain';
 
 const Index: FC = () => {
   return (
@@ -19,6 +20,8 @@ const Index: FC = () => {
     </Layout>
   );
 };
+
+export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
@@ -43,8 +46,6 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   };
 };
-
-export default Index;
 
 /* <TransitionPortal>
     <Modal>

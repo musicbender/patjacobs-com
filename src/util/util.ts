@@ -40,6 +40,12 @@ export const throttle = (func: Function, wait: number): any => {
   };
 };
 
+export const findPartialSum = (arr: number[], durationsIndex: number): number => {
+  return arr.reduce((sum: number, duration: number, i: number): number => {
+    return i <= durationsIndex ? sum + duration : sum;
+  }, 0);
+};
+
 export const minMax = (num: number, min = 0, max = 255): number => {
   return num <= min ? min : num >= max ? max : num;
 };

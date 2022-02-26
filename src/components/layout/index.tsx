@@ -67,28 +67,17 @@ const Layout: FC = ({ headProps = {}, children }: Props) => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <AppWrapper mode={mode} splashOpen={splashOpen}>
-        <GlobalStyles />
-        <Head pathname={router.pathname || null} {...headProps} />
-        <OutterWrapper>
-          <GridLines gridLines={settings.gridLines} />
-          <Toolbar handleToTop={handleToTop} />
-          {splashOpen && <SplashScreen />}
-          <InnerWrapper>{children}</InnerWrapper>
-        </OutterWrapper>
-        <Footer handleToTop={handleToTop} />
-        {/* {transportOpen && (
-          <Modal>
-            <Curtain
-              entrance="full"
-              exit="full"
-              duration={settings.curtainDuration}
-            />
-          </Modal>
-        )} */}
-      </AppWrapper>
-    </ThemeProvider>
+    <AppWrapper mode={mode} splashOpen={splashOpen}>
+      <GlobalStyles />
+      <Head pathname={router.pathname || null} {...headProps} />
+      <OutterWrapper>
+        <GridLines gridLines={settings.gridLines} />
+        <Toolbar handleToTop={handleToTop} />
+        <InnerWrapper>{children}</InnerWrapper>
+      </OutterWrapper>
+      <Footer handleToTop={handleToTop} />
+      {splashOpen && <SplashScreen />}
+    </AppWrapper>
   );
 };
 
