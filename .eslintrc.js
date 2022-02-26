@@ -2,27 +2,21 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    jest: true,
+    jest: true
   },
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'next',
-    'next/core-web-vitals',
-    'plugin:react/recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ["plugin:@typescript-eslint/recommended", "next", "next/core-web-vitals", "plugin:react/recommended", "plugin:prettier/recommended", "plugin:storybook/recommended"],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
     sourceType: 'module',
-    exmaVersion: 2018,
+    exmaVersion: 2018
   },
   ignorePatterns: ['node_modules/', 'test'],
   plugins: ['@typescript-eslint', 'prettier'],
   settings: {
     react: {
-      version: 'detect',
-    },
+      version: 'detect'
+    }
   },
   rules: {
     'prettier/prettier': 'error',
@@ -34,22 +28,15 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/prefer-for-of': 'off',
     '@typescript-eslint/prefer-function-type': 'error',
-    '@typescript-eslint/quotes': [
-      'error',
-      'single',
-      {
-        avoidEscape: true,
-      },
-    ],
+    '@typescript-eslint/quotes': ['error', 'single', {
+      avoidEscape: true
+    }],
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/unified-signatures': 'error',
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        ignoreRestSiblings: true,
-      },
-    ],
+    '@typescript-eslint/no-unused-vars': ['error', {
+      ignoreRestSiblings: true
+    }],
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     camelcase: 'off',
@@ -74,12 +61,9 @@ module.exports = {
     'no-fallthrough': 'off',
     'no-invalid-this': 'off',
     'no-new-wrappers': 'error',
-    'no-shadow': [
-      'error',
-      {
-        hoist: 'all',
-      },
-    ],
+    'no-shadow': ['error', {
+      hoist: 'all'
+    }],
     'no-throw-literal': 'error',
     'no-undef-init': 'error',
     'no-underscore-dangle': 'off',
@@ -92,6 +76,6 @@ module.exports = {
     radix: 'error',
     'spaced-comment': 'error',
     'use-isnan': 'error',
-    'valid-typeof': 'off',
-  },
+    'valid-typeof': 'off'
+  }
 };

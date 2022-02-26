@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeCurtainState } from '@actions/global';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
 import {
@@ -10,9 +10,8 @@ import {
   LogoOutterWrapper,
   StyledLogo,
 } from './styles';
-import { CurtainTypes, Store } from '@types';
+import { CurtainTypes } from '@types';
 import settings from '@configs/settings.json';
-import theme from '@styles/theme';
 import { createPortal } from 'react-dom';
 import { findPartialSum, hasWindow } from '@util/util';
 

@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 import RevealBlock from './reveal-block';
-const settings = require('@configs/settings');
 import { RevealBlockContentType } from '@types';
 
 // configuration
@@ -62,8 +61,8 @@ const GenericWrapper = styled.div`
 `;
 
 const LineContent = styled('div')<LineContentProps>`
-  height: ${props => props.height};
-  background-color: ${props => props.lineColor};
+  height: ${(props) => props.height};
+  background-color: ${(props) => props.lineColor};
 `;
 
 const GenericComponent = ({ text = conf.mockText }) => (

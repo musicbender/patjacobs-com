@@ -1,13 +1,10 @@
 import React, { FC } from 'react';
+import settings from '@configs/settings.json';
 import { GridLinesWrapper, GridItem, GridLine } from './styles';
 
-type Props = {
-  gridLines: number[];
-};
-
-const GridLines: FC<Props> = ({ gridLines = [] }) => (
+const GridLines: FC = () => (
   <GridLinesWrapper>
-    {gridLines.map((column, i) => (
+    {settings.gridLines.map((column, i) => (
       <GridItem width={column} key={i + column + 'gridline'}>
         <GridLine />
       </GridItem>

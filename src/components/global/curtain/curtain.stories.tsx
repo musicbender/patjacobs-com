@@ -17,5 +17,5 @@ storiesOf('Curtain', module)
   .add('reverse blocks exit', () => <Curtain exit="reverse-blocks" {...props} />)
   .add('rows exit', () => <Curtain exit="rows" {...props} />)
   .add('full exit', () => <Curtain exit="full" {...props} />)
-  .add('longer duration', () => <Curtain duration={5000} {...props} />)
-  .add('shorter duration', () => <Curtain duration={1000} {...props} />);
+  .add('longer duration', () => <Curtain durations={[1, 5, 1]} {...props} />)
+  .add('shorter duration', () => <Curtain durations={[1, 1, 1]} {...props} />);

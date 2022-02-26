@@ -15,4 +15,5 @@ const allMiddlewares =
 
 const makeStore = () => createStore(reducers, {}, allMiddlewares);
 
+export const store = makeStore();
 export const wrapper = createWrapper<Store<State>>(makeStore, { debug: true });
