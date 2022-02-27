@@ -10,7 +10,7 @@ import {
   LogoOutterWrapper,
   StyledLogo,
 } from './styles';
-import { CurtainTypes } from '@types';
+import { CurtainMode } from '@types';
 import settings from '@configs/settings.json';
 import { createPortal } from 'react-dom';
 import { findPartialSum, hasWindow } from '@util/util';
@@ -18,16 +18,17 @@ import { findPartialSum, hasWindow } from '@util/util';
 type Props = {
   durations?: number[];
   speed?: number;
-  entrance?: keyof typeof CurtainTypes;
-  exit?: keyof typeof CurtainTypes;
+  entrance?: CurtainMode;
+  exit?: CurtainMode;
   withLogo?: boolean;
 };
 
+type BlockAction = 'enter' | 'exit';
+
 const Curtain = ({
   durations = [2, 2, 2],
-  speed = 1,
-  entrance = 'none',
-  exit = 'blocks',
+  entrance = CurtainMode.NONE,
+  exit = CurtainMode.BLOCKS,
   withLogo = false,
 }: Props): JSX.Element => {
   const rows = 7;
@@ -43,21 +44,31 @@ const Curtain = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(changeCurtainState('opening'));
+    if (entrance !== CurtainMode.NONE) {
+      dispatch(changeCurtainState('opening'));
 
-    openTimeoutRef.current = requestTimeout(() => {
+      openTimeoutRef.current = requestTimeout(() => {
+        dispatch(changeCurtainState('open'));
+      }, durations[0] * msMultiplier);
+    } else {
       dispatch(changeCurtainState('open'));
-    }, durations[0] * msMultiplier);
+    }
 
-    closingTimeoutRef.current = requestTimeout(() => {
-      setExiting(true);
-      dispatch(changeCurtainState('closing'));
-    }, (durations[0] + durations[1]) * msMultiplier);
+    if (exit !== CurtainMode.NONE) {
+      closingTimeoutRef.current = requestTimeout(() => {
+        setExiting(true);
+        dispatch(changeCurtainState('closing'));
+      }, findPartialSum(durations, 1) * msMultiplier);
 
-    closedTimeoutRef.current = requestTimeout(() => {
+      closedTimeoutRef.current = requestTimeout(() => {
+        dispatch(changeCurtainState('closed'));
+        setExiting(false);
+        setClosed(true);
+      }, findPartialSum(durations, 2) * msMultiplier);
+    } else {
       dispatch(changeCurtainState('closed'));
       setClosed(true);
-    }, (durations[0] + durations[1] + durations[2]) * msMultiplier);
+    }
 
     return () => {
       dispatch(changeCurtainState('closed'));
@@ -67,50 +78,59 @@ const Curtain = ({
     };
   }, []);
 
-  const getBlockDelay = (i: number, j: number, action: 'enter' | 'exit'): number => {
+  const getBlockDelay = (i: number, j: number, action: BlockAction): number => {
+    let output = 0;
     const baseDelay = 0.055;
+    const exitDelay = durations[1];
+    const baseDelayOffset = action === 'exit' ? exitDelay : 0;
+
     switch (true) {
-      case action === 'exit' && exit === 'blocks':
-      case action === 'enter' && entrance === 'blocks':
+      case action === 'exit' && exit === CurtainMode.BLOCKS:
+      case action === 'enter' && entrance === CurtainMode.BLOCKS:
         const max = (columns * rows * baseDelay) / 2;
-        return max - baseDelay * ((i + 1) / 2) * (j + 1);
-      case action === 'exit' && exit === 'reverse-blocks':
-      case action === 'enter' && entrance === 'reverse-blocks':
-        return baseDelay * i;
-      case action === 'exit' && exit === 'rows':
-      case action === 'enter' && entrance === 'rows':
-        return baseDelay * (settings.gridLines.length - 1 - j);
+        output = max - baseDelay * ((i + 1) / 2) * (j + 1);
+        break;
+      case action === 'exit' && exit === CurtainMode.REVERSE_BLOCKS:
+      case action === 'enter' && entrance === CurtainMode.REVERSE_BLOCKS:
+        output = baseDelay * i;
+        break;
+      case action === 'exit' && exit === CurtainMode.ROWS:
+      case action === 'enter' && entrance === CurtainMode.ROWS:
+        output = baseDelay * (settings.gridLines.length - 1 - j);
+        break;
       default:
-        return baseDelay;
+        output = baseDelay;
     }
+
+    return output + baseDelayOffset;
   };
 
   const renderBlock = (i: number, j: number): JSX.Element => {
-    console.log('block', i, j, findPartialSum(durations, 1) + getBlockDelay(i, j, 'exit'));
     return (
-      <Block key={'splash-block' + i + '_' + j}>
-        {entrance !== 'none' && (
+      <Block key={'curtain-block' + i + '_' + j}>
+        {entrance !== CurtainMode.NONE && (
           <InnerBlock
             initial={{ x: 0 }}
             animate={{ x: '100%' }}
             exit={{ x: 100 }}
             transition={{
-              duration: speed,
+              duration: durations[0],
               delay: getBlockDelay(i, j, 'enter'),
             }}
           />
         )}
-        {exit !== 'none' && (
-          <InnerBlock
-            initial={{ x: 0 }}
-            animate={{ x: '-110%' }}
-            exit={{ x: '-110%' }}
-            transition={{
-              duration: speed,
-              delay: findPartialSum(durations, 1) + getBlockDelay(i, j, 'exit'),
-            }}
-          />
-        )}
+        {(entrance !== CurtainMode.NONE && exiting) ||
+          (entrance === CurtainMode.NONE && (
+            <InnerBlock
+              initial={{ x: 0 }}
+              animate={{ x: '-110%' }}
+              exit={{ x: '-110%' }}
+              transition={{
+                duration: durations[2],
+                delay: getBlockDelay(i, j, 'exit'),
+              }}
+            />
+          ))}
       </Block>
     );
   };

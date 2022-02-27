@@ -47,12 +47,12 @@ export type CoreColors = 'aqua' | 'purple' | 'yellow' | 'orange';
 
 export type RevealBlockContentType = 'generic' | 'text' | 'img' | 'video' | 'line';
 
-export enum CurtainTypes {
-  'none',
-  'blocks',
-  'reverse-blocks',
-  'rows',
-  'full',
+export enum CurtainMode {
+  'NONE',
+  'BLOCKS',
+  'REVERSE_BLOCKS',
+  'ROWS',
+  'FULL',
 }
 
 export enum CurtainColorLayouts {

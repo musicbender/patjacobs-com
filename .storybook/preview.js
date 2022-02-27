@@ -11,6 +11,10 @@ import { Provider } from 'react-redux';
 import { OutterWrapper, InnerWrapper } from './styles';
 import { store } from '../src/store';
 
+export const parameters = {
+  layout: 'fullscreen',
+};
+
 addParameters({
   options: {
     isFullScreen: true,
