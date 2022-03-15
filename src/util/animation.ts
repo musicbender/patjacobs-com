@@ -1,5 +1,5 @@
 import { CurtainState } from '@types';
 
-export const curtainInClose = (curtainState: CurtainState): boolean => {
-  return curtainState === 'closing' || curtainState === 'closed';
+export const curtainShouldMount = (curtainState: CurtainState): boolean => {
+  return !!curtainState && curtainState !== 'closing' && curtainState !== 'closed';
 };

@@ -1,7 +1,7 @@
 const initialState = {
   global: {
     pageLoaded: false,
-    curtainState: 'closed',
+    curtainState: null,
     splashOpen: true,
     transportOpen: false,
     menuOpen: false,

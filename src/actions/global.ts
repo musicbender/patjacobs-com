@@ -33,7 +33,7 @@ export function changeSplashOpen(open: boolean): AnyAction {
   };
 }
 
-export function changeCurtainState(curtainState: CurtainState = 'closed'): AnyAction {
+export function changeCurtainState(curtainState: CurtainState = null): AnyAction {
   return {
     type: CURTAIN_STATE_CHANGED,
     payload: curtainState,

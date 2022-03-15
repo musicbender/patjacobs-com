@@ -1,4 +1,5 @@
 import Curtain from '@components/global/curtain';
+import { CurtainMode } from '@types';
 import React, { FC } from 'react';
 
 export default function withCurtain<P>(WrappedComponent: React.ComponentType<P>) {
@@ -6,7 +7,7 @@ export default function withCurtain<P>(WrappedComponent: React.ComponentType<P>)
     return (
       <>
         <WrappedComponent {...props} />
-        <Curtain entrance="full" exit="full" durations={[1, 2, 1]} />
+        <Curtain entrance={CurtainMode.FULL} exit={CurtainMode.FULL} durations={[1, 2, 1]} />
       </>
     );
   };

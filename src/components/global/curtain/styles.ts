@@ -39,6 +39,12 @@ type InnerBlockProps = {
 };
 
 export const CurtainOverlay = styled.div`
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+`;
+
+export const CurtainWrapper = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
@@ -48,17 +54,15 @@ export const CurtainOverlay = styled.div`
   overflow-x: hidden;
   pointer-events: none;
   z-index: 80;
-`;
 
-export const CurtainWrapper = styled.div`
-  position: absolute;
+  /* position: absolute; */
   display: grid;
   grid-template-columns: 8% 17% 8% 17% 34.3% 8% 8%;
   grid-template-rows: repeat(7, 1fr);
-  width: 100%;
+  /* width: 100%;
   height: 100%;
-  min-height: 100vh;
-  pointer-events: none;
+  min-height: 100vh; */
+  /* pointer-events: none; */
 `;
 
 export const Block = styled.div`
@@ -67,11 +71,11 @@ export const Block = styled.div`
 `;
 
 export const InnerBlock = styled(motion.div)<InnerBlockProps>`
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 0;
   height: 100%;
-  width: 110%;
+  width: 110%; */
   background-color: ${({ theme }) => theme.palette.matteBlack};
 `;
 
@@ -80,6 +84,7 @@ export const LogoOutterWrapper = styled.div`
   width: auto;
   height: auto;
   overflow: hidden;
+  z-index: 81;
 `;
 
 export const StyledLogo = styled(Logo)<{ debug: boolean }>`

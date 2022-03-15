@@ -10,6 +10,7 @@ import '../public/fonts/fonts.css';
 import { Provider } from 'react-redux';
 import { OutterWrapper, InnerWrapper } from './styles';
 import { store } from '../src/store';
+import { AnimatePresence } from 'framer-motion';
 
 export const parameters = {
   layout: 'fullscreen',
@@ -27,10 +28,12 @@ addDecorator((story) => (
     <ThemeProvider theme={theme}>
       <AppWrapper mode="dark">
         <GlobalStyle />
-        <OutterWrapper>
-          <GridLines />
-          <InnerWrapper>{story()}</InnerWrapper>
-        </OutterWrapper>
+        <AnimatePresence>
+          <OutterWrapper key="outter">
+            <GridLines />
+            <InnerWrapper>{story()}</InnerWrapper>
+          </OutterWrapper>
+        </AnimatePresence>
       </AppWrapper>
     </ThemeProvider>
   </Provider>
