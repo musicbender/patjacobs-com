@@ -14,6 +14,7 @@ import settings from '@configs/settings.json';
 import { createPortal } from 'react-dom';
 import { findPartialSum, hasWindow } from '@util/util';
 import { usePresence } from 'framer-motion';
+import { TransitionDefinition } from 'framer-motion/types/types';
 
 export type Props = {
   durations?: number[];
@@ -24,7 +25,7 @@ export type Props = {
 };
 
 const Curtain = ({
-  durations = [3, 1, 3],
+  durations = [1, 1, 1],
   entrance = CurtainMode.NONE,
   exit = CurtainMode.BLOCKS,
   withLogo = false,
@@ -42,9 +43,9 @@ const Curtain = ({
   const [isPresent, safeToRemove] = usePresence();
   const dispatch = useDispatch();
 
-  // dEBUG
+  type CurtainAction = 'entrance' | 'exit';
+
   useEffect(() => {
-    console.log('isPresent', isPresent);
     if (!isPresent) setTimeout(safeToRemove, closedTimeout);
   }, [isPresent]);
 
@@ -81,7 +82,7 @@ const Curtain = ({
     finishedTimeoutRef.current = requestTimeout(() => {
       console.log('finished!');
       dispatch(changeCurtainState(null));
-    }, closedTimeout + 2000);
+    }, closedTimeout + 3000);
 
     return () => {
       dispatch(changeCurtainState(null));
@@ -96,25 +97,43 @@ const Curtain = ({
     return mode === CurtainMode.BLOCKS || mode === CurtainMode.REVERSE_BLOCKS;
   };
 
+  const getBlockDuration = (action: CurtainAction, blockDuration: number) => {
+    return isBlockAction(action === 'entrance' ? entrance : exit)
+      ? blockDuration - totalBlocks / 1000
+      : blockDuration - rows / 1000;
+  };
+
+  const getBlockTransition = (action: CurtainAction, index?: number): TransitionDefinition => {
+    const blockDuration = action === 'entrance' ? durations[0] : durations[2];
+    const isRows =
+      action === 'entrance' ? entrance === CurtainMode.ROWS : exit === CurtainMode.ROWS;
+
+    let output: TransitionDefinition = {
+      duration: getBlockDuration(action, blockDuration),
+      ease: 'easeInOut',
+    };
+
+    if (isRows && index) {
+      output = {
+        ...output,
+        delay: index / blockDuration / 2,
+      };
+    }
+
+    return output;
+  };
+
   const renderBlock = (i: number, j: number): JSX.Element => {
     const blockVariants = {
       start: { scaleX: 0, originX: 0 },
       noEntrence: { scaleX: 1, originX: 0 },
       opening: {
         scaleX: 1,
-        transition: {
-          duration: (durations[0] / totalBlocks) * 10,
-          ease: 'easeInOut',
-          delay: entrance === CurtainMode.ROWS ? j / durations[0] / 2 : 0,
-        },
+        transition: getBlockTransition('entrance', j),
       },
       closing: {
         scaleX: 0,
-        transition: {
-          duration: (durations[2] / totalBlocks) * 10,
-          ease: 'linear',
-          delay: exit === CurtainMode.ROWS ? durations[2] - j / durations[2] : 0,
-        },
+        transition: getBlockTransition('exit', j),
       },
     };
 
@@ -137,30 +156,34 @@ const Curtain = ({
   };
 
   return (
-    <CurtainOverlay>
-      <CurtainWrapper
-        initial={entrance ? 'start' : 'noEntrence'}
-        animate={entrance ? 'opening' : 'noEntrence'}
-        exit={'closing'}
-        key="curtain-wrapper-123"
-        variants={curtainVariants}
-      >
-        {settings.gridLines.map((g: number, i: number): JSX.Element[] => {
-          let blocks: JSX.Element[] = [];
+    hasWindow() &&
+    createPortal(
+      <CurtainOverlay>
+        <CurtainWrapper
+          initial={entrance ? 'start' : 'noEntrence'}
+          animate={entrance ? 'opening' : 'noEntrence'}
+          exit={'closing'}
+          key="curtain-wrapper-123"
+          variants={curtainVariants}
+        >
+          {settings.gridLines.map((g: number, i: number): JSX.Element[] => {
+            let blocks: JSX.Element[] = [];
 
-          for (let j = 0; j < rows; j++) {
-            blocks = [...blocks, renderBlock(i, j)];
-          }
+            for (let j = 0; j < rows; j++) {
+              blocks = [...blocks, renderBlock(i, j)];
+            }
 
-          return blocks;
-        })}
-      </CurtainWrapper>
-      {withLogo && (
-        <LogoOutterWrapper>
-          <StyledLogo color="aqua" debug={settings.splashScreenDebug} />
-        </LogoOutterWrapper>
-      )}
-    </CurtainOverlay>
+            return blocks;
+          })}
+        </CurtainWrapper>
+        {withLogo && (
+          <LogoOutterWrapper>
+            <StyledLogo color="aqua" debug={settings.splashScreenDebug} />
+          </LogoOutterWrapper>
+        )}
+      </CurtainOverlay>,
+      window.document.body,
+    )
   );
 };
 
