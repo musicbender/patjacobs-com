@@ -26,7 +26,7 @@ export function changeTransport(open: boolean, transportDuration?: number): AnyA
   };
 }
 
-export function changeSplashOpen(open: boolean): AnyAction {
+export function changeSplashActive(open: boolean): AnyAction {
   return {
     type: SPLASH_CHANGED,
     payload: open,

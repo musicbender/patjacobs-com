@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import Plx from 'react-plx';
-import { hasWindow } from '@util/util';
 import settings from '@configs/settings.json';
 import { CavieDotConfig } from '@types';
 import theme from '@styles/theme';
 import { CavieDotsWrapper, InnerWrapper, Dots } from './styles';
+import { useMounted } from 'src/hooks/use-mounted';
 
 type Props = {
   baseStart?: number;
@@ -13,6 +13,7 @@ type Props = {
 };
 
 const CavieDots: FC<Props> = ({ atBottom, bottom, baseStart = 0 }) => {
+  const { isMounted } = useMounted();
   const dotAmount = 25;
   const accumulator = 100;
   const bottomLoc: number = bottom || settings.homeBottom;
@@ -57,7 +58,7 @@ const CavieDots: FC<Props> = ({ atBottom, bottom, baseStart = 0 }) => {
         className="dot"
         parallaxData={getPlxData(index)}
         tagName="svg"
-        disabled={!hasWindow()}
+        disabled={!isMounted}
         animateWhenNotInViewport={true}
         key={`cavie-dot-${index}-${index + x + y}`}
         width={dotSize}

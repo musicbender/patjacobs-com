@@ -3,8 +3,7 @@ import { useSelector } from 'react-redux';
 import Plx from 'react-plx';
 import ColorDotRow from '@components/particles/color-dot-row';
 import Triangle from '@components/particles/triangle';
-import { hasWindow } from '@util/util';
-import { curtainInClose } from '@util/animation';
+import { curtainCovering } from '@util/animation';
 import config from '@configs/header.json';
 import metaConfig from '@configs/meta.json';
 import settings from '@configs/settings.json';
@@ -17,15 +16,17 @@ import {
   TriangleParallax,
   StyledLilSquare,
 } from './styles';
+import { useMounted } from 'src/hooks/use-mounted';
 
 const Header: FC = () => {
   const [active, setActive] = useState(false);
-  const splashOpen = useSelector((state: Store) => state.global.splashOpen);
+  const splashActive = useSelector((state: Store) => state.global.splashActive);
   const curtainState = useSelector((state: Store) => state.global.curtainState);
   const isMobile = useSelector((state: Store) => state.global.isMobile);
+  const { isMounted } = useMounted();
 
   useEffect(() => {
-    if (!active && curtainInClose(curtainState)) {
+    if (!active && curtainCovering(curtainState)) {
       setActive(true);
     }
   }, [active, curtainState]);
@@ -48,7 +49,7 @@ const Header: FC = () => {
   };
 
   return (
-    <HomeHeader splashOpen={splashOpen}>
+    <HomeHeader splashActive={splashActive}>
       <ColorDotRow active={active} />
       <StyledLilSquare />
       {config.triangles.map((tri: any, i: number) => (
@@ -60,7 +61,7 @@ const Header: FC = () => {
           gridLines={settings.gridLines}
           key={i + tri.id}
         >
-          <Plx disabled={!hasWindow() || isMobile} parallaxData={getPlxData(tri)}>
+          <Plx disabled={!isMounted || isMobile} parallaxData={getPlxData(tri)}>
             <Triangle
               color={tri.color as keyof typeof ParticleColors}
               size={tri.size as keyof typeof TriangleSizes}

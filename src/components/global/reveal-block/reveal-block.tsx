@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import Plx from 'react-plx';
-import { reduceSegment, hasWindow } from '@util/util';
+import { reduceSegment } from '@util/util';
 import settings from '@configs/settings.json';
 import { RevealBlockWrapper, OutterWrapper, InnerWrapper, ContentWrapper, Content } from './styles';
 import { RevealBlockContentType } from '@types';
+import { useMounted } from 'src/hooks/use-mounted';
 
 type Props = {
   startGrid?: number;
@@ -18,7 +19,7 @@ type Props = {
   children?: any;
 };
 
-const revealBlock: FC<Props> = ({
+const RevealBlock: FC<Props> = ({
   startGrid = 1,
   endGrid = 4,
   contentType = 'generic',
@@ -30,6 +31,7 @@ const revealBlock: FC<Props> = ({
   disableMobile = true,
   className,
 }) => {
+  const { isMounted, inClient } = useMounted();
   const gLines: number[] = settings.gridLines;
   const width = reduceSegment(startGrid, endGrid, gLines);
   const position = reduceSegment(0, startGrid, gLines);
@@ -52,7 +54,7 @@ const revealBlock: FC<Props> = ({
   );
 
   const plxRevealBlock = (
-    <Plx freeze={active} disabled={!hasWindow()} {...plxProps}>
+    <Plx freeze={active} disabled={!isMounted} {...plxProps}>
       {regularRevealBlock}
     </Plx>
   );
@@ -60,4 +62,4 @@ const revealBlock: FC<Props> = ({
   return plxProps && plxProps.parallaxData ? plxRevealBlock : regularRevealBlock;
 };
 
-export default revealBlock;
+export default RevealBlock;

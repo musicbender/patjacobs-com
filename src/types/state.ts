@@ -3,7 +3,7 @@ export type Store = {
   global: {
     pageLoaded: boolean;
     curtainState: CurtainState;
-    splashOpen: boolean;
+    splashActive: boolean;
     transportOpen: boolean;
     menuOpen: boolean;
     mode: string;

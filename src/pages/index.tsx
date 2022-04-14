@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 import { GetStaticProps } from 'next';
 import Home from '@components/pages/home';
-// import Modal from '../components/global/modal';
-// import Curtain from '../components/global/curtain/curtain';
 import {
   useGetAboutMeSectionQuery,
   useGetRecentWorkQuery,
@@ -21,7 +19,7 @@ const Index: FC = () => {
   );
 };
 
-export default Index;
+export default withCurtain(Index);
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
@@ -37,7 +35,6 @@ export const getStaticProps: GetStaticProps = async () => {
   );
 
   await queryClient.prefetchQuery(useGetRecentWorkQuery.getKey(), useGetRecentWorkQuery.fetcher());
-
   await queryClient.prefetchQuery(useGetSkillsQuery.getKey(), useGetSkillsQuery.fetcher());
 
   return {
@@ -46,9 +43,3 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   };
 };
-
-/* <TransitionPortal>
-    <Modal>
-        <Curtain entrance="full" exit="full" duration={1275} />
-    </Modal>
-</TransitionPortal> */

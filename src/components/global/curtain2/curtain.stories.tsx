@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { storiesOf } from '@storybook/react';
-import Curtain, { Props } from './curtain';
+import Curtain, { Props } from './curtain2';
 import { CurtainMode } from '@types';
 import { AnimatePresence } from 'framer-motion';
 import { useCurtain } from 'src/hooks/use-curtain';
@@ -13,7 +13,7 @@ const CurtainStory: FC<Props> = (props) => {
 };
 
 // stories
-storiesOf('Curtain', module)
+storiesOf('Curtain2', module)
   .add('default', () => <CurtainStory />, {
     info: { text: description },
   })

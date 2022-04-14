@@ -1,7 +1,7 @@
 import Plx from 'react-plx';
-import { hasWindow } from '@util/util';
 import { StyledHeading, ContentBox, AboutMeSection } from './styles';
 import { useGetAboutMeSectionQuery } from '@types';
+import { useMounted } from 'src/hooks/use-mounted';
 
 type Props = {
   atAbout: boolean;
@@ -11,11 +11,12 @@ type Props = {
 
 const AboutMe = ({ atAbout = false, isMobile }: Props) => {
   const { data } = useGetAboutMeSectionQuery();
+  const { isMounted } = useMounted();
   return (
     <AboutMeSection id="about-section">
       <StyledHeading text={data.aboutMeSection.heading} />
       <Plx
-        disabled={!hasWindow() || isMobile}
+        disabled={!isMounted || isMobile}
         parallaxData={[
           {
             start: 'self',

@@ -34,13 +34,21 @@ type InnerBlockProps = {
   duration?: string;
 };
 
-export const CurtainOverlay = styled.div`
-  position: relative;
+type CurtainOverlayProps = {
+  finished?: boolean;
+};
+
+export const CurtainOverlay = styled('div')<CurtainOverlayProps>`
+  position: fixed;
   height: 100vh;
   width: 100vw;
-  position: fixed;
   top: 0;
   z-index: 80;
+  ${({ finished }) =>
+    finished &&
+    css`
+      display: none;
+    `}
 `;
 
 export const CurtainWrapper = styled(motion.div)`
@@ -53,6 +61,9 @@ export const CurtainWrapper = styled(motion.div)`
   overflow-x: hidden;
   pointer-events: none;
   z-index: 80;
+
+  /* DEBUG */
+  border: 3px solid red;
 
   /* position: absolute; */
   display: grid;

@@ -25,6 +25,7 @@ import {
 } from './styles';
 import { ProcessedGcmsData, RevealBlockContentType, RevealedElementsState, Store } from '@types';
 import { processGcmsData } from '@pages/case-study/[projectId]';
+import { useMounted } from 'src/hooks/use-mounted';
 
 type Props = {
   projectId: string;
@@ -34,13 +35,14 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
   const [atTop, setAtTop] = useState(true);
   const [revealedElements, setRevealedElements] = useState<RevealedElementsState>({});
   const throttledAtTop = useThrottle(atTop, 5);
-  const { splashOpen, transportOpen } = useSelector((state: Store) => state.global);
+  const { splashActive, transportOpen } = useSelector((state: Store) => state.global);
+  const { isMounted, inClient } = useMounted();
   const { data: gcmsData } = useQuery<ProcessedGcmsData, Error>(
     ['processed-case-study', projectId],
     () => processGcmsData(projectId),
   );
 
-  const active: boolean = throttledAtTop && !splashOpen && !transportOpen;
+  const active: boolean = throttledAtTop && !splashActive && !transportOpen;
 
   const baseRevealProps = {
     startGrid: 3,
@@ -84,7 +86,7 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
     contentType,
     plxProps: {
       parallaxData: plxData,
-      onPlxEnd: hasWindow() ? addRevealed(elm) : null,
+      onPlxEnd: inClient ? addRevealed(elm) : null,
     },
   });
 
@@ -119,9 +121,9 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
         </RevealBlock>
         <Plx
           freeze={isActive}
-          disabled={!hasWindow()}
+          disabled={!isMounted}
           parallaxData={plxData}
-          onPlxEnd={hasWindow() ? addRevealed(key) : null}
+          onPlxEnd={inClient ? addRevealed(key) : null}
         >
           <BarList items={items} active={isActive} />
         </Plx>

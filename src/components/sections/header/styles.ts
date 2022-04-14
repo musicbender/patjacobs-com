@@ -9,7 +9,7 @@ const trianglePos = { prop: 'left', unit: '%', attach: 'right' };
 
 // types
 type HomeHeaderProps = {
-  splashOpen: boolean;
+  splashActive: boolean;
 };
 
 type TitleProps = {
@@ -34,7 +34,7 @@ export const HomeHeader = styled('div')<HomeHeaderProps>`
   `}
 
   ${(props) =>
-    props.splashOpen &&
+    props.splashActive &&
     css`
       overflow: hidden;
     `}

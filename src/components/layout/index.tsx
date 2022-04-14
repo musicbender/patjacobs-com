@@ -1,10 +1,8 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { ThemeProvider } from 'styled-components';
-import theme from '@styles/theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
-import { changeSplashOpen, changeTransport, setIsMobile } from '@actions/global';
+import { changeSplashActive, changeTransport, setIsMobile } from '@actions/global';
 import GlobalStyles from '@styles/global-styles';
 import Head from '@components/global/head';
 import GridLines from '@components/global/grid-lines';
@@ -23,7 +21,7 @@ type Props = {
 
 const Layout: FC = ({ headProps = {}, children }: Props) => {
   const router = useRouter();
-  const splashOpen = useSelector((state: Store) => state.global.splashOpen);
+  const splashActive = useSelector((state: Store) => state.global.splashActive);
   const transportOpen = useSelector((state: Store) => state.global.transportOpen);
   const isMobile = useSelector((state: Store) => state.global.isMobile);
   const skillsTop = useSelector((state: Store) => state.home.skillsTop);
@@ -43,14 +41,6 @@ const Layout: FC = ({ headProps = {}, children }: Props) => {
 
   useEffect(() => {
     dispatch(setIsMobile());
-
-    splashTimeoutRef.current = requestTimeout(
-      () => {
-        dispatch(changeSplashOpen(false));
-      },
-      settings.splashScreenDebug ? 6000000 : settings.splashScreenTimeout,
-    );
-
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -67,16 +57,16 @@ const Layout: FC = ({ headProps = {}, children }: Props) => {
   };
 
   return (
-    <AppWrapper mode={mode} splashOpen={splashOpen}>
+    <AppWrapper mode={mode} splashActive={splashActive}>
       <GlobalStyles />
       <Head pathname={router.pathname || null} {...headProps} />
       <OutterWrapper>
-        <GridLines gridLines={settings.gridLines} />
+        <GridLines />
         <Toolbar handleToTop={handleToTop} />
         <InnerWrapper>{children}</InnerWrapper>
       </OutterWrapper>
       <Footer handleToTop={handleToTop} />
-      {splashOpen && <SplashScreen />}
+      {splashActive && <SplashScreen />}
     </AppWrapper>
   );
 };

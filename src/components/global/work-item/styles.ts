@@ -44,11 +44,11 @@ export const ImageOutterWrapper = styled('div')<ParallaxProps>`
     height: 100%;
     &.index-0 {
       left: 0;
-      width: ${props => `calc(${props.theme.gridSizes.m}% * 4)`};
+      width: ${(props) => `calc(${props.theme.gridSizes.m}% * 4)`};
     }
     &.index-1 {
-      left: ${props => `calc(${props.theme.gridSizes.m}% * 4)`};
-      width: ${props => `calc(${props.theme.gridSizes.s}% * 4)`};
+      left: ${(props) => `calc(${props.theme.gridSizes.m}% * 4)`};
+      width: ${(props) => `calc(${props.theme.gridSizes.s}% * 4)`};
     }
   }
 `;
@@ -57,12 +57,12 @@ export const ImageParallaxInner = styled('div')<ParallaxProps>`
   position: relative;
   width: 100%;
   height: 0;
-  ${props =>
+  ${(props) =>
     props.index === 0 &&
     css`
       padding-top: calc(1 / 1 * 145%);
     `}
-  ${props =>
+  ${(props) =>
     props.index === 1 &&
     css`
       padding-top: calc(1 / 1 * 308%);
@@ -91,16 +91,16 @@ export const WorkImage = styled('div')<ImageProps>`
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
-  background-image: ${props => props.bgImage};
+  background-image: ${(props) => props.bgImage};
   ${media.tablet`
     display: block;
   `}
-  ${props =>
+  ${(props) =>
     props.index === 0 &&
     css`
       background-position: left;
     `}
-  ${props =>
+  ${(props) =>
     props.index === 1 &&
     css`
       background-position: right;
@@ -116,8 +116,8 @@ export const ImageCover = styled('div')<ImageCoverProps>`
   background-color: ${({ theme }) => shade(0.6, theme.corePalette.purple)};
   opacity: 0.75;
   transform: translate3d(0, 0, 0);
-  transition: ${props => `transform 450ms ${props.theme.animate.easeOut}`};
-  ${props =>
+  transition: ${(props) => `transform 450ms ${props.theme.animate.easeOut}`};
+  ${(props) =>
     props.isStopped &&
     css`
       transform: translate3d(-101%, 0, 0);
@@ -126,8 +126,8 @@ export const ImageCover = styled('div')<ImageCoverProps>`
 `;
 
 export const StyledWorkItemInfo = styled(WorkItemInfo)`
-  ${props =>
-    !props.isParallax &&
+  ${({ isParallax }) =>
+    !isParallax &&
     css`
       visibility: hidden;
       position: absolute;
@@ -137,15 +137,15 @@ export const StyledWorkItemInfo = styled(WorkItemInfo)`
       top: auto;
     `}
     `}
-  ${props =>
-    props.isParallax &&
-    props.isStopped &&
+  ${({ isParallax, isStopped }) =>
+    isParallax &&
+    isStopped &&
     css`
       visibility: hidden;
     `}
-  ${props =>
-    !props.isParallax &&
-    props.isStopped &&
+  ${({ isParallax, isStopped }) =>
+    !isParallax &&
+    isStopped &&
     css`
       visibility: visible;
     `}
@@ -202,8 +202,8 @@ export const InfoOutterWrapper = styled('div')<ParallaxProps>`
       `}
       `}
     }
-    ${props =>
-      props.isStopped &&
+    ${({ isStopped }) =>
+      isStopped &&
       css`
         visibility: hidden;
       `}

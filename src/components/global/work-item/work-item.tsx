@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import Plx from 'react-plx';
 import config from '@configs/recent-work.json';
-import { hasWindow } from '@util/util';
 import {
   WorkItemWrapper,
   ImageOutterWrapper,
@@ -15,6 +14,7 @@ import {
   ImageFilter,
   ImageCover,
 } from './styles';
+import { useMounted } from 'src/hooks/use-mounted';
 
 type Props = {
   item: any;
@@ -35,7 +35,7 @@ const WorkItem: FC<Props> = ({
 }) => {
   const baseEnd: number = isMobile ? baseTop - 200 : baseTop;
   const accumulator: number = isMobile ? 250 : 535;
-  const onClient: boolean = hasWindow();
+  const { isMounted, inClient } = useMounted();
 
   const getItemUrl = () => {
     switch (item.linkType) {
@@ -46,7 +46,7 @@ const WorkItem: FC<Props> = ({
     }
   };
 
-  const getPlxData = seg => [
+  const getPlxData = (seg) => [
     {
       start: 'self',
       end: baseEnd + accumulator * index,
@@ -66,7 +66,7 @@ const WorkItem: FC<Props> = ({
     return config.workItemPlx.image.map((seg, i: number) => (
       <Plx
         parallaxData={getPlxData(seg)}
-        disabled={!onClient}
+        disabled={!isMounted}
         className={`parallax index-${i}`}
         key={`${i}` + item.id + 'image' + JSON.stringify(seg)}
       >
@@ -87,9 +87,9 @@ const WorkItem: FC<Props> = ({
       return (
         <Plx
           parallaxData={getPlxData(plxSeg)}
-          onPlxStart={onClient ? handleWorkStops(index, false) : null}
-          onPlxEnd={onClient ? handleWorkStops(index, true) : null}
-          disabled={!onClient}
+          onPlxStart={inClient ? handleWorkStops(index, false) : null}
+          onPlxEnd={inClient ? handleWorkStops(index, true) : null}
+          disabled={!isMounted}
           className={`parallax index-${i}`}
           key={`${i}` + item.id + 'info' + JSON.stringify(seg)}
         >
