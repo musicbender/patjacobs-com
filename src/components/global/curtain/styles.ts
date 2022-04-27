@@ -1,6 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
-import { CurtainTransition } from '@types';
 import { superCenter } from '@styles/utils/global';
 import Logo from '@components/global/logo';
 
@@ -34,13 +33,17 @@ type InnerBlockProps = {
   duration?: string;
 };
 
-export const CurtainOverlay = styled.div`
-  position: relative;
+type CurtainOverlayProps = {
+  finished?: boolean;
+};
+
+export const CurtainOverlay = styled('div')<CurtainOverlayProps>`
+  position: fixed;
   height: 100vh;
   width: 100vw;
-  position: fixed;
   top: 0;
   z-index: 80;
+  pointer-events: none;
 `;
 
 export const CurtainWrapper = styled(motion.div)`
@@ -53,15 +56,10 @@ export const CurtainWrapper = styled(motion.div)`
   overflow-x: hidden;
   pointer-events: none;
   z-index: 80;
-
-  /* position: absolute; */
   display: grid;
   grid-template-columns: 8% 17% 8% 17% 34.3% 8% 8%;
   grid-template-rows: repeat(7, 1fr);
-  /* width: 100%;
-  height: 100%;
-  min-height: 100vh; */
-  /* pointer-events: none; */
+  pointer-events: none;
 `;
 
 export const Block = styled.div`

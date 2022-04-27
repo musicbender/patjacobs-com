@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeCurtainState } from '@actions/global';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
@@ -9,12 +9,13 @@ import {
   LogoOutterWrapper,
   StyledLogo,
 } from './styles';
-import { CurtainMode } from '@types';
+import { CurtainAction, CurtainMode } from '@types';
 import settings from '@configs/settings.json';
 import { createPortal } from 'react-dom';
-import { findPartialSum, hasWindow } from '@util/util';
+import { findPartialSum } from '@util/util';
 import { usePresence } from 'framer-motion';
 import { TransitionDefinition } from 'framer-motion/types/types';
+import { useMounted } from 'src/hooks/use-mounted';
 
 export type Props = {
   durations?: number[];
@@ -35,57 +36,56 @@ const Curtain = ({
   const totalBlocks = rows * columns;
   const msMultiplier = 1000;
   const closedTimeout = findPartialSum(durations, 2) * msMultiplier;
+  const finishTimeout = closedTimeout + 3000;
 
+  const [finished, setFinished] = useState(false);
   const openTimeoutRef = useRef(null);
   const closingTimeoutRef = useRef(null);
   const closedTimeoutRef = useRef(null);
   const finishedTimeoutRef = useRef(null);
   const [isPresent, safeToRemove] = usePresence();
+  const { inClient } = useMounted();
   const dispatch = useDispatch();
 
-  type CurtainAction = 'entrance' | 'exit';
-
   useEffect(() => {
-    if (!isPresent) setTimeout(safeToRemove, closedTimeout);
+    if (!isPresent)
+      setTimeout(() => {
+        safeToRemove();
+        dispatch(changeCurtainState(null));
+      }, durations[1] * msMultiplier);
   }, [isPresent]);
 
   useEffect(() => {
-    console.log('mount...');
+    if (finished) setFinished(false);
+
     if (entrance !== CurtainMode.NONE) {
-      console.log('opening...');
       dispatch(changeCurtainState('opening'));
 
       openTimeoutRef.current = requestTimeout(() => {
-        console.log('open...');
         dispatch(changeCurtainState('open'));
       }, durations[0] * msMultiplier);
     } else {
-      console.log('open because no entrence');
       dispatch(changeCurtainState('open'));
     }
 
     if (exit !== CurtainMode.NONE) {
       closingTimeoutRef.current = requestTimeout(() => {
-        console.log('closing...');
         dispatch(changeCurtainState('closing'));
       }, findPartialSum(durations, 1) * msMultiplier);
 
       closedTimeoutRef.current = requestTimeout(() => {
-        console.log('closed...');
         dispatch(changeCurtainState('closed'));
       }, closedTimeout);
     } else {
-      console.log('closed because no exit');
       dispatch(changeCurtainState('closed'));
     }
 
     finishedTimeoutRef.current = requestTimeout(() => {
-      console.log('finished!');
+      setFinished(true);
       dispatch(changeCurtainState(null));
-    }, closedTimeout + 3000);
+    }, finishTimeout);
 
     return () => {
-      dispatch(changeCurtainState(null));
       clearRequestTimeout(openTimeoutRef.current);
       clearRequestTimeout(closingTimeoutRef.current);
       clearRequestTimeout(closedTimeoutRef.current);
@@ -99,8 +99,8 @@ const Curtain = ({
 
   const getBlockDuration = (action: CurtainAction, blockDuration: number) => {
     return isBlockAction(action === 'entrance' ? entrance : exit)
-      ? blockDuration - totalBlocks / 1000
-      : blockDuration - rows / 1000;
+      ? blockDuration - totalBlocks / msMultiplier
+      : blockDuration - rows / msMultiplier;
   };
 
   const getBlockTransition = (action: CurtainAction, index?: number): TransitionDefinition => {
@@ -125,15 +125,15 @@ const Curtain = ({
 
   const renderBlock = (i: number, j: number): JSX.Element => {
     const blockVariants = {
-      start: { scaleX: 0, originX: 0 },
-      noEntrence: { scaleX: 1, originX: 0 },
+      start: { scaleX: 1, originX: 0 },
+      noEntrence: { scaleX: 0, originX: 0 },
       opening: {
-        scaleX: 1,
-        transition: getBlockTransition('entrance', j),
-      },
-      closing: {
         scaleX: 0,
         transition: getBlockTransition('exit', j),
+      },
+      closing: {
+        scaleX: 1,
+        transition: getBlockTransition('entrance', j),
       },
     };
 
@@ -141,13 +141,13 @@ const Curtain = ({
   };
 
   const curtainVariants = {
-    opening: {
+    closing: {
       transition: {
         staggerChildren: isBlockAction(entrance) ? durations[0] / totalBlocks : 0,
         staggerDirection: entrance === CurtainMode.REVERSE_BLOCKS ? -1 : 1,
       },
     },
-    closing: {
+    opening: {
       transition: {
         staggerChildren: isBlockAction(exit) ? durations[2] / totalBlocks : 0,
         staggerDirection: exit === CurtainMode.REVERSE_BLOCKS ? -1 : 1,
@@ -156,9 +156,9 @@ const Curtain = ({
   };
 
   return (
-    hasWindow() &&
+    inClient &&
     createPortal(
-      <CurtainOverlay>
+      <CurtainOverlay finished={finished}>
         <CurtainWrapper
           initial={entrance ? 'start' : 'noEntrence'}
           animate={entrance ? 'opening' : 'noEntrence'}

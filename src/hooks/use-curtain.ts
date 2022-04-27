@@ -18,12 +18,9 @@ export const useCurtain = ({
   const curtainState = useSelector((state: Store) => state.global.curtainState);
   const splashActive = useSelector((state: Store) => state.global.splashActive);
   const dispatch = useDispatch();
-
   const disabled = splashActive && !isSplash;
 
   useEffect(() => {
-    // console.log('$$$ use-curtain splash state', doStart, splashActive, isSplash, !splashActive || isSplash);
-    console.log('$$$ use-curtain', curtainState, `covering: ${curtainCovering(curtainState)}`);
     if (doStart && !disabled) dispatch(changeCurtainState('start'));
   }, []);
 

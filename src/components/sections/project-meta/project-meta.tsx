@@ -2,7 +2,7 @@ import React from 'react';
 import { format, parseISO } from 'date-fns';
 import { ProcessedProject } from '@types';
 import { pruneUrl } from '@util/util';
-import { projectMeta as content } from '@configs/case-study.json';
+import content from '@configs/case-study.json';
 import {
   ProjectMetaWrapper,
   ContentWrapper,
@@ -38,7 +38,7 @@ const ProjectMeta = ({ project }: Props): JSX.Element => {
       <ProjectMetaWrapper>
         {project.projectPublishDate && (
           <ContentWrapper color="aqua">
-            <Label>{content.datePublished}</Label>
+            <Label>{content.projectMeta.datePublished}</Label>
             <ContentValue>{format(publishDate, 'P')}</ContentValue>
             <ContentValue>{format(publishDate, 'p')}</ContentValue>
           </ContentWrapper>
@@ -46,7 +46,7 @@ const ProjectMeta = ({ project }: Props): JSX.Element => {
         ``
         {project.externalUrl && (
           <ContentWrapper color="orange">
-            <Label>{content.siteUrl}</Label>
+            <Label>{content.projectMeta.siteUrl}</Label>
             <ContentValueLink href={project.externalUrl} target="_blank">
               {pruneUrl(project.externalUrl)}
             </ContentValueLink>
@@ -54,13 +54,13 @@ const ProjectMeta = ({ project }: Props): JSX.Element => {
         )}
         {project.lastDeployedOn && (
           <ContentWrapper color="purple">
-            <Label>{content.lastDeployment}</Label>
+            <Label>{content.projectMeta.lastDeployment}</Label>
             <ContentValue>{project.lastDeployedOn}</ContentValue>
           </ContentWrapper>
         )}
         {project.projectPublishDate && (
           <ContentWrapper color="yellow">
-            <Label>{content.projectType}</Label>
+            <Label>{content.projectMeta.projectType}</Label>
             <ContentValue color="yellow">{project.projectType.toLowerCase()}</ContentValue>
           </ContentWrapper>
         )}

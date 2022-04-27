@@ -47,6 +47,8 @@ export type CoreColors = 'aqua' | 'purple' | 'yellow' | 'orange';
 
 export type RevealBlockContentType = 'generic' | 'text' | 'img' | 'video' | 'line';
 
+export type CurtainAction = 'entrance' | 'exit';
+
 export enum CurtainMode {
   'NONE',
   'BLOCKS',
@@ -59,11 +61,6 @@ export enum CurtainColorLayouts {
   'blocks',
   'rows',
   'full',
-}
-
-export enum CurtainTransition {
-  'enter',
-  'exit',
 }
 
 export enum TriangleSizes {
