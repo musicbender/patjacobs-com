@@ -47,7 +47,7 @@ export type CoreColors = 'aqua' | 'purple' | 'yellow' | 'orange';
 
 export type RevealBlockContentType = 'generic' | 'text' | 'img' | 'video' | 'line';
 
-export type CurtainAction = 'entrance' | 'exit';
+export type CurtainAction = 'cover' | 'uncover';
 
 export enum CurtainMode {
   'NONE',

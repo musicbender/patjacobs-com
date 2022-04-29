@@ -9,7 +9,7 @@ import { useSplashScreen } from 'src/hooks/use-splash-screen';
 
 const PJApp = ({ Component, pageProps, router }) => {
   const [queryClient] = useState(() => new QueryClient());
-  // useSplashScreen();
+  useSplashScreen();
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>

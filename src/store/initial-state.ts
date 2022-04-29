@@ -2,7 +2,7 @@ const initialState = {
   global: {
     pageLoaded: false,
     curtainState: null,
-    splashActive: false,
+    splashActive: true,
     transportOpen: false,
     menuOpen: false,
     mode: 'dark',

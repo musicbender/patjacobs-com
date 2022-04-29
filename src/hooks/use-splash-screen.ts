@@ -15,7 +15,6 @@ export const useSplashScreen = (): UseCurtainReturn => {
   const splashTimeoutRef = useRef(null);
 
   useEffect(() => {
-    dispatch(changeSplashActive(true));
     splashTimeoutRef.current = requestTimeout(
       () => {
         dispatch(changeSplashActive(false));

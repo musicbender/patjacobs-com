@@ -50,18 +50,24 @@ storiesOf('Curtain', module)
   .add('default', () => <CurtainStory />, {
     info: { text: description },
   })
-  .add('blocks', () => <CurtainStory entrance={CurtainMode.BLOCKS} />)
-  .add('reverse blocks enterence', () => <CurtainStory entrance={CurtainMode.REVERSE_BLOCKS} />)
-  .add('rows', () => <CurtainStory entrance={CurtainMode.ROWS} exit={CurtainMode.ROWS} />)
+  .add('blocks', () => <CurtainStory coverMode={CurtainMode.BLOCKS} />)
+  .add('reverse blocks enterence', () => <CurtainStory coverMode={CurtainMode.REVERSE_BLOCKS} />)
+  .add('rows', () => <CurtainStory coverMode={CurtainMode.ROWS} uncoverMode={CurtainMode.ROWS} />)
   .add('full', () => (
-    <CurtainStory entrance={CurtainMode.FULL} exit={CurtainMode.FULL} durations={[2, 1, 2]} />
+    <CurtainStory
+      coverMode={CurtainMode.FULL}
+      uncoverMode={CurtainMode.FULL}
+      durations={[2, 1, 2]}
+    />
   ))
-  .add('blocks exit', () => <CurtainStory exit={CurtainMode.BLOCKS} />)
-  .add('reverse blocks exit', () => <CurtainStory exit={CurtainMode.REVERSE_BLOCKS} />)
-  .add('rows exit', () => <CurtainStory exit={CurtainMode.ROWS} />)
-  .add('full exit', () => <CurtainStory exit={CurtainMode.FULL} />)
+  .add('blocks uncoverMode', () => <CurtainStory uncoverMode={CurtainMode.BLOCKS} />)
+  .add('reverse blocks uncoverMode', () => (
+    <CurtainStory uncoverMode={CurtainMode.REVERSE_BLOCKS} />
+  ))
+  .add('rows uncoverMode', () => <CurtainStory uncoverMode={CurtainMode.ROWS} />)
+  .add('full uncoverMode', () => <CurtainStory uncoverMode={CurtainMode.FULL} />)
   .add('longer duration', () => <CurtainStory durations={[2, 5, 2]} />)
   .add('shorter duration', () => <CurtainStory durations={[0.5, 1, 0.5]} />)
   .add('with logo', () => (
-    <CurtainStory durations={[0, 3, 3]} exit={CurtainMode.REVERSE_BLOCKS} withLogo />
+    <CurtainStory durations={[0, 3, 3]} uncoverMode={CurtainMode.REVERSE_BLOCKS} withLogo />
   ));

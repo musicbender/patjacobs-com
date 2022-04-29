@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import Plx from 'react-plx';
 import ColorDotRow from '@components/particles/color-dot-row';
 import Triangle from '@components/particles/triangle';
-import { curtainCovering } from '@util/animation';
 import config from '@configs/header.json';
 import metaConfig from '@configs/meta.json';
 import settings from '@configs/settings.json';
@@ -17,16 +16,17 @@ import {
   StyledLilSquare,
 } from './styles';
 import { useMounted } from 'src/hooks/use-mounted';
+import { useCurtain } from 'src/hooks/use-curtain';
 
 const Header: FC = () => {
   const [active, setActive] = useState(false);
+  const { curtainCovering, curtainState } = useCurtain();
   const splashActive = useSelector((state: Store) => state.global.splashActive);
-  const curtainState = useSelector((state: Store) => state.global.curtainState);
   const isMobile = useSelector((state: Store) => state.global.isMobile);
   const { isMounted } = useMounted();
 
   useEffect(() => {
-    if (!active && curtainCovering(curtainState)) {
+    if (!active && curtainCovering) {
       setActive(true);
     }
   }, [active, curtainState]);

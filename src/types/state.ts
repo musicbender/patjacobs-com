@@ -16,7 +16,7 @@ export type Store = {
   };
 };
 
-export type CurtainState = 'start' | 'opening' | 'open' | 'closing' | 'closed' | null;
+export type CurtainState = 'start' | 'covering' | 'covered' | 'uncovering' | 'uncovered' | null;
 
 export type HomeActionPayload = {
   didResize?: boolean;

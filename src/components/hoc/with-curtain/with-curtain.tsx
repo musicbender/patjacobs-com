@@ -1,19 +1,17 @@
 import Curtain from '@components/global/curtain';
-import { CurtainMode } from '@types';
+import { CurtainMode, Store } from '@types';
 import React, { FC } from 'react';
-import { useCurtain } from 'src/hooks/use-curtain';
 
 export default function withCurtain<P>(WrappedComponent: React.ComponentType<P>) {
   const OutputComponent: FC<P> = (props) => {
-    const { curtainState, curtainCovering } = useCurtain();
     return (
       <>
-        <WrappedComponent
-          {...props}
-          curtainState={curtainState}
-          curtainCovering={curtainCovering}
+        <WrappedComponent {...props} />
+        <Curtain
+          coverMode={CurtainMode.FULL}
+          uncoverMode={CurtainMode.FULL}
+          durations={[1, 2, 1]}
         />
-        <Curtain entrance={CurtainMode.FULL} exit={CurtainMode.FULL} durations={[1, 2, 1]} />
       </>
     );
   };
