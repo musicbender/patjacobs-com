@@ -23,12 +23,13 @@ type ImageCoverProps = {
 
 export const WorkItemWrapper = styled('div')<WorkItemWrapperProps>`
   position: relative;
-  margin-bottom: 0;
+  margin-bottom: 3em;
   height: 15em;
+
   ${media.tablet`
-        height: 23.5em;
-        margin-bottom: 10em;
-    `}
+    height: 23.5em;
+    margin-bottom: 10em;
+  `}
 `;
 
 export const ImageOutterWrapper = styled('div')<ParallaxProps>`
@@ -92,14 +93,17 @@ export const WorkImage = styled('div')<ImageProps>`
   background-position: left;
   background-repeat: no-repeat;
   background-image: ${(props) => props.bgImage};
+
   ${media.tablet`
     display: block;
   `}
+
   ${(props) =>
     props.index === 0 &&
     css`
       background-position: left;
     `}
+
   ${(props) =>
     props.index === 1 &&
     css`
@@ -117,6 +121,7 @@ export const ImageCover = styled('div')<ImageCoverProps>`
   opacity: 0.75;
   transform: translate3d(0, 0, 0);
   transition: ${(props) => `transform 450ms ${props.theme.animate.easeOut}`};
+
   ${(props) =>
     props.isStopped &&
     css`
@@ -132,17 +137,20 @@ export const StyledWorkItemInfo = styled(WorkItemInfo)`
       visibility: hidden;
       position: absolute;
       top: 0;
+
       ${media.tablet`
-      left: calc(17% * 4);
-      top: auto;
+        left: calc(17% * 4);
+        top: auto;
+      `}
     `}
-    `}
+
   ${({ isParallax, isStopped }) =>
     isParallax &&
     isStopped &&
     css`
       visibility: hidden;
     `}
+    
   ${({ isParallax, isStopped }) =>
     !isParallax &&
     isStopped &&

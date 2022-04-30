@@ -10,6 +10,7 @@ type Props = {
 
 const Toolbar: FC<Props> = ({ handleToTop }) => {
   const router = useRouter();
+
   const handleLogoClick = (): void => {
     if (router.pathname !== '/') return;
     if (window.scrollY < 100) return;
@@ -19,7 +20,7 @@ const Toolbar: FC<Props> = ({ handleToTop }) => {
   return (
     <ToolBarWrapper>
       <InnerWrapper>
-        <Link href="/" passHref>
+        <Link href="/" passHref scroll={false}>
           <LogoWrapper onClick={handleLogoClick}>
             <Logo color="white" />
           </LogoWrapper>

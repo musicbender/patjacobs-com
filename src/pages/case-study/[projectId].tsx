@@ -4,8 +4,6 @@ import { processRawBody } from '@util/project-body-process';
 import { getNextProject, getRelatedProjects } from '@util/projects';
 import Layout from '@components/layout';
 import CaseStudy from '@components/pages/case-study';
-// import Modal from 'components/global/modal';
-// import Curtain from 'components/global/curtain/curtain';
 import { dehydrate, DehydratedState, QueryClient } from 'react-query';
 import {
   GcmsProjectBodyRaw,
@@ -97,11 +95,3 @@ export const getStaticProps: GetStaticProps = async ({
     },
   };
 };
-
-{
-  /* <TransitionPortal>
-    <Modal>
-        <Curtain entrance="full" exit="full" duration={1275} />
-    </Modal>
-</TransitionPortal> */
-}

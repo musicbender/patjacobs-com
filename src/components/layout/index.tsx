@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
-import { changeSplashActive, changeTransport, setIsMobile } from '@actions/global';
+import { changeTransport, setIsMobile } from '@actions/global';
 import GlobalStyles from '@styles/global-styles';
 import Head from '@components/global/head';
 import GridLines from '@components/global/grid-lines';
@@ -13,6 +13,7 @@ import settings from '@configs/settings.json';
 import { AppWrapper, OutterWrapper, InnerWrapper } from './styles';
 import { Store, HeadProps } from '@types';
 import { useThrottleCallback } from '@hooks';
+import { useCurtain } from 'src/hooks/use-curtain';
 
 type Props = {
   children?: any;
@@ -27,6 +28,7 @@ const Layout: FC = ({ headProps = {}, children }: Props) => {
   const skillsTop = useSelector((state: Store) => state.home.skillsTop);
   const mode = useSelector((state: Store) => state.global.mode);
   const splashTimeoutRef = useRef(null);
+  const { curtainCovering, curtainState } = useCurtain();
   const dispatch = useDispatch();
 
   const handleResize = useThrottleCallback((): void => {
@@ -49,11 +51,22 @@ const Layout: FC = ({ headProps = {}, children }: Props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (curtainState === 'covered') {
+      try {
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'auto',
+        });
+      } catch (error) {
+        window.scrollTo(0, 0);
+      }
+    }
+  }, [curtainState]);
+
   const handleToTop = (): void => {
     dispatch(changeTransport(true, settings.transportDuration));
-    requestTimeout((): void => {
-      window.scrollTo(0, 0);
-    }, settings.transportDuration / 2 - 500);
   };
 
   return (

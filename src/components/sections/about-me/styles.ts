@@ -17,19 +17,23 @@ export const AboutMeSection = styled.div`
 `;
 
 export const StyledHeading = styled(Heading)`
-  margin-left: 0;
+  ${media.tablet`
+    margin-left: 0;
+  `}
 `;
 
 export const ContentBox = styled.div`
   padding: 2em;
+  margin: ${({ theme }) => `0 ${theme.gridSizes.s}%`};
   background-color: ${({ theme }) => theme.palette.darkerBlack};
 
   ${media.tablet`
-      padding: 1.25em 2em;
+    margin: 0;
+    padding: 1.25em 2em;
   `}
 
   ${media.desktopL`
-      padding: 2em 4em;
+    padding: 2em 4em;
   `}
 
   > p {
