@@ -15,9 +15,9 @@ const RecentWork: FC = () => {
   const [workStops, setWorkStops] = useState<boolean[]>(defaultWorkStops);
   const recentWorkTop = useSelector((state: Storage) => state.home.recentWorkTop);
   const isMobile = useSelector((state: Storage) => state.global.isMobile);
-  const transportOpen = useSelector((state: Storage) => state.global.transportOpen);
+  const scrollCurtainActive = useSelector((state: Storage) => state.global.scrollCurtainActive);
   const throttledRecentWorkTop = useThrottle(recentWorkTop);
-  const prevState = usePrevious({ transportOpen });
+  const prevState = usePrevious({ scrollCurtainActive });
   const dispatch = useDispatch();
 
   const setTop = (didResize = false, input?: any): void => {
@@ -44,10 +44,10 @@ const RecentWork: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!prevState?.transportOpen && transportOpen) {
+    if (!prevState?.scrollCurtainActive && scrollCurtainActive) {
       setWorkStops(defaultWorkStops);
     }
-  }, [transportOpen]);
+  }, [scrollCurtainActive]);
 
   const handleWorkStops = (index: number, stopped?: boolean) => (): void => {
     const updatedArr: boolean[] = [...workStops];

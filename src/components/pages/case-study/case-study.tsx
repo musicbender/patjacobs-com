@@ -35,14 +35,14 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
   const [atTop, setAtTop] = useState(true);
   const [revealedElements, setRevealedElements] = useState<RevealedElementsState>({});
   const throttledAtTop = useThrottle(atTop, 5);
-  const { splashActive, transportOpen } = useSelector((state: Store) => state.global);
+  const { splashActive, scrollCurtainActive } = useSelector((state: Store) => state.global);
   const { isMounted, inClient } = useMounted();
   const { data: gcmsData } = useQuery<ProcessedGcmsData, Error>(
     ['processed-case-study', projectId],
     () => processGcmsData(projectId),
   );
 
-  const active: boolean = throttledAtTop && !splashActive && !transportOpen;
+  const active: boolean = throttledAtTop && !splashActive && !scrollCurtainActive;
 
   const baseRevealProps = {
     startGrid: 3,

@@ -4,7 +4,7 @@ export type Store = {
     pageLoaded: boolean;
     curtainState: CurtainState;
     splashActive: boolean;
-    transportOpen: boolean;
+    scrollCurtainActive: boolean;
     menuOpen: boolean;
     mode: string;
     isMobile: boolean;

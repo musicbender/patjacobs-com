@@ -31,7 +31,7 @@ const RevealBlock: FC<Props> = ({
   disableMobile = true,
   className,
 }) => {
-  const { isMounted, inClient } = useMounted();
+  const { isMounted } = useMounted();
   const gLines: number[] = settings.gridLines;
   const width = reduceSegment(startGrid, endGrid, gLines);
   const position = reduceSegment(0, startGrid, gLines);

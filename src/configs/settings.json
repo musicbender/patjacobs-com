@@ -3,7 +3,7 @@
   "pageLoadTimeout": 4000,
   "splashScreenDebug": false,
   "splashScreenTimeout": 10000,
-  "transportDuration": 2500,
+  "scrollCurtainDurations": [1, 2.5, 1],
   "workItemsAmount": 5,
   "homeBottom": 5562,
   "skillsTop": 5540,

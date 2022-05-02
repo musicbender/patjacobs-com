@@ -6,7 +6,7 @@ import {
   CURTAIN_STATE_CHANGED,
   MODE_CHANGED,
   SPLASH_CHANGED,
-  TRANSPORT_CHANGED,
+  SCROLL_CURTAIN_CHANGED,
   MENU_CHANGED,
   IS_MOBILE_SET,
 } from '@constants/global';
@@ -22,10 +22,10 @@ export default function global(state = initialState.global, action: AnyAction) {
       return { ...state, curtainState: payload };
     case SPLASH_CHANGED:
       return { ...state, splashActive: payload };
-    case TRANSPORT_CHANGED:
-      return { ...state, transportOpen: payload.open };
+    case SCROLL_CURTAIN_CHANGED:
+      return { ...state, scrollCurtainActive: payload };
     case MENU_CHANGED:
-      return { ...state, menuhOpen: payload };
+      return { ...state, menuOpen: payload };
     case MODE_CHANGED:
       return { ...state, mode: payload };
     case IS_MOBILE_SET:

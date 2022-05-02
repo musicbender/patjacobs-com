@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeCurtainState } from '@actions/global';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
-import { CurtainAction, CurtainMode, Store } from '@types';
+import { CurtainAction, CurtainMode, CurtainType, Store } from '@types';
 import settings from '@configs/settings.json';
 import { createPortal } from 'react-dom';
 import { findPartialSum } from '@util/util';
@@ -21,14 +21,14 @@ export type Props = {
   durations?: number[];
   coverMode?: CurtainMode;
   uncoverMode?: CurtainMode;
-  isSplash?: boolean;
+  curtainType?: CurtainType;
 };
 
 const Curtain = ({
   durations = [1, 1, 1],
   coverMode = CurtainMode.NONE,
   uncoverMode = CurtainMode.BLOCKS,
-  isSplash = false,
+  curtainType = CurtainType.PAGE_TRANSITION,
 }: Props): JSX.Element => {
   const rows = 7;
   const columns = settings.gridLines.length;
@@ -46,7 +46,7 @@ const Curtain = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isPresent && !isSplash) {
+    if (!isPresent && curtainType === CurtainType.PAGE_TRANSITION) {
       dispatch(changeCurtainState('covering'));
 
       if (coverMode !== CurtainMode.NONE) {
@@ -59,10 +59,22 @@ const Curtain = ({
         safeToRemove();
       }, durations[1] * msMultiplier);
     }
+
+    if (!isPresent && curtainType === CurtainType.SCROLL) {
+      dispatch(changeCurtainState('uncovering'));
+
+      coveredTimeoutRef.current = requestTimeout(() => {
+        dispatch(changeCurtainState('uncovered'));
+      }, durations[0] * msMultiplier);
+
+      setTimeout(() => {
+        safeToRemove();
+      }, durations[1] * msMultiplier);
+    }
   }, [isPresent]);
 
   useEffect(() => {
-    if (!splashActive && !isSplash) {
+    if (!splashActive && curtainType === CurtainType.PAGE_TRANSITION) {
       if (coverMode === CurtainMode.NONE) {
         dispatch(changeCurtainState('covered'));
       }
@@ -82,7 +94,7 @@ const Curtain = ({
       }, finishTimeout);
     }
 
-    if (isSplash && splashActive) {
+    if (curtainType === CurtainType.SPLASH && splashActive) {
       dispatch(changeCurtainState('covered'));
 
       uncoveredTimeoutRef.current = requestTimeout(() => {
@@ -124,7 +136,7 @@ const Curtain = ({
     if (isRows && index) {
       output = {
         ...output,
-        delay: (isSplash ? durations[1] : 0) + index / blockDuration / 2,
+        delay: (curtainType === CurtainType.SPLASH ? durations[1] : 0) + index / blockDuration / 2,
       };
     }
 
@@ -135,6 +147,7 @@ const Curtain = ({
     const blockVariants = {
       start: { scaleX: 1, originX: 0 },
       startsCovered: { scaleX: 1, originX: 1 },
+      startUncovered: { scaleX: 0, originX: 0 },
       uncover: {
         scaleX: 0,
         transition: getBlockTransition('uncover', j),
@@ -148,6 +161,32 @@ const Curtain = ({
     return <InnerBlock variants={blockVariants} key={'curtain-block' + i + '_' + j} />;
   };
 
+  const getFramerProps = () => {
+    switch (curtainType) {
+      case CurtainType.PAGE_TRANSITION:
+        return {
+          initial: uncoverMode !== CurtainMode.NONE ? 'start' : 'startsCovered',
+          animate: uncoverMode !== CurtainMode.NONE ? 'uncover' : 'startsCovered',
+          exit: 'cover',
+          key: 'page-curtain-wrapper',
+        };
+      case CurtainType.SPLASH:
+        return {
+          initial: 'startsCovered',
+          animate: uncoverMode !== CurtainMode.NONE ? 'uncover' : 'startsCovered',
+          exit: 'cover',
+          key: 'splash-curtain-wrapper',
+        };
+      case CurtainType.SCROLL:
+        return {
+          initial: uncoverMode !== CurtainMode.NONE ? 'startUncovered' : 'startsCovered',
+          animate: uncoverMode !== CurtainMode.NONE ? 'cover' : 'startsCovered',
+          exit: 'uncover',
+          key: 'curtain-wrapper',
+        };
+    }
+  };
+
   const curtainVariants = {
     cover: {
       transition: {
@@ -157,7 +196,7 @@ const Curtain = ({
     },
     uncover: {
       transition: {
-        delayChildren: isSplash ? durations[1] : null,
+        delayChildren: curtainType === CurtainType.SPLASH ? durations[1] : null,
         staggerChildren: isBlockAction(uncoverMode) ? durations[2] / totalBlocks : 0,
         staggerDirection: uncoverMode === CurtainMode.REVERSE_BLOCKS ? -1 : 1,
       },
@@ -168,13 +207,7 @@ const Curtain = ({
     inClient &&
     createPortal(
       <CurtainOverlay>
-        <CurtainWrapper
-          initial={uncoverMode !== CurtainMode.NONE ? 'start' : 'startsCovered'}
-          animate={uncoverMode !== CurtainMode.NONE ? 'uncover' : 'startsCovered'}
-          exit={'cover'}
-          key="curtain-wrapper"
-          variants={curtainVariants}
-        >
+        <CurtainWrapper {...getFramerProps()} variants={curtainVariants}>
           {settings.gridLines.map((g: number, i: number): JSX.Element[] => {
             let blocks: JSX.Element[] = [];
 
@@ -185,7 +218,7 @@ const Curtain = ({
             return blocks;
           })}
         </CurtainWrapper>
-        {isSplash && (
+        {curtainType === CurtainType.SPLASH && (
           <LogoOutterWrapper>
             <StyledLogo color="aqua" debug={settings.splashScreenDebug} />
           </LogoOutterWrapper>

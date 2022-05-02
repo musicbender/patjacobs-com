@@ -2,7 +2,7 @@ import {
   PAGE_LOADED,
   CURTAIN_STATE_CHANGED,
   SPLASH_CHANGED,
-  TRANSPORT_CHANGED,
+  SCROLL_CURTAIN_CHANGED,
   MENU_CHANGED,
   RECENT_WORK_TOP_SET,
   IS_MOBILE_SET,
@@ -16,13 +16,10 @@ export function loadPage() {
   };
 }
 
-export function changeTransport(open: boolean, transportDuration?: number): AnyAction {
+export function changeScrollCurtain(open: boolean): AnyAction {
   return {
-    type: TRANSPORT_CHANGED,
-    payload: {
-      open,
-      transportDuration,
-    },
+    type: SCROLL_CURTAIN_CHANGED,
+    payload: open,
   };
 }
 

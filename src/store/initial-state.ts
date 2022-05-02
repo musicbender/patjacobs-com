@@ -3,7 +3,7 @@ const initialState = {
     pageLoaded: false,
     curtainState: null,
     splashActive: true,
-    transportOpen: false,
+    scrollCurtainActive: false,
     menuOpen: false,
     mode: 'dark',
     isMobile: true,

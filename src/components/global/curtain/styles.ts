@@ -37,6 +37,7 @@ type CurtainOverlayProps = {
   finished?: boolean;
 };
 
+// components
 export const CurtainOverlay = styled('div')<CurtainOverlayProps>`
   position: fixed;
   height: 100vh;
@@ -57,7 +58,7 @@ export const CurtainWrapper = styled(motion.div)`
   pointer-events: none;
   z-index: 80;
   display: grid;
-  grid-template-columns: 8% 17% 8% 17% 34.3% 8% 8%;
+  grid-template-columns: 8% 17% 8% 17% 33.75% 8% 8%;
   grid-template-rows: repeat(7, 1fr);
   pointer-events: none;
 `;
@@ -68,11 +69,6 @@ export const Block = styled.div`
 `;
 
 export const InnerBlock = styled(motion.div)<InnerBlockProps>`
-  /* position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 110%; */
   background-color: ${({ theme }) => theme.palette.matteBlack};
 `;
 
@@ -105,19 +101,3 @@ export const StyledLogo = styled(Logo)<{ debug: boolean }>`
     animation-delay: 1000ms;
   }
 `;
-
-// ${(props) => props.transition === 'enter' && 'transform: translate3d(110%, 0, 0);'}
-// ${(props) => props.transition === 'exit' && 'transform: translate3d(0, 0, 0);'}
-// ${(props) =>
-//   props.transition === 'enter' &&
-//   css`
-//     animation-name: ${splashBlockEnter};
-//     animation-timing-function: ${props.enterType === 'full' ? 'ease-in-out' : 'linear'};
-//   `}
-// ${(props) =>
-//   props.transition === 'exit' &&
-//   css`
-//     animation-name: ${splashBlockExit};
-//     animation-timing-function: ${props.exitType === 'full' ? 'ease-in-out' : 'linear'};
-//   `}
-// ${(props) => props.delay && `animation-delay: ${props.delay};`}

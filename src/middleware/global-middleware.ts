@@ -1,20 +1,21 @@
-import { TRANSPORT_CHANGED, IS_MOBILE_SET } from '@constants/global';
-import { changeTransport } from '@actions/global';
+import { SCROLL_CURTAIN_CHANGED, IS_MOBILE_SET } from '@constants/global';
+import { changeScrollCurtain } from '@actions/global';
 import { isMobileSize } from '@util/util';
 import { requestTimeout } from '@util/shims';
 import { Middleware, Dispatch, AnyAction, MiddlewareAPI } from 'redux';
+import settings from '@configs/settings.json';
 
 const globalMiddleware: Middleware<Dispatch> =
   (store: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: AnyAction) => {
     const { type, payload } = action;
     switch (type) {
-      case TRANSPORT_CHANGED:
+      case SCROLL_CURTAIN_CHANGED:
         next(action);
-
-        if (!!payload.open) {
+        const open = payload;
+        if (open) {
           requestTimeout(() => {
-            store.dispatch(changeTransport(false));
-          }, payload.transportDuration || 2500);
+            store.dispatch(changeScrollCurtain(false));
+          }, settings.scrollCurtainDurations[0] * 1000);
         }
 
         break;

@@ -49,6 +49,12 @@ export type RevealBlockContentType = 'generic' | 'text' | 'img' | 'video' | 'lin
 
 export type CurtainAction = 'cover' | 'uncover';
 
+export enum CurtainType {
+  'PAGE_TRANSITION',
+  'SPLASH',
+  'SCROLL',
+}
+
 export enum CurtainMode {
   'NONE',
   'BLOCKS',
