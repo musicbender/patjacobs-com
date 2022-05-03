@@ -82,7 +82,7 @@ const Layout: FC = ({ headProps = {}, children }: Props) => {
             coverMode={CurtainMode.FULL}
             uncoverMode={CurtainMode.FULL}
             curtainType={CurtainType.SCROLL}
-            durations={settings.curtainDurations}
+            durations={settings.scrollCurtainDurations}
           />
         )}
       </AnimatePresence>
