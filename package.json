@@ -100,7 +100,7 @@
     "tsconfig-paths-webpack-plugin": "^3.5.2"
   },
   "lint-staged": {
-    "*.{ts}": [
+    "*.ts": [
       "npm run lint:fix",
       "git add"
     ]
