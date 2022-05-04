@@ -43,7 +43,6 @@ const ProjectMeta = ({ project }: Props): JSX.Element => {
             <ContentValue>{format(publishDate, 'p')}</ContentValue>
           </ContentWrapper>
         )}
-        ``
         {project.externalUrl && (
           <ContentWrapper color="orange">
             <Label>{content.projectMeta.siteUrl}</Label>

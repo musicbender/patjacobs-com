@@ -5,7 +5,7 @@ import Heading from '@components/global/heading';
 import WorkItem from '@components/global/work-item/work-item';
 import settings from '@configs/settings.json';
 import { RECENT_WORK_TOP_SET } from '@constants/global';
-import { usePrevious, useThrottle } from '@hooks';
+import { usePrevious } from '@hooks';
 import { useGetRecentWorkQuery, Project } from '@types';
 import { RecentWorkWrapper, ParentWrapper, WorkItemsWrapper } from './styles';
 
@@ -16,7 +16,6 @@ const RecentWork: FC = () => {
   const recentWorkTop = useSelector((state: Storage) => state.home.recentWorkTop);
   const isMobile = useSelector((state: Storage) => state.global.isMobile);
   const scrollCurtainActive = useSelector((state: Storage) => state.global.scrollCurtainActive);
-  const throttledRecentWorkTop = useThrottle(recentWorkTop);
   const prevState = usePrevious({ scrollCurtainActive });
   const dispatch = useDispatch();
 
@@ -68,7 +67,7 @@ const RecentWork: FC = () => {
                   index={i}
                   isStopped={workStops[i]}
                   handleWorkStops={handleWorkStops}
-                  baseTop={throttledRecentWorkTop}
+                  baseTop={recentWorkTop}
                   isMobile={isMobile}
                   key={item.title + `${i * 7}`}
                 />

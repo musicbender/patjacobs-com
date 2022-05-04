@@ -36,7 +36,7 @@ const SkillsSection: FC<Props> = ({ atBottom }) => {
 
   const handleResize = useThrottleCallback((): void => {
     setTop(true);
-  }, 100);
+  }, 50);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);

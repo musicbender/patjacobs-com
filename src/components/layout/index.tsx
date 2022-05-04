@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, PropsWithChildren, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
@@ -19,11 +19,10 @@ import Curtain from '@components/global/curtain';
 import { AnimatePresence } from 'framer-motion';
 
 type Props = {
-  children?: any;
   headProps?: HeadProps;
 };
 
-const Layout: FC = ({ headProps = {}, children }: Props) => {
+const Layout: FC<PropsWithChildren<Props>> = ({ headProps = {}, children }) => {
   const router = useRouter();
   const splashActive = useSelector((state: Store) => state.global.splashActive);
   const scrollCurtainActive = useSelector((state: Store) => state.global.scrollCurtainActive);

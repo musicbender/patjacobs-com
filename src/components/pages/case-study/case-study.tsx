@@ -2,14 +2,13 @@ import React, { FC, useEffect, useState } from 'react';
 import Plx from 'react-plx';
 import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
-import { hasWindow } from '@util/util';
 import ScrollLine from '@components/global/scroll-line';
 import ProjectMeta from '@components/sections/project-meta';
 import ProjectBody from '@components/sections/project-body';
 import RevealBlock from '@components/global/reveal-block';
 import BarList from '@components/global/bar-list';
 import settings from '@configs/settings.json';
-import { useThrottle, useThrottleCallback } from '@hooks';
+import { useThrottleCallback } from '@hooks';
 import {
   CaseStudyPage,
   InfoWrapper,
@@ -34,7 +33,6 @@ type Props = {
 const CaseStudy: FC<Props> = ({ projectId }) => {
   const [atTop, setAtTop] = useState(true);
   const [revealedElements, setRevealedElements] = useState<RevealedElementsState>({});
-  const throttledAtTop = useThrottle(atTop, 5);
   const { splashActive, scrollCurtainActive } = useSelector((state: Store) => state.global);
   const { isMounted, inClient } = useMounted();
   const { data: gcmsData } = useQuery<ProcessedGcmsData, Error>(
@@ -42,7 +40,7 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
     () => processGcmsData(projectId),
   );
 
-  const active: boolean = throttledAtTop && !splashActive && !scrollCurtainActive;
+  const active: boolean = atTop && !splashActive && !scrollCurtainActive;
 
   const baseRevealProps = {
     startGrid: 3,
@@ -64,11 +62,11 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
   ];
 
   const handleScroll = useThrottleCallback((): void => {
-    if (window.scrollY === 0 && !throttledAtTop) {
+    if (window.scrollY === 0 && !atTop) {
       setAtTop(true);
     }
 
-    if (throttledAtTop && window.scrollY > 0) {
+    if (atTop && window.scrollY > 0) {
       setAtTop(false);
     }
   }, 5);
@@ -146,10 +144,10 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
     <CaseStudyPage>
       {gcmsData.project && (
         <InfoWrapper>
-          <Title atTop={throttledAtTop}>
+          <Title atTop={atTop}>
             {gcmsData.project.title || gcmsData.project.projectId || 'Case Study'}
           </Title>
-          <MetaOutterWrapper atTop={throttledAtTop}>
+          <MetaOutterWrapper atTop={atTop}>
             <ProjectMeta project={gcmsData.project} />
           </MetaOutterWrapper>
         </InfoWrapper>
@@ -157,7 +155,7 @@ const CaseStudy: FC<Props> = ({ projectId }) => {
       {gcmsData.project && (
         <Main>
           <Top>
-            <ScrollLine atTop={throttledAtTop} active={active} />
+            <ScrollLine atTop={atTop} active={active} />
           </Top>
           <Middle>
             {gcmsData.project.overview && renderOverview()}

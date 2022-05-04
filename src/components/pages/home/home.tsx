@@ -6,7 +6,7 @@ import RecentWork from '@components/sections/recent-work';
 import SkillsSection from '@components/sections/skills';
 import { HomePage, OutterWrapper, DotSequenceWrapper } from './styles';
 import CavieDots from '@components/sections/cavie-dots';
-import { useThrottle } from '@hooks';
+import { useThrottleCallback } from '@hooks';
 import { ABOUT_TOP_SET } from '@constants/global';
 import { Store } from '@types';
 
@@ -18,36 +18,33 @@ const Home: FC = () => {
   const skillsTop = useSelector((state: Store) => state.home.skillsTop);
   const [atAbout, setAtAbout] = useState(false);
   const [atBottom, setAtBottom] = useState(false);
-  const throttledAtAbout = useThrottle(atAbout, 80);
-  const throttledAtBottom = useThrottle(atBottom, 80);
 
-  const handleScroll = (): void => {
+  const handleScroll = useThrottleCallback((): void => {
     const scrollY = window.scrollY;
-
     if (scrollY >= aboutTop) {
-      if (!throttledAtAbout) {
+      if (!atAbout) {
         setAtAbout(true);
       }
 
       if (scrollY >= skillsTop) {
-        if (!throttledAtBottom) {
+        if (!atBottom) {
           setAtBottom(true);
         }
       }
     }
 
     if (scrollY < skillsTop) {
-      if (throttledAtBottom) {
+      if (atBottom) {
         setAtBottom(false);
       }
 
       if (scrollY < aboutTop) {
-        if (throttledAtAbout) {
+        if (atAbout) {
           setAtAbout(false);
         }
       }
     }
-  };
+  }, 50);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -62,13 +59,13 @@ const Home: FC = () => {
         <Header />
         <DotSequenceWrapper>
           <AboutMe
-            atAbout={throttledAtAbout}
+            atAbout={atAbout}
             setAboutTop={() => dispatch({ type: ABOUT_TOP_SET })}
             isMobile={isMobile}
           />
           <RecentWork />
-          <CavieDots baseStart={recentWorkTop - 400} atBottom={throttledAtBottom} />
-          <SkillsSection atBottom={throttledAtBottom} />
+          <CavieDots baseStart={recentWorkTop - 400} atBottom={atBottom} />
+          <SkillsSection atBottom={atBottom} />
         </DotSequenceWrapper>
       </OutterWrapper>
     </HomePage>

@@ -11,15 +11,17 @@ const PJApp = ({ Component, pageProps, router }) => {
   const [queryClient] = useState(() => new QueryClient());
   useSplashScreen();
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme}>
-          <AnimatePresence exitBeforeEnter initial={false}>
-            <Component {...pageProps} key={router.route} />
-          </AnimatePresence>
-        </ThemeProvider>
-      </Hydrate>
-    </QueryClientProvider>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ThemeProvider theme={theme}>
+            <AnimatePresence exitBeforeEnter initial={false}>
+              <Component {...pageProps} key={router.route} />
+            </AnimatePresence>
+          </ThemeProvider>
+        </Hydrate>
+      </QueryClientProvider>
+    </>
   );
 };
 
