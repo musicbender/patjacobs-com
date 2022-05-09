@@ -6,7 +6,7 @@ import settings from '@configs/settings.json';
 import { SkillsWrapper, DotWrapper, StyledDotFormation } from './styles';
 import { Skill, useGetSkillsQuery } from '@types';
 import { compileSkillsData } from '@util/data';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '@store';
 import { usePrevious, useThrottleCallback } from '@hooks';
 
 type Props = {

@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "yarn generate && next dev",
+    "debug": "yarn generate && NODE_OPTIONS='--inspect' next dev",
     "build": "yarn generate && next build",
     "start": "yarn dev",
     "format": "prettier --write src/**/*.{ts,tsx}",
@@ -22,6 +23,7 @@
   "dependencies": {
     "@babel/core": "^7.17.0",
     "@next/env": "^12.0.10",
+    "@reduxjs/toolkit": "^1.8.1",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.3",
     "@types/react-helmet": "^6.1.5",
@@ -32,7 +34,7 @@
     "babel-plugin-styled-components": "^2.0.2",
     "date-fns": "^2.28.0",
     "eslint-plugin-better-styled-components": "^1.1.2",
-    "framer-motion": "^6.2.6",
+    "framer-motion": "^6.3.3",
     "graphcms-image": "^1.1.0-beta4",
     "graphql": "^16.3.0",
     "graphql-request": "^4.0.0",

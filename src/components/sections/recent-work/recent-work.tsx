@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Particles from './particles';
 import Heading from '@components/global/heading';
 import WorkItem from '@components/global/work-item/work-item';
@@ -8,6 +8,7 @@ import { RECENT_WORK_TOP_SET } from '@constants/global';
 import { usePrevious } from '@hooks';
 import { useGetRecentWorkQuery, Project } from '@types';
 import { RecentWorkWrapper, ParentWrapper, WorkItemsWrapper } from './styles';
+import { useDispatch } from '@store';
 
 const RecentWork: FC = () => {
   const { data } = useGetRecentWorkQuery();

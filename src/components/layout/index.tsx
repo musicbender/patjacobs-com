@@ -1,8 +1,9 @@
 import React, { FC, PropsWithChildren, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
 import { changeScrollCurtain, setIsMobile } from '@actions/global';
+import { useDispatch } from '@store';
 import GlobalStyles from '@styles/global-styles';
 import Head from '@components/global/head';
 import GridLines from '@components/global/grid-lines';

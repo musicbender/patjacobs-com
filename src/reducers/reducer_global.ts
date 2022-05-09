@@ -1,6 +1,5 @@
 import initialState from '@store/initial-state';
 import { AnyAction } from 'redux';
-import { HYDRATE } from 'next-redux-wrapper';
 import {
   PAGE_LOADED,
   CURTAIN_STATE_CHANGED,
@@ -14,8 +13,6 @@ import {
 export default function global(state = initialState.global, action: AnyAction) {
   const { type, payload } = action;
   switch (type) {
-    case HYDRATE:
-      return { ...state, ...action.payload };
     case PAGE_LOADED:
       return { ...state, pageLoaded: true };
     case CURTAIN_STATE_CHANGED:

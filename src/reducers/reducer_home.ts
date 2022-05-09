@@ -1,13 +1,10 @@
 import initialState from '@store/initial-state';
-import { AnyAction } from 'redux';
-import { HYDRATE } from 'next-redux-wrapper';
+import { AnyAction } from '@reduxjs/toolkit';
 import { ABOUT_TOP_SET, RECENT_WORK_TOP_SET, SKILLS_TOP_SET } from '../constants/global';
 
 export default function home(state = initialState.home, action: AnyAction) {
   const { type, payload } = action;
   switch (type) {
-    case HYDRATE:
-      return { ...state, ...action.payload };
     case ABOUT_TOP_SET:
       return { ...state, aboutTop: payload };
     case RECENT_WORK_TOP_SET:

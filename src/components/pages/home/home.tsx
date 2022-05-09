@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Header from '@components/sections/header';
 import AboutMe from '@components/sections/about-me';
 import RecentWork from '@components/sections/recent-work';
@@ -9,6 +9,7 @@ import CavieDots from '@components/sections/cavie-dots';
 import { useThrottleCallback } from '@hooks';
 import { ABOUT_TOP_SET } from '@constants/global';
 import { Store } from '@types';
+import { useDispatch } from '@store';
 
 const Home: FC = () => {
   const dispatch = useDispatch();

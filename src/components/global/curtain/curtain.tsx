@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { changeCurtainState } from '@actions/global';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
 import { CurtainAction, CurtainMode, CurtainType, Store } from '@types';
+import { useDispatch } from '@store';
 import settings from '@configs/settings.json';
 import { createPortal } from 'react-dom';
 import { findPartialSum } from '@util/util';
@@ -42,7 +43,7 @@ const Curtain = ({
   const finishedTimeoutRef = useRef(null);
   const splashActive = useSelector((state: Store) => state.global.splashActive);
   const [isPresent, safeToRemove] = usePresence();
-  const { inClient } = useMounted();
+  const { inClient, isMounted } = useMounted();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -203,30 +204,28 @@ const Curtain = ({
     },
   };
 
-  return (
-    inClient &&
-    createPortal(
-      <CurtainOverlay>
-        <CurtainWrapper {...getFramerProps()} variants={curtainVariants}>
-          {settings.gridLines.map((g: number, i: number): JSX.Element[] => {
-            let blocks: JSX.Element[] = [];
+  const curtain: JSX.Element = (
+    <CurtainOverlay>
+      <CurtainWrapper {...getFramerProps()} variants={curtainVariants}>
+        {settings.gridLines.map((g: number, i: number): JSX.Element[] => {
+          let blocks: JSX.Element[] = [];
 
-            for (let j = 0; j < rows; j++) {
-              blocks = [...blocks, renderBlock(i, j)];
-            }
+          for (let j = 0; j < rows; j++) {
+            blocks = [...blocks, renderBlock(i, j)];
+          }
 
-            return blocks;
-          })}
-        </CurtainWrapper>
-        {curtainType === CurtainType.SPLASH && (
-          <LogoOutterWrapper>
-            <StyledLogo color="aqua" debug={settings.splashScreenDebug} />
-          </LogoOutterWrapper>
-        )}
-      </CurtainOverlay>,
-      window.document.body,
-    )
+          return blocks;
+        })}
+      </CurtainWrapper>
+      {curtainType === CurtainType.SPLASH && (
+        <LogoOutterWrapper>
+          <StyledLogo color="aqua" debug={settings.splashScreenDebug} />
+        </LogoOutterWrapper>
+      )}
+    </CurtainOverlay>
   );
+
+  return inClient ? createPortal(curtain, window.document.body) : curtain;
 };
 
 export default Curtain;

@@ -1,16 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from '@store';
 import { changeSplashActive } from '@actions/global';
-import { Store } from '@types';
 import settings from '@configs/settings.json';
 import { requestTimeout } from '@util/shims';
 
-type UseCurtainReturn = {
-  splashActive: boolean;
-};
-
-export const useSplashScreen = (): UseCurtainReturn => {
-  const splashActive = useSelector((state: Store) => state.global.splashActive);
+export const useSplashScreen = () => {
   const dispatch = useDispatch();
   const splashTimeoutRef = useRef(null);
 
@@ -22,8 +16,4 @@ export const useSplashScreen = (): UseCurtainReturn => {
       settings.splashScreenDebug ? 6000000 : settings.splashScreenTimeout,
     );
   }, []);
-
-  return {
-    splashActive,
-  };
 };
