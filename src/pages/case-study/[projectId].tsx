@@ -5,6 +5,8 @@ import { getNextProject, getRelatedProjects } from '@util/projects';
 import Layout from '@components/layout';
 import CaseStudy from '@components/pages/case-study';
 import { dehydrate, DehydratedState, QueryClient } from 'react-query';
+import withCurtain from '@components/hoc/with-curtain';
+import { wrapper } from '@store';
 import {
   GcmsProjectBodyRaw,
   OmitProjectBody,
@@ -17,7 +19,6 @@ import {
   useGetSocialLinksQuery,
   GetCaseStudyQuery,
 } from '@types';
-import withCurtain from '@components/hoc/with-curtain';
 
 type Props = {
   projectId: string;
@@ -74,24 +75,25 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-}): Promise<GetStaticPropsResult<Props>> => {
-  const queryClient = new QueryClient();
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  () =>
+    async ({ params }): Promise<GetStaticPropsResult<Props>> => {
+      const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(
-    useGetSocialLinksQuery.getKey(),
-    useGetSocialLinksQuery.fetcher(),
-  );
+      await queryClient.prefetchQuery(
+        useGetSocialLinksQuery.getKey(),
+        useGetSocialLinksQuery.fetcher(),
+      );
 
-  await queryClient.prefetchQuery(['processed-case-study', params.projectId], () =>
-    processGcmsData(params.projectId as string),
-  );
+      await queryClient.prefetchQuery(['processed-case-study', params.projectId], () =>
+        processGcmsData(params.projectId as string),
+      );
 
-  return {
-    props: {
-      projectId: params.projectId as string,
-      dehydratedState: dehydrate(queryClient),
+      return {
+        props: {
+          projectId: params.projectId as string,
+          dehydratedState: dehydrate(queryClient),
+        },
+      };
     },
-  };
-};
+);

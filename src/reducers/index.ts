@@ -11,13 +11,11 @@ const combinedReducers = combineReducers({
 });
 
 const reducer = (state, action) => {
-  console.log('REDUCER ----- ', action.type);
   if (action.type === HYDRATE) {
     const nextState = {
       ...state, // use previous state
-      ...action.payload, // apply delta from hydration
+      // ...action.payload, // apply delta from hydration
     };
-    if (state.count) nextState.count = state.count;
     return nextState;
   } else {
     return combinedReducers(state, action);

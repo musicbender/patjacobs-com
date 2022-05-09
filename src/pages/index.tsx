@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
 import { GetStaticProps } from 'next';
+import { dehydrate, QueryClient } from 'react-query';
+import Layout from '@components/layout';
+import withCurtain from '@components/hoc/with-curtain';
+import { wrapper } from '@store';
 import Home from '@components/pages/home';
 import {
   useGetAboutMeSectionQuery,
@@ -7,9 +11,6 @@ import {
   useGetSkillsQuery,
   useGetSocialLinksQuery,
 } from '@types';
-import { dehydrate, QueryClient } from 'react-query';
-import Layout from '@components/layout';
-import withCurtain from '@components/hoc/with-curtain';
 
 const Index: FC = () => {
   return (
@@ -21,7 +22,7 @@ const Index: FC = () => {
 
 export default withCurtain(Index);
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(() => async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(
@@ -42,4 +43,4 @@ export const getStaticProps: GetStaticProps = async () => {
       dehydratedState: dehydrate(queryClient),
     },
   };
-};
+});

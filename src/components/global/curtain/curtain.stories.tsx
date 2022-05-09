@@ -61,10 +61,5 @@ storiesOf('Curtain', module)
     />
   ))
   .add('blocks uncoverMode', () => <CurtainStory uncoverMode={CurtainMode.BLOCKS} />)
-  .add('reverse blocks uncoverMode', () => (
-    <CurtainStory uncoverMode={CurtainMode.REVERSE_BLOCKS} />
-  ))
-  .add('rows uncoverMode', () => <CurtainStory uncoverMode={CurtainMode.ROWS} />)
-  .add('full uncoverMode', () => <CurtainStory uncoverMode={CurtainMode.FULL} />)
   .add('longer duration', () => <CurtainStory durations={[2, 5, 2]} />)
   .add('shorter duration', () => <CurtainStory durations={[0.5, 1, 0.5]} />);

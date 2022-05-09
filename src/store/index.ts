@@ -1,4 +1,4 @@
-import { Store } from 'redux';
+import { Middleware, Store } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import promise from 'redux-promise';
 import reducer from '@reducers';
@@ -8,21 +8,20 @@ import { Store as State } from '@types';
 import { useDispatch as useReduxDispatch } from 'react-redux';
 import preloadedState from './initial-state';
 
-const middleware = [globalMiddleware, homeMiddleware, promise];
+const middleware: Middleware[] = [globalMiddleware, homeMiddleware, promise];
+const isDevEnv: boolean = process.env.NODE_ENV === 'development';
 
 const makeStore = () =>
   configureStore({
     reducer,
     middleware,
-    devTools: process.env.NODE_ENV === 'development',
+    devTools: isDevEnv,
     preloadedState,
   });
 
-export const store = makeStore();
+export const store: Store = makeStore();
 
-export const wrapper = createWrapper<Store<State>>(() => store, { debug: true });
-
-console.log('store', store.getState(), wrapper);
+export const wrapper = createWrapper<Store<State>>(() => store, { debug: isDevEnv });
 
 export type AppDispatch = typeof store.dispatch;
 
