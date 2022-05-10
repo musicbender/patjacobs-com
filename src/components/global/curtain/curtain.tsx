@@ -43,7 +43,7 @@ const Curtain = ({
   const finishedTimeoutRef = useRef(null);
   const splashActive = useSelector((state: Store) => state.global.splashActive);
   const [isPresent, safeToRemove] = usePresence();
-  const { inClient, isMounted } = useMounted();
+  const { inClient } = useMounted();
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -1,6 +1,4 @@
-import styled, { keyframes, css } from 'styled-components';
-import { superCenter } from '@styles/utils/global';
-import Logo from '@components/global/logo';
+import styled from 'styled-components';
 
 // components
 export const SplashScreenWrapper = styled.div`

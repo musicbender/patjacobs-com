@@ -101,7 +101,6 @@ const WorkItem: FC<Props> = ({
                 buttonUrl={getItemUrl()}
                 linkType={item.listType}
                 isStopped={isStopped}
-                isMobile={isMobile}
                 isParallax
               />
             </InfoInnerWrapper>

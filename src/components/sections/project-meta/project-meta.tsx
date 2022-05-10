@@ -9,9 +9,6 @@ import {
   Label,
   ContentValue,
   ContentValueLink,
-  IconWrapper,
-  StyledStorybookIcon,
-  StyledGithubIcon,
 } from './styles';
 
 type Props = {
@@ -19,20 +16,7 @@ type Props = {
 };
 
 const ProjectMeta = ({ project }: Props): JSX.Element => {
-  const getGithubIcon = (url: string) => (
-    <IconWrapper href={url} target="_blank">
-      <StyledGithubIcon />
-    </IconWrapper>
-  );
-
-  const getStorybookIcon = (url: string): JSX.Element => (
-    <IconWrapper href={url} target="_blank">
-      <StyledStorybookIcon />
-    </IconWrapper>
-  );
-
   const publishDate: Date = parseISO(project.projectPublishDate);
-
   return (
     project && (
       <ProjectMetaWrapper>

@@ -32,8 +32,9 @@ class ErrorBoundary extends Component<any, State> {
   }
 }
 
-export default (ChildComponent: React.ComponentType) => (props: any) => (
-  <ErrorBoundary>
-    <ChildComponent {...props} />
-  </ErrorBoundary>
-);
+export default (ChildComponent: React.ComponentType) => (props: any) =>
+  (
+    <ErrorBoundary>
+      <ChildComponent {...props} />
+    </ErrorBoundary>
+  );

@@ -1,5 +1,5 @@
 import Curtain from '@components/global/curtain';
-import { CurtainMode, Store } from '@types';
+import { CurtainMode } from '@types';
 import React, { FC } from 'react';
 
 export default function withCurtain<P>(WrappedComponent: React.ComponentType<P>) {

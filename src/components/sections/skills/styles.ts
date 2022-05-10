@@ -38,13 +38,13 @@ export const StyledDotFormation = styled(DotFormation)<StyledDotFormationProps>`
   }};
   left: 92%;
   transform: translateX(-100%);
-  ${props =>
+  ${(props) =>
     props.breakpoint === 'mobile' &&
     css`
       padding-bottom: 225%;
       ${media.tablet`display: none;`}
     `};
-  ${props =>
+  ${(props) =>
     props.breakpoint === 'desktop' &&
     css`
       display: none;

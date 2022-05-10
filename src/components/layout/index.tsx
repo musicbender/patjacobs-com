@@ -28,7 +28,6 @@ const Layout: FC<PropsWithChildren<Props>> = ({ headProps = {}, children }) => {
   const splashActive = useSelector((state: Store) => state.global.splashActive);
   const scrollCurtainActive = useSelector((state: Store) => state.global.scrollCurtainActive);
   const isMobile = useSelector((state: Store) => state.global.isMobile);
-  const skillsTop = useSelector((state: Store) => state.home.skillsTop);
   const mode = useSelector((state: Store) => state.global.mode);
   const splashTimeoutRef = useRef(null);
   const { curtainState } = useCurtain();

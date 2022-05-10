@@ -49,32 +49,32 @@ export const Dot = styled('div')<DotProps>`
   width: ${diameter};
   height: ${diameter};
   border-radius: ${diameter};
-  background-color: ${props => props.theme.corePalette[props.color]};
-  ${props =>
+  background-color: ${(props) => props.theme.corePalette[props.color]};
+  ${(props) =>
     !props.forMobile &&
     css`
       ${props.color === 'yellow' &&
-        css`
+      css`
         transform: translate3d(10vw, 5em, 0);
         /* animation-name: ${yellowDot}; */
       `}
       ${props.color === 'purple' &&
-        css`
+      css`
         transform: translate3d(34vw, 0em, 0);
         /* animation-name: ${purpleDot}; */
       `} 
       ${props.color === 'orange' &&
-        css`
+      css`
         transform: translate3d(86vw, 13em, 0);
         /* animation-name: ${orangeDot}; */
       `} 
       ${props.color === 'aqua' &&
-        css`
+      css`
         transform: translate3d(86vw, 13em, 0);
         /* animation-name: ${aquaDot}; */
       `}
     `}
-  ${props =>
+  ${(props) =>
     props.entering &&
     !props.forMobile &&
     css`
@@ -83,42 +83,42 @@ export const Dot = styled('div')<DotProps>`
       animation-timing-function: steps(1);
       animation-fill-mode: forwards;
       ${props.color === 'yellow' &&
-        css`
-          animation-name: ${css`
-            ${yellowDot}
-          `};
-        `}
+      css`
+        animation-name: ${css`
+          ${yellowDot}
+        `};
+      `}
       ${props.color === 'purple' &&
-        css`
-          animation-name: ${css`
-            ${purpleDot}
-          `};
-        `} 
+      css`
+        animation-name: ${css`
+          ${purpleDot}
+        `};
+      `} 
           ${props.color === 'orange' &&
-            css`
-              animation-name: ${css`
-                ${orangeDot}
-              `};
-            `} 
+      css`
+        animation-name: ${css`
+          ${orangeDot}
+        `};
+      `} 
           ${props.color === 'aqua' &&
-            css`
-              animation-name: ${css`
-                ${aquaDot}
-              `};
-            `}
+      css`
+        animation-name: ${css`
+          ${aquaDot}
+        `};
+      `}
     `}
-  ${props =>
+  ${(props) =>
     props.finished &&
     !props.forMobile &&
     css`
       animation: none;
       opacity: 1;
       ${props.color === 'yellow' &&
-        `
+      `
       transform: translate3d(8vw, 24em, 0);
     `}
       ${props.color === 'purple' &&
-        `
+      `
       transform: translate3d(8vw, 28em, 0) scale(1);
     `}
     ${props.color === 'orange' &&
@@ -130,7 +130,7 @@ export const Dot = styled('div')<DotProps>`
       transform: translate3d(8vw, 36em, 0) scale(1);
     `}
     `}
-  ${props =>
+  ${(props) =>
     props.forMobile &&
     css`
       display: inline-block;
@@ -139,7 +139,7 @@ export const Dot = styled('div')<DotProps>`
       opacity: 0;
       transform: translate3d(0, 2em, 0);
     `}
-  ${props =>
+  ${(props) =>
     props.forMobile &&
     props.entering &&
     css`
@@ -157,7 +157,7 @@ export const Dot = styled('div')<DotProps>`
         animation-delay: 2500ms;
       }
     `}
-  ${props =>
+  ${(props) =>
     props.forMobile &&
     props.finished &&
     css`

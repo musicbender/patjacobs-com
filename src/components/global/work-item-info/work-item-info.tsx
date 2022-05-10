@@ -6,7 +6,6 @@ type Props = {
   description?: string;
   isStopped?: boolean;
   isParallax?: boolean;
-  isMobile?: boolean;
   buttonUrl?: string;
   buttonText?: string;
   linkType?: string;
@@ -18,7 +17,6 @@ const ItemInfo: FC<Props> = ({
   description,
   isStopped = false,
   isParallax = false,
-  isMobile = false,
   buttonUrl,
   buttonText = 'view project',
   linkType = 'Case_Study',

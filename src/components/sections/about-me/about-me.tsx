@@ -4,12 +4,10 @@ import { useGetAboutMeSectionQuery } from '@types';
 import { useMounted } from 'src/hooks/use-mounted';
 
 type Props = {
-  atAbout: boolean;
-  setAboutTop: () => void;
   isMobile: boolean;
 };
 
-const AboutMe = ({ atAbout = false, isMobile }: Props) => {
+const AboutMe = ({ isMobile }: Props) => {
   const { data } = useGetAboutMeSectionQuery();
   const { isMounted } = useMounted();
   return (
