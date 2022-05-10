@@ -1,12 +1,11 @@
 // interfaces
 export type Store = {
   global: {
-    pageLoaded: boolean;
     curtainState: CurtainState;
     splashActive: boolean;
     scrollCurtainActive: boolean;
     menuOpen: boolean;
-    mode: string;
+    mode: Mode;
     isMobile: boolean;
   };
   home: {
@@ -25,4 +24,7 @@ export type HomeActionPayload = {
 
 export type { AppState } from '@reducers';
 
-export type Modes = 'light' | 'dark';
+export enum Mode {
+  DARK = 'dark',
+  LIGHT = 'light',
+}

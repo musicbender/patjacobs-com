@@ -70,6 +70,7 @@ export const Block = styled.div`
 
 export const InnerBlock = styled(motion.div)<InnerBlockProps>`
   background-color: ${({ theme }) => theme.palette.matteBlack};
+  transform-origin: left;
 `;
 
 export const LogoOutterWrapper = styled.div`

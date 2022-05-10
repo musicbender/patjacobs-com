@@ -1,11 +1,12 @@
+import { Mode } from '@types';
+
 const initialState = {
   global: {
-    pageLoaded: false,
     curtainState: null,
     splashActive: true,
     scrollCurtainActive: false,
     menuOpen: false,
-    mode: 'dark',
+    mode: Mode.DARK,
     isMobile: true,
   },
   home: {

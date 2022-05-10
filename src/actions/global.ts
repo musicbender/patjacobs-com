@@ -1,5 +1,4 @@
 import {
-  PAGE_LOADED,
   CURTAIN_STATE_CHANGED,
   SPLASH_CHANGED,
   SCROLL_CURTAIN_CHANGED,
@@ -9,12 +8,6 @@ import {
 } from '@constants/global';
 import { AnyAction } from 'redux';
 import { CurtainState } from '@types';
-
-export function loadPage() {
-  return {
-    type: PAGE_LOADED,
-  };
-}
 
 export function changeScrollCurtain(open: boolean): AnyAction {
   return {

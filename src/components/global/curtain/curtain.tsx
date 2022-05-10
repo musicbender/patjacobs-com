@@ -159,7 +159,7 @@ const Curtain = ({
       },
     };
 
-    return <InnerBlock variants={blockVariants} key={'curtain-block' + i + '_' + j} />;
+    return <InnerBlock variants={blockVariants} key={'curtain_block' + i + '_' + j} />;
   };
 
   const getFramerProps = () => {
@@ -169,21 +169,21 @@ const Curtain = ({
           initial: uncoverMode !== CurtainMode.NONE ? 'start' : 'startsCovered',
           animate: uncoverMode !== CurtainMode.NONE ? 'uncover' : 'startsCovered',
           exit: 'cover',
-          key: 'page-curtain-wrapper',
+          key: 'page_curtain_wrapper',
         };
       case CurtainType.SPLASH:
         return {
           initial: 'startsCovered',
           animate: uncoverMode !== CurtainMode.NONE ? 'uncover' : 'startsCovered',
           exit: 'cover',
-          key: 'splash-curtain-wrapper',
+          key: 'splash_curtain_wrapper',
         };
       case CurtainType.SCROLL:
         return {
           initial: uncoverMode !== CurtainMode.NONE ? 'startUncovered' : 'startsCovered',
           animate: uncoverMode !== CurtainMode.NONE ? 'cover' : 'startsCovered',
           exit: 'uncover',
-          key: 'curtain-wrapper',
+          key: 'scroll_curtain_wrapper',
         };
     }
   };
