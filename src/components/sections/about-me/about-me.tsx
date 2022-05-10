@@ -1,87 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
 import Plx from 'react-plx';
-import { hasWindow, countLongestArray } from '../../../util/util';
-import { startSequence } from '../../../util/animation';
-import { dotGridA } from './dots';
-import { StyledHeading, StyledDotGrid, ContentBox, AboutMeSection } from './styles';
+import { StyledHeading, ContentBox, AboutMeSection } from './styles';
+import { useGetAboutMeSectionQuery } from '@types';
+import { useMounted } from 'src/hooks/use-mounted';
 
-interface Props {
-    atAbout: boolean;
-    setAboutTop: () => void;
-    isMobile: boolean;
-}
+type Props = {
+  isMobile: boolean;
+};
 
-const AboutMe = ({ atAbout = false, isMobile }: Props) => {
-    const { gcms } = useStaticQuery(graphql`
-        query {
-            gcms {
-                section(where: { sectionId: "about-me" }) {
-                    heading
-                    body {
-                        html
-                    }
-                }
-            }
-        }
-    `);
-
-    const [dotGridIndex, updateSequence] = useState(0);
-    const interval = 180;
-    const delay = 0;
-
-    // on mount
-    useEffect(() => {
-        // const section = document.getElementById('about-section');
-        // const rect = section.getBoundingClientRect();
-        // TODO: set top here
-    }, []);
-
-    // on update
-    useEffect(() => {
-        if (atAbout) {
-            const dotGridLength = countLongestArray([dotGridA]);
-
-            startSequence(
-                {
-                    length: (dotGridLength as number) || 0,
-                    interval,
-                    delay,
-                    index: dotGridIndex,
-                },
-                updateSequence
-            );
-        } else {
-            updateSequence(0);
-        }
-    }, [atAbout]);
-
-    return (
-        <AboutMeSection id="about-section">
-            <StyledHeading text={gcms.section.heading} />
-            <StyledDotGrid sequence={dotGridA} index={dotGridIndex} />
-            <Plx
-                disabled={!hasWindow() || isMobile}
-                parallaxData={[
-                    {
-                        start: 'self',
-                        end: 'self',
-                        endOffset: '100vh',
-                        properties: [
-                            {
-                                startValue: 20,
-                                endValue: -16,
-                                unit: '%',
-                                property: 'translateY',
-                            },
-                        ],
-                    },
-                ]}
-            >
-                <ContentBox dangerouslySetInnerHTML={{ __html: gcms.section.body.html }} />
-            </Plx>
-        </AboutMeSection>
-    );
+const AboutMe = ({ isMobile }: Props) => {
+  const { data } = useGetAboutMeSectionQuery();
+  const { isMounted } = useMounted();
+  return (
+    <AboutMeSection id="about-section">
+      <StyledHeading text={data.aboutMeSection.heading} />
+      <Plx
+        disabled={!isMounted || isMobile}
+        parallaxData={[
+          {
+            start: 'self',
+            end: 'self',
+            endOffset: '100vh',
+            properties: [
+              {
+                startValue: 20,
+                endValue: -16,
+                unit: '%',
+                property: 'translateY',
+              },
+            ],
+          },
+        ]}
+      >
+        <ContentBox dangerouslySetInnerHTML={{ __html: data.aboutMeSection.body.html }} />
+      </Plx>
+    </AboutMeSection>
+  );
 };
 
 export default AboutMe;

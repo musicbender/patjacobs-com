@@ -1,185 +1,85 @@
-import React, { PureComponent } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import update from 'immutability-helper';
+import React, { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Particles from './particles';
-import Heading from '../../global/heading';
-import WorkItem from '../../global/work-item/work-item';
-import { throttle } from '../../../util/util';
-import { setRecentWorkTop } from '../../../actions/global';
+import Heading from '@components/global/heading';
+import WorkItem from '@components/global/work-item/work-item';
+import settings from '@configs/settings.json';
+import { RECENT_WORK_TOP_SET } from '@constants/global';
+import { usePrevious } from '@hooks';
+import { useGetRecentWorkQuery, Project } from '@types';
 import { RecentWorkWrapper, ParentWrapper, WorkItemsWrapper } from './styles';
-import { Gcms_Section, Gcms_Project, Configs } from '../../../../types';
+import { useDispatch } from '@store';
 
-interface Props {
-    configs?: Configs;
-    section?: Gcms_Section;
-    projects?: Gcms_Project[];
-}
+const RecentWork: FC = () => {
+  const { data } = useGetRecentWorkQuery();
+  const defaultWorkStops: boolean[] = data.projects.map(() => false);
+  const [workStops, setWorkStops] = useState<boolean[]>(defaultWorkStops);
+  const recentWorkTop = useSelector((state: Storage) => state.home.recentWorkTop);
+  const isMobile = useSelector((state: Storage) => state.global.isMobile);
+  const scrollCurtainActive = useSelector((state: Storage) => state.global.scrollCurtainActive);
+  const prevState = usePrevious({ scrollCurtainActive });
+  const dispatch = useDispatch();
 
-interface ReduxProps {
-    recentWorkTop: number;
-    isMobile: boolean;
-    transportOpen: boolean;
-    setRecentWorkTop: (args: any) => any;
-}
+  const setTop = (didResize = false, input?: any): void => {
+    let value = input;
 
-interface State {
-    workStops: boolean[];
-}
+    if (value == null) {
+      const section = document.getElementById('recent-work-section');
+      const rect = section.getBoundingClientRect();
+      value = rect.top;
+    }
 
-const mapStateToProps = ({ global, home }) => {
-    return {
-        recentWorkTop: home.recentWorkTop,
-        isMobile: global.isMobile,
-        transportOpen: global.transportOpen,
+    dispatch({ type: RECENT_WORK_TOP_SET, payload: { value, didResize } });
+  };
+
+  const handleResize = (): void => {
+    setTop(true);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
     };
-};
+  }, []);
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            setRecentWorkTop,
-        },
-        dispatch
-    );
-};
-
-class RecentWork extends PureComponent<Props & ReduxProps, State> {
-    defaultWorkStops: boolean[];
-
-    constructor(props: Props & ReduxProps) {
-        super(props);
-        this.defaultWorkStops = props.projects.map(() => false);
-        this.handleResize = throttle(this.handleResize.bind(this), 100);
-        this.handleWorkStops = this.handleWorkStops.bind(this);
-        this.state = {
-            workStops: this.defaultWorkStops,
-        };
+  useEffect(() => {
+    if (!prevState?.scrollCurtainActive && scrollCurtainActive) {
+      setWorkStops(defaultWorkStops);
     }
+  }, [scrollCurtainActive]);
 
-    componentDidMount() {
-        window.addEventListener('resize', this.handleResize);
-    }
+  const handleWorkStops = (index: number, stopped?: boolean) => (): void => {
+    const updatedArr: boolean[] = [...workStops];
+    updatedArr[index] = stopped !== null ? stopped : !workStops[index];
+    setWorkStops(updatedArr);
+  };
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.handleResize);
-    }
-
-    componentDidUpdate(prevProps) {
-        if (!prevProps.transportOpen && this.props.transportOpen) {
-            this.resetWorkStops();
-        }
-    }
-
-    handleResize() {
-        this.setTop(true);
-    }
-
-    setTop(didResize = false, input?: any): void {
-        let value = input;
-
-        if (value == null) {
-            const section = document.getElementById('recent-work-section');
-            const rect = section.getBoundingClientRect();
-            value = rect.top;
-        }
-
-        this.props.setRecentWorkTop({ value, didResize });
-    }
-
-    handleWorkStops(index, stopped) {
-        return () => {
-            const isStopped = stopped !== null ? stopped : !this.state.workStops[index];
-            const newState = update(this.state, {
-                workStops: {
-                    [index]: {
-                        $set: isStopped,
-                    },
-                },
-            });
-
-            this.setState(newState);
-        };
-    }
-
-    resetWorkStops() {
-        this.setState({ workStops: this.defaultWorkStops });
-    }
-
-    renderWorkItems() {
-        return this.props.projects.map((item, i: number) => {
+  return (
+    <RecentWorkWrapper id="recent-work-section">
+      <Heading text={data.recentWorkSection.heading} />
+      <ParentWrapper>
+        <WorkItemsWrapper>
+          {data.projects.map((item: Project, i: number) => {
             return (
-                i < this.props.configs.settings.workItemsAmount && (
-                    <WorkItem
-                        item={item}
-                        index={i}
-                        isStopped={this.state.workStops[i]}
-                        handleWorkStops={this.handleWorkStops}
-                        baseTop={this.props.recentWorkTop}
-                        isMobile={this.props.isMobile}
-                        key={item.title + `${i * 7}`}
-                    />
-                )
+              i < settings.workItemsAmount && (
+                <WorkItem
+                  item={item}
+                  index={i}
+                  isStopped={workStops[i]}
+                  handleWorkStops={handleWorkStops}
+                  baseTop={recentWorkTop}
+                  isMobile={isMobile}
+                  key={item.title + `${i * 7}`}
+                />
+              )
             );
-        });
-    }
+          })}
+        </WorkItemsWrapper>
+      </ParentWrapper>
+      <Particles isMobile={isMobile} />
+    </RecentWorkWrapper>
+  );
+};
 
-    render() {
-        return (
-            <RecentWorkWrapper id="recent-work-section">
-                <Heading text={this.props.section.heading} />
-                <ParentWrapper>
-                    <WorkItemsWrapper>{this.renderWorkItems()}</WorkItemsWrapper>
-                </ParentWrapper>
-                <Particles isMobile={this.props.isMobile} />
-            </RecentWorkWrapper>
-        );
-    }
-}
-
-const ConnectedRecentWork = connect(mapStateToProps, mapDispatchToProps)(RecentWork);
-
-export default (props: Omit<Props, 'configs'>) => (
-    <StaticQuery
-        query={graphql`
-            query {
-                configs {
-                    settings {
-                        workItemsAmount
-                    }
-                }
-                gcms {
-                    section(where: { sectionId: "recent-work" }) {
-                        heading
-                    }
-                    projects(
-                        orderBy: order_ASC
-                        first: 5
-                        where: { projectType: Work, disabled: false }
-                    ) {
-                        id
-                        projectType
-                        title
-                        description
-                        projectId
-                        externalUrl
-                        linkType
-                        order
-                        imageDesktop {
-                            url
-                        }
-                    }
-                }
-            }
-        `}
-        render={data => (
-            <ConnectedRecentWork
-                configs={data.configs}
-                section={data.gcms.section}
-                projects={data.gcms.projects}
-                {...props}
-            />
-        )}
-    />
-);
+export default RecentWork;

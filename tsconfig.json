@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,19 +11,34 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "experimentalDecorators": true,
-    "jsx": "react",
-    "noEmit": true
+    "jsx": "preserve",
+    "noEmit": true,
+    "typeRoots": ["./src/types", "node_modules/@types"],
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@configs/*": ["src/configs/*"],
+      "@hooks": ["src/hooks/index.ts"],
+      "@store": ["src/store/index.ts"],
+      "@store/*": ["src/store/*"],
+      "@types": ["src/types"],
+      "@util/*": ["src/util/*"],
+      "@constants/*": ["src/constants/*"],
+      "@reducers": ["src/reducers/index.ts"],
+      "@middleware": ["src/middleware/index.ts"],
+      "@styles/*": ["src/styles/*"],
+      "@queries/*": ["src/queries/*"],
+      "@actions/*": ["src/actions/*"],
+      "@assets/*": ["src/assets/*"],
+      "@public/*": ["public/*"],
+      "@test/*": ["test/*"]
+    },
+    "strict": false,
+    "incremental": true
   },
-  "include": [
-    "src", 
-    "gatsby-browser.js", 
-    "types", 
-    "data",
-    "gatsby-config.js", 
-    "gatsby-ssr.js",
-    "gatsby-node.js",
-    "jest.config.js"
-  ]
+  "include": ["next-env.d.ts", "src/types/global.d.ts", "src", "jest.config.js", "codegen.js"],
+  "exclude": ["node_modules", "build", ".next"]
 }

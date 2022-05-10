@@ -1,18 +1,18 @@
-import { getBlockAnimation } from '../animate';
+import { getBlockAnimation } from '@styles/utils/animate';
 import { css } from 'styled-components';
-import { mockKeyframes } from '../../../../test/mocks/styled';
-import theme from '../../theme';
+import { mockKeyframes } from '@test/mocks/styled';
+import theme from '@styles/theme';
 
 describe('styles/utils/animate.ts', () => {
-    describe('getBlockAnimation()', () => {
-        const { slow } = theme.animate;
-        const conf = {
-            enterFrames: mockKeyframes,
-            exitFrames: mockKeyframes,
-        };
+  describe('getBlockAnimation()', () => {
+    const { slow } = theme.animate;
+    const conf = {
+      enterFrames: mockKeyframes,
+      exitFrames: mockKeyframes,
+    };
 
-        // prettier-ignore
-        const tests: any[] = [
+    // prettier-ignore
+    const tests: any[] = [
             {
                 assert: {
                     ...conf,
@@ -134,10 +134,10 @@ describe('styles/utils/animate.ts', () => {
             },
         ];
 
-        tests.forEach(({ assert, expected, description }) => {
-            it(description, () => {
-                expect(getBlockAnimation(assert)).toEqual(expected);
-            });
-        });
+    tests.forEach(({ assert, expected, description }) => {
+      it(description, () => {
+        expect(getBlockAnimation(assert)).toEqual(expected);
+      });
     });
+  });
 });

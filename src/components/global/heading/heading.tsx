@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { HeadingWrapper } from './styles';
 
-interface Props {
-    text: string;
-    className?: string;
-}
+type Props = {
+  text: string;
+  className?: string;
+};
 
-const Heading = ({ text, className }: Props) => (
-    <HeadingWrapper className={className}>{text}</HeadingWrapper>
+const Heading: FC<Props> = ({ text, className }) => (
+  <HeadingWrapper className={className}>{text}</HeadingWrapper>
 );
 
 export default Heading;

@@ -1,21 +1,65 @@
-import React from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { storiesOf } from '@storybook/react';
-import Curtain from './curtain';
+import Curtain, { Props } from './curtain';
+import { CurtainMode } from '@types';
+import { AnimatePresence } from 'framer-motion';
+import { useCurtain } from 'src/hooks/use-curtain';
 
 const description = 'A curtain transition effect component';
-const props = { gridLines: [8, 17, 8, 17, 34, 8, 8] };
+
+const MockPage1 = (props) => {
+  useCurtain();
+  return (
+    <div>
+      <h2>Hi. Curtain will close in 3 seconds</h2>
+      <Curtain {...props} />
+    </div>
+  );
+};
+
+const MockPage2 = (props) => {
+  useCurtain();
+  return (
+    <div>
+      <h2>Hello again</h2>
+      <Curtain {...props} />
+    </div>
+  );
+};
+
+const CurtainStory: FC<Props> = (props) => {
+  const [simulateReroute, setSimulateReroute] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setSimulateReroute(true), 3000);
+  }, []);
+
+  return (
+    <AnimatePresence exitBeforeEnter initial={false}>
+      {simulateReroute ? (
+        <MockPage2 {...props} key="mock-page-2" />
+      ) : (
+        <MockPage1 {...props} key="mock-page-1" />
+      )}
+    </AnimatePresence>
+  );
+};
 
 // stories
 storiesOf('Curtain', module)
-    .add('default', () => <Curtain />, {
-        info: { text: description },
-    })
-    .add('reverse blocks enterence', () => <Curtain entrance="reverse-blocks" {...props} />)
-    .add('rows enterence', () => <Curtain entrance="rows" {...props} />)
-    .add('full enterence', () => <Curtain entrance="full" {...props} />)
-    .add('blocks exit', () => <Curtain exit="blocks" {...props} />)
-    .add('reverse blocks exit', () => <Curtain exit="reverse-blocks" {...props} />)
-    .add('rows exit', () => <Curtain exit="rows" {...props} />)
-    .add('full exit', () => <Curtain exit="full" {...props} />)
-    .add('longer duration', () => <Curtain duration={5000} {...props} />)
-    .add('shorter duration', () => <Curtain duration={1000} {...props} />);
+  .add('default', () => <CurtainStory />, {
+    info: { text: description },
+  })
+  .add('blocks', () => <CurtainStory coverMode={CurtainMode.BLOCKS} />)
+  .add('reverse blocks enterence', () => <CurtainStory coverMode={CurtainMode.REVERSE_BLOCKS} />)
+  .add('rows', () => <CurtainStory coverMode={CurtainMode.ROWS} uncoverMode={CurtainMode.ROWS} />)
+  .add('full', () => (
+    <CurtainStory
+      coverMode={CurtainMode.FULL}
+      uncoverMode={CurtainMode.FULL}
+      durations={[2, 1, 2]}
+    />
+  ))
+  .add('blocks uncoverMode', () => <CurtainStory uncoverMode={CurtainMode.BLOCKS} />)
+  .add('longer duration', () => <CurtainStory durations={[2, 5, 2]} />)
+  .add('shorter duration', () => <CurtainStory durations={[0.5, 1, 0.5]} />);

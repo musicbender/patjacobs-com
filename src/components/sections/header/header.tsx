@@ -1,212 +1,81 @@
-import React, { PureComponent } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
-import { connect } from 'react-redux';
+import { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Plx from 'react-plx';
-import ColorDotRow from '../../particles/color-dot-row';
-import Triangle from '../../particles/triangle';
-import { dotGridA, dotGridB, dotGridC, dotGridD } from './dots';
-import { countLongestArray, hasWindow } from '../../../util/util';
-import { startSequence, curtainInClose } from '../../../util/animation';
+import ColorDotRow from '@components/particles/color-dot-row';
+import Triangle from '@components/particles/triangle';
+import config from '@configs/header.json';
+import metaConfig from '@configs/meta.json';
+import settings from '@configs/settings.json';
+import { TriangleSizes, ParticleColors, Store } from '@types';
 import {
-    Modes,
-    TriangleSizes,
-    ParticleColors,
-    Configs,
-    ConfigsHeaderTriangles,
-    CurtainState,
-} from '../../../../types';
-import {
-    HomeHeader,
-    DotGridWrapper,
-    TitleWrapper,
-    Title,
-    SubTitle,
-    TriangleParallax,
-    StyledLilSquare,
-    DotGridA,
-    DotGridB,
-    DotGridC,
-    DotGridD,
+  HomeHeader,
+  TitleWrapper,
+  Title,
+  SubTitle,
+  TriangleParallax,
+  StyledLilSquare,
 } from './styles';
+import { useMounted } from 'src/hooks/use-mounted';
+import { useCurtain } from 'src/hooks/use-curtain';
 
-interface Props {
-    configs: Configs;
-}
+const Header: FC = () => {
+  const [active, setActive] = useState(false);
+  const { curtainCovering, curtainState } = useCurtain();
+  const splashActive = useSelector((state: Store) => state.global.splashActive);
+  const isMobile = useSelector((state: Store) => state.global.isMobile);
+  const { isMounted } = useMounted();
 
-interface ReduxProps {
-    pageLoaded: boolean;
-    splashOpen: boolean;
-    curtainState: CurtainState;
-    mode: Modes;
-    isMobile: boolean;
-}
-
-interface State {
-    dotGridIndex: number;
-    sequenceStarted: boolean;
-    active: boolean;
-}
-
-const mapStateToProps = ({ global }) => ({
-    pageLoaded: global.pageLoaded,
-    splashOpen: global.splashOpen,
-    curtainState: global.curtainState,
-    mode: global.mode,
-    isMobile: global.isMobile,
-});
-
-class Header extends PureComponent<Props & ReduxProps, State> {
-    interval: number;
-    delay: number;
-
-    constructor(props) {
-        super(props);
-        this.handleSequence = this.handleSequence.bind(this);
-        this.interval = 180;
-        this.delay = 500;
-        this.state = {
-            dotGridIndex: 0,
-            sequenceStarted: false,
-            active: false,
-        };
+  useEffect(() => {
+    if (!active && curtainCovering) {
+      setActive(true);
     }
+  }, [active, curtainState]);
 
-    componentDidMount() {
-        // if (!this.state.sequenceStarted && curtainInClose(this.props.curtainState)) {
-        //     this.setState({ sequenceStarted: true }, this.initSequence);
-        // }
-    }
+  const getPlxData = ({ plx, start, end }) => {
+    return [
+      {
+        start,
+        end,
+        properties: [
+          {
+            startValue: plx[0],
+            endValue: plx[1],
+            unit: '%',
+            property: 'translateY',
+          },
+        ],
+      },
+    ];
+  };
 
-    componentDidUpdate(prevProps: Props & ReduxProps, prevState: State) {
-        if (!this.state.active && prevProps.curtainState !== this.props.curtainState) {
-            if (
-                !curtainInClose(prevProps.curtainState) &&
-                curtainInClose(this.props.curtainState)
-            ) {
-                this.setState({ active: true });
-            }
-        }
+  return (
+    <HomeHeader splashActive={splashActive}>
+      <ColorDotRow active={active} />
+      <StyledLilSquare />
+      {config.triangles.map((tri: any, i: number) => (
+        <TriangleParallax
+          color={tri.color}
+          size={tri.size}
+          id={tri.id}
+          show={active}
+          gridLines={settings.gridLines}
+          key={i + tri.id}
+        >
+          <Plx disabled={!isMounted || isMobile} parallaxData={getPlxData(tri)}>
+            <Triangle
+              color={tri.color as keyof typeof ParticleColors}
+              size={tri.size as keyof typeof TriangleSizes}
+            />
+          </Plx>
+        </TriangleParallax>
+      ))}
+      <TitleWrapper>
+        <Title show={active}>{metaConfig.name}</Title>
+        <SubTitle show={active}>{metaConfig.role}</SubTitle>
+        <ColorDotRow active={active} forMobile />
+      </TitleWrapper>
+    </HomeHeader>
+  );
+};
 
-        if (!this.state.sequenceStarted) {
-            if (!prevState.active && this.state.active) {
-                this.setState({ sequenceStarted: true }, this.initSequence);
-            }
-        }
-    }
-
-    handleSequence(index = 0): void {
-        this.setState({ dotGridIndex: index });
-    }
-
-    initSequence = () => {
-        const dotGridLength: number | boolean = countLongestArray([
-            dotGridA,
-            dotGridB,
-            dotGridC,
-            dotGridD,
-        ]);
-
-        startSequence(
-            {
-                length: dotGridLength as number,
-                interval: this.interval,
-                delay: this.delay,
-                index: this.state.dotGridIndex,
-            },
-            this.handleSequence
-        );
-    };
-
-    getPlxData({ plx, start, end }: ConfigsHeaderTriangles) {
-        return [
-            {
-                start,
-                end,
-                properties: [
-                    {
-                        startValue: plx[0],
-                        endValue: plx[1],
-                        unit: '%',
-                        property: 'translateY',
-                    },
-                ],
-            },
-        ];
-    }
-
-    renderTriangles(show: boolean) {
-        const { triangles } = this.props.configs.header;
-        return triangles.map((tri, i: number) => (
-            <TriangleParallax
-                color={tri.color}
-                size={tri.size}
-                id={tri.id}
-                show={show}
-                gridLines={this.props.configs.settings.gridLines}
-                key={i + tri.id}
-            >
-                <Plx
-                    disabled={!hasWindow() || this.props.isMobile}
-                    parallaxData={this.getPlxData(tri)}
-                >
-                    <Triangle
-                        color={tri.color as keyof typeof ParticleColors}
-                        size={tri.size as keyof typeof TriangleSizes}
-                    />
-                </Plx>
-            </TriangleParallax>
-        ));
-    }
-
-    render() {
-        return (
-            <HomeHeader splashOpen={this.props.splashOpen}>
-                <ColorDotRow active={this.state.active} />
-                <StyledLilSquare />
-                {this.renderTriangles(this.state.active)}
-                <DotGridWrapper>
-                    <DotGridA sequence={dotGridA} index={this.state.dotGridIndex} />
-                    <DotGridB sequence={dotGridB} index={this.state.dotGridIndex} />
-                    <DotGridC sequence={dotGridC} index={this.state.dotGridIndex} />
-                    <DotGridD sequence={dotGridD} index={this.state.dotGridIndex} />
-                </DotGridWrapper>
-                <TitleWrapper>
-                    <Title show={this.state.active}>{this.props.configs.meta.name}</Title>
-                    <SubTitle show={this.state.active}>{this.props.configs.meta.role}</SubTitle>
-                    <ColorDotRow active={this.state.active} forMobile />
-                </TitleWrapper>
-            </HomeHeader>
-        );
-    }
-}
-
-const ConnectedHeader = connect(mapStateToProps)(Header);
-
-export default (props: Omit<Props, 'configs'>) => (
-    <StaticQuery
-        query={graphql`
-            query {
-                configs {
-                    meta {
-                        name
-                        role
-                    }
-                    header {
-                        triangles {
-                            id
-                            color
-                            size
-                            plx
-                            start
-                            end
-                        }
-                    }
-                    settings {
-                        gridLines
-                    }
-                }
-            }
-        `}
-        render={data => <ConnectedHeader configs={data.configs} {...props} />}
-    />
-);
+export default Header;

@@ -1,11 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 import { media } from './breakpoints';
 import { normalize } from 'styled-normalize';
-import { ITheme } from '../../types/styles';
+import { Theme } from '@types';
 
 interface GlobalStyles {
-    theme: ITheme;
-    media?: any;
+  theme: Theme;
+  media?: any;
 }
 
 export default createGlobalStyle<GlobalStyles>`

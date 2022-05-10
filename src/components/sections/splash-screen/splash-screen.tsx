@@ -1,30 +1,19 @@
-import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import Curtain from '../../global/curtain';
-import { SplashScreenWrapper, LogoOutterWrapper, StyledLogo } from './styles';
+import { FC } from 'react';
+import Curtain from '@components/global/curtain';
+import settings from '@configs/settings.json';
+import { SplashScreenWrapper } from './styles';
+import { AnimatePresence } from 'framer-motion';
+import { CurtainType } from '@types';
 
-const SplashScreen: React.SFC = () => {
-    const splashDuration = 3000;
-    const data = useStaticQuery(graphql`
-        query {
-            configs {
-                settings {
-                    splashScreenDebug
-                }
-            }
-        }
-    `);
-
-    return (
-        <SplashScreenWrapper>
-            <Curtain
-                duration={data.configs.settings.splashScreenDebug ? 3000000 : splashDuration}
-            />
-            <LogoOutterWrapper>
-                <StyledLogo color="aqua" debug={data.configs.settings.splashScreenDebug} />
-            </LogoOutterWrapper>
-        </SplashScreenWrapper>
-    );
+const SplashScreen: FC = () => {
+  const splashDuration = settings.splashScreenDebug ? 300 : 4;
+  return (
+    <SplashScreenWrapper>
+      <AnimatePresence>
+        <Curtain durations={[0, splashDuration, 2]} curtainType={CurtainType.SPLASH} />
+      </AnimatePresence>
+    </SplashScreenWrapper>
+  );
 };
 
 export default SplashScreen;

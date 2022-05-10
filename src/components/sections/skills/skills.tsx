@@ -1,188 +1,81 @@
-import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Heading from '../../global/heading';
-import { setSkillsTop } from '../../../actions/home';
-import { hasWindow, throttle } from '../../../util/util';
+import React, { FC, useEffect, useState } from 'react';
+import Heading from '@components/global/heading';
+import { setSkillsTop } from '@actions/home';
+import hideArray from './hide.json';
+import settings from '@configs/settings.json';
 import { SkillsWrapper, DotWrapper, StyledDotFormation } from './styles';
-import { StaticQuery, graphql } from 'gatsby';
-import { Configs, Gcms_Skill, Query } from '../../../../types';
-import { compileSkillsData } from '../../../util/data';
+import { Skill, useGetSkillsQuery } from '@types';
+import { compileSkillsData } from '@util/data';
+import { useDispatch } from '@store';
+import { usePrevious, useThrottleCallback } from '@hooks';
 
-interface Props {
-    configs: Configs;
-    skills: Gcms_Skill[];
-    atBottom?: boolean;
-}
+type Props = {
+  atBottom?: boolean;
+};
 
-interface ReduxProps {
-    skillsTop: number;
-    setSkillsTop: any;
-}
+const SkillsSection: FC<Props> = ({ atBottom }) => {
+  const GRID_ID = 'skills-dot-grid';
+  const DEFAULT_COLOR = 'rgb(249, 141, 81)';
 
-interface State {
-    dotsWidth: number;
-    dotsHeight: number;
-    color: string;
-}
+  const { data } = useGetSkillsQuery();
+  const dispatch = useDispatch();
+  const [color, setColor] = useState<string>(DEFAULT_COLOR);
+  const prevState = usePrevious({ atBottom });
 
-const mapStateToProps = ({ home }) => {
-    return {
-        skillsTop: home.skillsTop,
+  const setTop = (didResize = false, input?: number): void => {
+    let value = input;
+
+    if (value == null) {
+      const elm: HTMLElement = document.getElementById(GRID_ID);
+      const rect: ClientRect = elm.getBoundingClientRect();
+      value = rect.top - rect.height / 2 + 490;
+    }
+
+    dispatch(setSkillsTop({ value, didResize }));
+  };
+
+  const handleResize = useThrottleCallback((): void => {
+    setTop(true);
+  }, 50);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    setTop(false, settings.skillsTop);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
     };
+  }, []);
+
+  useEffect(() => {
+    if (prevState?.atBottom && !atBottom) {
+      setColor(DEFAULT_COLOR);
+    }
+  }, [atBottom]);
+
+  return (
+    <SkillsWrapper>
+      <Heading text="tech_i_know" />
+      <DotWrapper id={GRID_ID}>
+        <StyledDotFormation
+          breakpoint="desktop"
+          columns={15}
+          active={atBottom}
+          hideArray={hideArray}
+          color={color}
+          textConfig={compileSkillsData('desktop', data.skills as Skill[])}
+        />
+        <StyledDotFormation
+          breakpoint="mobile"
+          columns={8}
+          rows={20}
+          active={true}
+          color={color}
+          textConfig={compileSkillsData('mobile', data.skills as Skill[])}
+        />
+      </DotWrapper>
+    </SkillsWrapper>
+  );
 };
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            setSkillsTop,
-        },
-        dispatch
-    );
-};
-
-class SkillsSection extends PureComponent<Props & ReduxProps, State> {
-    gridID: string;
-    defaultColor: string;
-    hideArray: number[];
-
-    constructor(props: Props & ReduxProps) {
-        super(props);
-        this.handleResize = throttle(this.handleResize.bind(this), 100);
-        this.gridID = 'skills-dot-grid';
-        this.defaultColor = 'rgb(249, 141, 81)';
-        this.hideArray = [
-            10,
-            11,
-            12,
-            13,
-            14,
-            25,
-            26,
-            27,
-            28,
-            29,
-            40,
-            41,
-            42,
-            43,
-            44,
-            55,
-            56,
-            57,
-            58,
-            59,
-            70,
-            71,
-            72,
-            73,
-            74,
-        ];
-
-        this.state = {
-            dotsWidth: 0,
-            dotsHeight: 0,
-            color: this.defaultColor,
-        };
-    }
-
-    componentDidMount(): void {
-        const elm: HTMLElement = document.getElementById(this.gridID);
-        const rect: ClientRect = elm.getBoundingClientRect();
-
-        window.addEventListener('resize', this.handleResize);
-        this.setState({ dotsWidth: rect.width, dotsHeight: rect.height });
-        this.setTop(false, this.props.configs.settings.skillsTop);
-    }
-
-    componentDidUpdate(prevProps: Props & ReduxProps): void {
-        if (prevProps.atBottom && !this.props.atBottom) {
-            this.setState({ color: this.defaultColor });
-        }
-    }
-
-    componentWillUnmount(): void {
-        window.removeEventListener('resize', this.handleResize);
-    }
-
-    setTop(didResize = false, input?: number): void {
-        let value = input;
-
-        if (value == null) {
-            const elm: HTMLElement = document.getElementById(this.gridID);
-            const rect: ClientRect = elm.getBoundingClientRect();
-            value = rect.top - rect.height / 2 + 490;
-        }
-
-        this.props.setSkillsTop({ value, didResize });
-    }
-
-    handleResize(): void {
-        this.setTop(true);
-    }
-
-    handleButton(e: Event): void {
-        e.preventDefault();
-        if (hasWindow()) window.location.href = `mailto:${this.props.configs.meta.email}`;
-    }
-
-    render() {
-        return (
-            <SkillsWrapper>
-                <Heading text="tech_i_know" />
-                <DotWrapper id={this.gridID}>
-                    <StyledDotFormation
-                        breakpoint="desktop"
-                        columns={15}
-                        active={this.props.atBottom}
-                        hideArray={this.hideArray}
-                        color={this.state.color}
-                        textConfig={compileSkillsData('desktop', this.props.skills)}
-                    />
-                    <StyledDotFormation
-                        breakpoint="mobile"
-                        columns={8}
-                        rows={20}
-                        active={true}
-                        color={this.state.color}
-                        textConfig={compileSkillsData('mobile', this.props.skills)}
-                    />
-                </DotWrapper>
-            </SkillsWrapper>
-        );
-    }
-}
-
-const ConnectedSkills = connect(mapStateToProps, mapDispatchToProps)(SkillsSection);
-
-export default (props: Omit<Props, 'configs' | 'skills'>) => (
-    <StaticQuery
-        query={graphql`
-            query {
-                configs {
-                    meta {
-                        email
-                    }
-                    settings {
-                        skillsTop
-                    }
-                }
-                gcms {
-                    skills {
-                        xAxisDesktop
-                        xAxisMobile
-                        yAxisDesktop
-                        yAxisMobile
-                        directionDesktop
-                        directionMobile
-                        id
-                        label
-                    }
-                }
-            }
-        `}
-        render={(data: Query) => (
-            <ConnectedSkills configs={data.configs} skills={data.gcms.skills} {...props} />
-        )}
-    />
-);
+export default SkillsSection;

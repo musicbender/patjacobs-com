@@ -1,12 +1,12 @@
-import theme from '../theme';
+import theme from '@styles/theme';
 import { Keyframes, css, FlattenSimpleInterpolation } from 'styled-components';
 
 interface GetBlockAnimation {
-    enterFrames: Keyframes;
-    exitFrames: Keyframes;
-    enterType?: string;
-    exitType?: string;
-    transition: string | null;
+  enterFrames: Keyframes;
+  exitFrames: Keyframes;
+  enterType?: string;
+  exitType?: string;
+  transition: string | null;
 }
 
 // prettier-ignore

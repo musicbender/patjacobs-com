@@ -1,132 +1,231 @@
-import React, { useState, useEffect } from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeCurtainState } from '../../../actions/global';
-import { clearRequestTimeout, requestTimeout } from '../../../util/shims';
-import { CurtainWrapper, Block, InnerBlock } from './styles';
-import { ECurtainTypes, ECurtainTransition, ConfigsSettings, IStore } from '../../../../types';
-import theme from '../../../styles/theme';
+import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { changeCurtainState } from '@actions/global';
+import { clearRequestTimeout, requestTimeout } from '@util/shims';
+import { CurtainAction, CurtainMode, CurtainType, Store } from '@types';
+import { useDispatch } from '@store';
+import settings from '@configs/settings.json';
+import { createPortal } from 'react-dom';
+import { findPartialSum } from '@util/util';
+import { usePresence } from 'framer-motion';
+import { TransitionDefinition } from 'framer-motion/types/types';
+import { useMounted } from 'src/hooks/use-mounted';
+import {
+  CurtainOverlay,
+  CurtainWrapper,
+  InnerBlock,
+  LogoOutterWrapper,
+  StyledLogo,
+} from './styles';
 
-interface Props {
-    duration?: number;
-    entrance?: keyof typeof ECurtainTypes;
-    exit?: keyof typeof ECurtainTypes;
-    settings?: ConfigsSettings;
-}
+export type Props = {
+  durations?: number[];
+  coverMode?: CurtainMode;
+  uncoverMode?: CurtainMode;
+  curtainType?: CurtainType;
+};
 
-const Curtain = ({ duration = 3000, entrance = 'none', exit = 'blocks' }: Props) => {
-    const blockNum = 7;
-    const baseDelay = 55;
-    let openingDuration = 0;
-    let openTimeout;
-    let closingTimeout;
-    let closedTimeout;
+const Curtain = ({
+  durations = [1, 1, 1],
+  coverMode = CurtainMode.NONE,
+  uncoverMode = CurtainMode.BLOCKS,
+  curtainType = CurtainType.PAGE_TRANSITION,
+}: Props): JSX.Element => {
+  const rows = 7;
+  const columns = settings.gridLines.length;
+  const totalBlocks = rows * columns;
+  const msMultiplier = 1000;
+  const uncoveredTimeout = findPartialSum(durations, 2) * msMultiplier;
+  const finishTimeout = uncoveredTimeout + 3000;
 
-    const [exiting, setExiting] = useState(false);
-    const curtainState: string = useSelector((state: IStore) => state.global.curtainState);
-    const dispatch = useDispatch();
-    const { settings } = useStaticQuery(graphql`
-        query {
-            configs {
-                settings {
-                    gridLines
-                }
-            }
-        }
-    `).configs;
+  const coveredTimeoutRef = useRef(null);
+  const uncoveredTimeoutRef = useRef(null);
+  const finishedTimeoutRef = useRef(null);
+  const splashActive = useSelector((state: Store) => state.global.splashActive);
+  const [isPresent, safeToRemove] = usePresence();
+  const { inClient } = useMounted();
+  const dispatch = useDispatch();
 
-    const getOpeningDuration = () => {
-        if (entrance === 'none') return 0;
-        return entrance === 'full' ? 1000 : +theme.animate.slow;
+  useEffect(() => {
+    if (!isPresent && curtainType === CurtainType.PAGE_TRANSITION) {
+      dispatch(changeCurtainState('covering'));
+
+      if (coverMode !== CurtainMode.NONE) {
+        coveredTimeoutRef.current = requestTimeout(() => {
+          dispatch(changeCurtainState('covered'));
+        }, durations[0] * msMultiplier);
+      }
+
+      setTimeout(() => {
+        safeToRemove();
+      }, durations[1] * msMultiplier);
+    }
+
+    if (!isPresent && curtainType === CurtainType.SCROLL) {
+      dispatch(changeCurtainState('uncovering'));
+
+      coveredTimeoutRef.current = requestTimeout(() => {
+        dispatch(changeCurtainState('uncovered'));
+      }, durations[0] * msMultiplier);
+
+      setTimeout(() => {
+        safeToRemove();
+      }, durations[1] * msMultiplier);
+    }
+  }, [isPresent]);
+
+  useEffect(() => {
+    if (!splashActive && curtainType === CurtainType.PAGE_TRANSITION) {
+      if (coverMode === CurtainMode.NONE) {
+        dispatch(changeCurtainState('covered'));
+      }
+
+      if (uncoverMode !== CurtainMode.NONE) {
+        dispatch(changeCurtainState('uncovering'));
+
+        uncoveredTimeoutRef.current = requestTimeout(() => {
+          dispatch(changeCurtainState('uncovered'));
+        }, durations[2] * msMultiplier);
+      } else {
+        dispatch(changeCurtainState('uncovered'));
+      }
+
+      finishedTimeoutRef.current = requestTimeout(() => {
+        dispatch(changeCurtainState(null));
+      }, finishTimeout);
+    }
+
+    if (curtainType === CurtainType.SPLASH && splashActive) {
+      dispatch(changeCurtainState('covered'));
+
+      uncoveredTimeoutRef.current = requestTimeout(() => {
+        dispatch(changeCurtainState('uncovering'));
+      }, durations[1] * msMultiplier);
+
+      uncoveredTimeoutRef.current = requestTimeout(() => {
+        dispatch(changeCurtainState('uncovered'));
+      }, (durations[1] + durations[2]) * msMultiplier);
+    }
+
+    return () => {
+      clearRequestTimeout(coveredTimeoutRef.current);
+      clearRequestTimeout(uncoveredTimeoutRef.current);
+      clearRequestTimeout(finishedTimeoutRef.current);
+    };
+  }, []);
+
+  const isBlockAction = (mode: CurtainMode): boolean => {
+    return mode === CurtainMode.BLOCKS || mode === CurtainMode.REVERSE_BLOCKS;
+  };
+
+  const getBlockDuration = (action: CurtainAction, blockDuration: number) => {
+    return isBlockAction(action === 'cover' ? coverMode : uncoverMode)
+      ? blockDuration - totalBlocks / msMultiplier
+      : blockDuration - rows / msMultiplier;
+  };
+
+  const getBlockTransition = (action: CurtainAction, index?: number): TransitionDefinition => {
+    const blockDuration = action === 'cover' ? durations[0] : durations[2];
+    const isRows =
+      action === 'cover' ? coverMode === CurtainMode.ROWS : uncoverMode === CurtainMode.ROWS;
+
+    let output: TransitionDefinition = {
+      duration: getBlockDuration(action, blockDuration),
+      ease: 'easeInOut',
     };
 
-    useEffect(() => {
-        dispatch(changeCurtainState('opening'));
+    if (isRows && index) {
+      output = {
+        ...output,
+        delay: (curtainType === CurtainType.SPLASH ? durations[1] : 0) + index / blockDuration / 2,
+      };
+    }
 
-        openingDuration = getOpeningDuration();
+    return output;
+  };
 
-        openTimeout = requestTimeout(() => {
-            dispatch(changeCurtainState('open'));
-        }, openingDuration);
+  const renderBlock = (i: number, j: number): JSX.Element => {
+    const blockVariants = {
+      start: { scaleX: 1, originX: 0 },
+      startsCovered: { scaleX: 1, originX: 1 },
+      startUncovered: { scaleX: 0, originX: 0 },
+      uncover: {
+        scaleX: 0,
+        transition: getBlockTransition('uncover', j),
+      },
+      cover: {
+        scaleX: 1,
+        transition: getBlockTransition('cover', j),
+      },
+    };
 
-        closingTimeout = requestTimeout(() => {
-            setExiting(true);
-            dispatch(changeCurtainState('closing'));
-        }, duration);
+    return <InnerBlock variants={blockVariants} key={'curtain_block' + i + '_' + j} />;
+  };
 
-        closedTimeout = requestTimeout(() => {
-            dispatch(changeCurtainState('closed'));
-        }, duration * 2);
-
-        return () => {
-            if (curtainState !== 'closed') dispatch(changeCurtainState('closed'));
-            clearRequestTimeout(openTimeout);
-            clearRequestTimeout(closingTimeout);
-            clearRequestTimeout(closedTimeout);
+  const getFramerProps = () => {
+    switch (curtainType) {
+      case CurtainType.PAGE_TRANSITION:
+        return {
+          initial: uncoverMode !== CurtainMode.NONE ? 'start' : 'startsCovered',
+          animate: uncoverMode !== CurtainMode.NONE ? 'uncover' : 'startsCovered',
+          exit: 'cover',
+          key: 'page_curtain_wrapper',
         };
-    }, []);
+      case CurtainType.SPLASH:
+        return {
+          initial: 'startsCovered',
+          animate: uncoverMode !== CurtainMode.NONE ? 'uncover' : 'startsCovered',
+          exit: 'cover',
+          key: 'splash_curtain_wrapper',
+        };
+      case CurtainType.SCROLL:
+        return {
+          initial: uncoverMode !== CurtainMode.NONE ? 'startUncovered' : 'startsCovered',
+          animate: uncoverMode !== CurtainMode.NONE ? 'cover' : 'startsCovered',
+          exit: 'uncover',
+          key: 'scroll_curtain_wrapper',
+        };
+    }
+  };
 
-    const getBlockDelay = (i: number, j: number): number => {
-        switch (true) {
-            case exiting && exit === 'blocks':
-            case !exiting && entrance === 'blocks':
-                const max = (settings.gridLines.length * blockNum * baseDelay) / 2;
-                return max - baseDelay * ((i + 1) / 2) * (j + 1);
-            case exiting && exit === 'reverse-blocks':
-            case !exiting && entrance === 'reverse-blocks':
-                return baseDelay * i;
-            case exiting && exit === 'rows':
-            case !exiting && entrance === 'rows':
-                return baseDelay * (settings.gridLines.length - 1 - j);
-            default:
-                return baseDelay;
-        }
-    };
+  const curtainVariants = {
+    cover: {
+      transition: {
+        staggerChildren: isBlockAction(coverMode) ? durations[0] / totalBlocks : 0,
+        staggerDirection: coverMode === CurtainMode.REVERSE_BLOCKS ? -1 : 1,
+      },
+    },
+    uncover: {
+      transition: {
+        delayChildren: curtainType === CurtainType.SPLASH ? durations[1] : null,
+        staggerChildren: isBlockAction(uncoverMode) ? durations[2] / totalBlocks : 0,
+        staggerDirection: uncoverMode === CurtainMode.REVERSE_BLOCKS ? -1 : 1,
+      },
+    },
+  };
 
-    const getBlockDuration = (): string => {
-        let blockDuration: string = theme.animate.verySlow;
+  const curtain: JSX.Element = (
+    <CurtainOverlay>
+      <CurtainWrapper {...getFramerProps()} variants={curtainVariants}>
+        {settings.gridLines.map((g: number, i: number): JSX.Element[] => {
+          let blocks: JSX.Element[] = [];
 
-        if ((exiting && exit === 'full') || (!exiting && entrance === 'full')) {
-            blockDuration = 1000 + 'ms';
-        }
+          for (let j = 0; j < rows; j++) {
+            blocks = [...blocks, renderBlock(i, j)];
+          }
 
-        return blockDuration;
-    };
+          return blocks;
+        })}
+      </CurtainWrapper>
+      {curtainType === CurtainType.SPLASH && (
+        <LogoOutterWrapper>
+          <StyledLogo color="aqua" debug={settings.splashScreenDebug} />
+        </LogoOutterWrapper>
+      )}
+    </CurtainOverlay>
+  );
 
-    const getTransitionState = (): keyof typeof ECurtainTransition | null => {
-        const isEnter: boolean = !exiting && entrance !== 'none';
-        const isExit: boolean = exiting && exit !== 'none';
-        return isEnter ? 'enter' : isExit ? 'exit' : null;
-    };
-
-    const renderBlock = (i: number, j: number) => {
-        const delay: number = getBlockDelay(i, j);
-        return (
-            <Block key={'splash-block' + i + '_' + j}>
-                <InnerBlock
-                    transition={getTransitionState()}
-                    enterType={entrance}
-                    exitType={exit}
-                    delay={delay + 'ms'}
-                    duration={getBlockDuration()}
-                ></InnerBlock>
-            </Block>
-        );
-    };
-
-    return (
-        <CurtainWrapper>
-            {settings.gridLines.map((g: number, i: number) => {
-                let blocks: any[] = [];
-
-                for (let j = 0; j < blockNum; j++) {
-                    blocks = [...blocks, renderBlock(i, j)];
-                }
-
-                return blocks;
-            })}
-        </CurtainWrapper>
-    );
+  return inClient ? createPortal(curtain, window.document.body) : curtain;
 };
 
 export default Curtain;

@@ -1,32 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 import UpNext from './up-next';
-import theme from '../../../styles/theme';
+import theme from '@styles/theme';
 
 // test data
 const tests = [
-    {
-        label: 'Lineage 2',
-        path: '/case-study/lineage2',
-    },
-    {
-        label: 'This is a much longer title here',
-        path: '/long',
-    },
+  {
+    label: 'Lineage 2',
+    path: '/case-study/lineage2',
+  },
+  {
+    label: 'This is a much longer title here',
+    path: '/long',
+  },
 ];
 
 // decorator
 const Decorator = styled.div`
-    position: absolute;
-    top: 5em;
-    margin-left: ${`${theme.gridSizes.s * 2 + theme.gridSizes.m}%`};
+  position: absolute;
+  top: 5em;
+  margin-left: ${`${theme.gridSizes.s * 2 + theme.gridSizes.m}%`};
 `;
 
 // metadata
 export default {
-    title: 'UpNext',
-    component: UpNext,
-    decorators: [story => <Decorator>{story()}</Decorator>],
+  title: 'UpNext',
+  component: UpNext,
+  decorators: [(story) => <Decorator>{story()}</Decorator>],
 };
 
 // stories
