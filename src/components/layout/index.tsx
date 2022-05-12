@@ -1,29 +1,30 @@
-import React, { FC, PropsWithChildren, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { clearRequestTimeout, requestTimeout } from '@util/shims';
 import { changeScrollCurtain, setIsMobile } from '@actions/global';
 import { useDispatch } from '@store';
 import GlobalStyles from '@styles/global-styles';
-import Head from '@components/global/head';
 import GridLines from '@components/global/grid-lines';
 import Toolbar from '@components/global/toolbar';
 import Footer from '@components/global/footer';
 import SplashScreen from '../sections/splash-screen';
 import settings from '@configs/settings.json';
 import { AppWrapper, OutterWrapper, InnerWrapper } from './styles';
-import { Store, HeadProps, CurtainMode, CurtainType } from '@types';
+import { Store, CurtainMode, CurtainType } from '@types';
 import { useThrottleCallback } from '@hooks';
 import { useCurtain } from 'src/hooks/use-curtain';
 import { scrollToTop } from '@util/animation';
 import Curtain from '@components/global/curtain';
+import meta from '@configs/meta.json';
 import { AnimatePresence } from 'framer-motion';
 
 type Props = {
-  headProps?: HeadProps;
+  children?: JSX.Element;
 };
 
-const Layout: FC<PropsWithChildren<Props>> = ({ headProps = {}, children }) => {
+const Layout: FC<Props> = ({ children }) => {
   const router = useRouter();
   const splashActive = useSelector((state: Store) => state.global.splashActive);
   const scrollCurtainActive = useSelector((state: Store) => state.global.scrollCurtainActive);
@@ -32,6 +33,8 @@ const Layout: FC<PropsWithChildren<Props>> = ({ headProps = {}, children }) => {
   const splashTimeoutRef = useRef(null);
   const { curtainState } = useCurtain();
   const dispatch = useDispatch();
+
+  const pageUrl = `${meta.siteUrl}${router.asPath}`;
 
   const handleResize = useThrottleCallback((): void => {
     if (isMobile && window.innerWidth > settings.mobileBreakpoint) {
@@ -66,8 +69,13 @@ const Layout: FC<PropsWithChildren<Props>> = ({ headProps = {}, children }) => {
 
   return (
     <AppWrapper mode={mode} splashActive={splashActive}>
+      <Head>
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta name="twitter:url" content={pageUrl} />
+        {router.asPath.includes('/case-study') && <meta property="og:type" content="article" />}
+      </Head>
       <GlobalStyles />
-      <Head pathname={router.pathname || null} {...headProps} />
       <OutterWrapper>
         <GridLines />
         <Toolbar handleToTop={handleToTop} />
