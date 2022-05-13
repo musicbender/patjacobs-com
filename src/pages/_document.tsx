@@ -1,7 +1,8 @@
 import React from 'react';
+import { ServerStyleSheet } from 'styled-components';
 import { Seo } from '@types';
 import meta from '@configs/meta.json';
-import { ServerStyleSheet } from 'styled-components';
+import theme from '@styles/theme';
 import Document, {
   DocumentContext,
   DocumentInitialProps,
@@ -10,7 +11,6 @@ import Document, {
   Head,
   NextScript,
 } from 'next/document';
-import theme from '@styles/theme';
 export default class MyDocument extends Document {
   seo: Seo = {
     title: meta.title,

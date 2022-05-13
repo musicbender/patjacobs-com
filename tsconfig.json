@@ -39,6 +39,13 @@
     "strict": false,
     "incremental": true
   },
-  "include": ["next-env.d.ts", "src/types/global.d.ts", "src", "jest.config.js", "codegen.js"],
+  "include": [
+    "next-env.d.ts",
+    "src/types/global.d.ts",
+    "src",
+    "jest.config.js",
+    "codegen.js",
+    "next.config.js"
+  ],
   "exclude": ["node_modules", "build", ".next"]
 }
