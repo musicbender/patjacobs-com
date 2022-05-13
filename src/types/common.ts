@@ -11,11 +11,10 @@ export type TestItem = {
   description?: string;
 };
 
-export type ISeo = {
+export type Seo = {
   title: string;
   description: string;
   image: string;
-  url: string;
   twitter: string;
   site: string;
   color: string;
