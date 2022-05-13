@@ -1,8 +1,12 @@
 {
-    "name": "",
-    "short_name": "",
-    "icons": [
-        {
+    "id": "/",
+    "name": "Pat Jacobs - Web Engineer",
+    "short_name": "patjacobs.com",
+    "description": "Portfolio site for the web engineer Pat Jacobs",
+    "start_url": "/",
+    "scope": "/",
+    "orientation": "natural",
+    "icons": [{
             "src": "/android-chrome-192x192.png?v=4",
             "sizes": "192x192",
             "type": "image/png"
@@ -13,7 +17,12 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#111111",
-    "background_color": "#111111",
-    "display": "standalone"
+    "screenshots": [{
+        "src": "/assets/screenshot-pwa-1.png",
+        "type": "image/png",
+        "sizes": "720x540"
+    }],
+    "theme_color": "#1e1e1e",
+    "background_color": "#1e1e1e",
+    "display": "fullscreen"
 }
