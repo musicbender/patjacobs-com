@@ -8,7 +8,6 @@ import settings from '@configs/settings.json';
 import { createPortal } from 'react-dom';
 import { findPartialSum } from '@util/util';
 import { usePresence } from 'framer-motion';
-import { TransitionDefinition } from 'framer-motion/types/types';
 import { useMounted } from 'src/hooks/use-mounted';
 import {
   CurtainOverlay,
@@ -24,6 +23,8 @@ export type Props = {
   uncoverMode?: CurtainMode;
   curtainType?: CurtainType;
 };
+
+type TransitionDefinition = { [key: string]: unknown };
 
 const Curtain = ({
   durations = [1, 1, 1],

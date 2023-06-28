@@ -54,7 +54,7 @@ export type Sections = {
 
 export type RelatedProject = { __typename?: 'Project' } & Pick<
   Project,
-  'id' | 'projectId' | 'projectType' | 'title'
+  'id' | 'projectId' | 'projectType' | 'title' | 'order'
 >;
 
 export type ProcessedGcmsData = {

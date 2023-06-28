@@ -31,7 +31,7 @@ export const ContentWrapper = styled('div')<ContentProps>`
 `;
 
 const content = css`
-  display: inline-block;
+  display: block;
   margin: 0.2em 0;
   font-weight: 200;
   font-size: 0.9rem;
@@ -54,11 +54,11 @@ export const ContentValue = styled.p`
   &:nth-child(3) {
     margin-left: 0.75em;
     ${media.tablet`
-                display: none;
-            `}
+      display: none;
+    `}
     ${media.desktopM`
-                display: inline-block;
-            `}
+      display: inline-block;
+    `}
   }
 `;
 

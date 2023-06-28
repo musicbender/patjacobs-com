@@ -81,13 +81,13 @@ export const Content = styled('div')<ContentWrapperProps>`
   ${(props) =>
     props.contentType === 'generic' &&
     `
-            > * {
-                position: relative;
-                width: 100%;
-                min-height: 1.5em;
-                padding: 1.5em;
-            }
-        `};
+      > * {
+          position: relative;
+          width: 100%;
+          min-height: 1.5em;
+          padding: 1.5em;
+      }
+  `};
   ${(props) =>
     props.contentType === 'line' &&
     `

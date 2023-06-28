@@ -17,6 +17,6 @@ export const Caption = styled.p`
   color: ${({ theme }) => theme.palette.white};
   opacity: 0.7;
   ${media.tablet`
-        margin-bottom: 8em;
-    `}
+      margin-bottom: 8em;
+  `}
 `;

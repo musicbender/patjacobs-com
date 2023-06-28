@@ -24,7 +24,7 @@ type ImageCoverProps = {
 export const WorkItemWrapper = styled('div')<WorkItemWrapperProps>`
   position: relative;
   margin-bottom: 3em;
-  height: 15em;
+  height: 18em;
 
   ${media.tablet`
     height: 23.5em;

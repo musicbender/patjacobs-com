@@ -8,6 +8,7 @@ query getCaseStudy($projectId: String!) {
     projectId
     projectType
     title
+    order
   }
   project(where: { projectId: $projectId }) {
     updatedAt

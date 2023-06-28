@@ -17,6 +17,7 @@ type Props = {
 
 const ProjectMeta = ({ project }: Props): JSX.Element => {
   const publishDate: Date = parseISO(project.projectPublishDate);
+  const deployDate: Date = parseISO(project.lastDeployedOn);
   return (
     project && (
       <ProjectMetaWrapper>
@@ -24,7 +25,6 @@ const ProjectMeta = ({ project }: Props): JSX.Element => {
           <ContentWrapper color="aqua">
             <Label>{content.projectMeta.datePublished}</Label>
             <ContentValue>{format(publishDate, 'P')}</ContentValue>
-            <ContentValue>{format(publishDate, 'p')}</ContentValue>
           </ContentWrapper>
         )}
         {project.externalUrl && (
@@ -38,7 +38,7 @@ const ProjectMeta = ({ project }: Props): JSX.Element => {
         {project.lastDeployedOn && (
           <ContentWrapper color="purple">
             <Label>{content.projectMeta.lastDeployment}</Label>
-            <ContentValue>{project.lastDeployedOn}</ContentValue>
+            <ContentValue>{format(deployDate, 'P')}</ContentValue>
           </ContentWrapper>
         )}
         {project.projectPublishDate && (
