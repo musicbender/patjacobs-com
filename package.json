@@ -1,6 +1,6 @@
 {
   "name": "patjacobs-com",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Portfolio site for Pat Jacobs",
   "private": true,
   "scripts": {
@@ -40,7 +40,7 @@
     "hex-to-rgba": "^2.0.1",
     "jsondiffpatch": "^0.4.1",
     "next": "^12.0.10",
-    "next-pwa": "^5.5.2",
+    "next-pwa": "^5.6.0",
     "next-redux-wrapper": "^7.0.5",
     "polished": "^4.1.4",
     "react": "^18.1.0",

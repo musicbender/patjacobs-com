@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ThemeProvider } from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import { AppProps } from 'next/app';
@@ -8,7 +8,11 @@ import '../../public/fonts/fonts.css';
 import theme from '@styles/theme';
 import { useSplashScreen } from '@hooks';
 
-const PJApp: FC<AppProps> = ({ Component, pageProps, router }) => {
+type PageProps = {
+  dehydratedState: DehydratedState;
+};
+
+const PJApp: FC<AppProps<PageProps>> = ({ Component, pageProps, router }) => {
   const [queryClient] = useState(() => new QueryClient());
   useSplashScreen();
   return (
