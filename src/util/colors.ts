@@ -1,6 +1,6 @@
 import theme from '@styles/theme';
 import { moveAllInArray } from '@util/util';
-import { CoreColors, Theme } from '@types';
+import { CoreColors } from '@types';
 
 export const getRandomColor = (
   outputType: 'hex' | 'name' = 'hex',

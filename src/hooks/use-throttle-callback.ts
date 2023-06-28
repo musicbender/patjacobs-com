@@ -1,7 +1,7 @@
 import { throttle } from '@util/util';
 import { useCallback, useEffect, useRef } from 'react';
 
-export const useThrottleCallback = (cb: Function, delay = 500): ((...args: any[]) => any) => {
+export const useThrottleCallback = (cb: () => void, delay = 500): (() => any) => {
   const cbRef = useRef(cb);
 
   // use mutable ref to make useCallback/throttle not depend on `cb` dep
@@ -10,7 +10,7 @@ export const useThrottleCallback = (cb: Function, delay = 500): ((...args: any[]
   });
 
   return useCallback(
-    throttle((...args) => cbRef.current(...args), delay),
+    throttle(() => cbRef.current(), delay),
     [delay],
   );
 };

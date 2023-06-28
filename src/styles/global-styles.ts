@@ -3,17 +3,17 @@ import { media } from './breakpoints';
 import { normalize } from 'styled-normalize';
 import { Theme } from '@types';
 
-interface GlobalStyles {
+type GlobalStyles = {
   theme: Theme;
   media?: any;
-}
+};
 
 export default createGlobalStyle<GlobalStyles>`
   ${normalize}
   html {
     -webkit-font-smoothing: antialiased;
     margin: 0;
-    background: ${props => props.theme.modes.dark.bg}; 
+    background: ${(props) => props.theme.modes.dark.bg}; 
     box-sizing: border-box;
     font-size: 16px;
     ${media.tablet`
