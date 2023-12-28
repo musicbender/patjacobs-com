@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
 export const OutterWrapper = styled.div`
   position: relative;
   z-index: 1;

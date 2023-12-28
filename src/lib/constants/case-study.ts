@@ -1,0 +1,10 @@
+const caseStudyConf = {
+  projectMeta: {
+    datePublished: 'date_published',
+    lastDeployment: 'last_deployment',
+    siteUrl: 'site_url',
+    projectType: 'project_type',
+  },
+};
+
+export default caseStudyConf;

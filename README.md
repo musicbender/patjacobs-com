@@ -7,11 +7,13 @@ My new portfolio site v4. Check it out at [https://www.patjacobs.com](https://ww
 ### Tech Stack
 
 - Typescript
-- Next
+- Next 14
 - React
 - Redux
 - GraphCMS
+- React Query 5
 - Storybook
 - Netlify
-- Styled Components
+- Panda CSS
+- GraphQL
 - Jest

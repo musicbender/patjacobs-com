@@ -1,4 +1,4 @@
-import { throttle } from '@util/util';
+import { throttle } from 'src/lib/util/util';
 import { useCallback, useEffect, useRef } from 'react';
 
 export const useThrottleCallback = (cb: () => void, delay = 500): (() => any) => {

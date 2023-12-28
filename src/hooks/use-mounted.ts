@@ -1,4 +1,4 @@
-import { hasWindow } from '@util/util';
+import { hasWindow } from 'src/lib/util/util';
 import { useEffect, useState } from 'react';
 
 export const useMounted = () => {
